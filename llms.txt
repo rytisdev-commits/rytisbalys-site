@@ -1,0 +1,15 @@
+# Rytis Balys - Conversion Tracking & Attribution
+
+> Server-side conversion tracking engineer. Meta Pixel + Conversions API with event_id deduplication, GA4, Google Tag Manager / server-side GTM, Consent Mode v2. Based in Vilnius, Lithuania (MB Euruvizija); works worldwide, remote. Contact: work@rytisbalys.com
+
+I find the purchases your tracking silently drops: tracking audits that reconcile ad platform numbers against real backend orders, server-side tracking builds, and Shopify checkout tracking migrations.
+
+## Troubleshooting guides
+
+- [Meta Pixel not firing? The 6 real causes](https://rytisbalys.com/meta-pixel-not-firing): diagnostic checklist with a verification step for each cause - consent blocking, double init, GTM trigger chains, redirect payment loss, iframe checkouts, ad blockers
+- [GA4 purchases don't match your Shopify or WooCommerce orders](https://rytisbalys.com/ga4-does-not-match-backend): which number to trust and a practical reconciliation method - normal vs broken gaps, redirect losses, duplicate events, cross-domain breaks, Consent Mode modeling
+- [Shopify Checkout Extensibility migration without losing tracking](https://rytisbalys.com/shopify-checkout-upgrade-tracking): checkout.liquid and legacy Additional Scripts are being retired - what dies, why copy-paste migration fails, the parallel-run method
+
+## Proof
+
+- [GitHub case study](https://github.com/rytisdev-commits/server-side-conversion-tracking): browser + server Meta CAPI deduplication setup running in production on my own store
