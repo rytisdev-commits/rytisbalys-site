@@ -3,9 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Shopify's Checkout Upgrade Silently Breaks Tracking - What Dies in August 2026 and How to Migrate Without Losing Your Data</title>
+<title>Shopify Checkout Extensibility Migration: checkout.liquid and Additional Scripts Are Dying (Aug 2026) - How to Migrate Tracking Without Losing Data</title>
 <meta name="description" content="Shopify is retiring checkout.liquid and legacy additional scripts. When the auto-upgrade hits, Meta Pixel, GA4 and affiliate tracking on checkout and thank-you pages break silently. What to migrate, to where, and how to verify nothing was lost.">
 <link rel="canonical" href="https://rytisbalys.com/shopify-checkout-upgrade-tracking">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Shopify Checkout Extensibility: Migrate Tracking Without Losing Data">
+<meta property="og:description" content="checkout.liquid and legacy Additional Scripts are being retired - what dies, why copy-paste migration fails, and the parallel-run method.">
+<meta property="og:url" content="https://rytisbalys.com/shopify-checkout-upgrade-tracking">
+<meta property="og:image" content="https://rytisbalys.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
 <style>
   :root{--bg:#0a0e13;--panel:#0f151d;--line:#1c2530;--txt:#d7dee8;--dim:#8b98a8;--accent:#ffc72c;--green:#3fb950;--red:#f85149;--mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace}
   *{margin:0;padding:0;box-sizing:border-box}
@@ -34,7 +41,7 @@
 <body>
 <div class="wrap">
   <div class="crumb"><a href="/">rytisbalys.com</a> <span style="color:#4d5b6b">/ troubleshooting</span></div>
-  <h1>Shopify's checkout upgrade silently breaks tracking. Here's what dies and how to migrate without losing your data</h1>
+  <h1>Shopify Checkout Extensibility migration: checkout.liquid and legacy Additional Scripts are dying - here's how to move your tracking without losing data</h1>
   <p class="sub">Shopify is finishing its move from the old checkout stack (checkout.liquid, Scripts, "additional scripts" boxes) to Checkout Extensibility. The platform migrates you whether you act or not - and when it does, whatever tracking lived in the old places simply stops. No error, no email that mentions your pixels. Your ads keep spending; the reporting quietly goes dark.</p>
 
   <div class="warn"><b>THE TRAP</b> - the store keeps working after the auto-upgrade. Orders come in, checkout looks fine. Only your Purchase events, affiliate postbacks and survey scripts are gone - and most merchants notice weeks later, when ROAS "mysteriously" collapses.</div>
