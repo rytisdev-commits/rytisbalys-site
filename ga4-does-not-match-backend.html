@@ -39,7 +39,7 @@
 
   <h2>Step 0 - make the comparison honest</h2>
   <p>Most "GA4 is wrong" panics die here. Compare the same thing: GA4 <code>transactions</code> for a full month vs backend orders that were actually PAID in that month. Backend "all orders" usually includes cancellations, failed payments and abandoned financing applications that no analytics tool should count.</p>
-  <div class="verify"><b>VERIFY</b> - filter backend orders by paid status first. On one audit, 1,505 "orders" collapsed to ~822 paid - the raw comparison was meaningless.</div>
+  <div class="verify"><b>VERIFY</b> - filter backend orders by paid status first. It's common to see an "orders" total shrink by a third or more once unpaid and cancelled ones are stripped out - which makes the raw comparison meaningless.</div>
 
   <h2>What a NORMAL gap looks like</h2>
   <p>GA4 will always see fewer purchases than your backend. Consent rejections (in the EU, everyone who clicks "decline"), ad blockers, Safari's tracking prevention, and users who close the tab before the thank-you page loads. With a strict opt-in consent banner, a 15-30% gap can be fully legitimate - your baseline is roughly your consent rejection rate plus 5-10%.</p>
