@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shopify's Checkout Upgrade Silently Breaks Tracking - What Dies in August 2026 and How to Migrate Without Losing Your Data</title>
+<meta name="description" content="Shopify is retiring checkout.liquid and legacy additional scripts. When the auto-upgrade hits, Meta Pixel, GA4 and affiliate tracking on checkout and thank-you pages break silently. What to migrate, to where, and how to verify nothing was lost.">
+<link rel="canonical" href="https://rytisbalys.com/shopify-checkout-upgrade-tracking">
+<style>
+  :root{--bg:#0a0e13;--panel:#0f151d;--line:#1c2530;--txt:#d7dee8;--dim:#8b98a8;--accent:#ffc72c;--green:#3fb950;--red:#f85149;--mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:56px 24px 96px}
+  a{color:var(--accent)}
+  .crumb{font-family:var(--mono);font-size:13px;margin-bottom:28px}
+  .crumb a{text-decoration:none;color:var(--dim)} .crumb a:hover{color:var(--accent)}
+  h1{font-size:28px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:10px}
+  .sub{color:var(--dim);margin-bottom:36px;font-size:16px}
+  h2{font-size:19px;color:#fff;margin:36px 0 10px}
+  h2 .n{font-family:var(--mono);color:var(--accent);margin-right:8px}
+  p{margin-bottom:14px;font-size:15.5px}
+  p.dim{color:var(--dim)}
+  code{font-family:var(--mono);font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+  .warn{border-left:3px solid var(--red);padding:10px 14px;background:var(--panel);border-radius:0 8px 8px 0;margin-bottom:14px;font-size:14.5px}
+  .warn b{color:var(--red);font-family:var(--mono);font-size:12.5px;letter-spacing:.05em}
+  .verify{border-left:3px solid var(--green);padding:8px 14px;background:var(--panel);border-radius:0 8px 8px 0;margin-bottom:8px;font-size:14.5px}
+  .verify b{color:var(--green);font-family:var(--mono);font-size:12.5px;letter-spacing:.05em}
+  .cta{margin-top:52px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
+  .cta p{margin-bottom:14px}
+  .btn{font-family:var(--mono);font-size:14px;text-decoration:none;padding:11px 18px;border-radius:8px;background:var(--accent);color:#0a0e13;font-weight:600;display:inline-block}
+  footer{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;border-top:1px solid var(--line);padding-top:20px;margin-top:56px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="crumb"><a href="/">rytisbalys.com</a> <span style="color:#4d5b6b">/ troubleshooting</span></div>
+  <h1>Shopify's checkout upgrade silently breaks tracking. Here's what dies and how to migrate without losing your data</h1>
+  <p class="sub">Shopify is finishing its move from the old checkout stack (checkout.liquid, Scripts, "additional scripts" boxes) to Checkout Extensibility. The platform migrates you whether you act or not - and when it does, whatever tracking lived in the old places simply stops. No error, no email that mentions your pixels. Your ads keep spending; the reporting quietly goes dark.</p>
+
+  <div class="warn"><b>THE TRAP</b> - the store keeps working after the auto-upgrade. Orders come in, checkout looks fine. Only your Purchase events, affiliate postbacks and survey scripts are gone - and most merchants notice weeks later, when ROAS "mysteriously" collapses.</div>
+
+  <h2><span class="n">01</span>What actually dies</h2>
+  <p>Anything pasted into the legacy surfaces: <code>checkout.liquid</code> customizations (Plus), order status / thank-you page "additional scripts" - Meta Pixel purchase snippets, GA4/gtag calls, Google Ads conversion tags, affiliate pixels, post-purchase surveys, TikTok/Snap tags. Shopify's replacement surfaces are <b>Web Pixels</b> (app pixels + custom pixels running in a sandbox) and <b>Checkout UI extensions</b> - and they have different capabilities, a different event model (<code>analytics.subscribe</code>), and stricter data access.</p>
+
+  <h2><span class="n">02</span>Why a copy-paste migration fails</h2>
+  <p>The old scripts had full page access; the new sandbox does not. Three things break in almost every migration I've seen:</p>
+  <p>1. <b>Deduplication:</b> the old thank-you snippet fired <code>fbq('track','Purchase')</code> with an event ID your server-side CAPI deduped against. The new custom pixel must reproduce the SAME event_id logic or you start double-counting the day it goes live.<br>
+  2. <b>Consent wiring:</b> Web Pixels respect Shopify's Customer Privacy API. If your consent state doesn't map correctly, the pixel either fires for nobody (data gap) or for everybody (compliance problem).<br>
+  3. <b>Value and currency:</b> sandbox events expose checkout data differently; miswired mapping sends Purchase events with no value - your ROAS and value-based bidding go blind even though events "fire".</p>
+
+  <h2><span class="n">03</span>The migration that doesn't lose data</h2>
+  <p>The order of operations matters more than the code:</p>
+  <p>1. Inventory every tag on the legacy surfaces (you'll find ones nobody remembers adding).<br>
+  2. Rebuild them as a custom Web Pixel / UI extension with the same event names, event_id scheme and value mapping.<br>
+  3. <b>Run both in parallel</b> on a test store or short window, comparing counts per event.<br>
+  4. Verify end to end: browser network tab, platform test tools (Meta Test Events, GA4 DebugView), and most importantly - monthly totals against real paid orders.<br>
+  5. Only then let the old surface die.</p>
+  <div class="verify"><b>VERIFY</b> - after migration, pick one real order and trace it: did exactly ONE Purchase reach Meta (browser or server, deduped)? Did GA4 record it with the right value? Does the affiliate platform see it? If you can't answer all three, the migration isn't done.</div>
+
+  <h2><span class="n">04</span>If you run server-side tracking, you're half-safe (only half)</h2>
+  <p>Conversions API events sent from your backend don't care what Shopify does to the checkout UI - they survive the upgrade untouched. But the BROWSER half of the pair dies with the old surface, which means dedup pairs break and match quality drops. Post-upgrade, your Events Manager will show server-only events; that's survivable, but it's a degraded state you should fix, not a final one.</p>
+
+  <h2>The honest deadline note</h2>
+  <p class="dim">Shopify has been rolling these retirements out in stages through 2025-2026 (Scripts, then checkout.liquid, then legacy thank-you / order status scripts). If your store still has anything in the old boxes, assume the clock is running - the auto-upgrade date for your store is shown in your Shopify admin notifications, and after it passes, migration becomes forensics.</p>
+
+  <div class="cta">
+    <p><b>Want it migrated without the data gap?</b> I do Shopify checkout tracking migrations end to end - inventory, rebuild as Web Pixels with proper event_id dedup, parallel-run verification against real orders. I run my own Shopify stores, so this isn't theory.</p>
+    <a class="btn" href="mailto:work@rytisbalys.com">work@rytisbalys.com</a>
+  </div>
+
+  <footer>Rytis Balys · MB Euruvizija · Vilnius, Lithuania · <a href="/" style="color:#4d5b6b">rytisbalys.com</a></footer>
+</div>
+</body>
+</html>
