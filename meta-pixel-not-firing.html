@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meta Pixel Not Firing? The 6 Real Causes (and How to Verify Each One)</title>
+<meta name="description" content="Meta Pixel loads but events don't fire? A working diagnostic checklist: consent blocking, double init, GTM trigger chains, redirect loss, iframe checkouts, and how to verify each in minutes.">
+<link rel="canonical" href="https://rytisbalys.com/meta-pixel-not-firing">
+<style>
+  :root{--bg:#0a0e13;--panel:#0f151d;--line:#1c2530;--txt:#d7dee8;--dim:#8b98a8;--accent:#ffc72c;--green:#3fb950;--red:#f85149;--mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:56px 24px 96px}
+  a{color:var(--accent)}
+  .crumb{font-family:var(--mono);font-size:13px;margin-bottom:28px}
+  .crumb a{text-decoration:none;color:var(--dim)} .crumb a:hover{color:var(--accent)}
+  h1{font-size:28px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:10px}
+  .sub{color:var(--dim);margin-bottom:36px;font-size:16px}
+  h2{font-size:19px;color:#fff;margin:36px 0 10px}
+  h2 .n{font-family:var(--mono);color:var(--accent);margin-right:8px}
+  p{margin-bottom:14px;font-size:15.5px}
+  p.dim{color:var(--dim)}
+  code{font-family:var(--mono);font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+  pre{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-family:var(--mono);font-size:13px;color:var(--dim);overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin-bottom:14px}
+  pre b{color:var(--txt);font-weight:400}
+  .verify{border-left:3px solid var(--green);padding:8px 14px;background:var(--panel);border-radius:0 8px 8px 0;margin-bottom:8px;font-size:14.5px}
+  .verify b{color:var(--green);font-family:var(--mono);font-size:12.5px;letter-spacing:.05em}
+  .cta{margin-top:52px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
+  .cta p{margin-bottom:14px}
+  .btn{font-family:var(--mono);font-size:14px;text-decoration:none;padding:11px 18px;border-radius:8px;background:var(--accent);color:#0a0e13;font-weight:600;display:inline-block}
+  footer{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;border-top:1px solid var(--line);padding-top:20px;margin-top:56px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="crumb"><a href="/">rytisbalys.com</a> <span style="color:#4d5b6b">/ troubleshooting</span></div>
+  <h1>Meta Pixel not firing? The 6 real causes, in the order you should check them</h1>
+  <p class="sub">Written from production audits, not documentation. Each cause comes with a verification step you can run in minutes - because "the pixel is installed" and "the pixel is firing" are very different claims.</p>
+
+  <p>First, know what you're looking for. A firing pixel sends network requests to <code>facebook.com/tr</code>. Open DevTools > Network, filter by <code>tr</code>, and act on the site. No requests = not firing, whatever your tag manager says.</p>
+
+  <h2><span class="n">01</span>Consent banner is blocking it (the #1 cause in the EU)</h2>
+  <p>If you run Cookiebot, OneTrust or any CMP in opt-in mode, the pixel is legally supposed to stay silent until the visitor accepts. The bug: after acceptance it often STAYS silent, because the pixel tag in GTM is not wired to the consent state, or fires before consent updates.</p>
+  <div class="verify"><b>VERIFY</b> - open the site in incognito, accept all cookies, then check <code>facebook.com/tr</code> requests. Silent even after full acceptance = your consent wiring is broken, not working.</div>
+
+  <h2><span class="n">02</span>Pixel initialized twice (or three times)</h2>
+  <p>A hardcoded base code in the theme AND a GTM tag AND a platform integration all loading the same pixel. Symptom is usually the opposite of silence - events fire 2-3x per action, purchases double-count, and audiences pollute.</p>
+  <div class="verify"><b>VERIFY</b> - in the console run <code>fbq.getState().pixels</code> (or use Meta Pixel Helper). More than one init of the same ID, or multiple IDs you don't recognize = consolidate before anything else.</div>
+
+  <h2><span class="n">03</span>GTM trigger chain never completes</h2>
+  <p>The tag exists, but its trigger waits for a dataLayer event (<code>purchase</code>, <code>add_to_cart</code>) that the site never pushes - a theme update or checkout change silently broke the push. The tag is "active" and fires exactly never.</p>
+  <div class="verify"><b>VERIFY</b> - GTM Preview mode, perform the action, watch the event stream. If your trigger event never appears in the left column, the dataLayer push is gone.</div>
+
+  <h2><span class="n">04</span>Redirect checkouts eat the Purchase event</h2>
+  <p>PayPal, financing providers, bank-redirect payments: the buyer leaves your site to pay and often never returns to the thank-you page where the Purchase pixel lives. The pixel works perfectly - for the customers who come back. The rest vanish.</p>
+  <div class="verify"><b>VERIFY</b> - compare pixel Purchase counts against real backend orders BY PAYMENT METHOD. If card orders track and redirect-payment orders don't, this is your gap. The durable fix is server-side (Conversions API from the order event, not the browser).</div>
+
+  <h2><span class="n">05</span>Checkout runs in an iframe or on another domain</h2>
+  <p>Embedded checkouts (Eventbrite, Calendly, some booking and payment widgets) run in a cross-origin iframe. Your page's pixel physically cannot see events inside it.</p>
+  <div class="verify"><b>VERIFY</b> - if the confirmation step's URL bar or frame ancestry is another domain, stop debugging your pixel. You need the vendor's own tracking hooks, a postMessage bridge, or server-side events.</div>
+
+  <h2><span class="n">06</span>Ad blockers and browser privacy (the loss you can't fix client-side)</h2>
+  <p>Some meaningful share of your visitors block <code>facebook.com/tr</code> outright - ad blockers, Safari ITP, strict browser modes. No client-side fix exists. This is exactly what the Conversions API is for: the same event, sent server-to-server, deduplicated against the browser event via a shared <code>event_id</code>.</p>
+  <div class="verify"><b>VERIFY</b> - in Events Manager check the ratio of browser vs server events per event type. Browser-only setup = you are losing whatever your audience's blocker rate is, silently.</div>
+
+  <h2>The one-line rule</h2>
+  <p class="dim">Don't trust any dashboard that says "connected". Trace one real event end to end - browser network tab, GTM Preview, Events Manager Test Events - and compare monthly totals against your backend's paid orders. The number that matches reality is your backend. Everything else is a suspect.</p>
+
+  <div class="cta">
+    <p><b>Numbers still don't add up?</b> I do this for a living - tracking audits that reconcile Meta, GA4 and your backend, then server-side fixes with proper deduplication. Running in production on my own stores daily.</p>
+    <a class="btn" href="mailto:work@rytisbalys.com">work@rytisbalys.com</a>
+  </div>
+
+  <footer>Rytis Balys · MB Euruvizija · Vilnius, Lithuania · <a href="/" style="color:#4d5b6b">rytisbalys.com</a></footer>
+</div>
+</body>
+</html>

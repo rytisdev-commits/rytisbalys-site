@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GA4 Purchases Don't Match Your Backend Orders? Here's How to Find Out Which Number to Trust</title>
+<meta name="description" content="GA4 shows fewer (or more) purchases than your store backend. A practical reconciliation method: what a normal gap looks like, the 5 causes of a real one, and how to verify each.">
+<link rel="canonical" href="https://rytisbalys.com/ga4-does-not-match-backend">
+<style>
+  :root{--bg:#0a0e13;--panel:#0f151d;--line:#1c2530;--txt:#d7dee8;--dim:#8b98a8;--accent:#ffc72c;--green:#3fb950;--red:#f85149;--mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:56px 24px 96px}
+  a{color:var(--accent)}
+  .crumb{font-family:var(--mono);font-size:13px;margin-bottom:28px}
+  .crumb a{text-decoration:none;color:var(--dim)} .crumb a:hover{color:var(--accent)}
+  h1{font-size:28px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:10px}
+  .sub{color:var(--dim);margin-bottom:36px;font-size:16px}
+  h2{font-size:19px;color:#fff;margin:36px 0 10px}
+  h2 .n{font-family:var(--mono);color:var(--accent);margin-right:8px}
+  p{margin-bottom:14px;font-size:15.5px}
+  p.dim{color:var(--dim)}
+  code{font-family:var(--mono);font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+  pre{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-family:var(--mono);font-size:13px;color:var(--dim);overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin-bottom:14px}
+  pre b{color:var(--txt);font-weight:400}
+  .verify{border-left:3px solid var(--green);padding:8px 14px;background:var(--panel);border-radius:0 8px 8px 0;margin-bottom:8px;font-size:14.5px}
+  .verify b{color:var(--green);font-family:var(--mono);font-size:12.5px;letter-spacing:.05em}
+  .cta{margin-top:52px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
+  .cta p{margin-bottom:14px}
+  .btn{font-family:var(--mono);font-size:14px;text-decoration:none;padding:11px 18px;border-radius:8px;background:var(--accent);color:#0a0e13;font-weight:600;display:inline-block}
+  footer{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;border-top:1px solid var(--line);padding-top:20px;margin-top:56px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="crumb"><a href="/">rytisbalys.com</a> <span style="color:#4d5b6b">/ troubleshooting</span></div>
+  <h1>GA4 purchases don't match your backend orders. Which number do you trust?</h1>
+  <p class="sub">Short answer: your backend's PAID orders are the truth. GA4 is a browser-side observer with known blind spots. The real question is whether your gap is a normal one or a broken one - here's how to tell.</p>
+
+  <h2>Step 0 - make the comparison honest</h2>
+  <p>Most "GA4 is wrong" panics die here. Compare the same thing: GA4 <code>transactions</code> for a full month vs backend orders that were actually PAID in that month. Backend "all orders" usually includes cancellations, failed payments and abandoned financing applications that no analytics tool should count.</p>
+  <div class="verify"><b>VERIFY</b> - filter backend orders by paid status first. On one audit, 1,505 "orders" collapsed to ~822 paid - the raw comparison was meaningless.</div>
+
+  <h2>What a NORMAL gap looks like</h2>
+  <p>GA4 will always see fewer purchases than your backend. Consent rejections (in the EU, everyone who clicks "decline"), ad blockers, Safari's tracking prevention, and users who close the tab before the thank-you page loads. With a strict opt-in consent banner, a 15-30% gap can be fully legitimate - your baseline is roughly your consent rejection rate plus 5-10%.</p>
+  <p class="dim">Corollary: if GA4 shows MORE than your paid backend orders, that's never normal - hunt for duplicate events or test traffic.</p>
+
+  <h2><span class="n">01</span>Redirect payments never reach the thank-you page</h2>
+  <p>PayPal, financing, bank redirects: buyers pay off-site and a share never return to the page where the purchase event fires. The loss concentrates in specific payment methods, which is exactly how you catch it.</p>
+  <div class="verify"><b>VERIFY</b> - join GA4 transaction IDs against backend order IDs, segment the missing ones by payment method. If the missing orders cluster on redirect payments, you found the mechanism.</div>
+
+  <h2><span class="n">02</span>Server-side container configured but not connected</h2>
+  <p>A surprisingly common one: a server GTM container exists (Stape or self-hosted), but the web container's GA4 tag has no <code>server_container_url</code> - so every event still goes client-side only and inherits every browser blind spot. The server container sits at zero requests and nobody notices.</p>
+  <div class="verify"><b>VERIFY</b> - check the GA4 config tag for a server container URL, and check the server container's request log. Zero incoming requests = it's decorative.</div>
+
+  <h2><span class="n">03</span>Duplicate or phantom events inflating GA4</h2>
+  <p>Two GA4 configs on one page, a purchase event firing on page refresh, or a tag on a too-broad trigger. This produces the scarier version: GA4 ABOVE backend.</p>
+  <div class="verify"><b>VERIFY</b> - GA4 DebugView, run one test purchase, count how many purchase events arrive. More than one = trace both sources in GTM Preview.</div>
+
+  <h2><span class="n">04</span>Cross-domain journeys breaking attribution and sessions</h2>
+  <p>Separate checkout domain, rebranded domain, or a landing domain that hands off to the store - without cross-domain configuration, GA4 restarts the session mid-journey and purchases detach from their sources (everything collapses into Direct or referral spam).</p>
+  <div class="verify"><b>VERIFY</b> - check the GA4 data stream's configured domains against every domain in the real purchase path, including payment and rebrand domains.</div>
+
+  <h2><span class="n">05</span>Consent Mode modeling quietly changing your numbers</h2>
+  <p>With Consent Mode, Google models conversions for visitors who declined. Modeled conversions appear in some reports and not others, so two GA4 screens can legitimately disagree with each other - before you even compare to the backend.</p>
+  <div class="verify"><b>VERIFY</b> - compare the same date range in Reports vs Explorations. If they differ, modeling is in play; document it before blaming the pipeline.</div>
+
+  <h2>The reconciliation that settles it</h2>
+  <pre><b>1.</b> backend: paid orders only, one full month
+<b>2.</b> ga4: transactions, same month
+<b>3.</b> join on transaction_id -> list the missing orders
+<b>4.</b> segment missing by payment method + device
+<b>5.</b> the cluster tells you the mechanism; fix THAT, not "tracking" in general</pre>
+  <p class="dim">The named list of missing orders is the deliverable that turns a vague "our numbers are off" into a scoped, fixable engineering task.</p>
+
+  <div class="cta">
+    <p><b>Want this done properly?</b> I run exactly this reconciliation as a fixed-scope audit - every number verified against live APIs, every finding with severity, effort and a fix direction. Then I build the server-side pipeline that closes the gap.</p>
+    <a class="btn" href="mailto:work@rytisbalys.com">work@rytisbalys.com</a>
+  </div>
+
+  <footer>Rytis Balys · MB Euruvizija · Vilnius, Lithuania · <a href="/" style="color:#4d5b6b">rytisbalys.com</a></footer>
+</div>
+</body>
+</html>
