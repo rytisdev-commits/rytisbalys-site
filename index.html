@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rytis Balys - Conversion Tracking & Attribution</title>
+<meta name="description" content="Server-side conversion tracking engineer. Meta Pixel + CAPI with event_id dedup, GA4, GTM/sGTM. I find the purchases your tracking silently drops.">
+<style>
+  :root{
+    --bg:#0a0e13; --panel:#0f151d; --line:#1c2530;
+    --txt:#d7dee8; --dim:#8b98a8; --accent:#ffc72c; --green:#3fb950; --red:#f85149;
+    --mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:72px 24px 96px}
+  .tag{font-family:var(--mono);font-size:13px;color:var(--accent);letter-spacing:.06em}
+  h1{font-size:34px;font-weight:700;margin:10px 0 4px;color:#fff}
+  .role{font-size:17px;color:var(--dim);margin-bottom:36px}
+  .hook{font-size:20px;color:var(--txt);font-weight:500;margin-bottom:36px;line-height:1.5}
+  .hook b{color:var(--accent);font-weight:600}
+  .term{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:44px}
+  .term-bar{display:flex;gap:6px;padding:11px 14px;border-bottom:1px solid var(--line)}
+  .term-bar span{width:11px;height:11px;border-radius:50%;background:#2a3542}
+  .term-bar span:first-child{background:#f85149}.term-bar span:nth-child(2){background:#d29922}.term-bar span:nth-child(3){background:#3fb950}
+  .term pre{padding:18px 20px;font-family:var(--mono);font-size:13.5px;line-height:1.9;color:var(--dim);overflow-x:auto}
+  .term .k{color:var(--txt)} .term .n{color:var(--red)} .term .ok{color:var(--green)} .term .c{color:#4d5b6b}
+  h2{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin:0 0 14px}
+  ul{list-style:none;margin-bottom:44px}
+  li{padding:10px 0 10px 26px;position:relative;border-bottom:1px solid var(--line);color:var(--txt);font-size:15.5px}
+  li:last-child{border-bottom:none}
+  li::before{content:'>';position:absolute;left:2px;color:var(--accent);font-family:var(--mono)}
+  li span{color:var(--dim)}
+  .links{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:56px}
+  .btn{font-family:var(--mono);font-size:14px;text-decoration:none;padding:11px 18px;border-radius:8px;border:1px solid var(--line);color:var(--txt);transition:.15s}
+  .btn:hover{border-color:var(--accent);color:var(--accent)}
+  .btn.primary{background:var(--accent);color:#0a0e13;border-color:var(--accent);font-weight:600}
+  .btn.primary:hover{opacity:.9}
+  footer{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;border-top:1px solid var(--line);padding-top:20px}
+  @media (max-width:520px){h1{font-size:28px}.hook{font-size:18px}.wrap{padding-top:52px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="tag">// conversion tracking & attribution</div>
+  <h1>Rytis Balys</h1>
+  <p class="role">Server-side tracking engineer - Meta Pixel + CAPI, GA4, GTM / sGTM</p>
+
+  <p class="hook">Your ad platforms, your analytics and your backend all report <b>different numbers</b>. I find out which one is lying - then fix the pipes.</p>
+
+  <div class="term">
+    <div class="term-bar"><span></span><span></span><span></span></div>
+    <pre><span class="c"># same store, same month, three answers</span>
+<span class="k">meta_purchases</span>        <span class="n">142</span>   <span class="c"># double-counting, no event_id dedup</span>
+<span class="k">ga4_purchases</span>          <span class="n">98</span>   <span class="c"># consent + redirect losses on top</span>
+<span class="k">backend_paid_orders</span>    <span class="ok">76</span>   <span class="c"># the truth</span>
+<span class="c">-> your ads optimize on the wrong number. that costs money.</span></pre>
+  </div>
+
+  <h2>what I do</h2>
+  <ul>
+    <li>Tracking audits that reconcile platform numbers against real backend orders <span>- diagnosis first, with severity and effort for every finding</span></li>
+    <li>Server-side tracking builds <span>- Meta Conversions API with event_id deduplication, GA4, server-side GTM (Stape), Consent Mode v2</span></li>
+    <li>Firefighting <span>- pixels not firing, double-counted purchases, conversions stuck at zero, gclid/attribution loss</span></li>
+  </ul>
+
+  <h2>proof, not promises</h2>
+  <ul>
+    <li>The same stack runs in production on my own ecommerce stores - every day, with my own money on it</li>
+    <li>Public case study of my browser + server dedup setup on GitHub</li>
+    <li>I don't guess, I verify: every event traced end-to-end before I call anything done</li>
+  </ul>
+
+  <div class="links">
+    <a class="btn primary" href="mailto:work@rytisbalys.com">work@rytisbalys.com</a>
+    <a class="btn" href="https://github.com/rytisdev-commits/server-side-conversion-tracking" rel="noopener">github case study</a>
+  </div>
+
+  <footer>MB Euruvizija · Vilnius, Lithuania (EET) · worldwide, remote</footer>
+</div>
+</body>
+</html>
