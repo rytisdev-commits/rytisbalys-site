@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1D69SRZPPM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1D69SRZPPM');
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Offline Conversions in Google Ads: Getting Real Sales Back From a Closed CRM</title>
+<meta name="description" content="Google Ads optimizing on form fills instead of sales? How to import offline conversions - gclid capture, closed CRMs like Jobber and Housecall, Enhanced Conversions for Leads, timestamp and click-window rejections, and how to verify each step.">
+<link rel="canonical" href="https://rytisbalys.com/offline-conversions-google-ads">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Offline Conversions in Google Ads: Getting Real Sales Back From a Closed CRM">
+<meta property="og:description" content="When Google Ads only sees form fills, it bids toward cheap leads that never close. The offline-conversion flow, the closed-CRM problem, and Enhanced Conversions for Leads - with a verify step for each.">
+<meta property="og:url" content="https://rytisbalys.com/offline-conversions-google-ads">
+<meta property="og:image" content="https://rytisbalys.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Offline Conversions in Google Ads: Getting Real Sales Back From a Closed CRM",
+  "description": "Google Ads optimizing on form fills instead of sales? How to import offline conversions - gclid capture, closed CRMs like Jobber and Housecall, Enhanced Conversions for Leads, timestamp and click-window rejections, and how to verify each step.",
+  "url": "https://rytisbalys.com/offline-conversions-google-ads",
+  "mainEntityOfPage": "https://rytisbalys.com/offline-conversions-google-ads",
+  "datePublished": "2026-07-07",
+  "dateModified": "2026-07-07",
+  "author": {"@type": "Person", "@id": "https://rytisbalys.com/#rytis", "name": "Rytis Balys", "url": "https://rytisbalys.com/"},
+  "publisher": {"@type": "Organization", "name": "MB Euruvizija"}
+}
+</script>
+<style>
+  :root{--bg:#0a0e13;--panel:#0f151d;--line:#1c2530;--txt:#d7dee8;--dim:#8b98a8;--accent:#ffc72c;--green:#3fb950;--red:#f85149;--mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:56px 24px 96px}
+  a{color:var(--accent)}
+  .crumb{font-family:var(--mono);font-size:13px;margin-bottom:28px}
+  .crumb a{text-decoration:none;color:var(--dim)} .crumb a:hover{color:var(--accent)}
+  h1{font-size:28px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:10px}
+  .sub{color:var(--dim);margin-bottom:36px;font-size:16px}
+  h2{font-size:19px;color:#fff;margin:36px 0 10px}
+  h2 .n{font-family:var(--mono);color:var(--accent);margin-right:8px}
+  p{margin-bottom:14px;font-size:15.5px}
+  p.dim{color:var(--dim)}
+  code{font-family:var(--mono);font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+  pre{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-family:var(--mono);font-size:13px;color:var(--dim);overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin-bottom:14px}
+  pre b{color:var(--txt);font-weight:400}
+  .verify{border-left:3px solid var(--green);padding:8px 14px;background:var(--panel);border-radius:0 8px 8px 0;margin-bottom:8px;font-size:14.5px}
+  .verify b{color:var(--green);font-family:var(--mono);font-size:12.5px;letter-spacing:.05em}
+  .cta{margin-top:52px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
+  .cta p{margin-bottom:14px}
+  .btn{font-family:var(--mono);font-size:14px;text-decoration:none;padding:11px 18px;border-radius:8px;background:var(--accent);color:#0a0e13;font-weight:600;display:inline-block}
+  footer{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;border-top:1px solid var(--line);padding-top:20px;margin-top:56px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="crumb"><a href="/">rytisbalys.com</a> <span style="color:#4d5b6b">/ troubleshooting</span></div>
+  <h1>Offline conversions: getting real sales back into Google Ads (when your CRM fights you)</h1>
+  <p class="sub">If Google Ads only sees form fills and calls, Smart Bidding chases cheap leads that never close. Offline conversions send the actual sale back to the click that caused it - here's the flow, and the specific places it breaks in real accounts.</p>
+
+  <p>The problem is rarely the tracking, it's what you're optimizing on. Google Ads counts the form submit or the phone call as the conversion, so bidding learns to produce more of whatever is cheapest to generate - not the leads that turn into revenue. The fix is to feed the real outcome (the sale, the signed quote) back to Google, tied to the click that started it. Almost every failure comes down to one of two things: the gclid not surviving the trip into your CRM, or the upload getting silently rejected.</p>
+
+  <h2><span class="n">01</span>Create the conversion action first</h2>
+  <p>Before you touch the website, build the destination. Google Ads > Goals > Conversions > New conversion > Import > <b>conversions from clicks</b>. This is a separate bucket from the form-fill conversion - the closed deal lands here. Set count and value to match one real sale, not a lead.</p>
+  <div class="verify"><b>VERIFY</b> - the action shows up as "No recent conversions", then flips to "Recording conversions" after your first upload. If it isn't listed, nothing you upload has anywhere to land.</div>
+
+  <h2><span class="n">02</span>Capture the click ID at the moment of the lead</h2>
+  <p>When someone arrives from a Google ad, the Conversion Linker (a GTM tag, or gtag auto-tagging) drops a first-party <code>_gcl_aw</code> cookie holding the gclid. Read that cookie into a hidden field on your lead form so it's saved with the name, email and phone into whatever receives the lead. One catch most setups miss: on some iOS and in-app traffic Google hands you a <code>wbraid</code> or <code>gbraid</code> instead of a gclid - capture whichever one is present.</p>
+  <div class="verify"><b>VERIFY</b> - load your form from a URL with <code>?gclid=test123</code>, submit, and check the record actually carries it. Empty field = the capture is where you fix things, not the upload step.</div>
+
+  <h2><span class="n">03</span>Where to store the click ID when your CRM has no field for it</h2>
+  <p>This is where it usually breaks. Jobber, Housecall Pro, and a lot of dealership and home-service CRMs either give you no field to hold the gclid or won't export it. If the CRM takes any custom field - Jobber does - put it there. If it's fully locked, route the lead through a thin layer first that keeps the gclid mapped to the lead by email/phone, then hands the clean lead on to the CRM:</p>
+  <pre><b>a form / call tracker</b>   WhatConverts, CallRail
+<b>an automation step</b>      Zapier, Make
+<b>a plain spreadsheet</b>     Google Sheet keyed on email + phone</pre>
+  <div class="verify"><b>VERIFY</b> - trace one lead the whole way: ad click, cookie, hidden field, CRM record (or the middle layer). The gclid has to be readable at the point where you'll later learn the deal closed.</div>
+
+  <h2><span class="n">04</span>Upload on the real milestone, with the real value</h2>
+  <p>When the lead becomes a sale - or quote-approved, whatever "real" means for the business - export the gclid, the conversion time, the value and the conversion action name, and send it up. Roughly in order of effort:</p>
+  <pre><b>manual CSV</b>         Conversions &gt; Uploads
+<b>scheduled Sheet</b>    a recurring upload from Google Sheets
+<b>SFTP / Ads API</b>     once the volume justifies it
+<b>native connector</b>   if your CRM ships one</pre>
+  <p>Value matters as much as the count - a $12k job and a $300 job feeding back as the same conversion teaches bidding the wrong lesson. And the uploads that get silently rejected are almost always the same three: a conversion timestamp that sits <b>before</b> the click, a timestamp with <b>no timezone offset</b>, or a click that's older than the <b>90-day</b> import window.</p>
+  <div class="verify"><b>VERIFY</b> - a day or two after an upload, the action's count and total value match what you sent. If rows went missing, open the upload log - it lists each rejected row and the reason.</div>
+
+  <h2><span class="n">05</span>When the click ID can't survive: Enhanced Conversions for Leads</h2>
+  <p>Sometimes the gclid just doesn't make it - the form sits on a different subdomain, the CRM strips query data, or the record predates your capture fix. For <b>google-click leads where the gclid got lost</b> (not third-party directory leads - those never had a click to attribute), use Enhanced Conversions for Leads instead. You upload hashed email/phone on the conversion and Google matches it back to the click on its side. Every CRM has the email and phone even when it won't hold a gclid. The catch: it only recovers leads that genuinely came from a Google click, and you have to accept the customer-data terms.</p>
+  <div class="verify"><b>VERIFY</b> - Google Ads > Conversions > the action's diagnostics reports a match rate on the hashed data. A rate near zero means the hashing format is wrong or the terms toggle isn't on.</div>
+
+  <h2><span class="n">06</span>Reconcile once a month - it rots quietly</h2>
+  <p>Offline import is not set-and-forget. A CRM export change or a broken cookie capture stops feeding it with no error anywhere. Once a month, line up the conversions Google recorded against the deals your CRM actually closed from paid traffic for the same window - the same reconcile-against-the-real-numbers habit that <a href="/ga4-does-not-match-backend">keeps GA4 honest</a>.</p>
+  <div class="verify"><b>VERIFY</b> - Google shows 40 closed-deal conversions, the CRM shows 90 closed from paid: the pipe is leaking between capture and upload. Start again at step 02 and follow one lead through.</div>
+
+  <h2>The one-line rule</h2>
+  <p class="dim">Don't optimize on the form fill. Send the signed deal back with its real value, mind the timestamp and the 90-day window, and reconcile monthly - then bidding chases the money instead of the cheapest click.</p>
+
+  <div class="cta">
+    <p><b>Leads coming in but the sales never get back to Google?</b> I build offline-conversion pipelines - gclid capture, CRM export, Enhanced Conversions for Leads - with monthly reconciliation so they don't silently rot. The same verify-everything approach I run on my own work.</p>
+    <a class="btn" href="mailto:work@rytisbalys.com">work@rytisbalys.com</a>
+  </div>
+
+  <footer>Rytis Balys · MB Euruvizija · Vilnius, Lithuania · <a href="/" style="color:#4d5b6b">rytisbalys.com</a></footer>
+</div>
+</body>
+</html>
