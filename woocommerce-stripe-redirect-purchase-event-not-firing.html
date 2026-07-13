@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1D69SRZPPM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1D69SRZPPM');
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WooCommerce Purchase Event Missing After Stripe Redirect: Fix</title>
+<meta name="description" content="Orders show in Stripe but GA4 has no purchase, or the wrong value. Why thank-you scripts miss off-site payment returns and the server-side fix.">
+<link rel="canonical" href="https://rytisbalys.com/woocommerce-stripe-redirect-purchase-event-not-firing">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="WooCommerce Purchase Event Missing After Stripe Redirect: Fix">
+<meta property="og:description" content="Orders show in Stripe but GA4 has no purchase, or the wrong value. Why thank-you scripts miss off-site payment returns and the server-side fix.">
+<meta property="og:url" content="https://rytisbalys.com/woocommerce-stripe-redirect-purchase-event-not-firing">
+<meta property="og:image" content="https://rytisbalys.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "WooCommerce Purchase Event Missing After Stripe Redirect: Fix",
+  "description": "Orders show in Stripe but GA4 has no purchase, or the wrong value. Why thank-you scripts miss off-site payment returns and the server-side fix.",
+  "url": "https://rytisbalys.com/woocommerce-stripe-redirect-purchase-event-not-firing",
+  "mainEntityOfPage": "https://rytisbalys.com/woocommerce-stripe-redirect-purchase-event-not-firing",
+  "inLanguage": "en",
+  "datePublished": "2026-07-13",
+  "dateModified": "2026-07-13",
+  "author": {
+    "@type": "Person",
+    "@id": "https://rytisbalys.com/#rytis",
+    "name": "Rytis Balys",
+    "url": "https://rytisbalys.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MB Euruvizija"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why is my WooCommerce purchase event not firing with Stripe Payment Links?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Payment Links show a Stripe-hosted confirmation page, and unless you configure a redirect back to your site, the customer never loads your thank-you page, so any tag placed there cannot fire. Even with a redirect configured, customers close the tab or finish 3DS in a banking app. Fire the event from the order-received page rendered server-side, and cover non-returners with a webhook-driven server-side event."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does GA4 show my sales as referral / stripe.com?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The trip to Stripe or the bank's 3DS page and back looks like an inbound referral to GA4, so it breaks the session and reassigns the purchase to stripe.com. Add stripe.com to the unwanted referrals list in your web stream's tag settings. The original campaign source then survives the payment round trip."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I track purchases if the customer never returns to my site after paying?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not with browser tags. The reliable route is server-side: Stripe's webhook confirms the payment on your backend, which sends the purchase to GA4 via Measurement Protocol and to Meta via Conversions API, deduplicated against any browser event by transaction_id and event_id. This recovers the closed-tab and cross-device cases entirely."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is my GA4 purchase value 0 or wrong after an off-site payment?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Usually the tag reads the value from the browser: a scraped checkout total stored in localStorage that did not survive the redirect, or a formatted price string that parsed to NaN. Deposits and gift cards make the scraped cart total wrong even when it survives. Take the value from the WooCommerce order object on the backend instead - it is the amount actually charged."
+      }
+    }
+  ]
+}
+</script>
+<style>
+  :root{--bg:#0a0e13;--panel:#0f151d;--line:#1c2530;--txt:#d7dee8;--dim:#8b98a8;--accent:#ffc72c;--green:#3fb950;--red:#f85149;--mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:56px 24px 96px}
+  a{color:var(--accent)}
+  .crumb{font-family:var(--mono);font-size:13px;margin-bottom:28px}
+  .crumb a{text-decoration:none;color:var(--dim)} .crumb a:hover{color:var(--accent)}
+  h1{font-size:28px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:10px}
+  .sub{color:var(--dim);margin-bottom:36px;font-size:16px}
+  h2{font-size:19px;color:#fff;margin:36px 0 10px}
+  h3{font-size:16px;color:#fff;margin:20px 0 8px}
+  p{margin-bottom:14px;font-size:15.5px}
+  p.dim{color:var(--dim)}
+  ul,ol{margin:0 0 14px 22px}
+  li{margin-bottom:8px;font-size:15.5px}
+  code{font-family:var(--mono);font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+  pre{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-family:var(--mono);font-size:13px;color:var(--dim);overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin-bottom:14px}
+  pre b{color:var(--txt);font-weight:400}
+  .faq{margin-top:44px}
+  .faq h2{margin-bottom:18px}
+  .faq details{background:var(--panel);border:1px solid var(--line);border-radius:8px;margin-bottom:10px;padding:0}
+  .faq summary{cursor:pointer;padding:13px 16px;font-size:15px;font-weight:600;color:var(--txt)}
+  .faq details p{padding:0 16px 14px;color:var(--dim);font-size:14.5px;margin:0}
+  .cta{margin-top:52px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
+  .cta p{margin-bottom:14px}
+  .btn{font-family:var(--mono);font-size:14px;text-decoration:none;padding:11px 18px;border-radius:8px;background:var(--accent);color:#0a0e13;font-weight:600;display:inline-block}
+  footer{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;border-top:1px solid var(--line);padding-top:20px;margin-top:56px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="crumb"><a href="/">rytisbalys.com</a> <span style="color:#4d5b6b">/ troubleshooting</span></div>
+  <h1>WooCommerce Purchase Event Missing After Stripe Redirect: Fix</h1>
+<p>The order is in WooCommerce. The money is in Stripe. GA4 shows nothing, or a purchase with value 0, or a number that matches the cart but not what the customer actually paid. The cause is almost always the same: your purchase tag depends on the customer's browser making the round trip back to your thank-you page with the right data in hand, and off-site payment breaks that trip.</p><p>This applies to Stripe Payment Links, Stripe-hosted checkout, and any bank-redirect method (iDEAL, Bancontact, Przelewy24, local bank buttons). I fix this setup for stores weekly. Here is what actually goes wrong and the pattern that survives.</p>
+  <h2>Why thank-you-page scripts miss redirect returns</h2>
+<p>A purchase tag that lives on the order-received page only fires if the customer's browser loads that page. With off-site payment, a meaningful share of paying customers never do:</p><ul><li><strong>They close the tab.</strong> Stripe's hosted page already told them the payment succeeded. The job is done in their head. With Payment Links on default settings, Stripe shows its own confirmation page and the customer may never be redirected to your site at all.</li><li><strong>3DS detour.</strong> The bank's authentication step often pushes the customer into a banking app. They approve the payment there and go back to whatever they were doing. The original tab with the redirect chain is abandoned.</li><li><strong>Cross-device completion.</strong> The customer starts on desktop, confirms in a mobile banking app, and if they return at all it is on a different device with a different GA4 client ID. The purchase is attributed to a new user, or lost.</li><li><strong>Slow payment methods.</strong> Some bank transfers confirm minutes or hours later. There is no browser session left to fire anything.</li></ul><p>Typical damage: 10-30% of purchases missing from GA4 and Meta, which quietly starves your ad optimization of the conversions it needs.</p>
+  <h2>Why the localStorage total-scrape hack breaks</h2>
+<p>A common workaround: before the redirect, a script reads the checkout total from the DOM, stores it in localStorage, and reads it back on the return page. I remove this pattern from client sites regularly. It fails four ways:</p><ul><li><strong>Storage does not follow the customer.</strong> Complete the payment on another device, in another browser, or in an in-app browser that opens the return link in the system browser, and the stored value is not there. The event fires with value 0 or undefined.</li><li><strong>NaN.</strong> The scraper parses a formatted string like <code>1 234,56 €</code>. One locale change, one theme update to the totals markup, and <code>parseFloat</code> returns NaN. GA4 drops or mangles the value silently.</li><li><strong>Deposits and partial payments.</strong> The scraped number is the cart total at redirect time. If the customer pays a deposit, uses a gift card at the hosted page, or the amount changes at Stripe, your reported revenue is wrong. Wrong data is worse than missing data because nobody questions it.</li><li><strong>ITP and private mode.</strong> Safari purges script-writable storage after seven days without interaction, and private browsing keeps nothing. Delayed bank confirmations come back to an empty store.</li></ul><p>The deeper problem: the browser is the wrong source of truth for money. The backend already knows the real total.</p>
+  <h2>The fix: render the purchase push from the order object</h2>
+<p>WooCommerce's order-received URL contains the order ID and key. The server can load the full order and print a dataLayer push with backend numbers. No scraping, no storage, no guessing.</p><pre>add_action( 'woocommerce_thankyou', function( $order_id ) {
+    $order = wc_get_order( $order_id );
+    if ( ! $order || ! $order->is_paid() ) {
+        return; // do not fire for pending or failed redirects
+    }
+    if ( $order->get_meta( '_purchase_tracked' ) ) {
+        return; // refresh guard: fire once per order
+    }
+    $order->update_meta_data( '_purchase_tracked', 'yes' );
+    $order->save();
+    ?>
+    &lt;script&gt;
+    window.dataLayer = window.dataLayer || [];
+    dataLayer.push({
+        event: 'purchase',
+        transaction_id: '&lt;?php echo esc_js( $order->get_order_number() ); ?&gt;',
+        value: &lt;?php echo (float) $order->get_total(); ?&gt;,
+        currency: '&lt;?php echo esc_js( $order->get_currency() ); ?&gt;'
+    });
+    &lt;/script&gt;
+    &lt;?php
+} );</pre><p>Three details carry the weight here:</p><ul><li><strong>Value from the backend.</strong> <code>$order->get_total()</code> is what was actually charged, including deposits, coupons, and gift cards. It cannot be NaN.</li><li><strong>Refresh guard via order meta.</strong> Customers reload the thank-you page and click it from the order email days later. The meta flag makes the push render once. GA4 also deduplicates identical transaction_id values, but do not rely on that alone, and Meta needs an explicit event_id anyway.</li><li><strong>Paid-status check.</strong> Bank-redirect orders can land on the thank-you page while still pending. <code>is_paid()</code> stops you from reporting revenue on payments that later fail.</li></ul><p>This fixes every case where the customer does return. For the customers who never come back at all, no on-page code can help. That class is solved server-side: the Stripe webhook confirms payment, and the server sends the purchase directly via GA4 Measurement Protocol and Meta Conversions API, deduplicated against the browser event by transaction_id and event_id. That is the setup I build for clients when the redirect losses are large.</p>
+  <h2>How to verify it is actually working</h2>
+<p>Do not trust the plugin settings page. Run a real test order through the real off-site flow, 3DS included, and watch the wire:</p><ul><li><strong>Tag Assistant:</strong> connect your domain at tagassistant.google.com, complete a test payment, and on the return to order-received check that the <code>purchase</code> event appears in the dataLayer and that your GA4 event tag fired on it. The Tag Assistant connection sometimes drops across the Stripe redirect - if it does, verify via the network tab instead.</li><li><strong>Browser network tab:</strong> on the order-received page, open DevTools, filter requests for <code>collect</code>. Find the POST to google-analytics.com containing <code>en=purchase</code>. Check <code>epn.value</code> against the order total and <code>cu</code> against the currency. If the request is absent, the tag never fired. If value is 0 or missing, your data source is broken.</li><li><strong>GA4 DebugView:</strong> with Tag Assistant connected (or <code>debug_mode</code> set), open Admin, then DebugView. Confirm the purchase arrives with transaction_id, value, and currency populated.</li><li><strong>Meta Events Manager:</strong> open Test Events, run the flow in the same browser, and confirm a Purchase with the correct value and a matching event_id on both the browser and server event so Meta deduplicates them.</li><li><strong>The gap check:</strong> compare purchases in GA4 against paid orders in WooCommerce for the last 7 days. A consistent 10%+ shortfall on a store with off-site payment is redirect loss, not "tracking noise".</li></ul>
+  <h2>Stop sessions collapsing to referral / stripe.com</h2>
+<p>Even when the purchase fires, GA4 can credit it to the wrong channel. The customer leaves your site for stripe.com or their bank's 3DS page and comes back. GA4 sees stripe.com as the referrer, starts a new session, and your paid or organic attribution is overwritten by <code>referral / stripe.com</code>.</p><p>The fix is the unwanted referrals list. In GA4: Admin, then Data streams, select your web stream, open Configure tag settings, choose Show all, then List unwanted referrals. Add <code>stripe.com</code>. If your acquisition reports also show bank or 3DS authentication domains as referrers, add those too. GA4 will then ignore these referrers and keep the original session source intact.</p><p>Check the result in Reports under Traffic acquisition: referral traffic from stripe.com should drop to zero for new sessions, and your purchases start attributing to the campaigns that actually earned them.</p>
+  <div class="faq">
+  <h2>FAQ</h2>
+    <details><summary>Why is my WooCommerce purchase event not firing with Stripe Payment Links?</summary><p>Payment Links show a Stripe-hosted confirmation page, and unless you configure a redirect back to your site, the customer never loads your thank-you page, so any tag placed there cannot fire. Even with a redirect configured, customers close the tab or finish 3DS in a banking app. Fire the event from the order-received page rendered server-side, and cover non-returners with a webhook-driven server-side event.</p></details>
+    <details><summary>Why does GA4 show my sales as referral / stripe.com?</summary><p>The trip to Stripe or the bank's 3DS page and back looks like an inbound referral to GA4, so it breaks the session and reassigns the purchase to stripe.com. Add stripe.com to the unwanted referrals list in your web stream's tag settings. The original campaign source then survives the payment round trip.</p></details>
+    <details><summary>Can I track purchases if the customer never returns to my site after paying?</summary><p>Not with browser tags. The reliable route is server-side: Stripe's webhook confirms the payment on your backend, which sends the purchase to GA4 via Measurement Protocol and to Meta via Conversions API, deduplicated against any browser event by transaction_id and event_id. This recovers the closed-tab and cross-device cases entirely.</p></details>
+    <details><summary>Why is my GA4 purchase value 0 or wrong after an off-site payment?</summary><p>Usually the tag reads the value from the browser: a scraped checkout total stored in localStorage that did not survive the redirect, or a formatted price string that parsed to NaN. Deposits and gift cards make the scraped cart total wrong even when it survives. Take the value from the WooCommerce order object on the backend instead - it is the amount actually charged.</p></details>
+  </div>
+  <div class="cta">
+<p>I build and repair server-side tracking for WooCommerce and Shopify stores - redirect payments, webhooks, Measurement Protocol, Conversions API. If you want yours checked or fixed, email me at work@rytisbalys.com.</p>
+    <a class="btn" href="mailto:work@rytisbalys.com">work@rytisbalys.com</a>
+  </div>
+
+  <footer>Rytis Balys · MB Euruvizija · Vilnius, Lithuania · <a href="/" style="color:#4d5b6b">rytisbalys.com</a></footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1D69SRZPPM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1D69SRZPPM');
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fix GA4 Purchases Showing as stripe.com, paypal.com or (direct)</title>
+<meta name="description" content="GA4 shows purchases from stripe.com, paypal.com or (direct)/(none) after adding a payment gateway or 3DS. What causes each flavor and which fix applies.">
+<link rel="canonical" href="https://rytisbalys.com/ga4-purchases-attributed-stripe-paypal-direct-fix">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Fix GA4 Purchases Showing as stripe.com, paypal.com or (direct)">
+<meta property="og:description" content="GA4 shows purchases from stripe.com, paypal.com or (direct)/(none) after adding a payment gateway or 3DS. What causes each flavor and which fix applies.">
+<meta property="og:url" content="https://rytisbalys.com/ga4-purchases-attributed-stripe-paypal-direct-fix">
+<meta property="og:image" content="https://rytisbalys.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Fix GA4 Purchases Showing as stripe.com, paypal.com or (direct)",
+  "description": "GA4 shows purchases from stripe.com, paypal.com or (direct)/(none) after adding a payment gateway or 3DS. What causes each flavor and which fix applies.",
+  "url": "https://rytisbalys.com/ga4-purchases-attributed-stripe-paypal-direct-fix",
+  "mainEntityOfPage": "https://rytisbalys.com/ga4-purchases-attributed-stripe-paypal-direct-fix",
+  "inLanguage": "en",
+  "datePublished": "2026-07-13",
+  "dateModified": "2026-07-13",
+  "author": {
+    "@type": "Person",
+    "@id": "https://rytisbalys.com/#rytis",
+    "name": "Rytis Balys",
+    "url": "https://rytisbalys.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MB Euruvizija"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why does GA4 show my purchases as (direct) / (none) after checkout?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "(direct) / (none) means GA4 had no traffic source to credit, and List unwanted referrals cannot fix it - when the gateway strips the referrer, the exclusion has nothing to match. The usual causes: the payment took longer than your session timeout, so the return started a genuinely new session with no source; analytics cookies were blocked or lost, so the buyer looks like a new direct user; or there was no non-direct source inside the attribution lookback. Start by raising the session timeout and checking your consent setup."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the unwanted referrals list fix historical GA4 data?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. GA4 applies the setting from the moment you save it and never reprocesses old data. Past purchases stay attributed to the gateway or to direct, so judge campaign performance from the change date forward."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which domains should I add to the GA4 unwanted referrals list?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Start with stripe.com, paypal.com and klarna.com, then check Traffic acquisition for any other payment, bank or 3DS domains that appear as a session source with revenue attached. Only list domains that are part of your checkout flow, never domains that send you actual customers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need cross-domain tracking for Stripe or PayPal?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Cross-domain measurement requires your Google tag to run on both domains, and you cannot tag stripe.com or paypal.com. It is the right tool only for a second domain you own, such as a separate checkout or SSO domain. For gateways, List unwanted referrals is the correct fix."
+      }
+    }
+  ]
+}
+</script>
+<style>
+  :root{--bg:#0a0e13;--panel:#0f151d;--line:#1c2530;--txt:#d7dee8;--dim:#8b98a8;--accent:#ffc72c;--green:#3fb950;--red:#f85149;--mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:56px 24px 96px}
+  a{color:var(--accent)}
+  .crumb{font-family:var(--mono);font-size:13px;margin-bottom:28px}
+  .crumb a{text-decoration:none;color:var(--dim)} .crumb a:hover{color:var(--accent)}
+  h1{font-size:28px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:10px}
+  .sub{color:var(--dim);margin-bottom:36px;font-size:16px}
+  h2{font-size:19px;color:#fff;margin:36px 0 10px}
+  h3{font-size:16px;color:#fff;margin:20px 0 8px}
+  p{margin-bottom:14px;font-size:15.5px}
+  p.dim{color:var(--dim)}
+  ul,ol{margin:0 0 14px 22px}
+  li{margin-bottom:8px;font-size:15.5px}
+  code{font-family:var(--mono);font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+  pre{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-family:var(--mono);font-size:13px;color:var(--dim);overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin-bottom:14px}
+  pre b{color:var(--txt);font-weight:400}
+  .faq{margin-top:44px}
+  .faq h2{margin-bottom:18px}
+  .faq details{background:var(--panel);border:1px solid var(--line);border-radius:8px;margin-bottom:10px;padding:0}
+  .faq summary{cursor:pointer;padding:13px 16px;font-size:15px;font-weight:600;color:var(--txt)}
+  .faq details p{padding:0 16px 14px;color:var(--dim);font-size:14.5px;margin:0}
+  .cta{margin-top:52px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
+  .cta p{margin-bottom:14px}
+  .btn{font-family:var(--mono);font-size:14px;text-decoration:none;padding:11px 18px;border-radius:8px;background:var(--accent);color:#0a0e13;font-weight:600;display:inline-block}
+  footer{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;border-top:1px solid var(--line);padding-top:20px;margin-top:56px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="crumb"><a href="/">rytisbalys.com</a> <span style="color:#4d5b6b">/ troubleshooting</span></div>
+  <h1>Fix GA4 Purchases Showing as stripe.com, paypal.com or (direct)</h1>
+<p>You connected Stripe, PayPal or Klarna, or your bank switched on 3D Secure. Since that day GA4 reports purchases with session source <strong>stripe.com</strong>, <strong>paypal.com</strong> or <strong>(direct) / (none)</strong>, and your ad campaigns look like they stopped selling. They did not. The buyer leaves your site to pay, returns with the gateway as the browser referrer, and GA4 overwrites the session source with the last domain the visitor came from.</p><p>The gateway-referral flavor takes one setting in GA4 Admin called List unwanted referrals. The (direct) / (none) flavor has different causes - session timeout at the gateway, blocked cookies - and different fixes, covered further down. Below: the mechanism, the setting, when cross-domain linking is the right tool instead, and how to verify the fix with real traffic.</p>
+  <h2>Why GA4 credits purchases to the payment gateway</h2>
+<p>First, what does not happen: GA4 does not restart the session. Sessions only end on inactivity past the session timeout, 30 minutes by default - Google documents that new campaign parameters or a new referrer never restart a session. What actually happens is quieter. The return page fires a hit whose <strong>document referrer</strong> is the gateway domain. GA4 reads that as new traffic-source information for the ongoing session, and under its last-non-direct-click session attribution the gateway overwrites the source that brought the buyer. Same session, new owner. The purchase then reports under stripe.com instead of the Google Ads click or the email that did the work.</p><p>The symptom comes in two flavors, and they have different causes:</p><ul><li><strong>Source = stripe.com / paypal.com / klarna referral</strong> - the gateway passed a normal referrer on the redirect back and it overwrote the session source. This is the flavor List unwanted referrals fixes.</li><li><strong>Source = (direct) / (none)</strong> - this one is not a referrer problem. It shows up when the session times out while the buyer sits at the bank, when consent-blocked or lost cookies make the return look like a brand-new user, or when there was no non-direct source inside the attribution lookback. Many gateways return via an HTTPS POST or meta refresh that strips the referrer entirely, so a referral exclusion has nothing to match. The fixes for this flavor are in the last section.</li></ul><p>Either way the money consequence is the same: your paid campaigns under-report revenue, ROAS looks worse than it is, and budget gets cut from ads that were converting.</p>
+  <h2>The fix: List unwanted referrals</h2>
+<p>In GA4: <strong>Admin &gt; Data collection and modification &gt; Data streams</strong>, open your web data stream, click <strong>Configure tag settings</strong>, expand the settings list with <strong>Show all</strong>, then open <strong>List unwanted referrals</strong>.</p><p>Add one condition per domain, match type <strong>Referral domain contains</strong>:</p><ul><li>stripe.com</li><li>paypal.com</li><li>klarna.com</li><li>any 3DS or bank verification domain you see in your reports</li></ul><p>To find the offenders, open <strong>Reports &gt; Acquisition &gt; Traffic acquisition</strong>, set the dimension to session source, and look for payment or bank domains that carry revenue. Those are the ones to list. Do not add domains that send you real customers.</p><p>Two things to know. The setting is per data stream, so repeat it if you run more than one. And it applies from the moment you save it forward - GA4 never reprocesses historical data, so past purchases stay misattributed.</p>
+  <h2>When cross-domain linking applies instead</h2>
+<p>Cross-domain measurement is for a second domain <strong>you own and can tag</strong>: a separate checkout domain, an SSO portal, a landing-page domain on a different TLD. It lives on the same screen: <strong>Configure tag settings &gt; Configure your domains</strong>. Add both domains and the Google tag decorates links between them with the <strong>_gl</strong> linker parameter, which carries the client ID across so the visitor stays one user in one session.</p><p>It does not apply to payment gateways, because you cannot run your Google tag on stripe.com. For gateways, unwanted referrals is the whole fix.</p><p>Here is why that is enough. The <strong>_ga</strong> cookie is set on your domain and never leaves it. When the buyer goes yoursite.com &gt; gateway &gt; yoursite.com, the cookie is still sitting there on return, so GA4 already knows it is the same person. The only thing the round trip breaks is the session source, and unwanted referrals repairs that. Subdomains share the _ga cookie too, so shop.example.com and www.example.com need no cross-domain setup.</p>
+  <h2>Verify the fix</h2>
+<p>Do not trust the setting, watch the hits. Run a test order in the gateway's test mode and check each layer:</p><ul><li><strong>Browser network tab.</strong> DevTools &gt; Network, filter <strong>collect</strong>. On the return page, inspect the request to google-analytics.com/g/collect. Before the fix, the <strong>dr</strong> parameter carries the gateway URL. After the fix, the same hit carries <strong>ir=1</strong> (ignore referrer), which means the tag matched your unwanted referrals list. Test in a fresh incognito window and allow a few minutes for the tag configuration to update.</li><li><strong>GA4 DebugView.</strong> Enable it through Tag Assistant, or set <strong>debug_mode: true</strong> in your Google tag configuration - a bare URL parameter does not switch it on. Do not use session_start as proof the referral fix worked: a return within the session timeout never fires one, with or without the setting. Use DebugView for the timeout case instead - if a slow test payment produces a fresh <strong>session_start</strong> on return, the session expired at the gateway and you need a longer session timeout, not the referral list.</li><li><strong>Tag Assistant.</strong> Connect your domain at tagassistant.google.com and walk the full flow; you can inspect every hit and its referrer as it fires.</li><li><strong>Realtime.</strong> Reports &gt; Realtime confirms your test purchase event arrived at all.</li><li><strong>Session source, next day.</strong> Build an Exploration with dimension <strong>Session source / medium</strong> and metric key events or purchases. From the change date forward, the gateway domains should stop accruing purchases and your real channels should recover their share.</li></ul>
+  <h2>What this setting will not fix</h2>
+<p>Three cases survive the exclusion list:</p><ul><li><strong>Sessions that expire at the gateway.</strong> GA4's default session timeout is 30 minutes. A slow bank transfer or a stalled 3DS challenge can pass that, and the return starts a genuinely new session with no source. You can raise the timeout under the same Configure tag settings screen (Adjust session timeout, up to 7 hours 55 minutes).</li><li><strong>Consent-blocked cookies.</strong> If the visitor denied analytics cookies, there is no _ga cookie to survive the round trip, and every return looks like a new direct user. That is a consent mode problem, not a referral problem.</li><li><strong>Historical data.</strong> The reports before your change stay wrong. Annotate the date and compare forward only.</li></ul>
+  <div class="faq">
+  <h2>FAQ</h2>
+    <details><summary>Why does GA4 show my purchases as (direct) / (none) after checkout?</summary><p>(direct) / (none) means GA4 had no traffic source to credit, and List unwanted referrals cannot fix it - when the gateway strips the referrer, the exclusion has nothing to match. The usual causes: the payment took longer than your session timeout, so the return started a genuinely new session with no source; analytics cookies were blocked or lost, so the buyer looks like a new direct user; or there was no non-direct source inside the attribution lookback. Start by raising the session timeout and checking your consent setup.</p></details>
+    <details><summary>Does the unwanted referrals list fix historical GA4 data?</summary><p>No. GA4 applies the setting from the moment you save it and never reprocesses old data. Past purchases stay attributed to the gateway or to direct, so judge campaign performance from the change date forward.</p></details>
+    <details><summary>Which domains should I add to the GA4 unwanted referrals list?</summary><p>Start with stripe.com, paypal.com and klarna.com, then check Traffic acquisition for any other payment, bank or 3DS domains that appear as a session source with revenue attached. Only list domains that are part of your checkout flow, never domains that send you actual customers.</p></details>
+    <details><summary>Do I need cross-domain tracking for Stripe or PayPal?</summary><p>No. Cross-domain measurement requires your Google tag to run on both domains, and you cannot tag stripe.com or paypal.com. It is the right tool only for a second domain you own, such as a separate checkout or SSO domain. For gateways, List unwanted referrals is the correct fix.</p></details>
+  </div>
+  <div class="cta">
+<p>I fix attribution problems like this for stores and agencies, usually server-side and always verified against real transactions. If you would rather have someone check your setup and confirm the numbers, email me at work@rytisbalys.com.</p>
+    <a class="btn" href="mailto:work@rytisbalys.com">work@rytisbalys.com</a>
+  </div>
+
+  <footer>Rytis Balys · MB Euruvizija · Vilnius, Lithuania · <a href="/" style="color:#4d5b6b">rytisbalys.com</a></footer>
+</div>
+</body>
+</html>

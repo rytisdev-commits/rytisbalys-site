@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1D69SRZPPM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1D69SRZPPM');
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Server-Side GTM: What It Actually Fixes (and What It Doesn&#x27;t)</title>
+<meta name="description" content="Server-side GTM fixes transport, not bad data. What Stape-style tagging really fixes, what it can&#x27;t, and when browser-side is enough.">
+<link rel="canonical" href="https://rytisbalys.com/server-side-gtm-what-it-fixes">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Server-Side GTM: What It Actually Fixes (and What It Doesn&#x27;t)">
+<meta property="og:description" content="Server-side GTM fixes transport, not bad data. What Stape-style tagging really fixes, what it can&#x27;t, and when browser-side is enough.">
+<meta property="og:url" content="https://rytisbalys.com/server-side-gtm-what-it-fixes">
+<meta property="og:image" content="https://rytisbalys.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Server-Side GTM: What It Actually Fixes (and What It Doesn't)",
+  "description": "Server-side GTM fixes transport, not bad data. What Stape-style tagging really fixes, what it can't, and when browser-side is enough.",
+  "url": "https://rytisbalys.com/server-side-gtm-what-it-fixes",
+  "mainEntityOfPage": "https://rytisbalys.com/server-side-gtm-what-it-fixes",
+  "inLanguage": "en",
+  "datePublished": "2026-07-13",
+  "dateModified": "2026-07-13",
+  "author": {
+    "@type": "Person",
+    "@id": "https://rytisbalys.com/#rytis",
+    "name": "Rytis Balys",
+    "url": "https://rytisbalys.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MB Euruvizija"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does server-side tracking bypass ad blockers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Partly. Serving the container and hits from your own subdomain gets past blocklists that target google-analytics.com and connect.facebook.net, which recovers a meaningful share of blocked sessions. Blockers with behavioral heuristics still catch some traffic, so treat it as recovery, not immunity."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I still need the browser Meta pixel if I have the Conversions API?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Run both, deduplicated with a shared event_id. The browser pixel supplies fbp and fbc identifiers that improve match quality, and CAPI covers the sessions the pixel loses. Meta's own guidance is a redundant setup, not a replacement."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does server-side GTM cost per month?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Hosting on Stape runs from free at low traffic to roughly 20-50 USD per month for a typical small store. Self-hosting on Google Cloud tends to cost more. The bigger cost is the one-time setup and verification, one to three days of work done properly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will server-side tracking increase my ROAS?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It makes measured ROAS more accurate, which usually means reported numbers move closer to reality rather than up. Better match quality and more complete conversion data can improve ad delivery over the following weeks. It will not rescue an offer that does not convert."
+      }
+    }
+  ]
+}
+</script>
+<style>
+  :root{--bg:#0a0e13;--panel:#0f151d;--line:#1c2530;--txt:#d7dee8;--dim:#8b98a8;--accent:#ffc72c;--green:#3fb950;--red:#f85149;--mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:56px 24px 96px}
+  a{color:var(--accent)}
+  .crumb{font-family:var(--mono);font-size:13px;margin-bottom:28px}
+  .crumb a{text-decoration:none;color:var(--dim)} .crumb a:hover{color:var(--accent)}
+  h1{font-size:28px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:10px}
+  .sub{color:var(--dim);margin-bottom:36px;font-size:16px}
+  h2{font-size:19px;color:#fff;margin:36px 0 10px}
+  h3{font-size:16px;color:#fff;margin:20px 0 8px}
+  p{margin-bottom:14px;font-size:15.5px}
+  p.dim{color:var(--dim)}
+  ul,ol{margin:0 0 14px 22px}
+  li{margin-bottom:8px;font-size:15.5px}
+  code{font-family:var(--mono);font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+  pre{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-family:var(--mono);font-size:13px;color:var(--dim);overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin-bottom:14px}
+  pre b{color:var(--txt);font-weight:400}
+  .faq{margin-top:44px}
+  .faq h2{margin-bottom:18px}
+  .faq details{background:var(--panel);border:1px solid var(--line);border-radius:8px;margin-bottom:10px;padding:0}
+  .faq summary{cursor:pointer;padding:13px 16px;font-size:15px;font-weight:600;color:var(--txt)}
+  .faq details p{padding:0 16px 14px;color:var(--dim);font-size:14.5px;margin:0}
+  .cta{margin-top:52px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
+  .cta p{margin-bottom:14px}
+  .btn{font-family:var(--mono);font-size:14px;text-decoration:none;padding:11px 18px;border-radius:8px;background:var(--accent);color:#0a0e13;font-weight:600;display:inline-block}
+  footer{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;border-top:1px solid var(--line);padding-top:20px;margin-top:56px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="crumb"><a href="/">rytisbalys.com</a> <span style="color:#4d5b6b">/ troubleshooting</span></div>
+  <h1>Server-Side GTM: What It Actually Fixes (and What It Doesn&#x27;t)</h1>
+<p>You moved tracking to server-side GTM, or an agency is pitching it as the fix for your missing conversions. Half of those pitches oversell it. Server-side tagging changes how data travels, not what the data says. If your purchase event fires with the wrong value in the browser, the server forwards that wrong value faster and more reliably.</p><p>I run server-side GTM on Stape in production on my own store, every day. Here is what it earns its keep on, where it does nothing, and how to check which situation you are in.</p>
+  <h2>What server-side GTM actually fixes</h2>
+<p>Server-side GTM moves tag execution from the visitor's browser to a container you control - Stape hosts it, or you run it on Google Cloud. It solves four transport problems:</p><ul><li><strong>Ad blockers.</strong> Blockers kill requests to google-analytics.com and connect.facebook.net. With a custom loader on your own subdomain (gtm.yourstore.com), scripts load and hits fire from your domain. On my store this recovers a real share of Safari and Firefox sessions. Not all of them - strict blockers use heuristics and still catch some patterns.</li><li><strong>Cookie lifetime.</strong> Browsers with ITP-style rules cap JavaScript-set cookies at 7 days. Cookies set server-side via the Set-Cookie header outlive that cap in most browsers, so returning visitors keep their identity instead of counting as new users. Safari is the hard case: since 16.4 it also caps HTTP-set cookies to 7 days when the responding server's IP does not share the first half of your website server's IPv4 address, and a Stape or Cloud Run tagging server almost never does. The A record on your subdomain only avoids the CNAME-cloaking detection, not this IP check. For Safari specifically you need a mitigation like Stape's Cookie Keeper, or a tagging server on matching IP space, which is rare. Server-set cookies are still a clear win everywhere else.</li><li><strong>First-party data control.</strong> Every hit passes through your container before it reaches Google or Meta. You decide what leaves: strip parameters, hash emails, drop what you never agreed to send.</li><li><strong>One feed for CAPI and Enhanced Conversions.</strong> The same server stream feeds Meta Conversions API, GA4, and Google Ads Enhanced Conversions with hashed customer data. Match quality goes up because the server can attach order data the browser pixel never sees.</li></ul>
+  <h2>What it does not fix</h2>
+<p>Server-side tagging is a pipe. It does not clean what flows through it.</p><ul><li><strong>Bad event architecture.</strong> If purchase fires on a thank-you page that some payment methods skip, the event still never fires after migration. Same gap, new invoice.</li><li><strong>Wrong values.</strong> A dataLayer that sends the order total without shipping, or in the wrong currency, gets forwarded as-is. I audit stores where the fix was Stape and the value bug survived the migration untouched.</li><li><strong>Missing consent.</strong> Moving processing to a server does not remove the consent requirement. Consent Mode signals must reach the server container and the container must honor them. A hit fired without consent is still a hit fired without consent.</li><li><strong>Duplicate events.</strong> This one costs money and deserves its own section.</li></ul>
+  <h2>The double-counting trap</h2>
+<p>The standard migration mistake: old browser tags stay live, new server tags go live, and every purchase counts twice. Meta then optimizes on doubled conversions. ROAS looks great for two weeks, then delivery degrades and your reporting is fiction.</p><p>Deduplication is specific, per platform:</p><ul><li><strong>Meta:</strong> the browser pixel event and the CAPI event must carry the same event_id and the same event name. Meta drops the second arrival. Different IDs means two purchases in your account.</li><li><strong>GA4:</strong> do not run a direct gtag hit and a server-forwarded hit in parallel. Point the browser hit at the server container with server_container_url so there is one stream, not two.</li><li><strong>Google Ads:</strong> one conversion action per conversion. If a browser conversion tag and server-side conversions both feed the same conversion action without alignment, both count.</li></ul>
+  <h2>How to verify your setup in 20 minutes</h2>
+<p>Run these four checks after any server-side migration, and again after any theme or checkout change.</p><ul><li><strong>Tag Assistant.</strong> Open tagassistant.google.com and connect both containers, web and server, in Preview mode. Place a test order. In the server container, confirm one incoming request per event and check value and currency in the event data.</li><li><strong>GA4 DebugView.</strong> Admin, then DebugView. Your test purchase must appear once. Twice means a dedup problem. Zero means transport broke.</li><li><strong>Meta Events Manager, Test Events.</strong> Fire a test purchase with your test event code. Purchase should show as one event received from both Browser and Server, marked as deduplicated. Two separate Purchase rows means the event_id does not match.</li><li><strong>Browser network tab.</strong> DevTools, Network, filter for collect. Hits should go to your tagging subdomain, not google-analytics.com.</li></ul><pre>DevTools &gt; Network &gt; filter: collect
+
+Good: https://gtm.yourstore.com/g/collect ... en=purchase (once per order)
+Bad:  hits to BOTH google-analytics.com AND gtm.yourstore.com
+      = you are double-sending</pre><p>If any of the four fails, stop spending time on attribution debates. The pipe is broken and everything downstream is noise.</p>
+  <h2>When you need it, and what it costs</h2>
+<p>Server-side is worth it when:</p><ul><li>Paid social or Google Ads is a main channel and spend is meaningful. My rough line: above 3-5k EUR per month, the recovered signal pays for the setup.</li><li>Your audience skews iOS and Safari, or privacy-tool-heavy niches.</li><li>You want Meta CAPI or Enhanced Conversions with good match quality anyway. Doing those through one server container beats bolting on three separate integrations.</li></ul><p>A clean browser-side setup is enough when spend is small, traffic is mostly Chrome desktop, or your current tracking is broken at the logic level. Fix the logic first, browser-side, where debugging is cheaper. Migrating a broken setup gives you a broken setup with a monthly hosting bill.</p><p>Cost reality: Stape has a free tier for low traffic, and a typical small store lands around 20-50 USD per month in hosting. Self-hosting on Google Cloud usually costs more once minimum instances are counted. Setup for a standard Shopify or WooCommerce store is one to three days of competent work: custom domain with correct DNS, container config, deduplication, consent wiring, then verification. The hosting fee is the cheap part. The expensive part is a migration done without a dedup plan.</p>
+  <div class="faq">
+  <h2>FAQ</h2>
+    <details><summary>Does server-side tracking bypass ad blockers?</summary><p>Partly. Serving the container and hits from your own subdomain gets past blocklists that target google-analytics.com and connect.facebook.net, which recovers a meaningful share of blocked sessions. Blockers with behavioral heuristics still catch some traffic, so treat it as recovery, not immunity.</p></details>
+    <details><summary>Do I still need the browser Meta pixel if I have the Conversions API?</summary><p>Yes. Run both, deduplicated with a shared event_id. The browser pixel supplies fbp and fbc identifiers that improve match quality, and CAPI covers the sessions the pixel loses. Meta's own guidance is a redundant setup, not a replacement.</p></details>
+    <details><summary>How much does server-side GTM cost per month?</summary><p>Hosting on Stape runs from free at low traffic to roughly 20-50 USD per month for a typical small store. Self-hosting on Google Cloud tends to cost more. The bigger cost is the one-time setup and verification, one to three days of work done properly.</p></details>
+    <details><summary>Will server-side tracking increase my ROAS?</summary><p>It makes measured ROAS more accurate, which usually means reported numbers move closer to reality rather than up. Better match quality and more complete conversion data can improve ad delivery over the following weeks. It will not rescue an offer that does not convert.</p></details>
+  </div>
+  <div class="cta">
+<p>I build and run this stack in production daily, on my own store and for clients. If you want your setup verified or migrated without the double-counting window, email work@rytisbalys.com.</p>
+    <a class="btn" href="mailto:work@rytisbalys.com">work@rytisbalys.com</a>
+  </div>
+
+  <footer>Rytis Balys · MB Euruvizija · Vilnius, Lithuania · <a href="/" style="color:#4d5b6b">rytisbalys.com</a></footer>
+</div>
+</body>
+</html>

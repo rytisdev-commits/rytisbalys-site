@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1D69SRZPPM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1D69SRZPPM');
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ClickFunnels Upsell Tracking: Fix Double or Missing Purchases</title>
+<meta name="description" content="ClickFunnels OTO funnels either double the Purchase event in Meta or drop upsell revenue in GA4. Why it happens and the fix, with verification steps.">
+<link rel="canonical" href="https://rytisbalys.com/clickfunnels-upsell-tracking-fix">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ClickFunnels Upsell Tracking: Fix Double or Missing Purchases">
+<meta property="og:description" content="ClickFunnels OTO funnels either double the Purchase event in Meta or drop upsell revenue in GA4. Why it happens and the fix, with verification steps.">
+<meta property="og:url" content="https://rytisbalys.com/clickfunnels-upsell-tracking-fix">
+<meta property="og:image" content="https://rytisbalys.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "ClickFunnels Upsell Tracking: Fix Double or Missing Purchases",
+  "description": "ClickFunnels OTO funnels either double the Purchase event in Meta or drop upsell revenue in GA4. Why it happens and the fix, with verification steps.",
+  "url": "https://rytisbalys.com/clickfunnels-upsell-tracking-fix",
+  "mainEntityOfPage": "https://rytisbalys.com/clickfunnels-upsell-tracking-fix",
+  "inLanguage": "en",
+  "datePublished": "2026-07-13",
+  "dateModified": "2026-07-13",
+  "author": {
+    "@type": "Person",
+    "@id": "https://rytisbalys.com/#rytis",
+    "name": "Rytis Balys",
+    "url": "https://rytisbalys.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MB Euruvizija"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why does Meta show two purchases for one ClickFunnels order?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A Purchase snippet placed in funnel-wide tracking code fires on both the checkout confirmation and the OTO thank-you. Since each firing gets a different event ID, Meta counts them as two separate purchases. Move to one Purchase per order leg, each with that leg's own value."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is my upsell revenue missing from GA4 but the tag fires?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "GA4 discards purchase events that repeat a transaction_id it has already recorded. If your OTO purchase reuses the main order's transaction_id, it fires in DebugView but never reaches reports. Give the upsell leg its own ID, for example ORDER123-OTO1."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should the upsell Purchase event include the full order total?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Each leg carries only its own value, because Meta and GA4 sum event values. If the OTO event repeats the base value, your reported revenue and ROAS inflate and Meta optimizes on numbers that do not exist."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need the Conversions API for ClickFunnels upsell tracking?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For reliable numbers, yes. Browser-only events on post-checkout pages get lost to iOS privacy features and ad blockers, and the upsell leg is the most fragile one. Send a server event per leg with the same event_id as its browser twin so Meta deduplicates correctly."
+      }
+    }
+  ]
+}
+</script>
+<style>
+  :root{--bg:#0a0e13;--panel:#0f151d;--line:#1c2530;--txt:#d7dee8;--dim:#8b98a8;--accent:#ffc72c;--green:#3fb950;--red:#f85149;--mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:56px 24px 96px}
+  a{color:var(--accent)}
+  .crumb{font-family:var(--mono);font-size:13px;margin-bottom:28px}
+  .crumb a{text-decoration:none;color:var(--dim)} .crumb a:hover{color:var(--accent)}
+  h1{font-size:28px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:10px}
+  .sub{color:var(--dim);margin-bottom:36px;font-size:16px}
+  h2{font-size:19px;color:#fff;margin:36px 0 10px}
+  h3{font-size:16px;color:#fff;margin:20px 0 8px}
+  p{margin-bottom:14px;font-size:15.5px}
+  p.dim{color:var(--dim)}
+  ul,ol{margin:0 0 14px 22px}
+  li{margin-bottom:8px;font-size:15.5px}
+  code{font-family:var(--mono);font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+  pre{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-family:var(--mono);font-size:13px;color:var(--dim);overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin-bottom:14px}
+  pre b{color:var(--txt);font-weight:400}
+  .faq{margin-top:44px}
+  .faq h2{margin-bottom:18px}
+  .faq details{background:var(--panel);border:1px solid var(--line);border-radius:8px;margin-bottom:10px;padding:0}
+  .faq summary{cursor:pointer;padding:13px 16px;font-size:15px;font-weight:600;color:var(--txt)}
+  .faq details p{padding:0 16px 14px;color:var(--dim);font-size:14.5px;margin:0}
+  .cta{margin-top:52px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
+  .cta p{margin-bottom:14px}
+  .btn{font-family:var(--mono);font-size:14px;text-decoration:none;padding:11px 18px;border-radius:8px;background:var(--accent);color:#0a0e13;font-weight:600;display:inline-block}
+  footer{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;border-top:1px solid var(--line);padding-top:20px;margin-top:56px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="crumb"><a href="/">rytisbalys.com</a> <span style="color:#4d5b6b">/ troubleshooting</span></div>
+  <h1>ClickFunnels Upsell Tracking: Fix Double or Missing Purchases</h1>
+<p>Ads Manager shows two purchases for one buyer. Or the opposite: Stripe says the order was $144 with the upsell, but Meta and GA4 only saw $47. Both problems have the same root. In ClickFunnels, and in any funnel with one-click upsells, the main checkout and the OTO are separate purchase events on separate pages. Most pixel setups either fire one generic Purchase on every page or tag only the first sale.</p><p>I fix this weekly. Here is the mechanism, the fix pattern, and how to prove it works before you trust the numbers.</p>
+  <h2>Why one order becomes two purchase events</h2>
+<p>The checkout page charges the card and saves it. The buyer lands on the OTO page. One click charges the saved card again. That is two charges, two order legs, two different pages. There is no single moment where "the order" completes.</p><p>Your tracking has to mirror that structure. Any setup built on the assumption "one funnel = one purchase" breaks in one of two directions, and both cost you money in ad optimization.</p>
+  <h2>The two failure modes</h2>
+<p><strong>Failure A: one funnel-wide Purchase script.</strong> Someone pasted a Purchase snippet into the funnel-level tracking code, so it fires on the checkout confirmation and again on the OTO thank-you, usually with the same value. Meta counts both, because browser events with different event IDs are two separate purchases to Meta. Your main offer revenue doubles and ROAS looks better than it is. GA4 does the opposite: it sees the repeated transaction_id and discards the second event, so your upsell revenue silently disappears. Same mistake, opposite errors on the two platforms.</p><p><strong>Failure B: Purchase only on the first confirmation page.</strong> The main sale tracks fine, the OTO tracks nothing. If your $97 upsell takes at 30%, roughly 40% of real revenue never reaches Meta. The algorithm then optimizes toward people who buy the front-end offer and ignores the buyers who take upsells, which are the buyers you actually want more of.</p><p>There is a third, sneakier one: OTO accept and decline both redirect to the same thank-you page, and that page fires an upsell Purchase on load. Now decliners generate upsell revenue that never happened.</p>
+  <h2>The fix: one Purchase per leg, each with its own value</h2>
+<p>The pattern that holds up:</p><ul><li><strong>Main Purchase</strong> fires on the first page after checkout (usually the first OTO page), with the base offer value only.</li><li><strong>Upsell Purchase</strong> fires only on the accept path, with the upsell value only. If accept and decline share a thank-you page, split them into two pages, or fire the upsell leg server-side from the order webhook instead of page load.</li><li><strong>Distinct IDs per leg.</strong> GA4 gets a unique transaction_id per leg. Meta gets a unique event_id per leg, and the server event for each leg carries the same event_id as its browser twin so CAPI dedup keeps one copy of each.</li><li><strong>Currency matches</strong> on every event. Mixed or missing currency corrupts value optimization quietly.</li></ul><p>For a fixed-price OTO, hardcoding the value on that page is fine and more reliable than scraping it from the DOM:</p><pre>// Main sale page (first page after checkout)
+fbq('track', 'Purchase', {value: 47.00, currency: 'USD'}, {eventID: 'CF-38291'});
+gtag('event', 'purchase', {transaction_id: 'CF-38291', value: 47.00, currency: 'USD'});
+
+// OTO thank-you (accept path only)
+fbq('track', 'Purchase', {value: 97.00, currency: 'USD'}, {eventID: 'CF-38291-OTO1'});
+gtag('event', 'purchase', {transaction_id: 'CF-38291-OTO1', value: 97.00, currency: 'USD'});</pre><p>The order ID should come from the page's order data so the server events can reference the same IDs. The suffix pattern (-OTO1, -OTO2) keeps legs tied to one order while staying unique.</p>
+  <h2>Verify it with a test run before you trust it</h2>
+<p>Do not assume the tags fire the way the setup screen suggests. Run the funnel and watch the events.</p><ul><li><strong>Meta Events Manager, Test Events tab.</strong> Open your pixel in Events Manager, go to Test Events, then complete a test order in the same browser (gateway test mode or a 100% discount code, refund after if needed). Take the OTO. You should see two Purchase events with different event IDs and each leg's own value, not the order total on both. If CAPI is live, send the test_event_code with the server events and confirm each browser event pairs with its server twin and shows as deduplicated.</li><li><strong>GA4 DebugView.</strong> Admin, then DebugView, with debug mode on via GTM Preview or Tag Assistant. You want two purchase events with distinct transaction_id values. If the second purchase never appears in reports despite firing in DebugView, you have the repeated transaction_id problem.</li><li><strong>Browser network tab.</strong> Filter requests to facebook.com/tr and read the query string: ev=Purchase, cd[value], cd[currency], eid. For GA4, filter for "collect" and check en=purchase and the value parameter. This is the ground truth when a tag manager UI says one thing and the wire says another.</li><li><strong>Decline path.</strong> Run a second test order and decline the OTO. The thank-you page must not fire an upsell Purchase. Most broken funnels fail this step.</li></ul>
+  <h2>What clean values buy you</h2>
+<p>Once each leg reports its true value, Meta's value optimization bids toward the buyers who take upsells instead of the cheapest front-end conversions. Ads Manager ROAS starts matching Stripe, so budget decisions stop being guesses. GA4 attribution shows which campaigns produce high-AOV buyers rather than just buyers. On funnels with a strong OTO, the reported-versus-real gap is often 30-50% of revenue. That gap is what the algorithm was optimizing without.</p>
+  <div class="faq">
+  <h2>FAQ</h2>
+    <details><summary>Why does Meta show two purchases for one ClickFunnels order?</summary><p>A Purchase snippet placed in funnel-wide tracking code fires on both the checkout confirmation and the OTO thank-you. Since each firing gets a different event ID, Meta counts them as two separate purchases. Move to one Purchase per order leg, each with that leg's own value.</p></details>
+    <details><summary>Why is my upsell revenue missing from GA4 but the tag fires?</summary><p>GA4 discards purchase events that repeat a transaction_id it has already recorded. If your OTO purchase reuses the main order's transaction_id, it fires in DebugView but never reaches reports. Give the upsell leg its own ID, for example ORDER123-OTO1.</p></details>
+    <details><summary>Should the upsell Purchase event include the full order total?</summary><p>No. Each leg carries only its own value, because Meta and GA4 sum event values. If the OTO event repeats the base value, your reported revenue and ROAS inflate and Meta optimizes on numbers that do not exist.</p></details>
+    <details><summary>Do I need the Conversions API for ClickFunnels upsell tracking?</summary><p>For reliable numbers, yes. Browser-only events on post-checkout pages get lost to iOS privacy features and ad blockers, and the upsell leg is the most fragile one. Send a server event per leg with the same event_id as its browser twin so Meta deduplicates correctly.</p></details>
+  </div>
+  <div class="cta">
+<p>This is the work I do: funnel tracking rebuilt with per-leg values, CAPI dedup, and a recorded test run so you can see the numbers land correctly. If you want yours checked, email work@rytisbalys.com.</p>
+    <a class="btn" href="mailto:work@rytisbalys.com">work@rytisbalys.com</a>
+  </div>
+
+  <footer>Rytis Balys · MB Euruvizija · Vilnius, Lithuania · <a href="/" style="color:#4d5b6b">rytisbalys.com</a></footer>
+</div>
+</body>
+</html>

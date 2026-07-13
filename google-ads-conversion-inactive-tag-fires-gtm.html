@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1D69SRZPPM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1D69SRZPPM');
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Google Ads Conversion Inactive but Tag Fires in GTM: The Fix</title>
+<meta name="description" content="Google Ads conversion stuck on Inactive while GTM Preview shows the tag firing. The five real causes, a diagnosis order, and realistic update timelines.">
+<link rel="canonical" href="https://rytisbalys.com/google-ads-conversion-inactive-tag-fires-gtm">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Google Ads Conversion Inactive but Tag Fires in GTM: The Fix">
+<meta property="og:description" content="Google Ads conversion stuck on Inactive while GTM Preview shows the tag firing. The five real causes, a diagnosis order, and realistic update timelines.">
+<meta property="og:url" content="https://rytisbalys.com/google-ads-conversion-inactive-tag-fires-gtm">
+<meta property="og:image" content="https://rytisbalys.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Google Ads Conversion Inactive but Tag Fires in GTM: The Fix",
+  "description": "Google Ads conversion stuck on Inactive while GTM Preview shows the tag firing. The five real causes, a diagnosis order, and realistic update timelines.",
+  "url": "https://rytisbalys.com/google-ads-conversion-inactive-tag-fires-gtm",
+  "mainEntityOfPage": "https://rytisbalys.com/google-ads-conversion-inactive-tag-fires-gtm",
+  "inLanguage": "en",
+  "datePublished": "2026-07-13",
+  "dateModified": "2026-07-13",
+  "author": {
+    "@type": "Person",
+    "@id": "https://rytisbalys.com/#rytis",
+    "name": "Rytis Balys",
+    "url": "https://rytisbalys.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MB Euruvizija"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long does it take for a Google Ads conversion to show up after fixing the tag?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most website conversions from the Ads tag appear within about 3 hours, and Google allows up to 24. GA4-imported conversions take 24-48 hours longer because GA4 processes the event first. Remember that Ads dates the conversion to the ad click, not the purchase."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the tag firing in GTM Preview mean the conversion was tracked?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Preview only confirms the tag executed in your browser. It says nothing about whether the request reached Google, whether the ID and label matched an action, or whether a click ID was attached for attribution. Check the network request and the Ads conversion count."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need the Conversion Linker tag if I use gtag.js instead of GTM?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The Google tag (gtag.js) stores click IDs in first-party cookies on its own. The separate Conversion Linker tag is a GTM requirement. Cross-domain checkout flows need linker domain configuration in either setup."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I test Google Ads conversion tracking with a fake gclid?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Partially. Appending ?gclid=TeSter-123 to your URL and checking for the _gcl_aw cookie verifies that the Conversion Linker stores click IDs. But Ads discards click IDs it did not issue, so no conversion will record. The full proof is a real ad click plus a small test order."
+      }
+    }
+  ]
+}
+</script>
+<style>
+  :root{--bg:#0a0e13;--panel:#0f151d;--line:#1c2530;--txt:#d7dee8;--dim:#8b98a8;--accent:#ffc72c;--green:#3fb950;--red:#f85149;--mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:56px 24px 96px}
+  a{color:var(--accent)}
+  .crumb{font-family:var(--mono);font-size:13px;margin-bottom:28px}
+  .crumb a{text-decoration:none;color:var(--dim)} .crumb a:hover{color:var(--accent)}
+  h1{font-size:28px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:10px}
+  .sub{color:var(--dim);margin-bottom:36px;font-size:16px}
+  h2{font-size:19px;color:#fff;margin:36px 0 10px}
+  h3{font-size:16px;color:#fff;margin:20px 0 8px}
+  p{margin-bottom:14px;font-size:15.5px}
+  p.dim{color:var(--dim)}
+  ul,ol{margin:0 0 14px 22px}
+  li{margin-bottom:8px;font-size:15.5px}
+  code{font-family:var(--mono);font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+  pre{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-family:var(--mono);font-size:13px;color:var(--dim);overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin-bottom:14px}
+  pre b{color:var(--txt);font-weight:400}
+  .faq{margin-top:44px}
+  .faq h2{margin-bottom:18px}
+  .faq details{background:var(--panel);border:1px solid var(--line);border-radius:8px;margin-bottom:10px;padding:0}
+  .faq summary{cursor:pointer;padding:13px 16px;font-size:15px;font-weight:600;color:var(--txt)}
+  .faq details p{padding:0 16px 14px;color:var(--dim);font-size:14.5px;margin:0}
+  .cta{margin-top:52px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
+  .cta p{margin-bottom:14px}
+  .btn{font-family:var(--mono);font-size:14px;text-decoration:none;padding:11px 18px;border-radius:8px;background:var(--accent);color:#0a0e13;font-weight:600;display:inline-block}
+  footer{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;border-top:1px solid var(--line);padding-top:20px;margin-top:56px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="crumb"><a href="/">rytisbalys.com</a> <span style="color:#4d5b6b">/ troubleshooting</span></div>
+  <h1>Google Ads Conversion Inactive but Tag Fires in GTM: The Fix</h1>
+<p>The conversion action in Google Ads says <strong>Inactive</strong> and records nothing. GTM Preview shows the conversion tag firing green on the thank-you page. Both are true. Preview only proves the tag executed in your browser. Google Ads marks an action Inactive when it never receives hits for that conversion ID and label, or receives hits it cannot match to an ad click.</p><p>I debug this setup most weeks. The gap between "tag fired" and "conversion recorded" almost always comes down to one of five causes. Here they are, ranked by how often I find them, plus the order I check them in and how long Ads takes to update after the fix.</p>
+  <h2>The five causes, ranked</h2>
+<ul><li><strong>1. Missing Conversion Linker tag.</strong> In a GTM setup, the conversion tag does not store the click ID itself. A separate Conversion Linker tag has to fire on every page to write the gclid from the ad click into the <code>_gcl_aw</code> first-party cookie. Without it, the conversion tag fires and sends a hit with no click ID attached. Ads cannot attribute it, so nothing records. This is the most common cause I see on stores that built the container themselves.</li><li><strong>2. Conversion ID or label mismatch.</strong> The GTM tag carries an ID (AW-XXXXXXXXX) and a label. If either differs by one character from the action in Ads - copied from an old account, a deleted action, or a second action nobody remembers creating - the hits land on nothing. The action you are watching stays Inactive or Unverified.</li><li><strong>3. The tag fires on a page real buyers never reach.</strong> In Preview you navigate to the thank-you page by hand. Real buyers paying through PayPal, Klarna, or a bank redirect often close the tab at the payment provider and never return to your confirmation URL. The tag is correct; the trigger page has almost no traffic.</li><li><strong>4. Consent mode is blocking the hit.</strong> If your cookie banner denies ad_storage and you run basic consent mode, the tag does not send at all until the visitor accepts. In advanced consent mode it sends cookieless pings, but on a low-traffic store those rarely turn into modeled conversions.</li><li><strong>5. The action imports a GA4 event, not the Ads tag.</strong> If the conversion action's source is Google Analytics (GA4), the GTM conversion tag you are watching in Preview is irrelevant to it. The action only records if the GA4 event fires, is marked as a key event, and the GA4 property is linked to the Ads account.</li></ul>
+  <h2>Diagnosis order - do these steps in sequence</h2>
+<p>Each step rules out one cause. Stop at the first failure you find.</p><ul><li><strong>Step 1 - check the action's source.</strong> In Google Ads open Goals, then Conversions, and click the action. If the source says Google Analytics (GA4), skip to step 6. If it says Website (the Ads tag), continue.</li><li><strong>Step 2 - read the fired values in Tag Assistant.</strong> Run GTM Preview (Tag Assistant), complete the real flow, click the fired conversion tag, and read the resolved Conversion ID and Conversion Label. Do not trust what the tag template shows at rest - variables can resolve to the wrong value at fire time.</li><li><strong>Step 3 - compare character by character.</strong> In Ads, open the action's tag setup and compare the ID and label against what Tag Assistant showed. One wrong character is enough.</li><li><strong>Step 4 - browser network tab.</strong> Open DevTools, Network tab, filter for <code>pagead/conversion</code> or <code>googleadservices</code>. Confirm a request with your conversion ID in the URL path actually leaves the browser and returns 200 or 302. Find the <code>gcs</code> parameter in that request: <code>gcs=G111</code> means consent granted, <code>gcs=G100</code> means ad_storage denied. If you see G100, consent mode is your problem.</li><li><strong>Step 5 - Conversion Linker check.</strong> Load your site with a fake click ID appended: <pre>https://yourstore.com/?gclid=TeSter-123</pre> Then open DevTools, Application, Cookies, and look for <code>_gcl_aw</code> containing TeSter-123. If the cookie is missing, the Conversion Linker tag is missing or not firing on all pages.</li><li><strong>Step 6 - GA4 path only.</strong> Open GA4 DebugView and confirm the event arrives with the expected name while you run a test session. Then confirm the Ads link exists under GA4 Admin and the event is marked as a key event. Any break in that chain and the imported action records nothing, no matter what GTM does.</li><li><strong>Step 7 - reach check.</strong> Compare order count in your store backend against page views of the confirmation URL in GA4 for the same period. A large gap means buyers are not returning from the payment provider, and your trigger page is the problem.</li></ul><p>One nuance worth knowing: if the status reads <strong>No recent conversions</strong> instead of Inactive or Unverified, hits are arriving but attribution is failing. That points at the Linker or consent, not at an ID mismatch.</p>
+  <h2>The fixes</h2>
+<ul><li><strong>Linker missing:</strong> add one Conversion Linker tag in GTM with the trigger Initialization - All Pages. One tag covers the whole container. Publish, then repeat the TeSter-123 cookie check.</li><li><strong>ID or label wrong:</strong> in the Ads action, open tag setup, choose the Google Tag Manager option, and copy the ID and label straight into the GTM tag fields. Do not retype them.</li><li><strong>Trigger page unreachable:</strong> the durable fix is server-side - fire the conversion from the payment webhook (for example Stripe's checkout.session.completed) through server-side GTM or the Google Ads API, so recording no longer depends on the buyer's browser coming back. The lighter fix is moving the tag to the platform's native order-received page and enabling auto-return at the payment provider.</li><li><strong>Consent blocking:</strong> implement consent mode v2 correctly through your CMP, then verify in the network tab that <code>gcs</code> flips to G111 after you accept the banner. And clear your own stored denial before testing - I have watched people debug a tag for an hour while their own browser was the one denying consent.</li><li><strong>GA4 import problems:</strong> for the primary purchase conversion I use the Ads tag, not a GA4 import. It reports faster and attributes on Google's ad click data directly. If you keep the GA4 import, fix the link and the key event flag, and remove one of the two from Primary so you do not double count.</li></ul>
+  <h2>How long until the status changes</h2>
+<p>After Ads receives its first valid, attributable conversion, the count usually appears within about 3 hours. Give any fix a full 24 hours before you conclude it failed. GA4-imported conversions add another 24-48 hours because GA4 processes and attributes the event before exporting it to Ads.</p><p>Two things trip people up while waiting. First, the status column lags behind reality - the action can already be recording while the label still reads Inactive, so watch the conversion count, not the status. Second, Ads reports conversions against the date of the ad click, not the date of the purchase. If you check today's column for a conversion from a click three days ago, you will not find it there.</p><p>The definitive end-to-end test is a real ad click from a clean browser followed by a small test order. A fake gclid verifies cookie storage, but Ads discards click IDs it did not issue, so only a real click proves the full chain.</p>
+  <div class="faq">
+  <h2>FAQ</h2>
+    <details><summary>How long does it take for a Google Ads conversion to show up after fixing the tag?</summary><p>Most website conversions from the Ads tag appear within about 3 hours, and Google allows up to 24. GA4-imported conversions take 24-48 hours longer because GA4 processes the event first. Remember that Ads dates the conversion to the ad click, not the purchase.</p></details>
+    <details><summary>Does the tag firing in GTM Preview mean the conversion was tracked?</summary><p>No. Preview only confirms the tag executed in your browser. It says nothing about whether the request reached Google, whether the ID and label matched an action, or whether a click ID was attached for attribution. Check the network request and the Ads conversion count.</p></details>
+    <details><summary>Do I need the Conversion Linker tag if I use gtag.js instead of GTM?</summary><p>No. The Google tag (gtag.js) stores click IDs in first-party cookies on its own. The separate Conversion Linker tag is a GTM requirement. Cross-domain checkout flows need linker domain configuration in either setup.</p></details>
+    <details><summary>Can I test Google Ads conversion tracking with a fake gclid?</summary><p>Partially. Appending ?gclid=TeSter-123 to your URL and checking for the _gcl_aw cookie verifies that the Conversion Linker stores click IDs. But Ads discards click IDs it did not issue, so no conversion will record. The full proof is a real ad click plus a small test order.</p></details>
+  </div>
+  <div class="cta">
+<p>I diagnose and repair conversion tracking for a living - client-side and server-side, on Shopify, WooCommerce, and custom stacks. If you would rather have this fixed than fix it, email work@rytisbalys.com.</p>
+    <a class="btn" href="mailto:work@rytisbalys.com">work@rytisbalys.com</a>
+  </div>
+
+  <footer>Rytis Balys · MB Euruvizija · Vilnius, Lithuania · <a href="/" style="color:#4d5b6b">rytisbalys.com</a></footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1D69SRZPPM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1D69SRZPPM');
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GA4 nerodo pardavimų: 4 priežastys ir kaip jas rasti</title>
+<meta name="description" content="Shopify ar Stripe rodo užsakymus, o GA4 tuščia arba rodo perpus mažiau. Dažniausios priežastys ir kaip per 15 minučių rasti, kur dingsta purchase eventas.">
+<link rel="canonical" href="https://rytisbalys.com/lt/ga4-nerodo-pardavimu">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="GA4 nerodo pardavimų: 4 priežastys ir kaip jas rasti">
+<meta property="og:description" content="Shopify ar Stripe rodo užsakymus, o GA4 tuščia arba rodo perpus mažiau. Dažniausios priežastys ir kaip per 15 minučių rasti, kur dingsta purchase eventas.">
+<meta property="og:url" content="https://rytisbalys.com/lt/ga4-nerodo-pardavimu">
+<meta property="og:image" content="https://rytisbalys.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "GA4 nerodo pardavimų: 4 priežastys ir kaip jas rasti",
+  "description": "Shopify ar Stripe rodo užsakymus, o GA4 tuščia arba rodo perpus mažiau. Dažniausios priežastys ir kaip per 15 minučių rasti, kur dingsta purchase eventas.",
+  "url": "https://rytisbalys.com/lt/ga4-nerodo-pardavimu",
+  "mainEntityOfPage": "https://rytisbalys.com/lt/ga4-nerodo-pardavimu",
+  "inLanguage": "lt",
+  "datePublished": "2026-07-13",
+  "dateModified": "2026-07-13",
+  "author": {
+    "@type": "Person",
+    "@id": "https://rytisbalys.com/#rytis",
+    "name": "Rytis Balys",
+    "url": "https://rytisbalys.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MB Euruvizija"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Kodėl GA4 rodo mažiau pardavimų nei Shopify ar Stripe?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "GA4 niekada nerodys 100 proc. - ad blocker'iai, atmesti cookie sutikimai, iOS apribojimai ir po apmokėjimo negrįžtantys pirkėjai nurėžia apie 5-15 proc. Jei skirtumas didesnis nei 15-20 proc., beveik visada yra techninė klaida: nešaudantis purchase eventas, dvigubas įdiegimas arba consent konfigūracija."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kiek vėluoja GA4 pardavimų duomenys?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Standartinės ataskaitos atsinaujina per 24-48 valandas. Šiandienos pardavimų ieškokite Realtime ataskaitoje arba DebugView, ne standartinėse Reports. Jei pardavimo nematote ir po 48 valandų, tai jau ne vėlavimas, o gedimas."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ar cookie baneris gali visiškai užblokuoti GA4?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Taip. Jei baneris nustato analytics_storage=denied ir po sutikimo statuso neatnaujina, GA4 negauna nė vienos užklausos. Patikrinkite incognito lange: po „Sutinku\“ paspaudimo network tabe turi atsirasti collect užklausos."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ar galima siųsti pardavimus į GA4 ne iš naršyklės?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Taip, per Measurement Protocol - serveris siunčia purchase eventą tiesiai į GA4 iš mokėjimo sistemos webhook'o. Tai standartinis sprendimas redirect mokėjimams ir Shopify checkout apribojimams. Svarbu perduoti tą patį client_id, kad pardavimas susisietų su sesija ir srauto kanalu."
+      }
+    }
+  ]
+}
+</script>
+<style>
+  :root{--bg:#0a0e13;--panel:#0f151d;--line:#1c2530;--txt:#d7dee8;--dim:#8b98a8;--accent:#ffc72c;--green:#3fb950;--red:#f85149;--mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:56px 24px 96px}
+  a{color:var(--accent)}
+  .crumb{font-family:var(--mono);font-size:13px;margin-bottom:28px}
+  .crumb a{text-decoration:none;color:var(--dim)} .crumb a:hover{color:var(--accent)}
+  h1{font-size:28px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:10px}
+  .sub{color:var(--dim);margin-bottom:36px;font-size:16px}
+  h2{font-size:19px;color:#fff;margin:36px 0 10px}
+  h3{font-size:16px;color:#fff;margin:20px 0 8px}
+  p{margin-bottom:14px;font-size:15.5px}
+  p.dim{color:var(--dim)}
+  ul,ol{margin:0 0 14px 22px}
+  li{margin-bottom:8px;font-size:15.5px}
+  code{font-family:var(--mono);font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+  pre{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-family:var(--mono);font-size:13px;color:var(--dim);overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin-bottom:14px}
+  pre b{color:var(--txt);font-weight:400}
+  .faq{margin-top:44px}
+  .faq h2{margin-bottom:18px}
+  .faq details{background:var(--panel);border:1px solid var(--line);border-radius:8px;margin-bottom:10px;padding:0}
+  .faq summary{cursor:pointer;padding:13px 16px;font-size:15px;font-weight:600;color:var(--txt)}
+  .faq details p{padding:0 16px 14px;color:var(--dim);font-size:14.5px;margin:0}
+  .cta{margin-top:52px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
+  .cta p{margin-bottom:14px}
+  .btn{font-family:var(--mono);font-size:14px;text-decoration:none;padding:11px 18px;border-radius:8px;background:var(--accent);color:#0a0e13;font-weight:600;display:inline-block}
+  footer{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;border-top:1px solid var(--line);padding-top:20px;margin-top:56px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="crumb"><a href="/">rytisbalys.com</a> <span style="color:#4d5b6b">/ lt</span></div>
+  <h1>GA4 nerodo pardavimų: 4 priežastys ir kaip jas rasti</h1>
+<p>Stripe arba Shopify admin'as rodo 40 užsakymų per savaitę, o GA4 - 12. Arba iš viso nulį. Devyniais atvejais iš dešimties priežastis viena: purchase eventas neiššauna arba iššauna be reikiamų parametrų. Pinigai ateina, duomenys - ne, ir Google Ads kampanijos optimizuojasi aklai.</p><p>Tokias problemas taisau kiekvieną savaitę. Žemiau - keturios dažniausios priežastys ir diagnostika, kurią galite atlikti patys per 15 minučių, be programuotojo.</p>
+  <h2>Purchase eventas nešaudo padėkos puslapyje</h2>
+<p>GA4 pardavimą užfiksuoja tik tada, kai įvyksta purchase eventas. Naršyklės diegimuose jis beveik visada pririštas prie padėkos puslapio. Jei skriptas ten neįsikrauna, pardavimo GA4 tiesiog nėra.</p><ul><li><strong>Shopify checkout.</strong> 2024-2025 m. Shopify palaipsniui išjungė checkout.liquid ir „Additional scripts“ laukelį padėkos puslapyje. Sena GA4 integracija per įklijuotą kodą nustojo veikti tyliai, be įspėjimo. Dabar GA4 į checkout patenka tik per oficialią Google &amp; YouTube aplikaciją arba per Customer Events (Web Pixels API) custom pixel.</li><li><strong>Redirect mokėjimai.</strong> Paysera, banklink, PayPal, Klarna - pirkėjas išeina apmokėti į banko puslapį. Dalis po apmokėjimo uždaro langą ir niekada negrįžta į padėkos puslapį. Užsakymas yra, purchase evento nėra. Patikimas sprendimas vienas: siųsti eventą server-side iš mokėjimo webhook'o per Measurement Protocol, ne iš naršyklės.</li><li><strong>WooCommerce.</strong> Tema arba cache pluginas neužkrauna GTM ant /order-received/ puslapio, arba pirkėjas nukreipiamas į custom „ačiū“ puslapį be užsakymo duomenų.</li></ul>
+  <h2>Dvigubas GA4 įdiegimas</h2>
+<p>Antra pagal dažnumą priežastis. GA4 įdiegtas du kartus: gtag.js kodas temoje plius GTM tagas, arba pluginas plius ranka įklijuotas kodas. Blogiausias variantas - du skirtingi Measurement ID: purchase eventai keliauja į seną, pamirštą property, o jūs žiūrite į naują tuščią.</p><p>Patikrinimas užtrunka minutę. Atsidarykite puslapio source (Ctrl+U) ir paieškokite „G-“. Jei randate daugiau nei vieną skirtingą G- kodą, arba tą patį kodą ir source, ir GTM konteineryje - turite dublį. Palikite vieną diegimo kelią, geriausiai per GTM, ir išjunkite visus kitus.</p>
+  <h2>Consent baneris blokuoja skriptus</h2>
+<p>Jei sutikimų baneris (Cookiebot, CookieYes, temos vidinis) uždeda analytics_storage=denied, GA4 negauna nieko, kol lankytojas nepaspaudžia „Sutinku“. Realybėje 20-40 proc. pirkėjų sutikimo neduoda - tų pardavimų GA4 nematys niekada. Tai ne gedimas, o matematika, bet ją reikia žinoti vertinant skaičius.</p><p>Blogesnis variantas - sugedusi integracija: baneris pagal nutylėjimą nustato „denied“ ir po sutikimo statuso neatnaujina. Tada GA4 negauna ne dalies, o visų duomenų. Patikrinkite incognito lange: paspauskite „Sutinku“, atsidarykite network tab ir pažiūrėkite, ar atsiranda collect užklausos. Jei jų nėra net po sutikimo, baneris smaugia viską.</p>
+  <h2>Eventas šauna, bet be value arba currency</h2>
+<p>Eventų ataskaitoje purchase yra, o pajamos - 0 EUR. Priežastis beveik visada ta pati: eventas siunčiamas be currency parametro. GA4 taisyklė paprasta - value be currency ignoruojama.</p><p>Teisingas purchase eventas dataLayer'yje atrodo taip:</p><pre>dataLayer.push({
+  event: "purchase",
+  ecommerce: {
+    transaction_id: "1042",
+    value: 79.00,
+    currency: "EUR",
+    items: [{ item_id: "SKU-01", item_name: "Produktas",
+              price: 79.00, quantity: 1 }]
+  }
+});</pre><p>Dažnos klaidos: value kaip tekstas su kableliu („79,00“ vietoj 79.00), currency mažosiomis raidėmis arba jo iš viso nėra, trūksta transaction_id. Be transaction_id neveikia deduplikavimas - pirkėjui perkrovus padėkos puslapį pardavimas suskaičiuojamas du kartus.</p>
+  <h2>Diagnostika per 15 minučių</h2>
+<p>Eikite iš eilės. Kiekvienas žingsnis atmeta arba patvirtina vieną priežastį.</p><ul><li><strong>1. Realtime.</strong> GA4: Reports &gt; Realtime. Padarykite testinį užsakymą (tinka 100 proc. nuolaidos kodas arba pigiausia prekė) ir žiūrėkite, ar per minutę atsiranda purchase. Svarbu: standartinės ataskaitos vėluoja iki 24-48 val., todėl vakarykščių pardavimų nebuvimas šiandien dar nieko neįrodo - tikrinkite Realtime.</li><li><strong>2. Tag Assistant.</strong> tagassistant.google.com &gt; Add domain &gt; jūsų svetainė. Pereikite visą pirkimo kelią iki padėkos puslapio. Matysite, ar GA4 config ir purchase tagai iššauna, kiek kartų (dublio testas) ir su kokiais parametrais.</li><li><strong>3. DebugView.</strong> GA4: Admin &gt; DebugView. Kol Tag Assistant preview aktyvus, jūsų eventai čia matomi realiu laiku. Paspauskite ant purchase ir patikrinkite, ar yra transaction_id, value ir currency.</li><li><strong>4. Network tab.</strong> Naršyklėje F12 &gt; Network &gt; filtre įrašykite „collect“. Padėkos puslapyje turi atsirasti užklausa į google-analytics.com (arba į jūsų subdomeną, jei naudojate server-side GTM). Payload'e ieškokite:<pre>en=purchase
+tid=G-XXXXXXXXXX
+cu=EUR
+ep.transaction_id=1042
+epn.value=79.00</pre>Užklausos nėra - eventas nešaudo arba jį blokuoja consent. Yra, bet tid rodo kitą G- kodą - pardavimai eina į kitą property. Yra be cu - pajamos nesiskaičiuoja.</li></ul>
+  <h2>Kada kviesti specialistą</h2>
+<p>Diagnostiką pagal šiuos žingsnius įveikia bet kuris parduotuvės savininkas. Taisymas - nebūtinai. Kvieskite žmogų iš šalies, jei:</p><ul><li>naudojate redirect mokėjimus ir dalis pirkėjų negrįžta - reikia server-side sprendimo (webhook + Measurement Protocol), naršyklės skriptais to nesutvarkysite;</li><li>Shopify parduotuvėje purchase reikia perkelti į Customer Events pixel ir suderinti su consent - ten daug tylių spąstų;</li><li>radote dvigubą įdiegimą, bet nedrįstate nieko trinti, nes neaišku, kas nuo ko priklauso;</li><li>GA4 ir mokėjimų sistema skiriasi daugiau nei 15-20 proc. ir per savaitę neradote priežasties.</li></ul><p>Sutvarkytas tracking nėra kosmetika. Google Ads Smart Bidding mokosi iš purchase eventų - jei mato pusę pardavimų, pusę biudžeto leidžia aklai.</p>
+  <div class="faq">
+  <h2>D.U.K.</h2>
+    <details><summary>Kodėl GA4 rodo mažiau pardavimų nei Shopify ar Stripe?</summary><p>GA4 niekada nerodys 100 proc. - ad blocker'iai, atmesti cookie sutikimai, iOS apribojimai ir po apmokėjimo negrįžtantys pirkėjai nurėžia apie 5-15 proc. Jei skirtumas didesnis nei 15-20 proc., beveik visada yra techninė klaida: nešaudantis purchase eventas, dvigubas įdiegimas arba consent konfigūracija.</p></details>
+    <details><summary>Kiek vėluoja GA4 pardavimų duomenys?</summary><p>Standartinės ataskaitos atsinaujina per 24-48 valandas. Šiandienos pardavimų ieškokite Realtime ataskaitoje arba DebugView, ne standartinėse Reports. Jei pardavimo nematote ir po 48 valandų, tai jau ne vėlavimas, o gedimas.</p></details>
+    <details><summary>Ar cookie baneris gali visiškai užblokuoti GA4?</summary><p>Taip. Jei baneris nustato analytics_storage=denied ir po sutikimo statuso neatnaujina, GA4 negauna nė vienos užklausos. Patikrinkite incognito lange: po „Sutinku“ paspaudimo network tabe turi atsirasti collect užklausos.</p></details>
+    <details><summary>Ar galima siųsti pardavimus į GA4 ne iš naršyklės?</summary><p>Taip, per Measurement Protocol - serveris siunčia purchase eventą tiesiai į GA4 iš mokėjimo sistemos webhook'o. Tai standartinis sprendimas redirect mokėjimams ir Shopify checkout apribojimams. Svarbu perduoti tą patį client_id, kad pardavimas susisietų su sesija ir srauto kanalu.</p></details>
+  </div>
+  <div class="cta">
+<p>Tokius gedimus diagnozuoju ir taisau kasdien - Shopify, WooCommerce ir custom parduotuvėse, įskaitant server-side sprendimus. Jei perėjote žingsnius ir norite, kad kas nors sutvarkytų iki galo, parašykite work@rytisbalys.com - atsakysiu konkrečia diagnoze.</p>
+    <a class="btn" href="mailto:work@rytisbalys.com">work@rytisbalys.com</a>
+  </div>
+
+  <footer>Rytis Balys · MB Euruvizija · Vilnius, Lithuania · <a href="/" style="color:#4d5b6b">rytisbalys.com</a></footer>
+</div>
+</body>
+</html>

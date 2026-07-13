@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1D69SRZPPM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1D69SRZPPM');
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Konversijų sekimo specialistas - Meta CAPI, GA4, server-side</title>
+<meta name="description" content="Meta Ads, GA4 ir realūs užsakymai rodo skirtingus skaičius? Tracking auditas, Meta CAPI su dedup, sGTM, Consent Mode v2. Randu, kur dingsta pirkimai.">
+<link rel="canonical" href="https://rytisbalys.com/lt/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Konversijų sekimo specialistas - Meta CAPI, GA4, server-side">
+<meta property="og:description" content="Meta Ads, GA4 ir realūs užsakymai rodo skirtingus skaičius? Tracking auditas, Meta CAPI su dedup, sGTM, Consent Mode v2. Randu, kur dingsta pirkimai.">
+<meta property="og:url" content="https://rytisbalys.com/lt/">
+<meta property="og:image" content="https://rytisbalys.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Konversijų sekimo specialistas - Meta CAPI, GA4, server-side",
+  "description": "Meta Ads, GA4 ir realūs užsakymai rodo skirtingus skaičius? Tracking auditas, Meta CAPI su dedup, sGTM, Consent Mode v2. Randu, kur dingsta pirkimai.",
+  "url": "https://rytisbalys.com/lt/",
+  "inLanguage": "lt",
+  "founder": {
+    "@type": "Person",
+    "@id": "https://rytisbalys.com/#rytis",
+    "name": "Rytis Balys"
+  },
+  "areaServed": [
+    "LT",
+    "Worldwide"
+  ],
+  "email": "work@rytisbalys.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Vilnius",
+    "addressCountry": "LT"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Kodėl Meta Ads rodo daugiau pirkimų negu turiu užsakymų?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Dvi dažniausios priežastys: pixel ir Conversions API siunčia tą patį pirkimą be event_id deduplikacijos, arba purchase įvykis iššauna kaskart perkrovus padėkos puslapį. Pasitikrinkite Events Manager skiltyje Test Events - testinis pirkimas turi užsiskaityti vieną kartą."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ar mažai parduotuvei reikia server-side tracking?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Jei mokate už reklamą - taip. Vien naršyklinis pixel dalį įvykių praranda dėl ad blocker'ių ir iOS apribojimų, o kuo mažesnis biudžetas, tuo kiekvienas prarastas signalas algoritmui kainuoja daugiau. sGTM hostingas, pavyzdžiui Stape, kainuoja mažiau nei vienas prarastas užsakymas per mėnesį."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kas yra event_id deduplikacija?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Kai tas pats pirkimas siunčiamas ir iš naršyklės (pixel), ir iš serverio (Conversions API), abu įvykiai turi turėti tą patį pavadinimą ir tą patį event_id - tada Meta juos sujungia į vieną. Be šito Meta mato du pirkimus vietoj vieno, ir ROAS ataskaitose išpūstas dvigubai."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kiek trunka ir kaip atrodo tracking auditas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Man reikia prieigos prie Events Manager, GA4 ir užsakymų sąrašo skaitymo teisėmis. Per kelias darbo dienas gaunate dokumentą su sutikrintais skaičiais, rastų klaidų sąrašu ir taisymo eiliškumu pagal tai, kiek kuri klaida kainuoja."
+      }
+    }
+  ]
+}
+</script>
+<style>
+  :root{--bg:#0a0e13;--panel:#0f151d;--line:#1c2530;--txt:#d7dee8;--dim:#8b98a8;--accent:#ffc72c;--green:#3fb950;--red:#f85149;--mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:56px 24px 96px}
+  a{color:var(--accent)}
+  .crumb{font-family:var(--mono);font-size:13px;margin-bottom:28px}
+  .crumb a{text-decoration:none;color:var(--dim)} .crumb a:hover{color:var(--accent)}
+  h1{font-size:28px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:10px}
+  .sub{color:var(--dim);margin-bottom:36px;font-size:16px}
+  h2{font-size:19px;color:#fff;margin:36px 0 10px}
+  h3{font-size:16px;color:#fff;margin:20px 0 8px}
+  p{margin-bottom:14px;font-size:15.5px}
+  p.dim{color:var(--dim)}
+  ul,ol{margin:0 0 14px 22px}
+  li{margin-bottom:8px;font-size:15.5px}
+  code{font-family:var(--mono);font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+  pre{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-family:var(--mono);font-size:13px;color:var(--dim);overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin-bottom:14px}
+  pre b{color:var(--txt);font-weight:400}
+  .faq{margin-top:44px}
+  .faq h2{margin-bottom:18px}
+  .faq details{background:var(--panel);border:1px solid var(--line);border-radius:8px;margin-bottom:10px;padding:0}
+  .faq summary{cursor:pointer;padding:13px 16px;font-size:15px;font-weight:600;color:var(--txt)}
+  .faq details p{padding:0 16px 14px;color:var(--dim);font-size:14.5px;margin:0}
+  .cta{margin-top:52px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
+  .cta p{margin-bottom:14px}
+  .btn{font-family:var(--mono);font-size:14px;text-decoration:none;padding:11px 18px;border-radius:8px;background:var(--accent);color:#0a0e13;font-weight:600;display:inline-block}
+  footer{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;border-top:1px solid var(--line);padding-top:20px;margin-top:56px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="crumb"><a href="/">rytisbalys.com</a> <span style="color:#4d5b6b">/ lt</span></div>
+  <h1>Konversijų sekimo specialistas - Meta CAPI, GA4, server-side</h1>
+<p>Meta Events Manager rodo 40 pirkimų, GA4 - 28, o užsakymų sąraše jų 33. Taip nutinka, kai konversijų duomenys reklamos platformas pasiekia tik per naršyklę: ad blocker'iai, iOS apribojimai, sutikimo baneriai ir skriptų klaidos dalį įvykių numeta, o kiti užsiskaito po du kartus.</p>
+<p>Esu Rytis Balys, server-side konversijų sekimo inžinierius. Dirbu iš Vilniaus, klientai - visame pasaulyje. Žemiau - kaip per 20 minučių patiems pasitikrinti, ar jūsų tracking sveikas, ir ką darau, kai jis nesveikas.</p>
+  <h2>Kodėl sulaužytas tracking kainuoja pinigus</h2>
+<p>Meta ir Google algoritmai kampanijas optimizuoja pagal tą purchase signalą, kurį gauna. Ne pagal realius užsakymus - pagal signalą.</p><ul><li><strong>Kai įvykių trūksta</strong>, algoritmas mokosi iš mažesnės imties, kampanijos ilgiau stringa mokymosi fazėje (learning phase), CPA atrodo blogesnis nei yra, ir jūs išjungiate kampanijas, kurios iš tikrųjų uždirba.</li><li><strong>Kai įvykiai dubliuojasi</strong>, ROAS ataskaitose atrodo dvigubai geresnis nei realybėje. Keliate biudžetą kampanijai, kuri nuostolinga, ir tai pamatote tik banko išraše.</li><li><strong>Kai atribucija kreiva</strong>, GA4 nuopelnus priskiria ne tiems kanalams. Įprasta pasekmė - nurėžtas el. pašto ar prekės ženklo paieškos biudžetas, kuris iš tikrųjų ir nešė pardavimus.</li></ul><p>Kuo mažesnis biudžetas, tuo brangesnė kiekviena tokia klaida - algoritmui kiekvienas signalas sveria daugiau.</p>
+  <h2>Pasitikrinkite patys per 20 minučių</h2>
+<p>Atskaitos taškas visada tas pats - realūs užsakymai jūsų sistemoje (Shopify, WooCommerce, CRM). Ne platformų ataskaitos.</p><ul><li><strong>1. Suskaičiuokite tiesą.</strong> Backend užsakymai per paskutines 30 dienų, be atšauktų ir testinių. Šis skaičius - etalonas.</li><li><strong>2. Meta Events Manager.</strong> Atsidarykite savo pixelį ir pažiūrėkite Purchase įvykių kiekį per tą patį laikotarpį. Lyginkite įvykių kiekį, ne kampanijų konversijų stulpelį - kampanijų skaičiai priklauso nuo atribucijos lango ir su backend niekada nesutaps vienas prie vieno. Įvykių kiekis sutapti turi, plius minus keli procentai.</li><li><strong>3. Testinis pirkimas per Test Events.</strong> Events Manager skiltyje Test Events atlikite testinį užsakymą. Purchase turi atvykti vieną kartą. Jei naudojate ir pixel, ir Conversions API, matysite du įrašus - browser ir server - ir serverio įvykis turi būti pažymėtas kaip deduplikuotas pagal sutampantį event_id. Du įrašai be deduplikacijos reiškia, kad kiekvienas pirkimas skaičiuojasi dvigubai.</li><li><strong>4. GA4 DebugView.</strong> Įjunkite Tag Assistant (tagassistant.google.com) preview režimą, GA4 eikite į Admin, DebugView, ir pakartokite pirkimą. Turi atvykti purchase įvykis su transaction_id ir teisinga value.</li><li><strong>5. Naršyklės Network skirtukas.</strong> F12, Network, filtruokite pagal facebook.com/tr (pixel) ir /g/collect su en=purchase (GA4; jei jau naudojate sGTM, užklausa eis į jūsų subdomeną). Užsakymo patvirtinimo puslapyje paspauskite refresh: jei purchase iššauna dar kartą, kiekvienas to puslapio perkrovimas jums kuria fiktyvų pardavimą.</li></ul><p>Jei bent viename žingsnyje skaičiai išsiskiria daugiau nei keliais procentais, problemą turite.</p>
+  <h2>Ką darau</h2>
+<p>Keturios paslaugos, visos apie tą patį - kad platformos matytų tikrus skaičius.</p><ul><li><strong>Tracking auditas.</strong> Sutikrinu Meta, Google Ads ir GA4 duomenis su realiais backend užsakymais. Gaunate dokumentą: kur duomenys dingsta, kur dubliuojasi, kiek tai kainuoja ir ką taisyti pirmiausia.</li><li><strong>Server-side tracking.</strong> Meta Conversions API su event_id deduplikacija, GA4 per server-side GTM (sGTM ant Stape arba jūsų infrastruktūros). Įvykiai siunčiami iš serverio, todėl jų nebenumuša ad blocker'iai ir naršyklių apribojimai.</li><li><strong>Gaisrų gesinimas.</strong> Pixelis nešaudo po temos ar checkout atnaujinimo, konversijos nuliuose, dvigubi pirkimai, purchase be vertės - randu priežastį ir sutvarkau.</li><li><strong>Consent Mode v2.</strong> Sutvarkau, kad sutikimo signalai (ad_user_data, ad_personalization) Google žymes pasiektų teisingai ir ES srauto konversijos nedingtų vien dėl blogai sukonfigūruoto banerio.</li></ul>
+  <h2>Dažniausios klaidos, kurias randu audituose</h2>
+<ul><li>Pixel ir CAPI abu siunčia Purchase, bet be sutampančio event_id - kiekvienas užsakymas Meta pusėje tampa dviem.</li><li>Purchase pririštas prie padėkos puslapio URL ir iššauna kaskart jį perkrovus ar atsidarius iš išsaugotos nuorodos.</li><li>Siunčiama ne ta value: avansas vietoj pilnos užsakymo sumos, arba suma be PVM viename įrankyje ir su PVM kitame - skaičiai niekada nesutaps.</li><li>Dvi GA4 instaliacijos vienu metu, pavyzdžiui, per platformos integraciją ir per GTM - dvigubos puslapių peržiūros ir dvigubi pirkimai.</li><li>Consent baneris blokuoja žymes net ir gavus sutikimą - konversijos iš ES srauto tyliai dingsta, nors lankytojai sutiko būti skaičiuojami.</li><li>Testiniai ir atšaukti užsakymai skaičiuojami kaip tikri, todėl platformos rodo daugiau nei bankas.</li></ul>
+  <div class="faq">
+  <h2>D.U.K.</h2>
+    <details><summary>Kodėl Meta Ads rodo daugiau pirkimų negu turiu užsakymų?</summary><p>Dvi dažniausios priežastys: pixel ir Conversions API siunčia tą patį pirkimą be event_id deduplikacijos, arba purchase įvykis iššauna kaskart perkrovus padėkos puslapį. Pasitikrinkite Events Manager skiltyje Test Events - testinis pirkimas turi užsiskaityti vieną kartą.</p></details>
+    <details><summary>Ar mažai parduotuvei reikia server-side tracking?</summary><p>Jei mokate už reklamą - taip. Vien naršyklinis pixel dalį įvykių praranda dėl ad blocker'ių ir iOS apribojimų, o kuo mažesnis biudžetas, tuo kiekvienas prarastas signalas algoritmui kainuoja daugiau. sGTM hostingas, pavyzdžiui Stape, kainuoja mažiau nei vienas prarastas užsakymas per mėnesį.</p></details>
+    <details><summary>Kas yra event_id deduplikacija?</summary><p>Kai tas pats pirkimas siunčiamas ir iš naršyklės (pixel), ir iš serverio (Conversions API), abu įvykiai turi turėti tą patį pavadinimą ir tą patį event_id - tada Meta juos sujungia į vieną. Be šito Meta mato du pirkimus vietoj vieno, ir ROAS ataskaitose išpūstas dvigubai.</p></details>
+    <details><summary>Kiek trunka ir kaip atrodo tracking auditas?</summary><p>Man reikia prieigos prie Events Manager, GA4 ir užsakymų sąrašo skaitymo teisėmis. Per kelias darbo dienas gaunate dokumentą su sutikrintais skaičiais, rastų klaidų sąrašu ir taisymo eiliškumu pagal tai, kiek kuri klaida kainuoja.</p></details>
+  </div>
+  <div class="cta">
+<p>Šitą darbą darau kasdien - iš Vilniaus, klientams visame pasaulyje. Jei norite, kad jūsų skaičius sutikrinčiau aš, parašykite work@rytisbalys.com.</p>
+    <a class="btn" href="mailto:work@rytisbalys.com">work@rytisbalys.com</a>
+  </div>
+
+  <footer>Rytis Balys · MB Euruvizija · Vilnius, Lithuania · <a href="/" style="color:#4d5b6b">rytisbalys.com</a></footer>
+</div>
+</body>
+</html>

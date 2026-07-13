@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1D69SRZPPM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1D69SRZPPM');
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GA4 Counting Purchases Twice? The Duplicate Tag Fix</title>
+<meta name="description" content="GA4 shows double your real purchases and events. The usual cause: GA4 installed twice, by a plugin and by GTM. How to spot the duplicate and fix it.">
+<link rel="canonical" href="https://rytisbalys.com/ga4-double-counting-purchases-duplicate-tag">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="GA4 Counting Purchases Twice? The Duplicate Tag Fix">
+<meta property="og:description" content="GA4 shows double your real purchases and events. The usual cause: GA4 installed twice, by a plugin and by GTM. How to spot the duplicate and fix it.">
+<meta property="og:url" content="https://rytisbalys.com/ga4-double-counting-purchases-duplicate-tag">
+<meta property="og:image" content="https://rytisbalys.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "GA4 Counting Purchases Twice? The Duplicate Tag Fix",
+  "description": "GA4 shows double your real purchases and events. The usual cause: GA4 installed twice, by a plugin and by GTM. How to spot the duplicate and fix it.",
+  "url": "https://rytisbalys.com/ga4-double-counting-purchases-duplicate-tag",
+  "mainEntityOfPage": "https://rytisbalys.com/ga4-double-counting-purchases-duplicate-tag",
+  "inLanguage": "en",
+  "datePublished": "2026-07-13",
+  "dateModified": "2026-07-13",
+  "author": {
+    "@type": "Person",
+    "@id": "https://rytisbalys.com/#rytis",
+    "name": "Rytis Balys",
+    "url": "https://rytisbalys.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MB Euruvizija"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Will disconnecting Site Kit's Analytics module delete my GA4 data?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The GA4 property and its history live in your Google account, not in the plugin. Disconnecting only removes the tracking snippet Site Kit injects, and Search Console plus the other Site Kit modules keep working."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "GA4 shows more purchases than Shopify. Is it always double-tagging?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It is the most common cause, and a ratio near 2x makes it almost certain. A healthy browser-side setup reports slightly fewer purchases than the store admin, rarely more - cancelled or failed orders can put GA4 slightly above the completed-order count. A gap approaching 2x deserves the network tab check."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Doesn't GA4 deduplicate purchases with the same transaction_id?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It does, when the same user sends two purchase events with an identical transaction_id. Two independent installs rarely send identical IDs - one uses the raw order ID, the other a prefixed order number, or one omits the field - so the guard does not save you."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I keep GTM or the plugin?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Keep GTM if you run paid traffic, consent mode, or plan server-side tagging, since it is the one place to manage all tags. A plugin-only install is fine for a simple content site with no ad spend. Never run both for the same measurement ID."
+      }
+    }
+  ]
+}
+</script>
+<style>
+  :root{--bg:#0a0e13;--panel:#0f151d;--line:#1c2530;--txt:#d7dee8;--dim:#8b98a8;--accent:#ffc72c;--green:#3fb950;--red:#f85149;--mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:56px 24px 96px}
+  a{color:var(--accent)}
+  .crumb{font-family:var(--mono);font-size:13px;margin-bottom:28px}
+  .crumb a{text-decoration:none;color:var(--dim)} .crumb a:hover{color:var(--accent)}
+  h1{font-size:28px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:10px}
+  .sub{color:var(--dim);margin-bottom:36px;font-size:16px}
+  h2{font-size:19px;color:#fff;margin:36px 0 10px}
+  h3{font-size:16px;color:#fff;margin:20px 0 8px}
+  p{margin-bottom:14px;font-size:15.5px}
+  p.dim{color:var(--dim)}
+  ul,ol{margin:0 0 14px 22px}
+  li{margin-bottom:8px;font-size:15.5px}
+  code{font-family:var(--mono);font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+  pre{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-family:var(--mono);font-size:13px;color:var(--dim);overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin-bottom:14px}
+  pre b{color:var(--txt);font-weight:400}
+  .faq{margin-top:44px}
+  .faq h2{margin-bottom:18px}
+  .faq details{background:var(--panel);border:1px solid var(--line);border-radius:8px;margin-bottom:10px;padding:0}
+  .faq summary{cursor:pointer;padding:13px 16px;font-size:15px;font-weight:600;color:var(--txt)}
+  .faq details p{padding:0 16px 14px;color:var(--dim);font-size:14.5px;margin:0}
+  .cta{margin-top:52px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
+  .cta p{margin-bottom:14px}
+  .btn{font-family:var(--mono);font-size:14px;text-decoration:none;padding:11px 18px;border-radius:8px;background:var(--accent);color:#0a0e13;font-weight:600;display:inline-block}
+  footer{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;border-top:1px solid var(--line);padding-top:20px;margin-top:56px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="crumb"><a href="/">rytisbalys.com</a> <span style="color:#4d5b6b">/ troubleshooting</span></div>
+  <h1>GA4 Counting Purchases Twice? The Duplicate Tag Fix</h1>
+<p>GA4 shows roughly twice the purchases and events your store actually gets. Shopify or WooCommerce admin says 40 orders, GA4 says 78. In most stores I audit, the cause is simple: GA4 is installed twice - once by a plugin (Site Kit, a Shopify app, a theme field) and once through Google Tag Manager. Every event fires down both pipes.</p><p>This is a fifteen-minute diagnosis and usually a five-minute fix. Here is how I confirm it, why it wrecks more than the purchase count, and how to clean it up without losing data.</p>
+  <h2>Confirm the duplicate in five minutes</h2>
+<p>Open your store in an incognito window. Open DevTools (F12 or Cmd+Option+I), go to the <strong>Network</strong> tab, type <strong>collect</strong> in the filter box, reload the page. A healthy install produces one request containing <strong>en=page_view</strong> per measurement ID. If you see two requests with the same <strong>tid=G-XXXXXXX</strong> and <strong>en=page_view</strong>, you are double-tagged:</p><pre>https://region1.google-analytics.com/g/collect?v=2&tid=G-ABC1234&...&en=page_view
+https://www.google-analytics.com/g/collect?v=2&tid=G-ABC1234&...&en=page_view</pre><p>Three more checks that settle it:</p><ul><li><strong>Tag Assistant.</strong> Go to tagassistant.google.com, connect your domain. Two Google tags loading the same GA4 destination - typically a GT-XXXX injected by a plugin plus a G-XXXX config firing from your GTM-XXXX container - is the classic pattern. Since Google's tag consolidation, plugins often load a GT- ID that carries your G- stream, so GT- and G- both firing is the tell, not a feature.</li><li><strong>GA4 DebugView.</strong> Admin &gt; DebugView while Tag Assistant is connected. Every click and page_view appears twice in the stream.</li><li><strong>Test purchase.</strong> Place an order, keep the Network tab open on the thank-you page, filter for collect, look for <strong>en=purchase</strong>. Two purchase hits means doubled revenue in reports.</li></ul><p>You can also view page source and search for both <strong>gtag/js?id=G-</strong> and <strong>googletagmanager.com/gtm.js</strong>. If both are present and the GTM container also holds a GA4 tag, that is your duplicate.</p>
+  <h2>Why purchases double (and sessions can inflate)</h2>
+<p>Each GA4 config on the page dispatches every event once. Two configs for the same measurement ID means two hits per event: page_view, add_to_cart, purchase, all of it.</p><p>GA4 has one built-in guard for purchases: it drops a purchase whose <strong>transaction_id</strong> matches one it already recorded from the same user. That guard only works when both installs send an identical ID. Two independent installs rarely do. The plugin sends the raw order ID, GTM sends a prefixed order number, or one omits the field entirely. Both purchases count. Revenue doubles.</p><p>Sessions inflate for a duller reason: the two installs initialize at different moments with different settings, and redirects through payment gateways or consent updates can restart a session under one config but not the other. Even when session counts hold, event counts double, so every ratio built on the reports - conversion rate, revenue per session, AOV per channel - is computed from corrupted inputs.</p>
+  <h2>Why attribution falls apart</h2>
+<p>The same order now exists as two purchase events with different timing and session context. One fires the moment the thank-you page loads, the other after a consent update or a gateway redirect. GA4 attributes each copy independently, so a single order can show under two channels, or the late copy lands in Direct.</p><p>If you import GA4 key events into Google Ads, Ads receives doubled conversions. Smart Bidding optimizes toward a ROAS that does not exist and spends accordingly. And because GA4 no longer reconciles with your store admin, Meta, or your bank, every budget argument turns into a guess.</p>
+  <h2>The fix: one pipe, not two</h2>
+<p>Pick one install and kill the other. My default: <strong>keep GTM, remove the plugin's Analytics output</strong>. GTM gives you one place to manage GA4, Google Ads, Meta and consent, and it upgrades cleanly to server-side tagging later.</p><ul><li><strong>WordPress with Site Kit:</strong> Site Kit &gt; Settings &gt; Connected Services &gt; Analytics &gt; disconnect the Analytics module. Site Kit keeps working for Search Console and PageSpeed. You are removing its GA4 snippet, not the plugin.</li><li><strong>Other WP sources:</strong> MonsterInsights, Google for WooCommerce's analytics option, or a theme's Google Analytics ID field. Remove the measurement ID or disable the analytics feature. An empty ID field means no snippet.</li><li><strong>Shopify:</strong> here I usually flip the default and keep the Google &amp; YouTube channel for GA4, because it covers checkout events natively, then delete the GA4 config and event tags from GTM while keeping GTM for everything else. Also check theme.liquid and Settings &gt; Customer events for a pasted gtag snippet - old ones survive theme updates.</li></ul><p>Do not delete the GA4 property or the data stream. Your history lives in the property. You are removing one of two loaders, nothing else.</p>
+  <h2>Verify after the fix</h2>
+<p>Purge page cache and CDN first (WP Rocket, LiteSpeed, Cloudflare), otherwise the old snippet keeps serving. Then, in a fresh incognito window:</p><ul><li><strong>Network tab:</strong> one collect request with en=page_view per page load, one per event as you click around.</li><li><strong>Tag Assistant:</strong> a single GA4 destination for your measurement ID.</li><li><strong>Realtime:</strong> browse the site yourself with GA4 Realtime open. Event counts should step by one per action, not two.</li><li><strong>Test purchase:</strong> one en=purchase hit in the network tab, one purchase in DebugView.</li></ul><p>Next day, compare GA4 purchases against your store admin. GA4 at or slightly below the admin count is healthy - browser-side tracking always loses a share to ad blockers and declined consent. GA4 above admin means something still fires twice. Note the fix date: GA4 does not rewrite history, so reports before that date stay doubled and any period comparison has to start after it.</p>
+  <div class="faq">
+  <h2>FAQ</h2>
+    <details><summary>Will disconnecting Site Kit&#x27;s Analytics module delete my GA4 data?</summary><p>No. The GA4 property and its history live in your Google account, not in the plugin. Disconnecting only removes the tracking snippet Site Kit injects, and Search Console plus the other Site Kit modules keep working.</p></details>
+    <details><summary>GA4 shows more purchases than Shopify. Is it always double-tagging?</summary><p>It is the most common cause, and a ratio near 2x makes it almost certain. A healthy browser-side setup reports slightly fewer purchases than the store admin, rarely more - cancelled or failed orders can put GA4 slightly above the completed-order count. A gap approaching 2x deserves the network tab check.</p></details>
+    <details><summary>Doesn&#x27;t GA4 deduplicate purchases with the same transaction_id?</summary><p>It does, when the same user sends two purchase events with an identical transaction_id. Two independent installs rarely send identical IDs - one uses the raw order ID, the other a prefixed order number, or one omits the field - so the guard does not save you.</p></details>
+    <details><summary>Should I keep GTM or the plugin?</summary><p>Keep GTM if you run paid traffic, consent mode, or plan server-side tagging, since it is the one place to manage all tags. A plugin-only install is fine for a simple content site with no ad spend. Never run both for the same measurement ID.</p></details>
+  </div>
+  <div class="cta">
+<p>I find and fix duplicate GA4 installs, broken purchase tracking and attribution problems weekly, mostly for stores running paid traffic. If you want this checked and fixed on your store, email work@rytisbalys.com with your store URL.</p>
+    <a class="btn" href="mailto:work@rytisbalys.com">work@rytisbalys.com</a>
+  </div>
+
+  <footer>Rytis Balys · MB Euruvizija · Vilnius, Lithuania · <a href="/" style="color:#4d5b6b">rytisbalys.com</a></footer>
+</div>
+</body>
+</html>

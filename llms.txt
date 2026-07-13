@@ -11,6 +11,22 @@ I find the purchases your tracking silently drops: tracking audits that reconcil
 - [Shopify Checkout Extensibility migration without losing tracking](https://rytisbalys.com/shopify-checkout-upgrade-tracking): checkout.liquid and legacy Additional Scripts are being retired - what dies, why copy-paste migration fails, the parallel-run method
 - [Offline conversions in Google Ads from a closed CRM](https://rytisbalys.com/offline-conversions-google-ads): getting real sales (not just form fills) back into Google Ads - gclid capture, closed CRMs like Jobber and Housecall, Enhanced Conversions for Leads with hashed email/phone, monthly reconciliation
 
+- [GA4 Counting Purchases Twice? The Duplicate Tag Fix](https://rytisbalys.com/ga4-double-counting-purchases-duplicate-tag): GA4 shows double your real purchases and sessions. The usual cause: GA4 installed twice, by a plugin and by GTM. How to spot the duplicate and fix it.
+- [Meta Counts Purchases Twice: Pixel + CAPI Deduplication Fix](https://rytisbalys.com/meta-events-manager-double-purchases-deduplication-fix): Meta shows about 2x your real purchases when the pixel and Conversions API both send Purchase without a shared event_id. How to check the dedup and fix it.
+- [Google Ads Conversion Inactive but Tag Fires in GTM: The Fix](https://rytisbalys.com/google-ads-conversion-inactive-tag-fires-gtm): Google Ads conversion stuck on Inactive while GTM Preview shows the tag firing. The five real causes, a diagnosis order, and realistic update timelines.
+- [WooCommerce Purchase Event Missing After Stripe Redirect: Fix](https://rytisbalys.com/woocommerce-stripe-redirect-purchase-event-not-firing): Orders show in Stripe but GA4 has no purchase, or the wrong value. Why thank-you scripts miss off-site payment returns and the server-side fix.
+- [Fix GA4 Purchases Showing as stripe.com, paypal.com or (direct)](https://rytisbalys.com/ga4-purchases-attributed-stripe-paypal-direct-fix): GA4 shows purchases from stripe.com, paypal.com or (direct)/(none) after adding a payment gateway or 3DS. What causes each flavor and which fix applies.
+- [Conversions Dropped After Consent Mode v2? How to Diagnose It](https://rytisbalys.com/consent-mode-v2-conversions-dropped): Google Ads or GA4 conversions dropped after Consent Mode v2 or a new cookie banner? How to tell a broken setup from normal consent loss, and fix it.
+- [ClickFunnels Upsell Tracking: Fix Double or Missing Purchases](https://rytisbalys.com/clickfunnels-upsell-tracking-fix): ClickFunnels OTO funnels either double the Purchase event in Meta or drop upsell revenue in GA4. Why it happens and the fix, with verification steps.
+- [Server-Side GTM: What It Actually Fixes (and What It Doesn't)](https://rytisbalys.com/server-side-gtm-what-it-fixes): Server-side GTM fixes transport, not bad data. What Stape-style tagging really fixes, what it can't, and when browser-side is enough.
+
+## Lietuviškai (Lithuanian)
+
+- [Konversijų sekimo specialistas - Meta CAPI, GA4, server-side](https://rytisbalys.com/lt/): Meta Ads, GA4 ir realūs užsakymai rodo skirtingus skaičius? Tracking auditas, Meta CAPI su dedup, sGTM, Consent Mode v2. Randu, kur dingsta pirkimai.
+- [GA4 nerodo pardavimų: 4 priežastys ir kaip jas rasti](https://rytisbalys.com/lt/ga4-nerodo-pardavimu): Shopify ar Stripe rodo užsakymus, o GA4 tuščia arba rodo perpus mažiau. Dažniausios priežastys ir kaip per 15 minučių rasti, kur dingsta purchase eventas.
+- [Facebook Pixel neveikia arba dubliuoja pirkimus: ką tikrinti](https://rytisbalys.com/lt/facebook-pixel-neveikia-dvigubi-pirkimai): Purchase eventas nešauna arba Events Manager rodo dvigubus pirkimus. Kaip per Test Events rasti priežastį ir kodėl netikri skaičiai brangina reklamą.
+- [Google Ads konversijos nesiskaičiuoja (Inactive): kaip pataisyti](https://rytisbalys.com/lt/google-ads-konversijos-nesiskaiciuoja): Google Ads rodo Inactive ir konversijos nesiskaičiuoja? Penkios realios priežastys, diagnostika per 15 minučių ir kiek laukti pirmos konversijos.
+
 ## Proof
 
 - [GitHub case study](https://github.com/rytisdev-commits/server-side-conversion-tracking): browser + server Meta CAPI deduplication setup running in production on my own store

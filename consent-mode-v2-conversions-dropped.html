@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1D69SRZPPM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1D69SRZPPM');
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conversions Dropped After Consent Mode v2? How to Diagnose It</title>
+<meta name="description" content="Google Ads or GA4 conversions dropped after Consent Mode v2 or a new cookie banner? How to tell a broken setup from normal consent loss, and fix it.">
+<link rel="canonical" href="https://rytisbalys.com/consent-mode-v2-conversions-dropped">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Conversions Dropped After Consent Mode v2? How to Diagnose It">
+<meta property="og:description" content="Google Ads or GA4 conversions dropped after Consent Mode v2 or a new cookie banner? How to tell a broken setup from normal consent loss, and fix it.">
+<meta property="og:url" content="https://rytisbalys.com/consent-mode-v2-conversions-dropped">
+<meta property="og:image" content="https://rytisbalys.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Conversions Dropped After Consent Mode v2? How to Diagnose It",
+  "description": "Google Ads or GA4 conversions dropped after Consent Mode v2 or a new cookie banner? How to tell a broken setup from normal consent loss, and fix it.",
+  "url": "https://rytisbalys.com/consent-mode-v2-conversions-dropped",
+  "mainEntityOfPage": "https://rytisbalys.com/consent-mode-v2-conversions-dropped",
+  "inLanguage": "en",
+  "datePublished": "2026-07-13",
+  "dateModified": "2026-07-13",
+  "author": {
+    "@type": "Person",
+    "@id": "https://rytisbalys.com/#rytis",
+    "name": "Rytis Balys",
+    "url": "https://rytisbalys.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MB Euruvizija"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much conversion loss is normal after implementing Consent Mode v2?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Expect observed conversions to dip roughly in line with your decline rate, typically 15-35% in the EU, with modeling recovering part of that within one to two weeks if your traffic clears Google's thresholds. A 60-90% drop is almost never consent behavior. That scale of loss points at a missing default, a banner that never sends the update call, or a CMP hard-blocking the tags."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does gcs=G100 mean on my GA4 requests?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It means ad_storage and analytics_storage were both denied on that request. That is correct before the user makes a consent choice. If gcs stays G100 after the user accepts the banner, the consent update call is not firing, and every visitor is being tracked as declined."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I use basic or advanced consent mode?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Advanced mode fires tags as cookieless pings for declined users, which enables conversion modeling in Google Ads and behavioral modeling in GA4. Basic mode blocks tags entirely until consent, so declined users produce nothing to model. Most EU stores run advanced mode; confirm the choice with whoever handles your privacy compliance, since it is a legal position as much as a technical one."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does server-side tracking let me bypass the cookie banner?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Consent applies to server-side tagging the same as browser-side, and a denied user must stay denied end to end. What server-side does is make consented traffic count fully by beating ad blockers and Safari's cookie limits, which in practice recovers more revenue than the declined minority represents."
+      }
+    }
+  ]
+}
+</script>
+<style>
+  :root{--bg:#0a0e13;--panel:#0f151d;--line:#1c2530;--txt:#d7dee8;--dim:#8b98a8;--accent:#ffc72c;--green:#3fb950;--red:#f85149;--mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:56px 24px 96px}
+  a{color:var(--accent)}
+  .crumb{font-family:var(--mono);font-size:13px;margin-bottom:28px}
+  .crumb a{text-decoration:none;color:var(--dim)} .crumb a:hover{color:var(--accent)}
+  h1{font-size:28px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:10px}
+  .sub{color:var(--dim);margin-bottom:36px;font-size:16px}
+  h2{font-size:19px;color:#fff;margin:36px 0 10px}
+  h3{font-size:16px;color:#fff;margin:20px 0 8px}
+  p{margin-bottom:14px;font-size:15.5px}
+  p.dim{color:var(--dim)}
+  ul,ol{margin:0 0 14px 22px}
+  li{margin-bottom:8px;font-size:15.5px}
+  code{font-family:var(--mono);font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+  pre{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-family:var(--mono);font-size:13px;color:var(--dim);overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin-bottom:14px}
+  pre b{color:var(--txt);font-weight:400}
+  .faq{margin-top:44px}
+  .faq h2{margin-bottom:18px}
+  .faq details{background:var(--panel);border:1px solid var(--line);border-radius:8px;margin-bottom:10px;padding:0}
+  .faq summary{cursor:pointer;padding:13px 16px;font-size:15px;font-weight:600;color:var(--txt)}
+  .faq details p{padding:0 16px 14px;color:var(--dim);font-size:14.5px;margin:0}
+  .cta{margin-top:52px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
+  .cta p{margin-bottom:14px}
+  .btn{font-family:var(--mono);font-size:14px;text-decoration:none;padding:11px 18px;border-radius:8px;background:var(--accent);color:#0a0e13;font-weight:600;display:inline-block}
+  footer{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;border-top:1px solid var(--line);padding-top:20px;margin-top:56px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="crumb"><a href="/">rytisbalys.com</a> <span style="color:#4d5b6b">/ troubleshooting</span></div>
+  <h1>Conversions Dropped After Consent Mode v2? How to Diagnose It</h1>
+<p>Your Google Ads conversions dropped 40-70% the week Consent Mode v2 or a new cookie banner went live, and GA4 sessions look thin. The cause is one of two things: users declining tracking, which is expected and partly recoverable through modeling, or a consent implementation that keeps Google tags denied for everyone, which is a bug.</p><p>I audit these setups weekly. Most "consent killed our tracking" cases turn out to be the bug, not the consent. Here is how to tell them apart in about 15 minutes.</p>
+  <h2>What Consent Mode v2 actually blocks</h2>
+<p>Consent Mode v2 manages four signals: <strong>ad_storage</strong>, <strong>analytics_storage</strong>, <strong>ad_user_data</strong>, and <strong>ad_personalization</strong>. The last two were added in v2 and gate whether user data can be sent to Google's ad systems at all.</p><p>In <strong>advanced mode</strong>, when a user declines, Google tags still fire but send cookieless pings. No cookies are read or written, no client ID persists between pages, and each request carries the consent state. Those pings feed conversion modeling in Google Ads and behavioral modeling in GA4. That is the intended design: you lose the individual user, Google estimates the aggregate.</p><p>The modeling has thresholds. GA4 behavioral modeling needs roughly 1,000 events per day with analytics_storage denied for 7 days, plus about 1,000 daily consented users for 7 of the last 28 days. Google Ads conversion modeling needs roughly 700 ad clicks over 7 days per country-domain grouping. Smaller stores never clear these bars, so declined traffic simply vanishes from reports with nothing modeled back.</p><p>In <strong>basic mode</strong>, tags do not load until consent is granted. No pings, no GA4 modeling for declined users, and Ads falls back to a more general model. Basic mode always loses more data than advanced.</p>
+  <h2>Broken implementation vs expected loss</h2>
+<p>Three implementation bugs cause most of the catastrophic drops I see:</p><ul><li><strong>Default consent never set.</strong> A consent default must execute before any Google tag loads. If it is missing, tag behavior is undefined and modeling signals are unreliable. The correct pattern, in the page head before gtag.js or GTM:</li></ul><pre>gtag('consent', 'default', {
+  ad_storage: 'denied',
+  ad_user_data: 'denied',
+  ad_personalization: 'denied',
+  analytics_storage: 'denied',
+  wait_for_update: 500
+});</pre><ul><li><strong>The banner never updates consent.</strong> The user clicks Accept, but no <strong>gtag('consent', 'update', ...)</strong> call fires, or it fires with the wrong signal names. Everything stays denied for 100% of users, including the ones who said yes. This is the single most common cause of a 60-90% drop.</li><li><strong>The CMP hard-blocks the scripts.</strong> Many CMPs ship with auto-blocking that prevents gtag.js or GTM from loading at all until consent. That silently converts your advanced consent mode into basic mode, or worse, blocks tags even after acceptance if script categorization is wrong. No pings means nothing to model.</li></ul><p>Expected loss looks different. With a compliant EU banner, typically 15-35% of visitors decline, depending on banner design. Observed conversions dip by a similar share, then modeling gives part of it back over one to two weeks if you clear the thresholds. A drop that roughly matches your decline rate is consent behavior. A drop far beyond it is a bug.</p>
+  <h2>Diagnose it in 15 minutes</h2>
+<p>Do these checks in order, in an incognito window so you start with no stored consent.</p><ul><li><strong>Tag Assistant.</strong> Open tagassistant.google.com, connect your domain. In the left panel, select the first page-load message and open the <strong>Consent</strong> tab. You should see an on-page default (all four signals denied) registered before the container loads. Accept the banner, then check that an on-page update appears and flips the signals to granted. Missing default row = bug 1. Missing or wrong update = bug 2.</li><li><strong>Browser network tab.</strong> DevTools, Network, filter for <strong>collect</strong>. GA4 hits go to google-analytics.com/g/collect (or a regional endpoint). Inspect the <strong>gcs</strong> query parameter: G100 means ad_storage and analytics_storage both denied, G111 both granted, G110 ads granted only, G101 analytics granted only. Before any banner interaction you should see G100 with requests still firing (advanced mode). After accepting and clicking around, new hits must show G111. If gcs stays G100 after acceptance, the update call is broken. If there are no collect requests at all before consent, your CMP is hard-blocking and you are in basic mode whether you intended it or not. The <strong>gcd</strong> parameter encodes default and update per signal; a signal encoded as <strong>l</strong> was never set at all, which points at a missing default.</li><li><strong>GA4 DebugView.</strong> Enable debug mode, accept the banner, fire a test purchase or add_to_cart, and confirm the events arrive in Admin, DebugView. Consented events that never reach DebugView mean the tag is blocked downstream of consent.</li><li><strong>Google Ads.</strong> Open the conversion action and check its diagnostics for consent warnings. Ads flags actions receiving traffic without proper consent signals.</li><li><strong>Meta, if it dropped too.</strong> A hard-blocking CMP takes every vendor down at once. Verify the pixel in Events Manager, Test Events. If Meta events also stopped for consented users, the CMP script categorization is the problem, not Google.</li></ul>
+  <h2>What recovers the data</h2>
+<p><strong>Fix the consent flow first.</strong> Region-scoped denied defaults with wait_for_update, an update call that fires immediately on banner choice, and a stored choice that re-applies on every subsequent page load. Verify gcs on page two of a session, not just page one. Add <strong>gtag('set', 'url_passthrough', true)</strong> so ad click IDs survive into the session for declined users via URL parameters.</p><p><strong>Enhanced conversions.</strong> Send hashed email and phone with the purchase event. For consented users this recovers matches that Safari's tracking prevention and ad blockers would otherwise lose, and it feeds the models better data. Note that user-provided data only transmits when ad_user_data is granted, so a broken update call also silently disables enhanced conversions.</p><p><strong>Server-side tagging.</strong> A server GTM container on your own subdomain sets first-party cookies that outlive Safari's 7-day JavaScript cookie cap, gets past most ad blockers, and improves match quality on every consented hit. It does not override consent, denied stays denied, but it makes your consented majority count fully. In most EU stores I work on, the revenue recovered from the consented 70-80% exceeds what the declined minority ever represented.</p>
+  <div class="faq">
+  <h2>FAQ</h2>
+    <details><summary>How much conversion loss is normal after implementing Consent Mode v2?</summary><p>Expect observed conversions to dip roughly in line with your decline rate, typically 15-35% in the EU, with modeling recovering part of that within one to two weeks if your traffic clears Google's thresholds. A 60-90% drop is almost never consent behavior. That scale of loss points at a missing default, a banner that never sends the update call, or a CMP hard-blocking the tags.</p></details>
+    <details><summary>What does gcs=G100 mean on my GA4 requests?</summary><p>It means ad_storage and analytics_storage were both denied on that request. That is correct before the user makes a consent choice. If gcs stays G100 after the user accepts the banner, the consent update call is not firing, and every visitor is being tracked as declined.</p></details>
+    <details><summary>Should I use basic or advanced consent mode?</summary><p>Advanced mode fires tags as cookieless pings for declined users, which enables conversion modeling in Google Ads and behavioral modeling in GA4. Basic mode blocks tags entirely until consent, so declined users produce nothing to model. Most EU stores run advanced mode; confirm the choice with whoever handles your privacy compliance, since it is a legal position as much as a technical one.</p></details>
+    <details><summary>Does server-side tracking let me bypass the cookie banner?</summary><p>No. Consent applies to server-side tagging the same as browser-side, and a denied user must stay denied end to end. What server-side does is make consented traffic count fully by beating ad blockers and Safari's cookie limits, which in practice recovers more revenue than the declined minority represents.</p></details>
+  </div>
+  <div class="cta">
+<p>I diagnose and fix Consent Mode and conversion tracking setups for EU stores as my day job, usually within a couple of days. If you want a second pair of eyes on yours, email work@rytisbalys.com with your store URL.</p>
+    <a class="btn" href="mailto:work@rytisbalys.com">work@rytisbalys.com</a>
+  </div>
+
+  <footer>Rytis Balys · MB Euruvizija · Vilnius, Lithuania · <a href="/" style="color:#4d5b6b">rytisbalys.com</a></footer>
+</div>
+</body>
+</html>

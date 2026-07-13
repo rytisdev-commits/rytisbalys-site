@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1D69SRZPPM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1D69SRZPPM');
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meta Counts Purchases Twice: Pixel + CAPI Deduplication Fix</title>
+<meta name="description" content="Meta shows about 2x your real purchases when the pixel and Conversions API both send Purchase without a shared event_id. How to check the dedup and fix it.">
+<link rel="canonical" href="https://rytisbalys.com/meta-events-manager-double-purchases-deduplication-fix">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Meta Counts Purchases Twice: Pixel + CAPI Deduplication Fix">
+<meta property="og:description" content="Meta shows about 2x your real purchases when the pixel and Conversions API both send Purchase without a shared event_id. How to check the dedup and fix it.">
+<meta property="og:url" content="https://rytisbalys.com/meta-events-manager-double-purchases-deduplication-fix">
+<meta property="og:image" content="https://rytisbalys.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Meta Counts Purchases Twice: Pixel + CAPI Deduplication Fix",
+  "description": "Meta shows about 2x your real purchases when the pixel and Conversions API both send Purchase without a shared event_id. How to check the dedup and fix it.",
+  "url": "https://rytisbalys.com/meta-events-manager-double-purchases-deduplication-fix",
+  "mainEntityOfPage": "https://rytisbalys.com/meta-events-manager-double-purchases-deduplication-fix",
+  "inLanguage": "en",
+  "datePublished": "2026-07-13",
+  "dateModified": "2026-07-13",
+  "author": {
+    "@type": "Person",
+    "@id": "https://rytisbalys.com/#rytis",
+    "name": "Rytis Balys",
+    "url": "https://rytisbalys.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MB Euruvizija"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why does Meta show more purchases than my Shopify or WooCommerce store?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your browser pixel and your Conversions API integration are both reporting each order as a separate Purchase event. Without a matching event_id on both events, Meta cannot deduplicate them, so every order counts twice. A ratio near 2x almost always means dedup is fully broken rather than a tracking gap."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the event_id have to be identical on the pixel and the Conversions API?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Meta deduplicates only when event_name and event_id both match as literal strings, within a 48-hour window. The browser parameter is spelled eventID and the server parameter event_id, but the values must be character-for-character the same."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I just turn off the browser pixel and keep only the Conversions API?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The redundant setup exists for a reason: the server event survives ad blockers and browser privacy restrictions, while the browser event contributes signals the server often lacks. Fix the shared event_id instead of amputating a channel."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use a random UUID as the event_id?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Only if it is generated once and passed to both the pixel and the server event. Two sides independently generating random IDs will never match. An ID derived from the order number is safer because both sides already know it and webhook retries produce the same ID instead of a new duplicate."
+      }
+    }
+  ]
+}
+</script>
+<style>
+  :root{--bg:#0a0e13;--panel:#0f151d;--line:#1c2530;--txt:#d7dee8;--dim:#8b98a8;--accent:#ffc72c;--green:#3fb950;--red:#f85149;--mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:56px 24px 96px}
+  a{color:var(--accent)}
+  .crumb{font-family:var(--mono);font-size:13px;margin-bottom:28px}
+  .crumb a{text-decoration:none;color:var(--dim)} .crumb a:hover{color:var(--accent)}
+  h1{font-size:28px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:10px}
+  .sub{color:var(--dim);margin-bottom:36px;font-size:16px}
+  h2{font-size:19px;color:#fff;margin:36px 0 10px}
+  h3{font-size:16px;color:#fff;margin:20px 0 8px}
+  p{margin-bottom:14px;font-size:15.5px}
+  p.dim{color:var(--dim)}
+  ul,ol{margin:0 0 14px 22px}
+  li{margin-bottom:8px;font-size:15.5px}
+  code{font-family:var(--mono);font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+  pre{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-family:var(--mono);font-size:13px;color:var(--dim);overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin-bottom:14px}
+  pre b{color:var(--txt);font-weight:400}
+  .faq{margin-top:44px}
+  .faq h2{margin-bottom:18px}
+  .faq details{background:var(--panel);border:1px solid var(--line);border-radius:8px;margin-bottom:10px;padding:0}
+  .faq summary{cursor:pointer;padding:13px 16px;font-size:15px;font-weight:600;color:var(--txt)}
+  .faq details p{padding:0 16px 14px;color:var(--dim);font-size:14.5px;margin:0}
+  .cta{margin-top:52px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
+  .cta p{margin-bottom:14px}
+  .btn{font-family:var(--mono);font-size:14px;text-decoration:none;padding:11px 18px;border-radius:8px;background:var(--accent);color:#0a0e13;font-weight:600;display:inline-block}
+  footer{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;border-top:1px solid var(--line);padding-top:20px;margin-top:56px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="crumb"><a href="/">rytisbalys.com</a> <span style="color:#4d5b6b">/ troubleshooting</span></div>
+  <h1>Meta Counts Purchases Twice: Pixel + CAPI Deduplication Fix</h1>
+<p>Your store did 100 orders yesterday. Meta Events Manager shows 195 purchases. The cause in almost every case I audit: the browser pixel and the Conversions API both send a Purchase event for the same order, and they carry no shared <strong>event_id</strong>, so Meta has no way to know it is one sale and counts it twice.</p><p>This is not a display bug. The doubled events feed campaign optimization and reported ROAS. Your ads look twice as profitable as they are, and budget decisions get made on that number. Here is how the deduplication mechanism works, how to confirm it is broken, and how to fix it.</p>
+  <h2>How Meta deduplication actually works</h2>
+<p>Running the pixel and the Conversions API together is the correct setup. Meta recommends it because the server event survives ad blockers and browser restrictions. The system is designed to receive the same purchase twice and merge it. The merge has one rule:</p><ul><li>Two events are deduplicated when they have the same <strong>event_name</strong> and the same <strong>event_id</strong>, received within 48 hours of each other.</li><li>Meta keeps the first event that arrives and drops the duplicate.</li></ul><p>The match is a literal string comparison. <strong>order_10471</strong> does not match <strong>10471</strong>. Note the naming difference: in the browser pixel the parameter is <strong>eventID</strong> (an option on the fbq call), in the Conversions API payload it is <strong>event_id</strong>. Different spelling, but the values must be identical.</p><p>If the IDs never match, or one side sends no ID at all, Meta treats every order as two independent purchases. There is no reliable fallback you control. The event_id is the whole mechanism.</p>
+  <h2>How to confirm it in Events Manager</h2>
+<p>Open Events Manager, select your pixel dataset, and click into the Purchase event details. Three things to check:</p><ul><li><strong>Connection method breakdown.</strong> The event detail view splits Purchase by Browser and Server. In a healthy setup both channels report, but the total after deduplication is close to your real order count. In a broken setup the two channels simply stack.</li><li><strong>Deduplicated count.</strong> Meta reports how many server events were deduplicated against browser events. Both channels active plus a deduplicated figure near zero is the smoking gun.</li><li><strong>The ratio.</strong> Compare Purchase count in Events Manager against orders in your store admin for the same date range. A ratio near 2.0 means dedup is fully broken. Between 1.0 and 2.0 usually means the browser event is sometimes blocked, so only part of the traffic doubles.</li></ul><p>Then run a live check in the <strong>Test Events</strong> tab: place a test order and watch. You should see two Purchase events arrive within seconds, event IDs visible on both, and the second one labeled Deduplicated. If both show up and neither carries that label, you have your confirmation.</p>
+  <h2>The setups that break it</h2>
+<p>I see the same handful of broken configurations on repeat:</p><ul><li><strong>Plugin sends a random ID, pixel sends none.</strong> A CAPI plugin generates its own UUID per request while the pixel snippet in the theme has no eventID parameter. Nothing can ever match.</li><li><strong>Two independent stacks.</strong> The platform integration (Shopify's Facebook and Instagram app, Facebook for WooCommerce) plus a second pixel pasted into the theme or fired from GTM. Each stack may dedupe internally, but events across stacks never match, and Purchase fires from both.</li><li><strong>Server GTM with a broken handoff.</strong> The web container generates an event ID, but the Meta tag in the server container reads a different variable, or the web pixel tag never got the eventID field filled in. One side has an ID, the other has a different one or none.</li><li><strong>Webhook vs thank-you page.</strong> Server Purchase fires from an order webhook keyed on the order ID, browser Purchase fires on the confirmation page with a randomly generated ID. Both send IDs, the IDs never agree.</li></ul><p>Common thread: both sides sending is fine, both sides inventing their own ID is not.</p>
+  <h2>The fix: one order-based event_id on both sides</h2>
+<p>Derive the event_id from the order itself, deterministically, and use the identical string on both channels. Order number or order ID is the right key: both the browser and the server already know it, and it never changes on retries.</p><pre>fbq('track', 'Purchase',
+  { value: 89.00, currency: 'EUR' },
+  { eventID: 'order_10471' }
+);</pre><p>Conversions API payload for the same order:</p><pre>{
+  "data": [{
+    "event_name": "Purchase",
+    "event_id": "order_10471",
+    "event_time": 1767800000,
+    "action_source": "website",
+    ...
+  }]
+}</pre><p>In a server GTM setup, push the order ID into the dataLayer on the purchase page, map it into the web Meta pixel tag's event ID field, and make sure the same value rides to the server container and into the Event ID field of the Conversions API tag there. One value, one source, two destinations.</p><p>If your plugin does not let you control the event_id, replace it or disable one of its channels. Do not run two full pixel-plus-CAPI stacks side by side and hope.</p>
+  <h2>Verify before you trust the numbers again</h2>
+<p>Do not declare this fixed until you have watched a real event travel both paths with the same ID. My verification pass:</p><ul><li><strong>Browser network tab.</strong> Open DevTools, Network tab, filter for <strong>facebook.com/tr</strong>, place a test order. Open the Purchase request and find the <strong>eid</strong> parameter. That is the browser-side event_id. If it is missing, the pixel side is still naked.</li><li><strong>Tag Assistant / GTM preview.</strong> In web preview, confirm the Meta pixel tag fires on the confirmation page and its event ID variable resolves to the order value, not undefined. In server container preview, confirm the incoming request carries the ID and the outgoing Meta request includes it as event_id.</li><li><strong>GA4 DebugView</strong>, if your server container is fed by the GA4 stream: confirm the purchase event arrives with the transaction or event ID parameter that your server-side Meta tag maps from. If it is empty there, it is empty everywhere downstream.</li><li><strong>Events Manager Test Events.</strong> Add your test_event_code to the server payload, place an order, and watch for the pair: browser Purchase first, server Purchase seconds later marked Deduplicated, both showing the identical ID.</li><li><strong>Next-day sanity check.</strong> Compare the Events Manager Purchase total against store orders for the day. Within a few percent is normal. Anything drifting back toward 2x means one of the sources regressed.</li></ul>
+  <div class="faq">
+  <h2>FAQ</h2>
+    <details><summary>Why does Meta show more purchases than my Shopify or WooCommerce store?</summary><p>Your browser pixel and your Conversions API integration are both reporting each order as a separate Purchase event. Without a matching event_id on both events, Meta cannot deduplicate them, so every order counts twice. A ratio near 2x almost always means dedup is fully broken rather than a tracking gap.</p></details>
+    <details><summary>Does the event_id have to be identical on the pixel and the Conversions API?</summary><p>Yes. Meta deduplicates only when event_name and event_id both match as literal strings, within a 48-hour window. The browser parameter is spelled eventID and the server parameter event_id, but the values must be character-for-character the same.</p></details>
+    <details><summary>Should I just turn off the browser pixel and keep only the Conversions API?</summary><p>No. The redundant setup exists for a reason: the server event survives ad blockers and browser privacy restrictions, while the browser event contributes signals the server often lacks. Fix the shared event_id instead of amputating a channel.</p></details>
+    <details><summary>Can I use a random UUID as the event_id?</summary><p>Only if it is generated once and passed to both the pixel and the server event. Two sides independently generating random IDs will never match. An ID derived from the order number is safer because both sides already know it and webhook retries produce the same ID instead of a new duplicate.</p></details>
+  </div>
+  <div class="cta">
+<p>I set up and repair pixel plus Conversions API deduplication for stores most weeks, usually in a day. If you would rather have it checked and fixed than debug it yourself, email <strong>work@rytisbalys.com</strong> with your store URL.</p>
+    <a class="btn" href="mailto:work@rytisbalys.com">work@rytisbalys.com</a>
+  </div>
+
+  <footer>Rytis Balys · MB Euruvizija · Vilnius, Lithuania · <a href="/" style="color:#4d5b6b">rytisbalys.com</a></footer>
+</div>
+</body>
+</html>

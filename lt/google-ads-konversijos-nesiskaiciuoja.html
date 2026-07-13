@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1D69SRZPPM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1D69SRZPPM');
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Google Ads konversijos nesiskaičiuoja (Inactive): kaip pataisyti</title>
+<meta name="description" content="Google Ads rodo Inactive ir konversijos nesiskaičiuoja? Penkios realios priežastys, diagnostika per 15 minučių ir kiek laukti pirmos konversijos.">
+<link rel="canonical" href="https://rytisbalys.com/lt/google-ads-konversijos-nesiskaiciuoja">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Google Ads konversijos nesiskaičiuoja (Inactive): kaip pataisyti">
+<meta property="og:description" content="Google Ads rodo Inactive ir konversijos nesiskaičiuoja? Penkios realios priežastys, diagnostika per 15 minučių ir kiek laukti pirmos konversijos.">
+<meta property="og:url" content="https://rytisbalys.com/lt/google-ads-konversijos-nesiskaiciuoja">
+<meta property="og:image" content="https://rytisbalys.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Google Ads konversijos nesiskaičiuoja (Inactive): kaip pataisyti",
+  "description": "Google Ads rodo Inactive ir konversijos nesiskaičiuoja? Penkios realios priežastys, diagnostika per 15 minučių ir kiek laukti pirmos konversijos.",
+  "url": "https://rytisbalys.com/lt/google-ads-konversijos-nesiskaiciuoja",
+  "mainEntityOfPage": "https://rytisbalys.com/lt/google-ads-konversijos-nesiskaiciuoja",
+  "inLanguage": "lt",
+  "datePublished": "2026-07-13",
+  "dateModified": "2026-07-13",
+  "author": {
+    "@type": "Person",
+    "@id": "https://rytisbalys.com/#rytis",
+    "name": "Rytis Balys",
+    "url": "https://rytisbalys.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MB Euruvizija"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Kodėl Google Ads rodo Inactive, nors Tag Assistant rodo, kad tag'as šauna?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tago iššovimas ir užskaityta konversija yra du skirtingi dalykai. Jei užklausa išeina be gclid (nėra Conversion Linker arba consent denied), Google jos nepriskiria jokiam klikui ir statusas lieka Inactive. Be to, statusas atsinaujina su vėlavimu - po pirmos realios konversijos gali praeiti iki paros."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kiek laiko užtrunka, kol Google Ads parodo pirmą konversiją?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Su tiesioginiu website tag'u - dažniausiai kelios valandos, oficialiai iki 24 valandų. Su GA4 importu - 24-48 valandos, nes prisideda GA4 duomenų apdorojimas. Konversija ataskaitoje atsiranda ties kliko data, ne pirkimo data."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ar Consent Mode sumažina konversijų skaičių?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Taip, atsisakiusių vartotojų konversijos tiesiogiai nefiksuojamos. Google dalį jų atkuria modeliavimu, bet tik tada, kai Consent Mode v2 įdiegtas teisingai ir siunčia tikrus granted/denied signalus. Jei CMP visada siunčia denied ir po sutikimo neatnaujina, prarandate beveik viską."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ką geriau naudoti - Google Ads tag'ą ar purchase importą iš GA4?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tiesioginis Ads tag'as greitesnis ir tiksliau priskiria konversijas kampanijoms. GA4 importą paprasčiau įdiegti, bet vėluoja ir naudoja GA4 atribuciją. Svarbiausia nenaudoti abiejų tam pačiam veiksmui vienu metu kaip primary - pardavimai skaičiuosis dvigubai."
+      }
+    }
+  ]
+}
+</script>
+<style>
+  :root{--bg:#0a0e13;--panel:#0f151d;--line:#1c2530;--txt:#d7dee8;--dim:#8b98a8;--accent:#ffc72c;--green:#3fb950;--red:#f85149;--mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:56px 24px 96px}
+  a{color:var(--accent)}
+  .crumb{font-family:var(--mono);font-size:13px;margin-bottom:28px}
+  .crumb a{text-decoration:none;color:var(--dim)} .crumb a:hover{color:var(--accent)}
+  h1{font-size:28px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:10px}
+  .sub{color:var(--dim);margin-bottom:36px;font-size:16px}
+  h2{font-size:19px;color:#fff;margin:36px 0 10px}
+  h3{font-size:16px;color:#fff;margin:20px 0 8px}
+  p{margin-bottom:14px;font-size:15.5px}
+  p.dim{color:var(--dim)}
+  ul,ol{margin:0 0 14px 22px}
+  li{margin-bottom:8px;font-size:15.5px}
+  code{font-family:var(--mono);font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+  pre{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-family:var(--mono);font-size:13px;color:var(--dim);overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin-bottom:14px}
+  pre b{color:var(--txt);font-weight:400}
+  .faq{margin-top:44px}
+  .faq h2{margin-bottom:18px}
+  .faq details{background:var(--panel);border:1px solid var(--line);border-radius:8px;margin-bottom:10px;padding:0}
+  .faq summary{cursor:pointer;padding:13px 16px;font-size:15px;font-weight:600;color:var(--txt)}
+  .faq details p{padding:0 16px 14px;color:var(--dim);font-size:14.5px;margin:0}
+  .cta{margin-top:52px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
+  .cta p{margin-bottom:14px}
+  .btn{font-family:var(--mono);font-size:14px;text-decoration:none;padding:11px 18px;border-radius:8px;background:var(--accent);color:#0a0e13;font-weight:600;display:inline-block}
+  footer{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;border-top:1px solid var(--line);padding-top:20px;margin-top:56px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="crumb"><a href="/">rytisbalys.com</a> <span style="color:#4d5b6b">/ lt</span></div>
+  <h1>Google Ads konversijos nesiskaičiuoja (Inactive): kaip pataisyti</h1>
+<p>Kampanijos sukasi, biudžetas dega, o Google Ads konversijos veiksmas rodo <strong>Inactive</strong> ir konversijų stulpelyje nulis. Devyniais atvejais iš dešimties kaltas ne Google, o diegimas: tag'as arba nešauna padėkos puslapyje, arba šauna, bet be gclid, todėl Google neturi prie ko pririšti pardavimo.</p><p>Tokias situacijas tvarkau kas savaitę. Žemiau surašiau penkias dažniausias priežastis ir diagnostikos eigą, kurią pereisite patys per 15 minučių, be programuotojo.</p>
+  <h2>Ką iš tikrųjų reiškia Inactive statusas</h2>
+<p>Statusą matote Google Ads meniu <strong>Goals &gt; Conversions &gt; Summary</strong>. Inactive reiškia viena: Google negavo nė vienos konversijos per pastarąsias dienas. Tai simptomas, ne diagnozė.</p><p>Svarbi išimtis: naujai sukurtas konversijos veiksmas pirmas 24-48 valandas rodo <strong>Unverified</strong> arba lieka be konversijų net kai viskas įdiegta teisingai. Tai normalu. Nerimauti verta tada, kai su realiu srautu ir realiais pardavimais po dviejų-trijų parų vis dar nulis. Po pirmos užfiksuotos konversijos statusas pats persijungia į <strong>Recording conversions</strong>.</p>
+  <h2>Penkios dažniausios priežastys</h2>
+<ul><li><strong>Nėra Conversion Linker.</strong> GTM diegimuose be šio tag'o gclid parametras iš URL neišsaugomas į first-party slapuką <strong>_gcl_aw</strong>. Purchase tag'as šauna, bet konversija ateina be kliko ID, ir Google jos nepriskiria. Sprendimas: GTM sukurkite Conversion Linker tag'ą su trigger All Pages. Jei Google tag (gtag.js) įdėtas tiesiai į visus puslapius, linkerio funkcija jau įskaičiuota.</li><li><strong>Blogas conversion label.</strong> Kiekvienas veiksmas turi savo ID formatu AW-123456789/AbC-dEf. Jei label nukopijuotas iš kito veiksmo ar seno accounto, duomenys eina į niekur. Palyginkite raidė į raidę: Google Ads veiksmo lange atsidarykite Tag setup ir sutikrinkite su tuo, kas įrašyta GTM ar kode.</li><li><strong>Tagas šauna ne tame puslapyje.</strong> Purchase turi šauti tik užsakymo patvirtinimo puslapyje. Dažniausi variantai: trigger pririštas prie URL, kuris po atnaujinimo pasikeitė (pvz., /order-received/ tapo /checkout/order-received/), arba mokėjimo šliuzas grąžina klientą į kitą adresą, arba tag'as šauna checkout'e dar prieš apmokėjimą.</li><li><strong>Consent Mode blokuoja.</strong> EEE nuo 2024 m. kovo privalomas Consent Mode v2 (ad_storage, ad_user_data, ad_personalization). Jei CMP siunčia ad_storage: denied ir po vartotojo sutikimo signalo neatnaujina, gclid slapukas nerašomas ir konversijos krenta. Požymis: konversijos užklausoje parametras gcs=G100.</li><li><strong>Importuotas ne tas GA4 eventas.</strong> Jei konversija importuota iš GA4, eventas turi realiai šauti GA4 property, būti pažymėtas kaip key event, o property susieta su Ads accountu. Dažna klaida: importuotas custom eventas, kuris niekada nešauna, arba GA4 purchase importuotas šalia veikiančio tiesioginio Ads tag'o ir skaičiai dubliuojasi.</li></ul>
+  <h2>Diagnostika žingsnis po žingsnio</h2>
+<p>Eikite iš eilės. Kiekvienas žingsnis atmeta vieną priežastį.</p><ul><li><strong>1. Patikrinkite, ar gclid išsaugomas.</strong> Atsidarykite svetainę su testiniu parametru:<pre>https://jususvetaine.lt/?gclid=TEST123</pre>Tada DevTools &gt; Application &gt; Cookies. Turi atsirasti slapukas <strong>_gcl_aw</strong> su reikšme TEST123 viduje. Jei jo nėra, kaltas Conversion Linker arba consent.</li><li><strong>2. Tag Assistant.</strong> Atsidarykite tagassistant.google.com, prijunkite savo domeną ir pereikite visą pirkimo kelią iki padėkos puslapio. Tikrinkite tris dalykus: Conversion Linker šauna pirmame puslapyje, Google Ads Conversion Tracking tag'as šauna padėkos puslapyje, consent būsena rodo granted.</li><li><strong>3. Network tab.</strong> DevTools &gt; Network, filtras <strong>googleadservices</strong> arba <strong>pagead</strong>. Padėkos puslapyje turi išeiti užklausa į /pagead/conversion/ su jūsų AW ID ir label. Užklausos parametruose pažiūrėkite <strong>gcs</strong>: G111 reiškia, kad sutikimai duoti, G100 - consent blokuoja.</li><li><strong>4. Jei importuojate iš GA4</strong> - atsidarykite GA4 Admin &gt; DebugView ir padarykite testinį pirkimą. Purchase eventas turi atvykti su value ir transaction_id. Jei GA4 jo nemato, Ads irgi niekada nepamatys.</li><li><strong>5. Testinis pirkimas per realų kliką.</strong> Paspauskite savo skelbimą, nusipirkite pigiausią prekę ir laukite. Tai vienintelis testas, kuris patikrina visą grandinę nuo kliko iki ataskaitos.</li></ul>
+  <h2>Kiek laukti pirmos konversijos</h2>
+<p>Vėlavimas priklauso nuo diegimo tipo:</p><ul><li><strong>Tiesioginis website tag'as</strong> - konversijos ataskaitose dažniausiai per kelias valandas, oficialiai iki 24 valandų.</li><li><strong>GA4 importas</strong> - GA4 duomenų apdorojimas užtrunka iki paros, plius importo ciklas. Realistiškai 24-48 valandos.</li></ul><p>Dvi vietos, kur žmonės apsigauna. Pirma, konversija priskiriama <strong>kliko dienai</strong>, ne pirkimo dienai: jei klientas paspaudė skelbimą pirmadienį, o pirko trečiadienį, konversija atsiras pirmadienio eilutėje. Antra, šiandienos skaičiai visada nepilni, nes dalis paspaudusių dar tik pirks.</p><p>Riba paprasta: jei po 48 valandų su realiu srautu, patikrintu tag'u ir bent keliais realiais pardavimais Ads vis dar rodo nulį, problema tikra. Grįžkite prie diagnostikos sąrašo.</p>
+  <div class="faq">
+  <h2>D.U.K.</h2>
+    <details><summary>Kodėl Google Ads rodo Inactive, nors Tag Assistant rodo, kad tag'as šauna?</summary><p>Tago iššovimas ir užskaityta konversija yra du skirtingi dalykai. Jei užklausa išeina be gclid (nėra Conversion Linker arba consent denied), Google jos nepriskiria jokiam klikui ir statusas lieka Inactive. Be to, statusas atsinaujina su vėlavimu - po pirmos realios konversijos gali praeiti iki paros.</p></details>
+    <details><summary>Kiek laiko užtrunka, kol Google Ads parodo pirmą konversiją?</summary><p>Su tiesioginiu website tag'u - dažniausiai kelios valandos, oficialiai iki 24 valandų. Su GA4 importu - 24-48 valandos, nes prisideda GA4 duomenų apdorojimas. Konversija ataskaitoje atsiranda ties kliko data, ne pirkimo data.</p></details>
+    <details><summary>Ar Consent Mode sumažina konversijų skaičių?</summary><p>Taip, atsisakiusių vartotojų konversijos tiesiogiai nefiksuojamos. Google dalį jų atkuria modeliavimu, bet tik tada, kai Consent Mode v2 įdiegtas teisingai ir siunčia tikrus granted/denied signalus. Jei CMP visada siunčia denied ir po sutikimo neatnaujina, prarandate beveik viską.</p></details>
+    <details><summary>Ką geriau naudoti - Google Ads tag'ą ar purchase importą iš GA4?</summary><p>Tiesioginis Ads tag'as greitesnis ir tiksliau priskiria konversijas kampanijoms. GA4 importą paprasčiau įdiegti, bet vėluoja ir naudoja GA4 atribuciją. Svarbiausia nenaudoti abiejų tam pačiam veiksmui vienu metu kaip primary - pardavimai skaičiuosis dvigubai.</p></details>
+  </div>
+  <div class="cta">
+<p>Diagnostiką pagal šį sąrašą galite pasidaryti patys. Jei norite, kad viską patikrinčiau ir sutvarkyčiau už jus - tai mano kasdienis darbas, parašykite work@rytisbalys.com.</p>
+    <a class="btn" href="mailto:work@rytisbalys.com">work@rytisbalys.com</a>
+  </div>
+
+  <footer>Rytis Balys · MB Euruvizija · Vilnius, Lithuania · <a href="/" style="color:#4d5b6b">rytisbalys.com</a></footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1D69SRZPPM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1D69SRZPPM');
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Facebook Pixel neveikia arba dubliuoja pirkimus: ką tikrinti</title>
+<meta name="description" content="Purchase eventas nešauna arba Events Manager rodo dvigubus pirkimus. Kaip per Test Events rasti priežastį ir kodėl netikri skaičiai brangina reklamą.">
+<link rel="canonical" href="https://rytisbalys.com/lt/facebook-pixel-neveikia-dvigubi-pirkimai">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Facebook Pixel neveikia arba dubliuoja pirkimus: ką tikrinti">
+<meta property="og:description" content="Purchase eventas nešauna arba Events Manager rodo dvigubus pirkimus. Kaip per Test Events rasti priežastį ir kodėl netikri skaičiai brangina reklamą.">
+<meta property="og:url" content="https://rytisbalys.com/lt/facebook-pixel-neveikia-dvigubi-pirkimai">
+<meta property="og:image" content="https://rytisbalys.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Facebook Pixel neveikia arba dubliuoja pirkimus: ką tikrinti",
+  "description": "Purchase eventas nešauna arba Events Manager rodo dvigubus pirkimus. Kaip per Test Events rasti priežastį ir kodėl netikri skaičiai brangina reklamą.",
+  "url": "https://rytisbalys.com/lt/facebook-pixel-neveikia-dvigubi-pirkimai",
+  "mainEntityOfPage": "https://rytisbalys.com/lt/facebook-pixel-neveikia-dvigubi-pirkimai",
+  "inLanguage": "lt",
+  "datePublished": "2026-07-13",
+  "dateModified": "2026-07-13",
+  "author": {
+    "@type": "Person",
+    "@id": "https://rytisbalys.com/#rytis",
+    "name": "Rytis Balys",
+    "url": "https://rytisbalys.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MB Euruvizija"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Kaip suprasti, ar Events Manager dubliuoja mano pirkimus?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Palyginkite paskutinių 7 dienų Purchase kiekį Events Manager su realiais užsakymais parduotuvės admin'e. Jei Meta rodo maždaug dvigubai daugiau, browser pixel ir Conversions API siunčia tuos pačius pirkimus be bendro event_id. Paspaudę ant Purchase evento Events Manager viduje matysite išskaidymą pagal kanalą ir deduplikacijos statistiką."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ar palikti browser pixelį, jei jau turiu Conversions API?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Taip, palikite abu. Naršyklės pixelis duoda Meta papildomo konteksto atitikimui (match quality), o serveris pagauna pirkimus, kuriuos blokuoja iOS ar ad blocker'iai. Svarbu viena sąlyga: abu kanalai turi siųsti tą patį event_id, kad Meta dublikatus išmestų."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Pixel Helper rodo, kad pixelis įdiegtas. Kodėl pirkimai vis tiek nesimato?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Įdiegtas bazinis kodas dar nereiškia, kad šauna Purchase eventas - bazinis kodas siunčia tik PageView. Patikrinkite būtent padėkos puslapį po testinio pirkimo. Dažniausiai eventas pamestas ten: pasikeitęs URL trigger'yje, apmokėjimas kitame domene arba consent juosta, blokuojanti skriptą."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kiek pirkimų pameta vien naršyklės pixelis be server-side?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Priklauso nuo auditorijos, bet tipinis intervalas yra 10-30 procentų: iOS apribojimai, ad blocker'iai ir consent atmetimai. Būtent šiai spragai dengti Meta ir sukūrė Conversions API. Bet įjungus jį be deduplikacijos problema tik apsiverčia - vietoj pamestų pirkimų gaunate dvigubus."
+      }
+    }
+  ]
+}
+</script>
+<style>
+  :root{--bg:#0a0e13;--panel:#0f151d;--line:#1c2530;--txt:#d7dee8;--dim:#8b98a8;--accent:#ffc72c;--green:#3fb950;--red:#f85149;--mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:56px 24px 96px}
+  a{color:var(--accent)}
+  .crumb{font-family:var(--mono);font-size:13px;margin-bottom:28px}
+  .crumb a{text-decoration:none;color:var(--dim)} .crumb a:hover{color:var(--accent)}
+  h1{font-size:28px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:10px}
+  .sub{color:var(--dim);margin-bottom:36px;font-size:16px}
+  h2{font-size:19px;color:#fff;margin:36px 0 10px}
+  h3{font-size:16px;color:#fff;margin:20px 0 8px}
+  p{margin-bottom:14px;font-size:15.5px}
+  p.dim{color:var(--dim)}
+  ul,ol{margin:0 0 14px 22px}
+  li{margin-bottom:8px;font-size:15.5px}
+  code{font-family:var(--mono);font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+  pre{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-family:var(--mono);font-size:13px;color:var(--dim);overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin-bottom:14px}
+  pre b{color:var(--txt);font-weight:400}
+  .faq{margin-top:44px}
+  .faq h2{margin-bottom:18px}
+  .faq details{background:var(--panel);border:1px solid var(--line);border-radius:8px;margin-bottom:10px;padding:0}
+  .faq summary{cursor:pointer;padding:13px 16px;font-size:15px;font-weight:600;color:var(--txt)}
+  .faq details p{padding:0 16px 14px;color:var(--dim);font-size:14.5px;margin:0}
+  .cta{margin-top:52px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
+  .cta p{margin-bottom:14px}
+  .btn{font-family:var(--mono);font-size:14px;text-decoration:none;padding:11px 18px;border-radius:8px;background:var(--accent);color:#0a0e13;font-weight:600;display:inline-block}
+  footer{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;border-top:1px solid var(--line);padding-top:20px;margin-top:56px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="crumb"><a href="/">rytisbalys.com</a> <span style="color:#4d5b6b">/ lt</span></div>
+  <h1>Facebook Pixel neveikia arba dubliuoja pirkimus: ką tikrinti</h1>
+<p>Pixelis įdiegtas, reklama sukasi, bet Events Manager arba nerodo pirkimų, arba rodo jų maždaug dvigubai daugiau nei realiai turite užsakymų. Priežastis beveik visada viena iš dviejų: Purchase eventas iš viso nešauna, arba browser pixel ir Conversions API siunčia tą patį pirkimą du kartus be bendro event_id.</p><p>Abu atvejai gadina tą patį dalyką - duomenis, pagal kuriuos Meta optimizuoja jūsų kampanijas. Žemiau parodau, kaip per 15 minučių nustatyti, kuris variantas jūsų, ir ką tvarkyti.</p>
+  <h2>Pirma priežastis: Purchase eventas niekada nešauna</h2>
+<p>Pixelio bazinis kodas ir Purchase eventas yra du skirtingi dalykai. Bazinis kodas užsikrauna kiekviename puslapyje ir siunčia PageView. Purchase turi iššauti tik užsakymo patvirtinimo puslapyje, ir būtent ši dalis dažniausiai būna sulūžusi. Events Manager tada rodo srautą, bet pirkimų - nulis arba tik dalis.</p><p>Dažniausi scenarijai iš praktikos:</p><ul><li>Apmokėjimas vyksta kitame domene (bankas, Stripe, PayPal), o pirkėjas po apmokėjimo negrįžta į jūsų padėkos puslapį. Eventas neturi kur iššauti.</li><li>Purchase paleidžiamas per Google Tag Manager, o trigger'is pririštas prie padėkos puslapio URL. Atnaujinote temą ar checkout'ą, URL pasikeitė, tag'as nebešauna.</li><li>Shopify parduotuvės po perėjimo prie Checkout Extensibility: senas skriptas iš checkout.liquid arba „Additional scripts“ laukelio nebeveikia, o Custom Pixel taip ir nebuvo sukurtas.</li><li>Sutikimų (consent) juosta blokuoja marketingo skriptus, ir pixelis iš viso neužsikrauna daliai ES lankytojų.</li></ul>
+  <h2>Antra priežastis: browser pixel + Conversions API be bendro event_id</h2>
+<p>Kai pirkimą siunčia ir naršyklės pixelis, ir serveris per Conversions API, Meta gauna du Purchase eventus apie tą patį užsakymą. Sistema juos sujungia tik tada, kai sutampa du laukai: event_name ir event_id. Jei event_id nesutampa arba jo iš viso nėra, abu eventai užskaitomi kaip atskiri pirkimai.</p><p>Tipinė klaida: serveris siunčia užsakymo numerį, o naršyklė - atsitiktinį hash'ą arba nieko. Rezultatas: Events Manager rodo maždaug dvigubai daugiau pirkimų nei turite užsakymų, o ROAS ataskaitose atrodo dvigubai geresnis nei realybėje.</p><p>Teisingas variantas atrodo taip:</p><pre>fbq('track', 'Purchase',
+  { value: 59.90, currency: 'EUR' },
+  { eventID: 'order_10482' }
+);
+
+// Serveris per Conversions API siunčia tą patį ID:
+// "event_name": "Purchase"
+// "event_id": "order_10482"</pre><p>event_id turi būti unikalus kiekvienam užsakymui ir identiškas abiejuose kanaluose. Paprasčiausia naudoti užsakymo numerį.</p>
+  <h2>Kaip pasitikrinti per 15 minučių</h2>
+<p>Nespėliokite. Padarykite testinį pirkimą ir pažiūrėkite, kas realiai atkeliauja pas Meta.</p><ul><li><strong>Events Manager > Test Events.</strong> Pasirinkite savo pixelį, skiltyje Test Events įveskite svetainės adresą ir pereikite visą pirkimo kelią iki padėkos puslapio. Naršyklės eventai rodomi realiu laiku. Jei serverio eventai nesirodo, į Conversions API užklausą laikinai įdėkite test_event_code reikšmę iš to paties lango.</li><li><strong>Ko ieškoti:</strong> ar Purchase apskritai atsiranda; ar atsiranda vieną kartą, ar du; iš kur atėjo (naršyklė ar serveris); ar prie abiejų tas pats event_id.</li><li><strong>Naršyklės Network tab.</strong> DevTools > Network, filtruokite pagal facebook.com/tr. Užsakymo patvirtinimo puslapyje turi būti užklausa su ev=Purchase. Parametras eid yra jūsų event_id - jei jo nėra, deduplikacija neveiks.</li><li><strong>Meta Pixel Helper.</strong> Chrome plėtinys, kuris padėkos puslapyje iškart parodo, kurie eventai iššovė ir su kokiais parametrais.</li><li><strong>Jei tag'ai valdomi per GTM:</strong> įjunkite Tag Assistant (Preview) režimą ir patikrinkite, ar Purchase tag'as suveikė padėkos puslapyje ir koks trigger'is jį paleido.</li><li><strong>Skaičių sutikrinimas.</strong> Palyginkite paskutinių 7 dienų Purchase kiekį Events Manager su realiais užsakymais parduotuvėje. Apie du kartus daugiau - dubliavimas. Gerokai mažiau - eventas nešauna daliai pirkėjų.</li></ul>
+  <h2>Kodėl netikri skaičiai brangina kampanijas</h2>
+<p>Meta algoritmas optimizuoja pagal tuos Purchase signalus, kuriuos gauna. Ne pagal jūsų realius užsakymus.</p><p>Kai pirkimai dubliuojasi, kiekvienas ad setas atrodo dvigubai pelningesnis. Skaliuojate tai, kas realiai nuostolinga, ir pastebite tik tada, kai banko sąskaita nesutampa su Ads Manager ataskaita. Value optimizacija ir Advantage+ kampanijos gauna iškreiptas vertes, o tai reiškia, kad biudžetas keliauja ne ten.</p><p>Kai Purchase nešauna, kampanija su pirkimo optimizacija neturi iš ko mokytis. Ji stringa learning fazėje, rodymai nestabilūs, o sistema taikosi į žmones, kurie panašūs į klikintojus, ne į pirkėjus. Kaina už realų pirkimą auga, nors ataskaitose to nesimato, nes ataskaitose pirkimų tiesiog nėra.</p><p>Abiem atvejais mokate už reklamą, kuri mokosi iš klaidingų duomenų. Tai brangiausia tracking'o klaida, nes ji kaupiasi kiekvieną dieną.</p>
+  <div class="faq">
+  <h2>D.U.K.</h2>
+    <details><summary>Kaip suprasti, ar Events Manager dubliuoja mano pirkimus?</summary><p>Palyginkite paskutinių 7 dienų Purchase kiekį Events Manager su realiais užsakymais parduotuvės admin'e. Jei Meta rodo maždaug dvigubai daugiau, browser pixel ir Conversions API siunčia tuos pačius pirkimus be bendro event_id. Paspaudę ant Purchase evento Events Manager viduje matysite išskaidymą pagal kanalą ir deduplikacijos statistiką.</p></details>
+    <details><summary>Ar palikti browser pixelį, jei jau turiu Conversions API?</summary><p>Taip, palikite abu. Naršyklės pixelis duoda Meta papildomo konteksto atitikimui (match quality), o serveris pagauna pirkimus, kuriuos blokuoja iOS ar ad blocker'iai. Svarbu viena sąlyga: abu kanalai turi siųsti tą patį event_id, kad Meta dublikatus išmestų.</p></details>
+    <details><summary>Pixel Helper rodo, kad pixelis įdiegtas. Kodėl pirkimai vis tiek nesimato?</summary><p>Įdiegtas bazinis kodas dar nereiškia, kad šauna Purchase eventas - bazinis kodas siunčia tik PageView. Patikrinkite būtent padėkos puslapį po testinio pirkimo. Dažniausiai eventas pamestas ten: pasikeitęs URL trigger'yje, apmokėjimas kitame domene arba consent juosta, blokuojanti skriptą.</p></details>
+    <details><summary>Kiek pirkimų pameta vien naršyklės pixelis be server-side?</summary><p>Priklauso nuo auditorijos, bet tipinis intervalas yra 10-30 procentų: iOS apribojimai, ad blocker'iai ir consent atmetimai. Būtent šiai spragai dengti Meta ir sukūrė Conversions API. Bet įjungus jį be deduplikacijos problema tik apsiverčia - vietoj pamestų pirkimų gaunate dvigubus.</p></details>
+  </div>
+  <div class="cta">
+<p>Tokius auditus darau kas savaitę: pereinu visą eventų grandinę nuo checkout'o iki Events Manager, sutvarkau deduplikaciją ir parodau prieš-po skaičius. Jei norite, kad kas peržiūrėtų jūsų setup'ą, parašykite work@rytisbalys.com.</p>
+    <a class="btn" href="mailto:work@rytisbalys.com">work@rytisbalys.com</a>
+  </div>
+
+  <footer>Rytis Balys · MB Euruvizija · Vilnius, Lithuania · <a href="/" style="color:#4d5b6b">rytisbalys.com</a></footer>
+</div>
+</body>
+</html>
