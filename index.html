@@ -80,6 +80,14 @@
   .btn:hover{border-color:var(--accent);color:var(--accent)}
   .btn.primary{background:var(--accent);color:#0a0e13;border-color:var(--accent);font-weight:600}
   .btn.primary:hover{opacity:.9}
+    .score{font-family:var(--mono);font-size:13.5px;color:var(--dim);border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:12px 16px;margin-bottom:18px}
+  .score b{color:var(--accent);font-weight:600}
+  .score a{color:var(--dim);text-decoration:none;border-bottom:1px solid var(--line)}
+  .score a:hover{color:var(--accent);border-color:var(--accent)}
+  .rev{border-left:2px solid var(--accent);padding:2px 0 2px 16px;margin:0 0 18px}
+  .rev p{font-size:15.5px;color:var(--txt);margin:0 0 6px}
+  .rev cite{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;font-style:normal}
+  ul.proof-extra{margin-top:26px}
   footer{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;border-top:1px solid var(--line);padding-top:20px}
   @media (max-width:520px){h1{font-size:28px}.hook{font-size:18px}.wrap{padding-top:52px}}
 
@@ -114,10 +122,35 @@
   </ul>
 
   <h2>proof, not promises</h2>
+
+  <div class="score">
+    <b>100%</b> job success &middot; <b>15</b> jobs delivered &middot; <b>every rated one 5.0</b>
+    &middot; <a href="https://www.upwork.com/freelancers/rytis" rel="nofollow noopener" target="_blank">verify on Upwork</a>
+  </div>
+
+  <blockquote class="rev">
+    <p>&ldquo;He found the exact root cause quickly, fixed it cleanly, and &mdash; this is what set him apart &mdash; didn&rsquo;t just tell me it was done. He proved it with cold-load tests and a reversal test, and confirmed it on Meta&rsquo;s side. On top of that he flagged two serious issues outside the scope of the job, including a security problem, completely honestly.&rdquo;</p>
+    <cite>Meta Pixel and conversion tracking fix, WordPress &middot; July 2026</cite>
+  </blockquote>
+
+  <blockquote class="rev">
+    <p>&ldquo;He identified and fixed all three tracking issues &mdash; the broken purchase values, the affiliate attribution dropping after the Stripe redirect, and GA4 loading twice. He also caught a fourth problem we didn&rsquo;t know about ($0 ghost conversions polluting our data) and fixed that too.&rdquo;</p>
+    <cite>GA4 and GTM attribution fix &middot; July 2026</cite>
+  </blockquote>
+
+  <blockquote class="rev">
+    <p>&ldquo;Report was actually deep &ndash; data-cross-checked GA4 / Meta Graph / Magento, not a generic checklist. He delivered the free first-read exactly as advertised, then the full audit landed same-day after access was granted.&rdquo;</p>
+    <cite>Tracking audit, phase one of a server-side GTM engagement &middot; July 2026</cite>
+  </blockquote>
+
+  <blockquote class="rev">
+    <p>&ldquo;My GA4 wasn&rsquo;t recording anything and I had no idea if my Meta pixel even worked. Rytis got it all set up and made sure everything was actually coming through before we wrapped up, so I knew it was done properly.&rdquo;</p>
+    <cite>GA4 and Meta tracking for a quiz funnel &middot; July 2026</cite>
+  </blockquote>
+
   <ul>
-    <li>The same stack runs in production on my own ecommerce stores - every day, with my own money on it</li>
+    <li>The same stack runs in production on my own ecommerce stores <span>- every day, with my own money on it</span></li>
     <li>Public case study of my browser + server dedup setup on GitHub</li>
-    <li>I don't guess, I verify: every event traced end-to-end before I call anything done</li>
   </ul>
 
   <h2>troubleshooting guides</h2>
