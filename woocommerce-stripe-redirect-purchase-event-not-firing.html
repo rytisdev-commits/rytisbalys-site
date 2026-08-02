@@ -55,7 +55,7 @@
       "name": "Why is my WooCommerce purchase event not firing with Stripe Payment Links?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Payment Links show a Stripe-hosted confirmation page, and unless you configure a redirect back to your site, the customer never loads your thank-you page, so any tag placed there cannot fire. Even with a redirect configured, customers close the tab or finish 3DS in a banking app. Fire the event from the order-received page rendered server-side, and cover non-returners with a webhook-driven server-side event."
+        "text": "Payment Links are the one case where the pattern in this article does not apply. A standalone Payment Link creates no WooCommerce order: Stripe hosts the page and the redirect goes to whatever URL you configured, not to order-received with an order ID and key. There is no order object to read, so a thank-you-page tag has nothing to fire on. Track these from Stripe's webhook alone, keyed on the Checkout Session, and send the purchase server-side. If you are using Stripe Checkout through the WooCommerce gateway instead, an order does exist and everything above applies."
       }
     },
     {
@@ -71,7 +71,7 @@
       "name": "Can I track purchases if the customer never returns to my site after paying?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Not with browser tags. The reliable route is server-side: Stripe's webhook confirms the payment on your backend, which sends the purchase to GA4 via Measurement Protocol and to Meta via Conversions API, deduplicated against any browser event by transaction_id and event_id. This recovers the closed-tab and cross-device cases entirely."
+        "text": "Not with browser tags. The reliable route is server-side: Stripe's webhook confirms the payment on your backend, which sends the purchase to GA4 via Measurement Protocol and to Meta via Conversions API, deduplicated against any browser event by transaction_id and event_id. This recovers the closed-tab and cross-device cases, with one condition people skip: capture the GA4 client_id (and session_id, if you want session-scoped attribution) at checkout and store it on the order, then send it with the webhook event. Without it the purchase still lands in GA4, but unattributed."
       }
     },
     {
@@ -101,7 +101,7 @@
   p.dim{color:var(--dim)}
   ul,ol{margin:0 0 14px 22px}
   li{margin-bottom:8px;font-size:15.5px}
-  code{font-family:var(--mono);font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+  code{font-family:var(--mono);font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px;overflow-wrap:break-word;word-break:break-word}
   pre{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-family:var(--mono);font-size:13px;color:var(--dim);overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin-bottom:14px}
   pre b{color:var(--txt);font-weight:400}
   .faq{margin-top:44px}
@@ -112,6 +112,15 @@
   .cta{margin-top:52px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
   .cta p{margin-bottom:14px}
   .btn{font-family:var(--mono);font-size:14px;text-decoration:none;padding:11px 18px;border-radius:8px;background:var(--accent);color:#0a0e13;font-weight:600;display:inline-block}
+  .related{border-top:1px solid var(--line);margin-top:34px;padding-top:20px}
+  .related h2{margin-bottom:12px}
+  .related ul{list-style:none;margin:0}
+  .related li{padding:9px 0 9px 24px;position:relative;border-bottom:1px solid var(--line);font-size:15px}
+  .related li:last-child{border-bottom:none}
+  .related li::before{content:'>';position:absolute;left:2px;color:var(--accent);font-family:var(--mono)}
+  .related a{color:var(--txt);text-decoration:none}
+  .related a:hover{color:var(--accent)}
+
   footer{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;border-top:1px solid var(--line);padding-top:20px;margin-top:56px}
 </style>
 </head>
@@ -119,7 +128,7 @@
 <div class="wrap">
   <div class="crumb"><a href="/">rytisbalys.com</a> <span style="color:#4d5b6b">/ troubleshooting</span></div>
   <h1>WooCommerce Purchase Event Missing After Stripe Redirect: Fix</h1>
-<p>The order is in WooCommerce. The money is in Stripe. GA4 shows nothing, or a purchase with value 0, or a number that matches the cart but not what the customer actually paid. The cause is almost always the same: your purchase tag depends on the customer's browser making the round trip back to your thank-you page with the right data in hand, and off-site payment breaks that trip.</p><p>This applies to Stripe Payment Links, Stripe-hosted checkout, and any bank-redirect method (iDEAL, Bancontact, Przelewy24, local bank buttons). I fix this setup for stores weekly. Here is what actually goes wrong and the pattern that survives.</p>
+<p>The order is in WooCommerce. The money is in Stripe. GA4 shows nothing, or a purchase with value 0, or a number that matches the cart but not what the customer actually paid. The cause is almost always the same: your purchase tag depends on the customer's browser making the round trip back to your thank-you page with the right data in hand, and off-site payment breaks that trip.</p><p>This applies to Stripe-hosted checkout through the WooCommerce gateway and to any bank-redirect method (iDEAL, Bancontact, Przelewy24, local bank buttons). Standalone Stripe Payment Links behave differently, because they create no WooCommerce order at all - see the FAQ. I fix this setup for stores weekly. Here is what actually goes wrong and the pattern that survives.</p>
   <h2>Why thank-you-page scripts miss redirect returns</h2>
 <p>A purchase tag that lives on the order-received page only fires if the customer's browser loads that page. With off-site payment, a meaningful share of paying customers never do:</p><ul><li><strong>They close the tab.</strong> Stripe's hosted page already told them the payment succeeded. The job is done in their head. With Payment Links on default settings, Stripe shows its own confirmation page and the customer may never be redirected to your site at all.</li><li><strong>3DS detour.</strong> The bank's authentication step often pushes the customer into a banking app. They approve the payment there and go back to whatever they were doing. The original tab with the redirect chain is abandoned.</li><li><strong>Cross-device completion.</strong> The customer starts on desktop, confirms in a mobile banking app, and if they return at all it is on a different device with a different GA4 client ID. The purchase is attributed to a new user, or lost.</li><li><strong>Slow payment methods.</strong> Some bank transfers confirm minutes or hours later. There is no browser session left to fire anything.</li></ul><p>Typical damage: 10-30% of purchases missing from GA4 and Meta, which quietly starves your ad optimization of the conversions it needs.</p>
   <h2>Why the localStorage total-scrape hack breaks</h2>
@@ -153,14 +162,24 @@
 <p>Even when the purchase fires, GA4 can credit it to the wrong channel. The customer leaves your site for stripe.com or their bank's 3DS page and comes back. GA4 sees stripe.com as the referrer, starts a new session, and your paid or organic attribution is overwritten by <code>referral / stripe.com</code>.</p><p>The fix is the unwanted referrals list. In GA4: Admin, then Data streams, select your web stream, open Configure tag settings, choose Show all, then List unwanted referrals. Add <code>stripe.com</code>. If your acquisition reports also show bank or 3DS authentication domains as referrers, add those too. GA4 will then ignore these referrers and keep the original session source intact.</p><p>Check the result in Reports under Traffic acquisition: referral traffic from stripe.com should drop to zero for new sessions, and your purchases start attributing to the campaigns that actually earned them.</p>
   <div class="faq">
   <h2>FAQ</h2>
-    <details><summary>Why is my WooCommerce purchase event not firing with Stripe Payment Links?</summary><p>Payment Links show a Stripe-hosted confirmation page, and unless you configure a redirect back to your site, the customer never loads your thank-you page, so any tag placed there cannot fire. Even with a redirect configured, customers close the tab or finish 3DS in a banking app. Fire the event from the order-received page rendered server-side, and cover non-returners with a webhook-driven server-side event.</p></details>
+    <details><summary>Why is my WooCommerce purchase event not firing with Stripe Payment Links?</summary><p>Payment Links are the one case where the pattern in this article does not apply. A standalone Payment Link creates no WooCommerce order: Stripe hosts the page and the redirect goes to whatever URL you configured, not to order-received with an order ID and key. There is no order object to read, so a thank-you-page tag has nothing to fire on. Track these from Stripe's webhook alone, keyed on the Checkout Session, and send the purchase server-side. If you are using Stripe Checkout through the WooCommerce gateway instead, an order does exist and everything above applies.</p></details>
     <details><summary>Why does GA4 show my sales as referral / stripe.com?</summary><p>The trip to Stripe or the bank's 3DS page and back looks like an inbound referral to GA4, so it breaks the session and reassigns the purchase to stripe.com. Add stripe.com to the unwanted referrals list in your web stream's tag settings. The original campaign source then survives the payment round trip.</p></details>
-    <details><summary>Can I track purchases if the customer never returns to my site after paying?</summary><p>Not with browser tags. The reliable route is server-side: Stripe's webhook confirms the payment on your backend, which sends the purchase to GA4 via Measurement Protocol and to Meta via Conversions API, deduplicated against any browser event by transaction_id and event_id. This recovers the closed-tab and cross-device cases entirely.</p></details>
+    <details><summary>Can I track purchases if the customer never returns to my site after paying?</summary><p>Not with browser tags. The reliable route is server-side: Stripe's webhook confirms the payment on your backend, which sends the purchase to GA4 via Measurement Protocol and to Meta via Conversions API, deduplicated against any browser event by transaction_id and event_id. This recovers the closed-tab and cross-device cases, with one condition people skip: capture the GA4 client_id (and session_id, if you want session-scoped attribution) at checkout and store it on the order, then send it with the webhook event. Without it the purchase still lands in GA4, but unattributed.</p></details>
     <details><summary>Why is my GA4 purchase value 0 or wrong after an off-site payment?</summary><p>Usually the tag reads the value from the browser: a scraped checkout total stored in localStorage that did not survive the redirect, or a formatted price string that parsed to NaN. Deposits and gift cards make the scraped cart total wrong even when it survives. Take the value from the WooCommerce order object on the backend instead - it is the amount actually charged.</p></details>
   </div>
   <div class="cta">
 <p>I build and repair server-side tracking for WooCommerce and Shopify stores - redirect payments, webhooks, Measurement Protocol, Conversions API. If you want yours checked or fixed, email me at work@rytisbalys.com.</p>
     <a class="btn" href="mailto:work@rytisbalys.com">work@rytisbalys.com</a>
+  </div>
+
+
+  <div class="related">
+    <h2>related guides</h2>
+    <ul>
+      <li><a href="/ga4-purchases-attributed-stripe-paypal-direct-fix">Fix GA4 purchases showing as stripe.com, paypal.com or (direct)</a></li>
+      <li><a href="/ga4-does-not-match-backend">GA4 purchases don't match your backend orders - which number to trust</a></li>
+      <li><a href="/meta-pixel-not-firing">Meta Pixel not firing? The 7 real causes, in the order to check them</a></li>
+    </ul>
   </div>
 
   <footer>Rytis Balys · MB Euruvizija · Vilnius, Lithuania · <a href="/" style="color:#4d5b6b">rytisbalys.com</a></footer>
