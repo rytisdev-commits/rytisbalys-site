@@ -12,12 +12,12 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Meta Pixel Not Firing? The 6 Real Causes and How to Verify Each</title>
+<title>Meta Pixel Not Firing? The 7 Real Causes and How to Verify Each</title>
 <meta name="description" content="Meta Pixel loads but events don't fire? Diagnostic checklist: consent blocking, double init, GTM triggers, redirect loss, iframes - verify each fast.">
 <link rel="canonical" href="https://rytisbalys.com/meta-pixel-not-firing">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Meta Pixel Not Firing? The 6 Real Causes">
+<meta property="og:title" content="Meta Pixel Not Firing? The 7 Real Causes">
 <meta property="og:description" content="A working diagnostic checklist: consent blocking, double init, GTM trigger chains, redirect loss, iframe checkouts - with a verify step for each.">
 <meta property="og:url" content="https://rytisbalys.com/meta-pixel-not-firing">
 <meta property="og:image" content="https://rytisbalys.com/og.png">
@@ -26,7 +26,7 @@
 {
   "@context": "https://schema.org",
   "@type": "TechArticle",
-  "headline": "Meta Pixel Not Firing? The 6 Real Causes and How to Verify Each",
+  "headline": "Meta Pixel Not Firing? The 7 Real Causes and How to Verify Each",
   "description": "Meta Pixel loads but events don't fire? Diagnostic checklist: consent blocking, double init, GTM triggers, redirect loss, iframes - verify each fast.",
   "url": "https://rytisbalys.com/meta-pixel-not-firing",
   "mainEntityOfPage": "https://rytisbalys.com/meta-pixel-not-firing",
@@ -50,7 +50,7 @@
   h2 .n{font-family:var(--mono);color:var(--accent);margin-right:8px}
   p{margin-bottom:14px;font-size:15.5px}
   p.dim{color:var(--dim)}
-  code{font-family:var(--mono);font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+  code{font-family:var(--mono);font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px;overflow-wrap:break-word;word-break:break-word}
   pre{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-family:var(--mono);font-size:13px;color:var(--dim);overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin-bottom:14px}
   pre b{color:var(--txt);font-weight:400}
   .verify{border-left:3px solid var(--green);padding:8px 14px;background:var(--panel);border-radius:0 8px 8px 0;margin-bottom:8px;font-size:14.5px}
@@ -58,14 +58,65 @@
   .cta{margin-top:52px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
   .cta p{margin-bottom:14px}
   .btn{font-family:var(--mono);font-size:14px;text-decoration:none;padding:11px 18px;border-radius:8px;background:var(--accent);color:#0a0e13;font-weight:600;display:inline-block}
+  .related{border-top:1px solid var(--line);margin-top:34px;padding-top:20px}
+  .related h2{margin-bottom:12px}
+  .related ul{list-style:none;margin:0}
+  .related li{padding:9px 0 9px 24px;position:relative;border-bottom:1px solid var(--line);font-size:15px}
+  .related li:last-child{border-bottom:none}
+  .related li::before{content:'>';position:absolute;left:2px;color:var(--accent);font-family:var(--mono)}
+  .related a{color:var(--txt);text-decoration:none}
+  .related a:hover{color:var(--accent)}
+
   footer{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;border-top:1px solid var(--line);padding-top:20px;margin-top:56px}
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why is my Meta Pixel not firing even though it shows as installed?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "\"Installed\" only means the base code is present. Firing means the browser sends requests to facebook.com/tr. Open DevTools, Network, filter by tr and act on the site. No requests means it is not firing, whatever the tag manager or Pixel Helper says."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does my Meta Pixel work when I test it but not for real visitors?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The usual cause on WordPress is a caching plugin's delay-JavaScript option. It postpones fbq until the first interaction, while the script that calls fbq is not delayed, so the call throws ReferenceError: fbq is not defined and the PageView never fires. Testing hides it, because moving your mouse is exactly what releases the delayed scripts. Verify on a cold anonymous load with no interaction, and while logged out."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "My server-side events arrive but the browser pixel does not. Is that possible?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. They are two independent delivery paths. Server-side events go straight from your backend to Meta and are unaffected by delayed scripts, ad blockers or consent wiring in the browser, so one can work perfectly while the other sends nothing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Safari's ITP block the Meta Pixel?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. ITP does not block the request to facebook.com/tr. It limits cookie and script-writable storage lifetime, which degrades match quality and attribution windows. Ad blockers and Firefox's strict tracking protection are what block the request itself."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <div class="wrap">
   <div class="crumb"><a href="/">rytisbalys.com</a> <span style="color:#4d5b6b">/ troubleshooting</span></div>
-  <h1>Meta Pixel not firing? The 6 real causes, in the order you should check them</h1>
+  <h1>Meta Pixel not firing? The 7 real causes, in the order you should check them</h1>
   <p class="sub">Written from production audits, not documentation. Each cause comes with a verification step you can run in minutes - because "the pixel is installed" and "the pixel is firing" are very different claims.</p>
+
+  <p><b>The short answer, in the order to check them:</b> a consent banner that never releases the tag, a caching plugin&rsquo;s delay-JavaScript option that makes <code>fbq</code> arrive after the script that calls it, the pixel initialised more than once, a GTM trigger chain that never completes, a redirect checkout that eats the Purchase, a checkout in an iframe or on another domain, and finally ad blockers and browser privacy, which is the only one you cannot fix client-side. On WordPress the second one is by far the most common and the hardest to catch, because it hides while you test it.</p>
 
   <p>First, know what you're looking for. A firing pixel sends network requests to <code>facebook.com/tr</code>. Open DevTools > Network, filter by <code>tr</code>, and act on the site. No requests = not firing, whatever your tag manager says.</p>
 
@@ -73,24 +124,32 @@
   <p>If you run Cookiebot, OneTrust or any CMP in opt-in mode, the pixel is legally supposed to stay silent until the visitor accepts. The bug: after acceptance it often STAYS silent, because the pixel tag in GTM is not wired to the consent state, or fires before consent updates.</p>
   <div class="verify"><b>VERIFY</b> - open the site in incognito, accept all cookies, then check <code>facebook.com/tr</code> requests. Silent even after full acceptance = your consent wiring is broken, not working.</div>
 
-  <h2><span class="n">02</span>Pixel initialized twice (or three times)</h2>
-  <p>A hardcoded base code in the theme AND a GTM tag AND a platform integration all loading the same pixel. Symptom is usually the opposite of silence - events fire 2-3x per action, purchases double-count, and audiences pollute.</p>
-  <div class="verify"><b>VERIFY</b> - in the console run <code>fbq.getState().pixels</code> (or use Meta Pixel Helper). More than one init of the same ID, or multiple IDs you don't recognize = consolidate before anything else.</div>
+  <h2><span class="n">02</span>A caching plugin delayed the pixel to death (the #1 cause on WordPress)</h2>
+  <p>WP Rocket, LiteSpeed and Perfmatters all have a &ldquo;delay JavaScript execution&rdquo; option. It wraps your inline <code>fbq('init')</code> in <code>&lt;script type="text/rocketlazyloadscript"&gt;</code>, so <code>fbq</code> does not exist until the visitor first moves the mouse or scrolls. Meanwhile whatever <em>calls</em> <code>fbq</code> - a page builder&rsquo;s tracking script, GTM, your theme - usually is <em>not</em> delayed, because the default exclusion list has a broad rule covering <code>/wp-content/</code>. The consumer runs before the provider exists, throws <code>ReferenceError: fbq is not defined</code>, dies on that line, and the PageView never happens.</p>
+  <p>It is a race, not a constant. It only works when the visitor happens to interact before that script runs, which is why the same page seems fine sometimes.</p>
+  <p><b>This is the one that hides from manual testing.</b> Opening the page and checking with Pixel Helper moves the mouse, and moving the mouse is exactly what releases the delayed scripts. The bug disappears while you look at it. That single sentence usually explains why a client has been stuck on this for a month.</p>
+  <p>The tell that confirms it: your server-side events count normally while the browser PageView does not. Clients call that impossible. It is not - they are two independent delivery paths.</p>
+  <div class="verify"><b>VERIFY</b> - cold anonymous load, no clicking, no mouse movement. In the console: <code>typeof window.fbq</code> returns <code>undefined</code>, and there is a live <code>ReferenceError: fbq is not defined</code>. Then count the scripts whose type is <code>text/rocketlazyloadscript</code> - if there are any, the plugin is delaying them. Do it logged out - caching plugins skip optimisation for logged-in admins, so an admin session gives you a false pass.</div>
+  <div class="verify"><b>FIX</b> - in the delay-JS exclusions, add (do not remove anything): <code>fbevents.js</code>, <code>connect.facebook.net</code>, <code>fbq</code>, plus a keyword from whatever script calls the pixel. Write <code>fbq</code>, not <code>fbq(</code> - the exclusions are PCRE and an unescaped bracket breaks the pattern silently. Then clear and preload the cache and re-verify in a cold anonymous session.</div>
 
-  <h2><span class="n">03</span>GTM trigger chain never completes</h2>
+  <h2><span class="n">03</span>Pixel initialized twice (or three times)</h2>
+  <p>A hardcoded base code in the theme AND a GTM tag AND a platform integration all loading the same pixel. Symptom is usually the opposite of silence - events fire 2-3x per action, purchases double-count, and audiences pollute.</p>
+  <div class="verify"><b>VERIFY</b> - in the console run <code>fbq.getState().pixels</code> (Meta Pixel Helper reads JavaScript state, not the wire - it can show green while nothing reaches <code>/tr</code>, so treat it as a hint, never as proof). More than one init of the same ID, or multiple IDs you don't recognize = consolidate before anything else.</div>
+
+  <h2><span class="n">04</span>GTM trigger chain never completes</h2>
   <p>The tag exists, but its trigger waits for a dataLayer event (<code>purchase</code>, <code>add_to_cart</code>) that the site never pushes - a theme update or checkout change silently broke the push. The tag is "active" and fires exactly never.</p>
   <div class="verify"><b>VERIFY</b> - GTM Preview mode, perform the action, watch the event stream. If your trigger event never appears in the left column, the dataLayer push is gone.</div>
 
-  <h2><span class="n">04</span>Redirect checkouts eat the Purchase event</h2>
+  <h2><span class="n">05</span>Redirect checkouts eat the Purchase event</h2>
   <p>PayPal, financing providers, bank-redirect payments: the buyer leaves your site to pay and often never returns to the thank-you page where the Purchase pixel lives. The pixel works perfectly - for the customers who come back. The rest vanish.</p>
   <div class="verify"><b>VERIFY</b> - compare pixel Purchase counts against real backend orders BY PAYMENT METHOD. If card orders track and redirect-payment orders don't, this is your gap. The durable fix is server-side (Conversions API from the order event, not the browser).</div>
 
-  <h2><span class="n">05</span>Checkout runs in an iframe or on another domain</h2>
+  <h2><span class="n">06</span>Checkout runs in an iframe or on another domain</h2>
   <p>Embedded checkouts (Eventbrite, Calendly, some booking and payment widgets) run in a cross-origin iframe. Your page's pixel physically cannot see events inside it.</p>
   <div class="verify"><b>VERIFY</b> - if the confirmation step's URL bar or frame ancestry is another domain, stop debugging your pixel. You need the vendor's own tracking hooks, a postMessage bridge, or server-side events.</div>
 
-  <h2><span class="n">06</span>Ad blockers and browser privacy (the loss you can't fix client-side)</h2>
-  <p>Some meaningful share of your visitors block <code>facebook.com/tr</code> outright - ad blockers, Safari ITP, strict browser modes. No client-side fix exists. This is exactly what the Conversions API is for: the same event, sent server-to-server, deduplicated against the browser event via a shared <code>event_id</code>.</p>
+  <h2><span class="n">07</span>Ad blockers and browser privacy (the loss you can't fix client-side)</h2>
+  <p>Some meaningful share of your visitors block <code>facebook.com/tr</code> outright - ad blockers and Firefox&rsquo;s strict tracking protection stop the request itself. Safari&rsquo;s ITP is a different problem and belongs in a different bucket: it does not block the request, it caps cookie and script-writable storage lifetime, so the request still fires but match quality and attribution windows degrade. No client-side fix exists. This is exactly what the Conversions API is for: the same event, sent server-to-server, deduplicated against the browser event via a shared <code>event_id</code>.</p>
   <div class="verify"><b>VERIFY</b> - in Events Manager check the ratio of browser vs server events per event type. Browser-only setup = you are losing whatever your audience's blocker rate is, silently.</div>
 
   <h2>The one-line rule</h2>
@@ -99,6 +158,24 @@
   <div class="cta">
     <p><b>Numbers still don't add up?</b> I do this for a living - tracking audits that reconcile Meta, GA4 and your backend, then server-side fixes with proper deduplication. Running in production on my own stores daily.</p>
     <a class="btn" href="mailto:work@rytisbalys.com">work@rytisbalys.com</a>
+  </div>
+
+
+  <div class="faq">
+  <h2>FAQ</h2>
+    <details><summary>Why is my Meta Pixel not firing even though it shows as installed?</summary><p>"Installed" only means the base code is present. Firing means the browser sends requests to facebook.com/tr. Open DevTools, Network, filter by tr and act on the site. No requests means it is not firing, whatever the tag manager or Pixel Helper says.</p></details>
+    <details><summary>Why does my Meta Pixel work when I test it but not for real visitors?</summary><p>The usual cause on WordPress is a caching plugin's delay-JavaScript option. It postpones fbq until the first interaction, while the script that calls fbq is not delayed, so the call throws ReferenceError: fbq is not defined and the PageView never fires. Testing hides it, because moving your mouse is exactly what releases the delayed scripts. Verify on a cold anonymous load with no interaction, and while logged out.</p></details>
+    <details><summary>My server-side events arrive but the browser pixel does not. Is that possible?</summary><p>Yes. They are two independent delivery paths. Server-side events go straight from your backend to Meta and are unaffected by delayed scripts, ad blockers or consent wiring in the browser, so one can work perfectly while the other sends nothing.</p></details>
+    <details><summary>Does Safari's ITP block the Meta Pixel?</summary><p>No. ITP does not block the request to facebook.com/tr. It limits cookie and script-writable storage lifetime, which degrades match quality and attribution windows. Ad blockers and Firefox's strict tracking protection are what block the request itself.</p></details>
+  </div>
+
+  <div class="related">
+    <h2>related guides</h2>
+    <ul>
+      <li><a href="/meta-events-manager-double-purchases-deduplication-fix">Meta counts purchases twice: Pixel + CAPI deduplication fix</a></li>
+      <li><a href="/consent-mode-v2-conversions-dropped">Conversions dropped after Consent Mode v2? How to diagnose it</a></li>
+      <li><a href="/shopify-checkout-upgrade-tracking">Shopify's checkout upgrade silently breaks tracking - what dies and how to migrate</a></li>
+    </ul>
   </div>
 
   <footer>Rytis Balys · MB Euruvizija · Vilnius, Lithuania · <a href="/" style="color:#4d5b6b">rytisbalys.com</a></footer>
