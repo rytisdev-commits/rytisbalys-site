@@ -50,7 +50,7 @@
   h2 .n{font-family:var(--mono);color:var(--accent);margin-right:8px}
   p{margin-bottom:14px;font-size:15.5px}
   p.dim{color:var(--dim)}
-  code{font-family:var(--mono);font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+  code{font-family:var(--mono);font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px;overflow-wrap:break-word;word-break:break-word}
   .warn{border-left:3px solid var(--red);padding:10px 14px;background:var(--panel);border-radius:0 8px 8px 0;margin-bottom:14px;font-size:14.5px}
   .warn b{color:var(--red);font-family:var(--mono);font-size:12.5px;letter-spacing:.05em}
   .verify{border-left:3px solid var(--green);padding:8px 14px;background:var(--panel);border-radius:0 8px 8px 0;margin-bottom:8px;font-size:14.5px}
@@ -58,6 +58,15 @@
   .cta{margin-top:52px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
   .cta p{margin-bottom:14px}
   .btn{font-family:var(--mono);font-size:14px;text-decoration:none;padding:11px 18px;border-radius:8px;background:var(--accent);color:#0a0e13;font-weight:600;display:inline-block}
+  .related{border-top:1px solid var(--line);margin-top:34px;padding-top:20px}
+  .related h2{margin-bottom:12px}
+  .related ul{list-style:none;margin:0}
+  .related li{padding:9px 0 9px 24px;position:relative;border-bottom:1px solid var(--line);font-size:15px}
+  .related li:last-child{border-bottom:none}
+  .related li::before{content:'>';position:absolute;left:2px;color:var(--accent);font-family:var(--mono)}
+  .related a{color:var(--txt);text-decoration:none}
+  .related a:hover{color:var(--accent)}
+
   footer{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;border-top:1px solid var(--line);padding-top:20px;margin-top:56px}
 </style>
 </head>
@@ -96,6 +105,16 @@
   <div class="cta">
     <p><b>Want it migrated without the data gap?</b> I do Shopify checkout tracking migrations end to end - inventory, rebuild as Web Pixels with proper event_id dedup, parallel-run verification against real orders. I run my own Shopify stores, so this isn't theory.</p>
     <a class="btn" href="mailto:work@rytisbalys.com">work@rytisbalys.com</a>
+  </div>
+
+
+  <div class="related">
+    <h2>related guides</h2>
+    <ul>
+      <li><a href="/meta-events-manager-double-purchases-deduplication-fix">Meta counts purchases twice: Pixel + CAPI deduplication fix</a></li>
+      <li><a href="/meta-pixel-not-firing">Meta Pixel not firing? The 7 real causes, in the order to check them</a></li>
+      <li><a href="/server-side-gtm-what-it-fixes">Server-side GTM: what it actually fixes (and what it doesn't)</a></li>
+    </ul>
   </div>
 
   <footer>Rytis Balys · MB Euruvizija · Vilnius, Lithuania · <a href="/" style="color:#4d5b6b">rytisbalys.com</a></footer>
