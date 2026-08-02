@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1D69SRZPPM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1D69SRZPPM');
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>fbq is not defined: Your Caching Plugin Is Killing the Meta Pixel</title>
+<meta name="description" content="ReferenceError: fbq is not defined on WordPress? Delay JavaScript in WP Rocket, LiteSpeed or Perfmatters delays fbq past the script that calls it. The fix and its traps.">
+<link rel="canonical" href="https://rytisbalys.com/fbq-is-not-defined-delay-javascript-fix">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="fbq is not defined: Your Caching Plugin Is Killing the Meta Pixel">
+<meta property="og:description" content="Delay JavaScript makes fbq arrive after the script that calls it. Why the bug hides from manual testing, the 30-second diagnosis, and the exclusion-list fix.">
+<meta property="og:url" content="https://rytisbalys.com/fbq-is-not-defined-delay-javascript-fix">
+<meta property="og:image" content="https://rytisbalys.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "fbq is not defined: Your Caching Plugin Is Killing the Meta Pixel",
+  "description": "Why delay-JavaScript options in WP Rocket, LiteSpeed and Perfmatters break the Meta Pixel with ReferenceError: fbq is not defined, why the bug hides from manual testing, and the exclusion-list fix with its traps.",
+  "datePublished": "2026-08-03",
+  "dateModified": "2026-08-03",
+  "author": {
+    "@type": "Person",
+    "@id": "https://rytisbalys.com/#rytis",
+    "name": "Rytis Balys",
+    "url": "https://rytisbalys.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MB Euruvizija"
+  }
+}
+</script>
+<style>
+  :root{--bg:#0a0e13;--panel:#0f151d;--line:#1c2530;--txt:#d7dee8;--dim:#8b98a8;--accent:#ffc72c;--green:#3fb950;--red:#f85149;--mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:56px 24px 96px}
+  a{color:var(--accent)}
+  .crumb{font-family:var(--mono);font-size:13px;margin-bottom:28px}
+  .crumb a{text-decoration:none;color:var(--dim)} .crumb a:hover{color:var(--accent)}
+  h1{font-size:28px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:10px}
+  .sub{color:var(--dim);margin-bottom:36px;font-size:16px}
+  h2{font-size:19px;color:#fff;margin:36px 0 10px}
+  h2 .n{font-family:var(--mono);color:var(--accent);margin-right:8px}
+  p{margin-bottom:14px;font-size:15.5px}
+  p.dim{color:var(--dim)}
+  code{font-family:var(--mono);font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px;overflow-wrap:break-word;word-break:break-word}
+  pre{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-family:var(--mono);font-size:13px;color:var(--dim);overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin-bottom:14px}
+  pre b{color:var(--txt);font-weight:400}
+  .verify{border-left:3px solid var(--green);padding:8px 14px;background:var(--panel);border-radius:0 8px 8px 0;margin-bottom:8px;font-size:14.5px}
+  .verify b{color:var(--green);font-family:var(--mono);font-size:12.5px;letter-spacing:.05em}
+  .faq{margin-top:44px}
+  .faq details{border-bottom:1px solid var(--line);padding:12px 0}
+  .faq summary{cursor:pointer;font-weight:600;font-size:15.5px}
+  .faq p{margin:10px 0 4px;color:var(--dim)}
+  .cta{margin-top:52px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
+  .cta .ask{margin-top:12px;font-size:15px;color:var(--dim)}
+  .cta .ask b{color:var(--txt);font-weight:600}
+  .cta p{margin-bottom:14px}
+  .btn{font-family:var(--mono);font-size:14px;text-decoration:none;padding:11px 18px;border-radius:8px;background:var(--accent);color:#0a0e13;font-weight:600;display:inline-block}
+  .related{border-top:1px solid var(--line);margin-top:34px;padding-top:20px}
+  .related h2{margin-bottom:12px}
+  .related ul{list-style:none;margin:0}
+  .related li{padding:9px 0 9px 24px;position:relative;border-bottom:1px solid var(--line);font-size:15px}
+  .related li:last-child{border-bottom:none}
+  .related li::before{content:'>';position:absolute;left:2px;color:var(--accent);font-family:var(--mono)}
+  .related a{color:var(--txt);text-decoration:none}
+  .related a:hover{color:var(--accent)}
+  footer{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;border-top:1px solid var(--line);padding-top:20px;margin-top:56px}
+  .cta-proof{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;margin-top:10px;user-select:all}
+  .cta-proof a{color:#4d5b6b}
+  .cta-proof a:hover{color:var(--accent)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What causes ReferenceError: fbq is not defined on WordPress?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A performance plugin's delay-JavaScript option (WP Rocket, LiteSpeed Cache, Perfmatters) postpones the Meta Pixel base code until the visitor's first interaction, while the script that calls fbq runs on schedule. The call happens before fbq exists and throws. The fix is adding fbevents.js, connect.facebook.net and fbq to the delay exclusions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does Meta Pixel Helper show the pixel working when conversions are missing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Checking the page means moving your mouse, and the first interaction is exactly what releases the delayed scripts. The pixel fires during your test and fails for visitors who do not interact in time. Verify instead with a cold anonymous load, hands off the mouse, watching the network tab for the request to facebook.com/tr."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why do my server-side events work while browser pixel events are missing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "They are independent delivery paths. Server-side events go from your backend to Meta and never touch the delayed JavaScript, so they keep counting while the browser pixel dies on the fbq call. That mismatch is the signature symptom of the delay-JS race."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I just disable delay JavaScript entirely?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. It genuinely improves load times, and turning it off trades a measurement bug for a speed regression. Exclude the pixel from the delay instead, and verify the exclusion in an anonymous session, because an invalid exclusion pattern fails silently."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<div class="wrap">
+  <div class="crumb"><a href="/">rytisbalys.com</a> <span style="color:#4d5b6b">/ troubleshooting</span></div>
+  <h1>fbq is not defined: your caching plugin is killing the Meta Pixel</h1>
+  <p class="sub">The most common WordPress pixel failure I see in audits, and the one that hides from manual testing by design. Found on a live account losing most of its PageViews: 36 recorded from 280 ad clicks.</p>
+
+  <p><b>The short answer:</b> a performance plugin&rsquo;s &ldquo;delay JavaScript execution&rdquo; option (WP Rocket, LiteSpeed Cache, Perfmatters) postpones the inline <code>fbq('init')</code> until the visitor&rsquo;s first interaction, while the script that <em>calls</em> <code>fbq</code> is not delayed. The call runs before <code>fbq</code> exists, throws <code>ReferenceError: fbq is not defined</code>, and the PageView never fires. The fix is adding the pixel to the delay exclusions, and verifying in a cold anonymous session with no mouse movement, because interacting with the page is exactly what makes the bug disappear.</p>
+
+  <h2><span class="n">01</span>The mechanism, in one minute</h2>
+  <p>Delay-JavaScript features rewrite script tags so they do not execute until the first user interaction: a mouse move, a scroll, a tap. Your inline pixel base code becomes <code>&lt;script type="text/rocketlazyloadscript"&gt;</code> (or the LiteSpeed / Perfmatters equivalent), so <code>window.fbq</code> simply does not exist yet.</p>
+  <p>Meanwhile the thing that calls the pixel - a page builder&rsquo;s tracking file, a theme script, GTM - is often <em>not</em> delayed, because the default exclusion list carries a broad rule covering <code>/wp-content/</code>. The consumer runs on schedule, calls a function that is not there, and dies on that line:</p>
+  <pre><b>Uncaught ReferenceError: fbq is not defined</b>
+    at op3-fb-tracking.js:1</pre>
+  <p>The script does not retry. Whatever it was going to send - usually the PageView, sometimes your Lead or Purchase - is gone for that visitor.</p>
+
+  <h2><span class="n">02</span>Why it is a race, not a constant</h2>
+  <p>If the visitor happens to move the mouse <em>before</em> the consumer script runs, the delayed pixel gets released in time and everything works. If they do not - they arrived from an ad, the page is still painting, they have not touched anything - the call fires first and dies. So the pixel works for some visitors and silently fails for others, which is why the numbers look throttled rather than dead. On the account where I found this, 280 ad clicks produced 36 PageViews.</p>
+
+  <h2><span class="n">03</span>Why you have not been able to catch it</h2>
+  <p><b>Testing releases the trap.</b> You open the page to check it with Meta Pixel Helper. Opening and checking means moving your mouse, and moving the mouse is the interaction that releases the delayed scripts. The pixel fires, the Helper shows green, you conclude it works. The bug hides from manual testing by construction, and that is the sentence that usually explains why someone has been stuck on this for a month.</p>
+  <p>The tell that confirms it: if you run server-side tracking too, the server events keep counting normally while browser events crater. That looks logically impossible - same site, same visitors - but they are two independent delivery paths, and the delay only breaks the browser one.</p>
+
+  <h2><span class="n">04</span>The 30-second diagnosis</h2>
+  <div class="verify"><b>VERIFY</b> - open the site in a private window, logged out, and do not touch the mouse after the page loads. In the console: <code>typeof window.fbq</code> returns <code>undefined</code>, and there is a live <code>ReferenceError: fbq is not defined</code>. Then count the rewritten tags: scripts whose type is <code>text/rocketlazyloadscript</code>. Any hits means the plugin is delaying them.</div>
+  <p class="dim">Logged out matters: caching plugins skip optimisation for logged-in administrators, so testing while logged in gives you a clean-looking page and a false pass.</p>
+
+  <h2><span class="n">05</span>The fix: exclusions, not switches</h2>
+  <p>Do not turn the delay feature off - it is doing real work for your load times. Add exclusions so the pixel is never delayed. In WP Rocket: File Optimization, Delay JavaScript execution, exclusions list. Add, without removing anything that is already there:</p>
+  <pre>fbevents.js
+connect.facebook.net
+fbq</pre>
+  <p>Plus one keyword matching whatever script calls the pixel on your site (the file name from the ReferenceError is the hint). Then clear and preload the cache. This is also the fix WP Rocket&rsquo;s own documentation prescribes for exactly this error - there is no built-in preset for the Meta Pixel, and their Safe Mode does not cover it either.</p>
+  <p><b>The regex trap that makes fixes silently fail:</b> the exclusion lines are treated as regular expressions, and WP Rocket escapes only some characters for you. An unescaped bracket breaks the pattern and the rule silently stops matching. Write <code>fbq</code>, not <code>fbq(</code>. If the plugin rejects a pattern it shows a small admin notice that is easy to miss, so never trust the save.</p>
+  <div class="verify"><b>VERIFY</b> - after saving, repeat the cold anonymous test from step 04: private window, no interaction, and the PageView request to <code>facebook.com/tr</code> appears in the network tab on its own. If you only re-check with the Helper and a moving mouse, you have verified nothing.</div>
+
+  <h2><span class="n">06</span>What recovery actually looks like</h2>
+  <p>Set expectations before you compare numbers. Many page builders fire the PageView on window load, which lands 3 to 4 seconds after navigation starts - visitors who leave earlier never count, delay or no delay. And ad clicks never equal landing page views: prefetch, accidental taps and instant bounces see to that. So promise yourself a large jump, not parity with clicks. On the account above, the fix took PageViews from 13% of clicks to the normal range.</p>
+
+  <div class="faq">
+  <h2>FAQ</h2>
+    <details><summary>What causes ReferenceError: fbq is not defined on WordPress?</summary><p>A performance plugin's delay-JavaScript option (WP Rocket, LiteSpeed Cache, Perfmatters) postpones the Meta Pixel base code until the visitor's first interaction, while the script that calls fbq runs on schedule. The call happens before fbq exists and throws. The fix is adding fbevents.js, connect.facebook.net and fbq to the delay exclusions.</p></details>
+    <details><summary>Why does Meta Pixel Helper show the pixel working when conversions are missing?</summary><p>Checking the page means moving your mouse, and the first interaction is exactly what releases the delayed scripts. The pixel fires during your test and fails for visitors who do not interact in time. Verify instead with a cold anonymous load, hands off the mouse, watching the network tab for the request to facebook.com/tr.</p></details>
+    <details><summary>Why do my server-side events work while browser pixel events are missing?</summary><p>They are independent delivery paths. Server-side events go from your backend to Meta and never touch the delayed JavaScript, so they keep counting while the browser pixel dies on the fbq call. That mismatch is the signature symptom of the delay-JS race.</p></details>
+    <details><summary>Should I just disable delay JavaScript entirely?</summary><p>No. It genuinely improves load times, and turning it off trades a measurement bug for a speed regression. Exclude the pixel from the delay instead, and verify the exclusion in an anonymous session, because an invalid exclusion pattern fails silently.</p></details>
+  </div>
+
+  <h2>The one-line rule</h2>
+  <p class="dim">Never verify a pixel with a moving mouse. A cold anonymous load with your hands off the input is the only test this bug cannot hide from.</p>
+
+  <div class="cta">
+    <p><b>PageViews far below your ad clicks?</b> I find and fix exactly this class of failure - measured on the wire, verified in a cold session, confirmed on Meta's side. Running in production on my own stores daily.</p>
+    <p class="ask">Run this check: pick any 7 days, put Meta's PageView or Purchase count next to your backend's real numbers for the same days. Send me those two numbers, your site URL and what counts as a conversion, and I will tell you which cause you have. No charge for that answer. <b>If the gap is under about 10&percnt; you probably do not need me, and I will tell you so.</b></p>
+    <a class="btn" href="mailto:work@rytisbalys.com?subject=Tracking%20gap&body=Site%3A%0AWhat%20counts%20as%20a%20conversion%20%28purchase%20/%20lead%20/%20call%20/%20booking%29%3A%0APlatform%20number%2C%20last%207%20days%3A%0ABackend%20number%2C%20same%207%20days%3A%0AWhat%20changed%20recently%20%28site%20move%2C%20new%20checkout%2C%20consent%20banner%2C%20nothing%29%3A%0A">Send me the two numbers</a>
+    <p class="cta-proof">work@rytisbalys.com &middot; every rated job 5.0 &middot; <a href="https://www.upwork.com/freelancers/rytis" rel="nofollow noopener" target="_blank">verify on Upwork</a></p>
+  </div>
+
+  <div class="related">
+    <h2>related guides</h2>
+    <ul>
+      <li><a href="/meta-pixel-not-firing">Meta Pixel not firing? The 7 real causes, in the order to check them</a></li>
+      <li><a href="/meta-events-manager-double-purchases-deduplication-fix">Meta counts purchases twice: Pixel + CAPI deduplication fix</a></li>
+      <li><a href="/consent-mode-v2-conversions-dropped">Conversions dropped after Consent Mode v2? How to diagnose it</a></li>
+    </ul>
+  </div>
+
+  <footer>Rytis Balys · MB Euruvizija · Vilnius, Lithuania · <a href="/" style="color:#4d5b6b">rytisbalys.com</a></footer>
+</div>
+</body>
+</html>
