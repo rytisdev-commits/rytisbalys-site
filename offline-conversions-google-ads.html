@@ -50,7 +50,7 @@
   h2 .n{font-family:var(--mono);color:var(--accent);margin-right:8px}
   p{margin-bottom:14px;font-size:15.5px}
   p.dim{color:var(--dim)}
-  code{font-family:var(--mono);font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+  code{font-family:var(--mono);font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px;overflow-wrap:break-word;word-break:break-word}
   pre{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-family:var(--mono);font-size:13px;color:var(--dim);overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin-bottom:14px}
   pre b{color:var(--txt);font-weight:400}
   .verify{border-left:3px solid var(--green);padding:8px 14px;background:var(--panel);border-radius:0 8px 8px 0;margin-bottom:8px;font-size:14.5px}
@@ -58,6 +58,15 @@
   .cta{margin-top:52px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
   .cta p{margin-bottom:14px}
   .btn{font-family:var(--mono);font-size:14px;text-decoration:none;padding:11px 18px;border-radius:8px;background:var(--accent);color:#0a0e13;font-weight:600;display:inline-block}
+  .related{border-top:1px solid var(--line);margin-top:34px;padding-top:20px}
+  .related h2{margin-bottom:12px}
+  .related ul{list-style:none;margin:0}
+  .related li{padding:9px 0 9px 24px;position:relative;border-bottom:1px solid var(--line);font-size:15px}
+  .related li:last-child{border-bottom:none}
+  .related li::before{content:'>';position:absolute;left:2px;color:var(--accent);font-family:var(--mono)}
+  .related a{color:var(--txt);text-decoration:none}
+  .related a:hover{color:var(--accent)}
+
   footer{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;border-top:1px solid var(--line);padding-top:20px;margin-top:56px}
 </style>
 </head>
@@ -107,6 +116,16 @@
   <div class="cta">
     <p><b>Leads coming in but the sales never get back to Google?</b> I build offline-conversion pipelines - gclid capture, CRM export, Enhanced Conversions for Leads - with monthly reconciliation so they don't silently rot. The same verify-everything approach I run on my own work.</p>
     <a class="btn" href="mailto:work@rytisbalys.com">work@rytisbalys.com</a>
+  </div>
+
+
+  <div class="related">
+    <h2>related guides</h2>
+    <ul>
+      <li><a href="/google-ads-conversion-inactive-tag-fires-gtm">Google Ads conversion inactive but the tag fires in GTM: the fix</a></li>
+      <li><a href="/ga4-does-not-match-backend">GA4 purchases don't match your backend orders - which number to trust</a></li>
+      <li><a href="/clickfunnels-upsell-tracking-fix">ClickFunnels upsell tracking: fix double or missing purchases</a></li>
+    </ul>
   </div>
 
   <footer>Rytis Balys · MB Euruvizija · Vilnius, Lithuania · <a href="/" style="color:#4d5b6b">rytisbalys.com</a></footer>
