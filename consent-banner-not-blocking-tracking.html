@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1D69SRZPPM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1D69SRZPPM');
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Cookie Banner Blocks Nothing: The 60-Second Check</title>
+<meta name="description" content="A cookie banner on screen does not mean tracking waits for consent. The 60-second network-tab check, why it happens, and what actually blocks tags until consent.">
+<link rel="canonical" href="https://rytisbalys.com/consent-banner-not-blocking-tracking">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Your Cookie Banner Blocks Nothing: The 60-Second Check">
+<meta property="og:description" content="The banner shows, the visitor has not clicked anything, and GA4 and Meta are already collecting. How to check in 60 seconds and what actually fixes it.">
+<meta property="og:url" content="https://rytisbalys.com/consent-banner-not-blocking-tracking">
+<meta property="og:image" content="https://rytisbalys.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Your Cookie Banner Blocks Nothing: The 60-Second Check",
+  "description": "A visible cookie banner does not mean tracking waits for consent. The 60-second network-tab check, the usual causes, and what a working consent setup looks like on the wire.",
+  "datePublished": "2026-08-03",
+  "dateModified": "2026-08-03",
+  "author": {
+    "@type": "Person",
+    "@id": "https://rytisbalys.com/#rytis",
+    "name": "Rytis Balys",
+    "url": "https://rytisbalys.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MB Euruvizija"
+  }
+}
+</script>
+<style>
+  :root{--bg:#0a0e13;--panel:#0f151d;--line:#1c2530;--txt:#d7dee8;--dim:#8b98a8;--accent:#ffc72c;--green:#3fb950;--red:#f85149;--mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:56px 24px 96px}
+  a{color:var(--accent)}
+  .crumb{font-family:var(--mono);font-size:13px;margin-bottom:28px}
+  .crumb a{text-decoration:none;color:var(--dim)} .crumb a:hover{color:var(--accent)}
+  h1{font-size:28px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:10px}
+  .sub{color:var(--dim);margin-bottom:36px;font-size:16px}
+  h2{font-size:19px;color:#fff;margin:36px 0 10px}
+  h2 .n{font-family:var(--mono);color:var(--accent);margin-right:8px}
+  p{margin-bottom:14px;font-size:15.5px}
+  p.dim{color:var(--dim)}
+  code{font-family:var(--mono);font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px;overflow-wrap:break-word;word-break:break-word}
+  pre{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-family:var(--mono);font-size:13px;color:var(--dim);overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin-bottom:14px}
+  pre b{color:var(--txt);font-weight:400}
+  .verify{border-left:3px solid var(--green);padding:8px 14px;background:var(--panel);border-radius:0 8px 8px 0;margin-bottom:8px;font-size:14.5px}
+  .verify b{color:var(--green);font-family:var(--mono);font-size:12.5px;letter-spacing:.05em}
+  .faq{margin-top:44px}
+  .faq details{border-bottom:1px solid var(--line);padding:12px 0}
+  .faq summary{cursor:pointer;font-weight:600;font-size:15.5px}
+  .faq p{margin:10px 0 4px;color:var(--dim)}
+  .cta{margin-top:52px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
+  .cta .ask{margin-top:12px;font-size:15px;color:var(--dim)}
+  .cta .ask b{color:var(--txt);font-weight:600}
+  .cta p{margin-bottom:14px}
+  .btn{font-family:var(--mono);font-size:14px;text-decoration:none;padding:11px 18px;border-radius:8px;background:var(--accent);color:#0a0e13;font-weight:600;display:inline-block}
+  .related{border-top:1px solid var(--line);margin-top:34px;padding-top:20px}
+  .related h2{margin-bottom:12px}
+  .related ul{list-style:none;margin:0}
+  .related li{padding:9px 0 9px 24px;position:relative;border-bottom:1px solid var(--line);font-size:15px}
+  .related li:last-child{border-bottom:none}
+  .related li::before{content:'>';position:absolute;left:2px;color:var(--accent);font-family:var(--mono)}
+  .related a{color:var(--txt);text-decoration:none}
+  .related a:hover{color:var(--accent)}
+  footer{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;border-top:1px solid var(--line);padding-top:20px;margin-top:56px}
+  .cta-proof{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;margin-top:10px;user-select:all}
+  .cta-proof a{color:#4d5b6b}
+  .cta-proof a:hover{color:var(--accent)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I check if my cookie banner actually blocks tracking?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Private window, logged out, DevTools Network tab open before load. Load the page and touch nothing. Filter for collect and facebook, and check Application cookies for ga and fbp entries. If requests or cookies exist while the banner is still unanswered, the banner is not blocking anything."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "My cookie plugin is installed - is that not enough?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The banner is UI; blocking is separate wiring. Most consent plugins need tags declared or auto-blocking configured, and tags loaded through custom paths (theme snippets, page builders) are commonly missed. Installed and configured are different states, and only the network tab tells you which one you are in."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why did my analytics numbers drop after fixing consent blocking?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Because before the fix you were measuring everyone, including people who rejected or never chose. After the fix you measure only consented visitors. The drop is the tracking becoming honest, not breaking - the earlier numbers were inflated by data you were not permitted to collect."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does a non-blocking banner affect my ads performance?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, increasingly. Consent Mode v2 ties Google's ad features to properly signalled consent, and signals collected without it are the ones platforms discount or refuse. A decorative banner gives you legal exposure and, over time, worse optimisation data than a correct setup with honest volumes."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<div class="wrap">
+  <div class="crumb"><a href="/">rytisbalys.com</a> <span style="color:#4d5b6b">/ troubleshooting</span></div>
+  <h1>Your cookie banner blocks nothing: the 60-second check</h1>
+  <p class="sub">The most confidently broken setup I meet in audits. The banner renders, the buttons work, the privacy policy is linked - and the tracking never asked anyone's permission.</p>
+
+  <p><b>The short answer:</b> a cookie banner is a piece of UI. Blocking is a separate mechanism, and installing a consent plugin does not wire it up by itself. On a site I audited recently, the banner offered Accept and Reject while GA4 requests and <code>_ga</code> cookies appeared before any click - the consent had no effect on anything. The check takes 60 seconds in the network tab, and the difference between looking compliant and being compliant is exactly that check.</p>
+
+  <h2><span class="n">01</span>The 60-second check</h2>
+  <div class="verify"><b>VERIFY</b> - open your site in a private window, logged out. Open DevTools, Network tab, before the page loads. Load the page and touch nothing: do not accept, do not reject, do not scroll. Filter requests by <code>collect</code> and by <code>facebook</code>. Then check cookies in DevTools Application: look for <code>_ga</code>, <code>_ga_*</code>, <code>_fbp</code>.</div>
+  <p>If the banner is on screen and those requests or cookies already exist, your consent is decorative. Anything that appears before a choice was made is tracking without consent - which is both the legal problem and, after Consent Mode v2, an ads problem: signals collected this way are the ones platforms increasingly refuse to use.</p>
+
+  <h2><span class="n">02</span>How sites end up here</h2>
+  <p>Almost never malice, almost always assembly order. The usual paths:</p>
+  <p><b>The banner plugin was installed after the tags.</b> GA4 through a plugin, the pixel pasted in the theme, then a cookie banner added the day someone asked about GDPR. The banner has no idea those tags exist. Nothing connects them.</p>
+  <p><b>The banner supports blocking, but nobody configured it.</b> Most consent plugins need the tags declared or their auto-blocklists enabled. Out of the box they often just record the choice and display the bar. Installed is not configured.</p>
+  <p><b>The tags load through a path the blocker does not see.</b> A hardcoded snippet in the theme, a tag added by a page builder, a plugin that prints its own gtag - blockers mostly intercept known patterns, and custom paths sail past.</p>
+  <p><b>Someone tested it logged in, with cached pages, or after having already accepted once.</b> A previous consent cookie makes every later test look fine. Real verification is a cold anonymous session, every time.</p>
+
+  <h2><span class="n">03</span>What a working setup looks like on the wire</h2>
+  <p>Before any choice: zero requests to Google or Meta, zero of their cookies. After Accept: the tags load and fire. After Reject: still zero, on every subsequent page too. That is the entire acceptance test, and it is measurable - not a settings screen, not a plugin badge, the actual network traffic.</p>
+  <p>On the site from the intro, after rebuilding the consent wiring: before consent, zero requests and zero cookies; after accepting, GA4 and the pixel came up normally; after rejecting, silence held across the session. Same banner position, same buttons - the difference was invisible on screen and total on the wire.</p>
+
+  <h2><span class="n">04</span>The trap after you fix it</h2>
+  <p>Blocking correctly means your measured numbers drop: some share of visitors rejects, and their events stop existing. That is not the tracking breaking - that is the tracking finally telling the truth. Budget for it, tell whoever reads the dashboards, and if the gap to your backend matters for ad optimisation, that is what server-side delivery with proper consent gating is for - recovering the measurement you are allowed to recover, not sneaking back the part you are not.</p>
+
+  <div class="faq">
+  <h2>FAQ</h2>
+    <details><summary>How do I check if my cookie banner actually blocks tracking?</summary><p>Private window, logged out, DevTools Network tab open before load. Load the page and touch nothing. Filter for collect and facebook, and check Application cookies for ga and fbp entries. If requests or cookies exist while the banner is still unanswered, the banner is not blocking anything.</p></details>
+    <details><summary>My cookie plugin is installed - is that not enough?</summary><p>No. The banner is UI; blocking is separate wiring. Most consent plugins need tags declared or auto-blocking configured, and tags loaded through custom paths (theme snippets, page builders) are commonly missed. Installed and configured are different states, and only the network tab tells you which one you are in.</p></details>
+    <details><summary>Why did my analytics numbers drop after fixing consent blocking?</summary><p>Because before the fix you were measuring everyone, including people who rejected or never chose. After the fix you measure only consented visitors. The drop is the tracking becoming honest, not breaking - the earlier numbers were inflated by data you were not permitted to collect.</p></details>
+    <details><summary>Does a non-blocking banner affect my ads performance?</summary><p>Yes, increasingly. Consent Mode v2 ties Google's ad features to properly signalled consent, and signals collected without it are the ones platforms discount or refuse. A decorative banner gives you legal exposure and, over time, worse optimisation data than a correct setup with honest volumes.</p></details>
+  </div>
+
+  <h2>The one-line rule</h2>
+  <p class="dim">A banner on screen proves nothing. Consent exists only if the network tab is silent until the visitor says yes.</p>
+
+  <div class="cta">
+    <p><b>Not sure which state your site is in?</b> I audit and rebuild consent wiring so it blocks for real and your remaining numbers can be trusted - verified in cold sessions, before and after, on the wire.</p>
+    <p class="ask">Run the 60-second check above. Then send me what you saw, your site URL and what counts as a conversion, and I will tell you whether the problem is the banner, the tags, or the way they are connected. No charge for that answer. <b>If the network tab is already silent before consent, you probably do not need me, and I will tell you so.</b></p>
+    <a class="btn" href="mailto:work@rytisbalys.com?subject=Consent%20check&body=Site%3A%0AWhat%20I%20saw%20in%20the%20network%20tab%20before%20clicking%20anything%3A%0AWhat%20counts%20as%20a%20conversion%20%28purchase%20/%20lead%20/%20call%20/%20booking%29%3A%0A">Send me what you saw</a>
+    <p class="cta-proof">work@rytisbalys.com &middot; every rated job 5.0 &middot; <a href="https://www.upwork.com/freelancers/rytis" rel="nofollow noopener" target="_blank">verify on Upwork</a></p>
+  </div>
+
+  <div class="related">
+    <h2>related guides</h2>
+    <ul>
+      <li><a href="/consent-mode-v2-conversions-dropped">Conversions dropped after Consent Mode v2? How to diagnose it</a></li>
+      <li><a href="/meta-pixel-not-firing">Meta Pixel not firing? The 7 real causes, in the order to check them</a></li>
+      <li><a href="/ga4-does-not-match-backend">GA4 purchases don't match your backend orders - which number to trust</a></li>
+    </ul>
+  </div>
+
+  <footer>Rytis Balys · MB Euruvizija · Vilnius, Lithuania · <a href="/" style="color:#4d5b6b">rytisbalys.com</a></footer>
+</div>
+</body>
+</html>
