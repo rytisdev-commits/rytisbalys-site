@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1D69SRZPPM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1D69SRZPPM');
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GA4 Events Missing? A Plugin May Have Wrapped Your gtag</title>
+<meta name="description" content="Your gtag call runs, dataLayer grows, and nothing reaches GA4. How analytics plugins wrap gtag, why events without send_to vanish, and how to prove it in five minutes.">
+<link rel="canonical" href="https://rytisbalys.com/ga4-events-missing-plugin-wrapped-gtag">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="GA4 Events Missing? A Plugin May Have Wrapped Your gtag">
+<meta property="og:description" content="The code runs, the console is clean, and the event never arrives. The wrapped-gtag problem, measured on the wire rather than guessed at.">
+<meta property="og:url" content="https://rytisbalys.com/ga4-events-missing-plugin-wrapped-gtag">
+<meta property="og:image" content="https://rytisbalys.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "GA4 Events Missing? A Plugin May Have Wrapped Your gtag",
+  "description": "Your gtag call runs, dataLayer grows, and nothing reaches GA4. How analytics plugins wrap gtag, why events without send_to vanish, and how to prove it in five minutes.",
+  "datePublished": "2026-08-03",
+  "dateModified": "2026-08-03",
+  "author": {
+    "@type": "Person",
+    "@id": "https://rytisbalys.com/#rytis",
+    "name": "Rytis Balys",
+    "url": "https://rytisbalys.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MB Euruvizija"
+  }
+}
+</script>
+<style>
+  :root{--bg:#0a0e13;--panel:#0f151d;--line:#1c2530;--txt:#d7dee8;--dim:#8b98a8;--accent:#ffc72c;--green:#3fb950;--red:#f85149;--mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:56px 24px 96px}
+  a{color:var(--accent)}
+  .crumb{font-family:var(--mono);font-size:13px;margin-bottom:28px}
+  .crumb a{text-decoration:none;color:var(--dim)} .crumb a:hover{color:var(--accent)}
+  h1{font-size:28px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:10px}
+  .sub{color:var(--dim);margin-bottom:36px;font-size:16px}
+  h2{font-size:19px;color:#fff;margin:36px 0 10px}
+  h2 .n{font-family:var(--mono);color:var(--accent);margin-right:8px}
+  p{margin-bottom:14px;font-size:15.5px}
+  p.dim{color:var(--dim)}
+  code{font-family:var(--mono);font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px;overflow-wrap:break-word;word-break:break-word}
+  pre{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-family:var(--mono);font-size:13px;color:var(--dim);overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin-bottom:14px}
+  pre b{color:var(--txt);font-weight:400}
+  .verify{border-left:3px solid var(--green);padding:8px 14px;background:var(--panel);border-radius:0 8px 8px 0;margin-bottom:8px;font-size:14.5px}
+  .verify b{color:var(--green);font-family:var(--mono);font-size:12.5px;letter-spacing:.05em}
+  .faq{margin-top:44px}
+  .faq details{border-bottom:1px solid var(--line);padding:12px 0}
+  .faq summary{cursor:pointer;font-weight:600;font-size:15.5px}
+  .faq p{margin:10px 0 4px;color:var(--dim)}
+  .cta{margin-top:52px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
+  .cta .ask{margin-top:12px;font-size:15px;color:var(--dim)}
+  .cta .ask b{color:var(--txt);font-weight:600}
+  .cta p{margin-bottom:14px}
+  .btn{font-family:var(--mono);font-size:14px;text-decoration:none;padding:11px 18px;border-radius:8px;background:var(--accent);color:#0a0e13;font-weight:600;display:inline-block}
+  .related{border-top:1px solid var(--line);margin-top:34px;padding-top:20px}
+  .related h2{margin-bottom:12px}
+  .related ul{list-style:none;margin:0}
+  .related li{padding:9px 0 9px 24px;position:relative;border-bottom:1px solid var(--line);font-size:15px}
+  .related li:last-child{border-bottom:none}
+  .related li::before{content:'>';position:absolute;left:2px;color:var(--accent);font-family:var(--mono)}
+  .related a{color:var(--txt);text-decoration:none}
+  .related a:hover{color:var(--accent)}
+  footer{font-family:var(--mono);font-size:12.5px;color:#7d8a9a;border-top:1px solid var(--line);padding-top:20px;margin-top:56px}
+  .chip-label{display:block;font-family:var(--mono);font-size:12.5px;color:var(--dim);margin-bottom:2px;letter-spacing:.03em}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 18px}
+  .lead label.chip{display:inline-block;margin-bottom:0}
+  .chip input{position:absolute;opacity:0;width:0;height:0}
+  .chip span{display:inline-block;font-family:var(--mono);font-size:13px;padding:7px 13px;border:1px solid var(--line);border-radius:20px;color:var(--dim);cursor:pointer;background:var(--bg);transition:.15s;-webkit-tap-highlight-color:transparent}
+  .chip span:hover{border-color:var(--accent);color:var(--txt)}
+  .chip input:checked+span{border-color:var(--accent);color:var(--accent);background:rgba(255,199,44,.09)}
+  .chip input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
+  .lead-hint{font-family:var(--mono);font-size:12px;color:var(--dim);margin:-8px 0 18px}
+  .cta-proof{font-family:var(--mono);font-size:13px;color:var(--dim);margin-top:12px;user-select:all}
+  .cta-proof a{color:var(--accent);border-bottom:1px solid rgba(255,199,44,.35)}
+  .cta-proof a:hover{color:var(--accent)}
+  .lead{margin-top:8px}
+  .lead-row{display:flex;gap:12px;flex-wrap:wrap}
+  .lead-row label{flex:1 1 220px}
+  .lead label{display:block;font-family:var(--mono);font-size:12.5px;color:var(--dim);margin-bottom:12px;letter-spacing:.03em}
+  .lead input,.lead textarea{display:block;width:100%;margin-top:6px;background:var(--bg);border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:10px 12px;font:inherit;font-size:15px}
+  .lead textarea{resize:vertical;line-height:1.5}
+  .lead input:focus,.lead textarea:focus{outline:none;border-color:var(--accent)}
+  .lead-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .lead button{border:none;cursor:pointer;font-family:var(--mono)}
+  .lead button[disabled]{opacity:.6;cursor:default}
+  .lead-msg{margin:12px 0 0;font-family:var(--mono);font-size:13px;min-height:1em}
+  .lead-msg.ok{color:var(--green)} .lead-msg.err{color:var(--red)}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"Why does my gtag event run without errors but never reach GA4?","acceptedAnswer":{"@type":"Answer","text":"Most often something replaced gtag with its own wrapper. Depending on how that wrapper is configured it can reroute your event to a different property, or drop it entirely. Your call executes normally either way, which is why no error appears."}},
+    {"@type":"Question","name":"What is __gtagTracker?","acceptedAnswer":{"@type":"Answer","text":"It is the wrapper function installed by the MonsterInsights and ExactMetrics family of WordPress plugins so that measurement runs through their settings. When it is present, window.gtag points at it rather than at Google's own stub."}},
+    {"@type":"Question","name":"Does a 204 response mean GA4 received my event?","acceptedAnswer":{"@type":"Answer","text":"No. Google's collection endpoint returns 204 for practically any request, including one sent to a measurement ID that does not exist. Confirm delivery in DebugView or the realtime report instead."}},
+    {"@type":"Question","name":"How long should I wait before deciding an event did not fire?","acceptedAnswer":{"@type":"Answer","text":"At least ten seconds. GA4 batches events, so the first one after page load can be delayed by several seconds. Short test windows produce false negatives."}},
+    {"@type":"Question","name":"Why do events disappear when a consent banner is on the page?","acceptedAnswer":{"@type":"Answer","text":"If the consent tool blocks the inline gtag snippet as well as the remote script, gtag does not exist yet. Code guarded by a typeof check then skips the event instead of holding it. Queue events and flush them once the function appears."}}
+  ]
+}
+</script>
+</head>
+<body>
+<div class="wrap">
+  <div class="crumb"><a href="/">rytisbalys.com</a> <span style="color:#7d8a9a">/ troubleshooting</span></div>
+
+  <h1>GA4 events missing? A plugin may have wrapped your gtag</h1>
+  <p class="sub">The call runs. <code>dataLayer</code> grows. The console is clean. And GA4 never receives the event. Here is why that happens, and how to prove which half is broken in about five minutes.</p>
+
+  <p>This one is nasty because every surface you would normally trust says the setup is fine. Your code executes. No error is thrown. <code>typeof gtag === 'function'</code> is true. The network tab even shows requests going to Google. And the event still does not exist in GA4.</p>
+
+  <p>The usual cause is that something replaced <code>gtag</code> with its own function. Analytics plugins do this on purpose, to route measurement through their own settings. WordPress plugins are the common case. The MonsterInsights and ExactMetrics family defines a <code>__gtagTracker</code> wrapper and points <code>window.gtag</code> at it by default. Your call still runs, but it now runs through code you did not write.</p>
+
+  <div class="verify"><b>VERIFY</b> - in the console, run <code>gtag.name</code> and <code>gtag.toString()</code>. Genuine gtag is one line: <code>function gtag(){dataLayer.push(arguments);}</code>. Anything that is not that one-line push is a wrapper, whether it is longer or shorter.</div>
+
+  <h2><span class="n">1</span> Events without an explicit recipient get dropped</h2>
+  <p>The wrapper decides where each event goes. Some implementations only forward events that name their destination, and silently discard the ones that do not. That is the single most common version of this bug:</p>
+  <pre>// runs, returns, and goes nowhere
+gtag('event', 'generate_lead');
+
+// same call, now routed
+gtag('event', 'generate_lead', { send_to: 'G-XXXXXXXXXX' });</pre>
+  <p>Nothing warns you. There is no error, no console message, no failed request. The event simply never becomes a request.</p>
+  <p class="dim">If you send to more than one property, name each one. A single call with one <code>send_to</code> reaches one property, not all of them.</p>
+
+  <h2><span class="n">1b</span> The version that catches you personally</h2>
+  <p>There is a second, meaner variant of the same wrapper. When the plugin is set to exclude the current user from tracking, which by default means logged-in administrators, it replaces <code>gtag</code> with a function that does nothing at all:</p>
+  <pre>window.gtag = function () { return null; };</pre>
+  <p>Now <em>every</em> event is dropped, including the ones that do name a destination. And it only happens to you, because you are the one logged in. You test, see nothing, and start debugging code that works perfectly for every real visitor.</p>
+  <p class="dim">Always confirm in a private window, logged out. This is the single most common reason a developer reports "the event never fires" on a site that is measuring fine.</p>
+
+  <h2><span class="n">2</span> Your event may fire before gtag exists</h2>
+  <p>The second failure looks identical from the outside but has a different cause. This one depends on your consent tool. If it blocks only the remote script, or you use Consent Mode, the small <code>gtag</code> stub exists from the first moment and your calls queue harmlessly. But if it also blocks the inline snippet, and many autoblocking tools do, then for the first seconds of the visit there is no <code>gtag</code> at all.</p>
+  <p>Now consider the standard guard everyone writes:</p>
+  <pre>if (typeof gtag === 'function') {
+  gtag('event', 'generate_lead', { send_to: 'G-XXXXXXXXXX' });
+}</pre>
+  <p>If the visitor submits your form before consent resolves, that condition is false and the event is dropped on the floor. Quietly. The guard was supposed to make the code safe, and instead it made the loss invisible.</p>
+  <p>The fix is a queue rather than a guard. Push the event into an array, and flush the array once the real function appears:</p>
+  <pre>var queue = [];
+function flush() {
+  var g = window.gtag || window.__gtagTracker;
+  if (typeof g !== 'function') return false;
+  while (queue.length) {
+    var e = queue.shift();
+    g('event', e.name, e.params);
+  }
+  return true;
+}
+function track(name, params) {
+  queue.push({ name: name, params: params });
+  if (!flush()) watch();
+}
+// keep retrying for as long as anything is waiting
+var timer = null;
+function watch() {
+  if (timer) return;
+  timer = setInterval(function () {
+    if (flush()) { clearInterval(timer); timer = null; }
+  }, 500);
+}
+watch();</pre>
+  <div class="verify"><b>VERIFY</b> - load the page, submit the form <i>before</i> touching the banner, then accept. The event should appear after acceptance, not disappear.</div>
+
+  <h2><span class="n">3</span> A 204 response proves nothing</h2>
+  <p>This is where most debugging sessions go wrong. You find the request in the network tab, you see <code>204 No Content</code>, and you conclude the data landed.</p>
+  <p>It does not follow. Google's collection endpoint answers <code>204</code> to almost anything, including a measurement ID that does not exist. The status code tells you the request was received, not that any property accepted it. Treating <code>204</code> as proof is the same mistake as treating a green checkmark in a dashboard as proof.</p>
+  <p>What actually proves delivery is seeing the event on the receiving side: DebugView, or the realtime report, or a report the next day. Nothing short of that counts.</p>
+
+  <h2><span class="n">4</span> Wait long enough before declaring it broken</h2>
+  <p>GA4 does not send every event the instant you call it. It batches. On a page that has just loaded, the first user-triggered event can sit for several seconds before anything leaves the browser.</p>
+  <p>I have watched this produce a completely false conclusion, my own included: a click event measured with a three-second window looked dead, and the same event measured with a six-second window fired normally. If your test is shorter than the batching delay, you will report a bug that does not exist and go looking for it in the wrong place.</p>
+  <p class="dim">Give any single-event test at least ten seconds before you call it a failure. Then run a control - an event you know works - through the exact same window.</p>
+
+  <h2><span class="n">5</span> How to tell the two failures apart in five minutes</h2>
+  <p>Open a private window with the network tab filtered to <code>collect</code>, and go in this order:</p>
+  <pre>1. gtag.name  +  gtag.toString()  -> wrapper or the real stub?
+2. gtag('event','zz_test',{send_to:'G-XXXXXXXXXX'})
+   ... wait 10 s. Request or nothing?
+3. same call WITHOUT send_to
+   ... wait 10 s. Request or nothing?</pre>
+  <p>If step 2 produces a request and step 3 does not, the wrapper is dropping unrouted events, and every event in your site that omits <code>send_to</code> is being lost. If neither produces a request, the problem is upstream: consent, a blocked script, or a measurement ID that is not what you think it is.</p>
+
+  <h2><span class="n">6</span> The trap underneath all of this</h2>
+  <p>Every symptom here shares one property: the failure is silent. No error, no warning, no red line anywhere. Silent failures are why tracking rots for months without anyone noticing, and why the platform number and the backend number drift apart until somebody finally compares them.</p>
+  <p>That is also the reason a tracking setup is not finished when the code is written. It is finished when you have watched one real event travel the whole way and arrive.</p>
+
+  <div class="faq">
+  <h2>FAQ</h2>
+    <details><summary>Why does my gtag event run without errors but never reach GA4?</summary><p>Most often something replaced gtag with its own wrapper, and that wrapper only forwards events that name a destination with send_to. Your call executes normally and is then discarded internally, which is why no error appears.</p></details>
+    <details><summary>What is __gtagTracker?</summary><p>It is the wrapper function some WordPress analytics plugins install so that measurement runs through their settings. When it is present, window.gtag usually points at it rather than at Google's own stub.</p></details>
+    <details><summary>Does a 204 response mean GA4 received my event?</summary><p>No. Google's collection endpoint returns 204 for practically any request, including one sent to a measurement ID that does not exist. Confirm delivery in DebugView or the realtime report instead.</p></details>
+    <details><summary>How long should I wait before deciding an event did not fire?</summary><p>At least ten seconds. GA4 batches events, so the first one after page load can be delayed by several seconds. Short test windows produce false negatives.</p></details>
+    <details><summary>Why do events disappear when a consent banner is on the page?</summary><p>The measurement script is blocked until consent, so gtag does not exist yet. Code guarded by a typeof check simply skips the event instead of holding it. Queue events and flush them once the function appears.</p></details>
+  </div>
+
+  <h2>The one-line rule</h2>
+  <p class="dim">Code that runs is not the same as data that arrives. Only the receiving side can tell you which one you have.</p>
+
+  <div class="cta">
+    <p><b>Events still not arriving?</b> I do this for a living - tracking audits that trace one real event from the browser all the way to the platform, then fix whatever is eating it. Running in production on my own stores daily.</p>
+    <p class="ask">Before you hire anyone, run the differential test above. If step 2 fires and step 3 does not, you already know the answer and you do not need me. If both are silent, send me your site URL and what you are seeing, and I will tell you which of the usual causes yours is. No charge for that answer.</p>
+    <form class="lead" id="leadForm" novalidate>
+      <div class="lead-row">
+        <label>Your email<input type="email" name="email" required placeholder="you@company.com" autocomplete="email"></label>
+        <label>Your site<input type="text" name="site" required placeholder="yourstore.com" autocomplete="url"></label>
+      </div>
+
+      <span class="chip-label">Where the numbers disagree</span>
+      <div class="chips">
+        <label class="chip"><input type="checkbox" name="where" value="Meta"><span>Meta ads</span></label>
+        <label class="chip"><input type="checkbox" name="where" value="Google Ads"><span>Google Ads</span></label>
+        <label class="chip"><input type="checkbox" name="where" value="GA4"><span>GA4</span></label>
+        <label class="chip"><input type="checkbox" name="where" value="TikTok"><span>TikTok</span></label>
+        <label class="chip"><input type="checkbox" name="where" value="Not sure"><span>not sure yet</span></label>
+      </div>
+
+      <span class="chip-label">Your platform</span>
+      <div class="chips">
+        <label class="chip"><input type="radio" name="platform" value="Shopify"><span>Shopify</span></label>
+        <label class="chip"><input type="radio" name="platform" value="WooCommerce"><span>WooCommerce</span></label>
+        <label class="chip"><input type="radio" name="platform" value="Custom"><span>custom build</span></label>
+        <label class="chip"><input type="radio" name="platform" value="Leads"><span>leads, not a store</span></label>
+        <label class="chip"><input type="radio" name="platform" value="Other"><span>something else</span></label>
+      </div>
+
+      <div class="lead-row">
+        <label>Platform says, last 7 days<input type="text" inputmode="numeric" name="n_platform" placeholder="e.g. 142"></label>
+        <label>Backend says, same 7 days<input type="text" inputmode="numeric" name="n_backend" placeholder="e.g. 76"></label>
+      </div>
+      <p class="lead-hint">Rough is fine. If you do not have them to hand, leave them blank and say so below.</p>
+
+      <label>Anything else worth knowing<textarea name="details" rows="3" placeholder="What counts as a conversion for you, and what changed recently"></textarea></label>
+      <div class="lead-hp"><label>Company<input type="text" name="company" tabindex="-1" autocomplete="off"></label></div>
+      <button type="submit" class="btn primary">Send it over</button>
+      <p class="lead-msg" role="status"></p>
+    </form>
+    <p class="cta-proof">or email work@rytisbalys.com &middot; every rated job 5.0 &middot; <a href="https://www.upwork.com/freelancers/rytis" rel="nofollow noopener" target="_blank">verify on Upwork</a></p>
+  </div>
+
+  <div class="related">
+    <h2>related guides</h2>
+    <ul>
+      <li><a href="/google-ads-conversion-inactive-tag-fires-gtm">Google Ads conversion inactive but the tag fires in GTM: the fix</a></li>
+      <li><a href="/consent-banner-not-blocking-tracking">Your cookie banner blocks nothing - the 60-second check</a></li>
+      <li><a href="/ga4-does-not-match-backend">GA4 purchases don't match your backend orders - which number to trust</a></li>
+    </ul>
+  </div>
+
+  <footer>Rytis Balys · MB Euruvizija · Vilnius, Lithuania · <a href="/" style="color:#7d8a9a">rytisbalys.com</a></footer>
+</div>
+<script>
+(function(){
+  var f=document.getElementById('leadForm'); if(!f) return;
+  var t0=Date.now(), msg=f.querySelector('.lead-msg'), btn=f.querySelector('button');
+  function picked(name){
+    return Array.prototype.slice.call(f.querySelectorAll('input[name="'+name+'"]:checked'))
+      .map(function(i){return i.value;}).join(', ');
+  }
+  function num(v){ v=String(v||'').replace(/[^0-9.]/g,''); return v===''?null:parseFloat(v); }
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var np=num(f.n_platform.value), nb=num(f.n_backend.value), gap=null;
+    if(np!==null&&nb!==null&&np>0) gap=Math.round(Math.abs(np-nb)/np*100);
+    var d={email:f.email.value.trim(),site:f.site.value.trim(),details:f.details.value.trim(),
+           where:picked('where'),platform:picked('platform'),
+           n_platform:np,n_backend:nb,gap:gap,
+           company:f.company.value,dt:Date.now()-t0,page:location.pathname};
+    if(!d.email||!d.site){ msg.className='lead-msg err'; msg.textContent='Email and site are both needed.'; return; }
+    btn.disabled=true; msg.className='lead-msg'; msg.textContent='Sending...';
+    fetch('https://rb-form.peporalabs.workers.dev/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)})
+      .then(function(r){ return r.json().then(function(j){ return {ok:r.ok&&j.ok, j:j}; }); })
+      .then(function(res){
+        if(res.ok){
+          msg.className='lead-msg ok';
+          msg.textContent = gap===null
+            ? 'Got it. I read every one of these myself and reply, usually the same day.'
+            : (gap<10
+                ? 'Got it. That is a '+gap+'% gap, which is inside normal loss - I will tell you straight if there is nothing to fix.'
+                : 'Got it. That is a '+gap+'% gap, well past normal loss. I will come back with the likely cause, usually the same day.');
+          f.reset();
+        }
+        else { throw new Error(res.j&&res.j.error||'failed'); }
+      })
+      .catch(function(){
+        msg.className='lead-msg err';
+        msg.innerHTML='That did not go through. Email work@rytisbalys.com instead and I will pick it up.';
+        btn.disabled=false;
+      });
+  });
+})();
+</script>
+</body>
+</html>
