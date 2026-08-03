@@ -70,22 +70,23 @@
   .related a:hover{color:var(--accent)}
 
   footer{font-family:var(--mono);font-size:12.5px;color:#7d8a9a;border-top:1px solid var(--line);padding-top:20px;margin-top:56px}
-  .chip-label{display:block;font-family:var(--mono);font-size:12.5px;color:var(--dim);margin-bottom:2px;letter-spacing:.03em}
+  .chip-label{display:block;font-family:var(--mono);font-size:12.5px;color:#b9c3cf;margin-bottom:2px;letter-spacing:.03em}
   .chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 18px}
   .lead label.chip{display:inline-block;margin-bottom:0}
   .chip input{position:absolute;opacity:0;width:0;height:0}
-  .chip span{display:inline-block;font-family:var(--mono);font-size:13px;padding:7px 13px;border:1px solid var(--line);border-radius:20px;color:var(--dim);cursor:pointer;background:var(--bg);transition:.15s;-webkit-tap-highlight-color:transparent}
+  .chip span{display:inline-block;font-family:var(--mono);font-size:13px;padding:7px 13px;border:1px solid var(--line);border-radius:20px;color:#b9c3cf;cursor:pointer;background:var(--bg);transition:.15s;-webkit-tap-highlight-color:transparent}
   .chip span:hover{border-color:var(--accent);color:var(--txt)}
   .chip input:checked+span{border-color:var(--accent);color:var(--accent);background:rgba(255,199,44,.09)}
   .chip input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
-  .lead-hint{font-family:var(--mono);font-size:12px;color:var(--dim);margin:-8px 0 18px}
+  .lead ::placeholder{color:#7d8a9a;opacity:1}
+  .cta p.lead-hint{font-family:var(--mono);font-size:12px;line-height:1.5;color:#8b98a8;margin:2px 0 18px}
   .cta-proof{font-family:var(--mono);font-size:13px;color:var(--dim);margin-top:12px;user-select:all}
   .cta-proof a{color:var(--accent);border-bottom:1px solid rgba(255,199,44,.35)}
   .cta-proof a:hover{color:var(--accent)}
   .lead{margin-top:8px}
   .lead-row{display:flex;gap:12px;flex-wrap:wrap}
   .lead-row label{flex:1 1 220px}
-  .lead label{display:block;font-family:var(--mono);font-size:12.5px;color:var(--dim);margin-bottom:12px;letter-spacing:.03em}
+  .lead label{display:block;font-family:var(--mono);font-size:12.5px;color:#b9c3cf;margin-bottom:12px;letter-spacing:.03em}
   .lead input,.lead textarea{display:block;width:100%;margin-top:6px;background:var(--bg);border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:10px 12px;font:inherit;font-size:15px}
   .lead textarea{resize:vertical;line-height:1.5}
   .lead input:focus,.lead textarea:focus{outline:none;border-color:var(--accent)}
