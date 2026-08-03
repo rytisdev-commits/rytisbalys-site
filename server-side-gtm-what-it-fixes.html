@@ -125,10 +125,15 @@
 
   footer{font-family:var(--mono);font-size:12.5px;color:#7d8a9a;border-top:1px solid var(--line);padding-top:20px;margin-top:56px}
   .chip-label{display:block;font-family:var(--mono);font-size:12.5px;color:#b9c3cf;margin-bottom:2px;letter-spacing:.03em}
-  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 18px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0}
+  .chip-set{border:none;padding:0;margin:0 0 18px;min-width:0}
+  .other-in{display:block;width:100%;margin-top:10px;background:#0d131a;border:1px solid #2f3c4b;border-radius:8px;color:var(--txt);padding:10px 12px;font:inherit;font-size:15px}
+  .other-in:focus{outline:none;border-color:var(--accent)}
+  .cta p.lead-gap{font-family:var(--mono);font-size:13px;margin:10px 0 0;color:var(--accent)}
+  .cta p.lead-gap.small{color:var(--green)}
   .lead label.chip{display:inline-block;margin-bottom:0}
   .chip input{position:absolute;opacity:0;width:0;height:0}
-  .chip span{display:inline-block;font-family:var(--mono);font-size:13px;padding:7px 14px;border:1px solid #3a4757;border-radius:20px;color:#c9d3de;cursor:pointer;background:#18222e;transition:.15s;-webkit-tap-highlight-color:transparent}
+  .chip span{display:inline-flex;align-items:center;min-height:44px;font-family:var(--mono);font-size:13px;padding:0 16px;border:1px solid #3a4757;border-radius:20px;color:#c9d3de;cursor:pointer;background:#18222e;transition:.15s;-webkit-tap-highlight-color:transparent}
   .chip span:hover{border-color:var(--accent);color:#fff;background:#1e2a38}
   .chip input:checked+span{border-color:var(--accent);color:#0a0e13;background:var(--accent);font-weight:600}
   .chip input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
@@ -181,38 +186,47 @@ Bad:  hits to BOTH google-analytics.com AND gtm.yourstore.com
 <p>I build and run this stack in production daily, on my own store and for clients. If you want your setup verified or migrated without the double-counting window, email work@rytisbalys.com.</p>
     <p class="ask">Before you hire anyone, run this check: pick any 7 days, put the platform&rsquo;s number next to your backend&rsquo;s real orders or leads for the same days. Send me those two numbers, your site URL and what counts as a conversion, and I will tell you which of the causes above you have. No charge for that answer. <b>If the gap is under about 10&percnt; you probably do not need me, and I will tell you so.</b></p>
     <form class="lead" id="leadForm" novalidate>
+      <fieldset class="chip-set">
+        <legend class="chip-label">Where the numbers disagree</legend>
+        <div class="chips">
+          <label class="chip"><input type="checkbox" name="where" value="Meta"><span>Meta ads</span></label>
+          <label class="chip"><input type="checkbox" name="where" value="Google Ads"><span>Google Ads</span></label>
+          <label class="chip"><input type="checkbox" name="where" value="GA4"><span>GA4</span></label>
+          <label class="chip"><input type="checkbox" name="where" value="TikTok"><span>TikTok</span></label>
+          <label class="chip"><input type="checkbox" name="where" value="CRM or email tool"><span>my CRM or email tool</span></label>
+          <label class="chip"><input type="checkbox" name="where" value="Somewhere else" data-other="whereOther"><span>somewhere else</span></label>
+          <label class="chip"><input type="checkbox" name="where" value="Not sure"><span>not sure yet</span></label>
+        </div>
+        <input class="other-in" id="whereOther" name="where_other" type="text" placeholder="Where is it off?" hidden>
+      </fieldset>
+
+      <div class="lead-row">
+        <label>Your ad platform says, last 7 days<input type="text" inputmode="numeric" name="n_platform" id="nPlat" placeholder="e.g. 142"></label>
+        <label>Real orders or leads, same 7 days<input type="text" inputmode="numeric" name="n_backend" id="nBack" placeholder="e.g. 76"></label>
+      </div>
+      <p class="lead-gap" id="leadGap" role="status" hidden></p>
+      <p class="lead-hint">Rough is fine. If more than one platform is off, use the worst one. No numbers to hand? Leave both blank and say so below.</p>
+
+      <fieldset class="chip-set">
+        <legend class="chip-label">Your platform</legend>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="platform" value="Shopify"><span>Shopify</span></label>
+          <label class="chip"><input type="radio" name="platform" value="WooCommerce"><span>WooCommerce</span></label>
+          <label class="chip"><input type="radio" name="platform" value="Custom"><span>custom build</span></label>
+          <label class="chip"><input type="radio" name="platform" value="Leads"><span>leads, not a store</span></label>
+          <label class="chip"><input type="radio" name="platform" value="Other" data-other="platformOther"><span>something else</span></label>
+        </div>
+        <input class="other-in" id="platformOther" name="platform_other" type="text" placeholder="What are you on?" hidden>
+      </fieldset>
+
+      <label>Anything else worth knowing<textarea name="details" rows="3" placeholder="What does your ad platform count as a conversion, and what changed recently"></textarea></label>
+
       <div class="lead-row">
         <label>Your email<input type="email" name="email" required placeholder="you@company.com" autocomplete="email"></label>
-        <label>Your site<input type="text" name="site" required placeholder="yourstore.com" autocomplete="url"></label>
+        <label>Your site<input type="text" name="site" required placeholder="yourstore.com" autocomplete="url" inputmode="url" autocapitalize="none" autocorrect="off" spellcheck="false"></label>
       </div>
-
-      <span class="chip-label">Where the numbers disagree</span>
-      <div class="chips">
-        <label class="chip"><input type="checkbox" name="where" value="Meta"><span>Meta ads</span></label>
-        <label class="chip"><input type="checkbox" name="where" value="Google Ads"><span>Google Ads</span></label>
-        <label class="chip"><input type="checkbox" name="where" value="GA4"><span>GA4</span></label>
-        <label class="chip"><input type="checkbox" name="where" value="TikTok"><span>TikTok</span></label>
-        <label class="chip"><input type="checkbox" name="where" value="Not sure"><span>not sure yet</span></label>
-      </div>
-
-      <span class="chip-label">Your platform</span>
-      <div class="chips">
-        <label class="chip"><input type="radio" name="platform" value="Shopify"><span>Shopify</span></label>
-        <label class="chip"><input type="radio" name="platform" value="WooCommerce"><span>WooCommerce</span></label>
-        <label class="chip"><input type="radio" name="platform" value="Custom"><span>custom build</span></label>
-        <label class="chip"><input type="radio" name="platform" value="Leads"><span>leads, not a store</span></label>
-        <label class="chip"><input type="radio" name="platform" value="Other"><span>something else</span></label>
-      </div>
-
-      <div class="lead-row">
-        <label>Platform says, last 7 days<input type="text" inputmode="numeric" name="n_platform" placeholder="e.g. 142"></label>
-        <label>Backend says, same 7 days<input type="text" inputmode="numeric" name="n_backend" placeholder="e.g. 76"></label>
-      </div>
-      <p class="lead-hint">Rough is fine. If you do not have them to hand, leave them blank and say so below.</p>
-
-      <label>Anything else worth knowing<textarea name="details" rows="3" placeholder="What counts as a conversion for you, and what changed recently"></textarea></label>
-      <div class="lead-hp"><label>Company<input type="text" name="company" tabindex="-1" autocomplete="off"></label></div>
-      <button type="submit" class="btn primary">Send it over</button>
+      <div class="lead-hp" aria-hidden="true"><label>Leave this empty<input type="text" name="fax_line" tabindex="-1" autocomplete="off"></label></div>
+      <button type="submit" class="btn primary">Get the likely cause</button>
       <p class="lead-msg" role="status"></p>
     </form>
     <p class="cta-proof">or email work@rytisbalys.com &middot; every rated job 5.0 &middot; <a href="https://www.upwork.com/freelancers/rytis" rel="nofollow noopener" target="_blank">verify on Upwork</a></p>
@@ -234,38 +248,85 @@ Bad:  hits to BOTH google-analytics.com AND gtm.yourstore.com
 (function(){
   var f=document.getElementById('leadForm'); if(!f) return;
   var t0=Date.now(), msg=f.querySelector('.lead-msg'), btn=f.querySelector('button');
+  var gapEl=document.getElementById('leadGap');
+
   function picked(name){
     return Array.prototype.slice.call(f.querySelectorAll('input[name="'+name+'"]:checked'))
       .map(function(i){return i.value;}).join(', ');
   }
   function num(v){ v=String(v||'').replace(/[^0-9.]/g,''); return v===''?null:parseFloat(v); }
+  function gapNow(){
+    var np=num(f.n_platform.value), nb=num(f.n_backend.value);
+    if(np===null||nb===null||np<=0) return null;
+    return Math.round(Math.abs(np-nb)/np*100);
+  }
+
+  // Tarpas rodomas IS KARTO, dar nepraseant el. pasto. Zmogus pamato savo skaiciu.
+  function showGap(){
+    var g=gapNow();
+    if(g===null){ gapEl.hidden=true; return; }
+    gapEl.hidden=false;
+    if(g<10){ gapEl.className='lead-gap small'; gapEl.textContent='-> '+g+'% gap. That is inside normal loss.'; }
+    else { gapEl.className='lead-gap'; gapEl.textContent='-> '+g+'% gap, well past the ~10% you would expect.'; }
+  }
+  f.n_platform.addEventListener('input', showGap);
+  f.n_backend.addEventListener('input', showGap);
+
+  // "kazkas kita" atskleidzia laukeli, kad neliktu bereiksmiu atsakymu
+  Array.prototype.forEach.call(f.querySelectorAll('input[data-other]'), function(inp){
+    var box=document.getElementById(inp.getAttribute('data-other'));
+    function sync(){
+      var on = inp.type==='radio'
+        ? inp.checked
+        : !!f.querySelector('input[data-other="'+inp.getAttribute('data-other')+'"]:checked');
+      box.hidden = !on;
+      if(on) box.focus();
+    }
+    inp.addEventListener('change', function(){
+      if(inp.type==='radio'){
+        Array.prototype.forEach.call(f.querySelectorAll('input[data-other]'), function(o){
+          if(o.type==='radio' && o!==inp) document.getElementById(o.getAttribute('data-other')).hidden=true;
+        });
+      }
+      sync();
+    });
+  });
+
+  var EMAIL=/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/;
+  var ERRORS={ email_invalid:'That email looks mistyped - check it and send again.',
+               site_required:'I need the site URL to look anything up.',
+               origin:'Something blocked that request. Email work@rytisbalys.com and I will pick it up.' };
+
   f.addEventListener('submit',function(e){
     e.preventDefault();
-    var np=num(f.n_platform.value), nb=num(f.n_backend.value), gap=null;
-    if(np!==null&&nb!==null&&np>0) gap=Math.round(Math.abs(np-nb)/np*100);
-    var d={email:f.email.value.trim(),site:f.site.value.trim(),details:f.details.value.trim(),
-           where:picked('where'),platform:picked('platform'),
-           n_platform:np,n_backend:nb,gap:gap,
-           company:f.company.value,dt:Date.now()-t0,page:location.pathname};
-    if(!d.email||!d.site){ msg.className='lead-msg err'; msg.textContent='Email and site are both needed.'; return; }
+    var email=f.email.value.trim(), site=f.site.value.trim();
+    if(!EMAIL.test(email)){ msg.className='lead-msg err'; msg.textContent=ERRORS.email_invalid; f.email.focus(); return; }
+    if(!site){ msg.className='lead-msg err'; msg.textContent=ERRORS.site_required; f.site.focus(); return; }
+
+    var gap=gapNow();
+    var d={email:email,site:site,details:f.details.value.trim(),
+           where:picked('where'), where_other:f.where_other.value.trim(),
+           platform:picked('platform'), platform_other:f.platform_other.value.trim(),
+           n_platform:num(f.n_platform.value), n_backend:num(f.n_backend.value), gap:gap,
+           fax_line:f.fax_line.value, dt:Date.now()-t0, page:location.pathname};
+
     btn.disabled=true; msg.className='lead-msg'; msg.textContent='Sending...';
     fetch('https://rb-form.peporalabs.workers.dev/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)})
       .then(function(r){ return r.json().then(function(j){ return {ok:r.ok&&j.ok, j:j}; }); })
       .then(function(res){
-        if(res.ok){
-          msg.className='lead-msg ok';
-          msg.textContent = gap===null
-            ? 'Got it. I read every one of these myself and reply, usually the same day.'
-            : (gap<10
-                ? 'Got it. That is a '+gap+'% gap, which is inside normal loss - I will tell you straight if there is nothing to fix.'
-                : 'Got it. That is a '+gap+'% gap, well past normal loss. I will come back with the likely cause, usually the same day.');
-          f.reset();
-        }
-        else { throw new Error(res.j&&res.j.error||'failed'); }
+        if(!res.ok){ throw new Error((res.j&&res.j.error)||'failed'); }
+        msg.className='lead-msg ok';
+        msg.textContent = gap===null
+          ? 'Got it. I read every one of these myself and reply, usually the same day.'
+          : (gap<10
+              ? 'Got it. A '+gap+'% gap is inside normal loss - I will tell you straight if there is nothing to fix.'
+              : 'Got it. I will come back with the likely cause of that '+gap+'% gap, usually the same day.');
+        f.reset(); gapEl.hidden=true;
+        Array.prototype.forEach.call(f.querySelectorAll('.other-in'), function(b){ b.hidden=true; });
       })
-      .catch(function(){
+      .catch(function(err){
         msg.className='lead-msg err';
-        msg.innerHTML='That did not go through. Email work@rytisbalys.com instead and I will pick it up.';
+        msg.textContent = ERRORS[String(err.message)] || 'That did not go through. Email work@rytisbalys.com instead and I will pick it up.';
         btn.disabled=false;
       });
   });
