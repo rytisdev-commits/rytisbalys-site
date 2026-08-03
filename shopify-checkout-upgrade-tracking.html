@@ -74,9 +74,9 @@
   .chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 18px}
   .lead label.chip{display:inline-block;margin-bottom:0}
   .chip input{position:absolute;opacity:0;width:0;height:0}
-  .chip span{display:inline-block;font-family:var(--mono);font-size:13px;padding:7px 13px;border:1px solid var(--line);border-radius:20px;color:#b9c3cf;cursor:pointer;background:var(--bg);transition:.15s;-webkit-tap-highlight-color:transparent}
-  .chip span:hover{border-color:var(--accent);color:var(--txt)}
-  .chip input:checked+span{border-color:var(--accent);color:var(--accent);background:rgba(255,199,44,.09)}
+  .chip span{display:inline-block;font-family:var(--mono);font-size:13px;padding:7px 14px;border:1px solid #3a4757;border-radius:20px;color:#c9d3de;cursor:pointer;background:#18222e;transition:.15s;-webkit-tap-highlight-color:transparent}
+  .chip span:hover{border-color:var(--accent);color:#fff;background:#1e2a38}
+  .chip input:checked+span{border-color:var(--accent);color:#0a0e13;background:var(--accent);font-weight:600}
   .chip input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
   .lead ::placeholder{color:#7d8a9a;opacity:1}
   .cta p.lead-hint{font-family:var(--mono);font-size:12px;line-height:1.5;color:#8b98a8;margin:2px 0 18px}
@@ -87,7 +87,7 @@
   .lead-row{display:flex;gap:12px;flex-wrap:wrap}
   .lead-row label{flex:1 1 220px}
   .lead label{display:block;font-family:var(--mono);font-size:12.5px;color:#b9c3cf;margin-bottom:12px;letter-spacing:.03em}
-  .lead input,.lead textarea{display:block;width:100%;margin-top:6px;background:var(--bg);border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:10px 12px;font:inherit;font-size:15px}
+  .lead input,.lead textarea{display:block;width:100%;margin-top:6px;background:#0d131a;border:1px solid #2f3c4b;border-radius:8px;color:var(--txt);padding:10px 12px;font:inherit;font-size:15px}
   .lead textarea{resize:vertical;line-height:1.5}
   .lead input:focus,.lead textarea:focus{outline:none;border-color:var(--accent)}
   .lead-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
