@@ -123,15 +123,27 @@
   .related a{color:var(--txt);text-decoration:none}
   .related a:hover{color:var(--accent)}
 
-  footer{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;border-top:1px solid var(--line);padding-top:20px;margin-top:56px}
-  .cta-proof{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;margin-top:10px;user-select:all}
-  .cta-proof a{color:#4d5b6b}
+  footer{font-family:var(--mono);font-size:12.5px;color:#7d8a9a;border-top:1px solid var(--line);padding-top:20px;margin-top:56px}
+  .cta-proof{font-family:var(--mono);font-size:13px;color:var(--dim);margin-top:12px;user-select:all}
+  .cta-proof a{color:var(--accent);border-bottom:1px solid rgba(255,199,44,.35)}
   .cta-proof a:hover{color:var(--accent)}
+  .lead{margin-top:8px}
+  .lead-row{display:flex;gap:12px;flex-wrap:wrap}
+  .lead-row label{flex:1 1 220px}
+  .lead label{display:block;font-family:var(--mono);font-size:12.5px;color:var(--dim);margin-bottom:12px;letter-spacing:.03em}
+  .lead input,.lead textarea{display:block;width:100%;margin-top:6px;background:var(--bg);border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:10px 12px;font:inherit;font-size:15px}
+  .lead textarea{resize:vertical;line-height:1.5}
+  .lead input:focus,.lead textarea:focus{outline:none;border-color:var(--accent)}
+  .lead-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .lead button{border:none;cursor:pointer;font-family:var(--mono)}
+  .lead button[disabled]{opacity:.6;cursor:default}
+  .lead-msg{margin:12px 0 0;font-family:var(--mono);font-size:13px;min-height:1em}
+  .lead-msg.ok{color:var(--green)} .lead-msg.err{color:var(--red)}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="crumb"><a href="/">rytisbalys.com</a> <span style="color:#4d5b6b">/ troubleshooting</span></div>
+  <div class="crumb"><a href="/">rytisbalys.com</a> <span style="color:#7d8a9a">/ troubleshooting</span></div>
   <h1>Fix GA4 Purchases Showing as stripe.com, paypal.com or (direct)</h1>
 <p>You connected Stripe, PayPal or Klarna, or your bank switched on 3D Secure. Since that day GA4 reports purchases with session source <strong>stripe.com</strong>, <strong>paypal.com</strong> or <strong>(direct) / (none)</strong>, and your ad campaigns look like they stopped selling. They did not. The buyer leaves your site to pay, returns with the gateway as the browser referrer, and GA4 overwrites the session source with the last domain the visitor came from.</p><p>The gateway-referral flavor takes one setting in GA4 Admin called List unwanted referrals. The (direct) / (none) flavor has different causes - session timeout at the gateway, blocked cookies - and different fixes, covered further down. Below: the mechanism, the setting, when cross-domain linking is the right tool instead, and how to verify the fix with real traffic.</p>
   <h2>Why GA4 credits purchases to the payment gateway</h2>
@@ -154,8 +166,17 @@
   <div class="cta">
 <p>I fix attribution problems like this for stores and agencies, usually server-side and always verified against real transactions. If you would rather have someone check your setup and confirm the numbers, email me at work@rytisbalys.com.</p>
     <p class="ask">Before you hire anyone, run this check: pick any 7 days, put the platform&rsquo;s number next to your backend&rsquo;s real orders or leads for the same days. Send me those two numbers, your site URL and what counts as a conversion, and I will tell you which of the causes above you have. No charge for that answer. <b>If the gap is under about 10&percnt; you probably do not need me, and I will tell you so.</b></p>
-    <a class="btn" href="mailto:work@rytisbalys.com?subject=Tracking%20gap&body=Site%3A%0AWhat%20counts%20as%20a%20conversion%20%28purchase%20/%20lead%20/%20call%20/%20booking%29%3A%0APlatform%20number%2C%20last%207%20days%3A%0ABackend%20number%2C%20same%207%20days%3A%0AWhat%20changed%20recently%20%28site%20move%2C%20new%20checkout%2C%20consent%20banner%2C%20nothing%29%3A%0A">Send me the two numbers</a>
-    <p class="cta-proof">work@rytisbalys.com &middot; every rated job 5.0 &middot; <a href="https://www.upwork.com/freelancers/rytis" rel="nofollow noopener" target="_blank">verify on Upwork</a></p>
+    <form class="lead" id="leadForm" novalidate>
+      <div class="lead-row">
+        <label>Your email<input type="email" name="email" required placeholder="you@company.com" autocomplete="email"></label>
+        <label>Your site<input type="text" name="site" required placeholder="yourstore.com" autocomplete="url"></label>
+      </div>
+      <label>What you are seeing<textarea name="details" rows="4" placeholder="Platform number, last 7 days:&#10;Backend number, same 7 days:&#10;What counts as a conversion:&#10;What changed recently:"></textarea></label>
+      <div class="lead-hp"><label>Company<input type="text" name="company" tabindex="-1" autocomplete="off"></label></div>
+      <button type="submit" class="btn">Send it over</button>
+      <p class="lead-msg" role="status"></p>
+    </form>
+    <p class="cta-proof">or email work@rytisbalys.com &middot; every rated job 5.0 &middot; <a href="https://www.upwork.com/freelancers/rytis" rel="nofollow noopener" target="_blank">verify on Upwork</a></p>
   </div>
 
 
@@ -168,7 +189,31 @@
     </ul>
   </div>
 
-  <footer>Rytis Balys · MB Euruvizija · Vilnius, Lithuania · <a href="/" style="color:#4d5b6b">rytisbalys.com</a></footer>
+  <footer>Rytis Balys · MB Euruvizija · Vilnius, Lithuania · <a href="/" style="color:#7d8a9a">rytisbalys.com</a></footer>
 </div>
+<script>
+(function(){
+  var f=document.getElementById('leadForm'); if(!f) return;
+  var t0=Date.now(), msg=f.querySelector('.lead-msg'), btn=f.querySelector('button');
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var d={email:f.email.value.trim(),site:f.site.value.trim(),details:f.details.value.trim(),
+           company:f.company.value,dt:Date.now()-t0,page:location.pathname};
+    if(!d.email||!d.site){ msg.className='lead-msg err'; msg.textContent='Email and site are both needed.'; return; }
+    btn.disabled=true; msg.className='lead-msg'; msg.textContent='Sending...';
+    fetch('https://rb-form.peporalabs.workers.dev/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)})
+      .then(function(r){ return r.json().then(function(j){ return {ok:r.ok&&j.ok, j:j}; }); })
+      .then(function(res){
+        if(res.ok){ msg.className='lead-msg ok'; msg.textContent='Got it. I reply to all of these myself, usually same day.'; f.reset(); }
+        else { throw new Error(res.j&&res.j.error||'failed'); }
+      })
+      .catch(function(){
+        msg.className='lead-msg err';
+        msg.innerHTML='That did not go through. Email work@rytisbalys.com instead and I will pick it up.';
+        btn.disabled=false;
+      });
+  });
+})();
+</script>
 </body>
 </html>
