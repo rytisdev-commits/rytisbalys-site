@@ -68,7 +68,7 @@
   .term-bar span{width:11px;height:11px;border-radius:50%;background:#2a3542}
   .term-bar span:first-child{background:#f85149}.term-bar span:nth-child(2){background:#d29922}.term-bar span:nth-child(3){background:#3fb950}
   .term pre{padding:18px 20px;font-family:var(--mono);font-size:13.5px;line-height:1.9;color:var(--dim);overflow-x:auto}
-  .term .k{color:var(--txt)} .term .n{color:var(--red)} .term .ok{color:var(--green)} .term .c{color:#4d5b6b}
+  .term .k{color:var(--txt)} .term .n{color:var(--red)} .term .ok{color:var(--green)} .term .c{color:#7d8a9a}
   h2{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin:0 0 14px}
   ul{list-style:none;margin-bottom:44px}
   li{padding:10px 0 10px 26px;position:relative;border-bottom:1px solid var(--line);color:var(--txt);font-size:15.5px}
@@ -86,13 +86,44 @@
   .score a:hover{color:var(--accent);border-color:var(--accent)}
   .rev{border-left:2px solid var(--accent);padding:2px 0 2px 16px;margin:0 0 18px}
   .rev p{font-size:15.5px;color:var(--txt);margin:0 0 6px}
-  .rev cite{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;font-style:normal}
+  .rev cite{font-family:var(--mono);font-size:12.5px;color:#7d8a9a;font-style:normal}
   ul.proof-extra{margin-top:26px}
-  footer{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;border-top:1px solid var(--line);padding-top:20px}
+  footer{font-family:var(--mono);font-size:12.5px;color:#7d8a9a;border-top:1px solid var(--line);padding-top:20px}
   @media (max-width:520px){h1{font-size:28px}.hook{font-size:18px}.wrap{padding-top:52px}}
 
 .guide-link{color:var(--txt);text-decoration:underline;text-decoration-color:rgba(255,199,44,.5);text-underline-offset:4px;text-decoration-thickness:1px;transition:color .15s}
 .guide-link:hover{color:#FFC72C;text-decoration-color:#FFC72C}
+  .cta{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px;margin-bottom:44px}
+  .cta p{margin-bottom:14px;font-size:15.5px}
+  .cta .ask{font-size:15px;color:var(--dim)}
+  .cta .ask b{color:var(--txt);font-weight:600}
+  .cta-proof{font-family:var(--mono);font-size:13px;color:var(--dim);margin-top:12px;user-select:all}
+  .chip-label{display:block;font-family:var(--mono);font-size:12.5px;color:var(--dim);margin-bottom:2px;letter-spacing:.03em}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 18px}
+  .lead label.chip{display:inline-block;margin-bottom:0}
+  .chip input{position:absolute;opacity:0;width:0;height:0}
+  .chip span{display:inline-block;font-family:var(--mono);font-size:13px;padding:7px 13px;border:1px solid var(--line);border-radius:20px;color:var(--dim);cursor:pointer;background:var(--bg);transition:.15s;-webkit-tap-highlight-color:transparent}
+  .chip span:hover{border-color:var(--accent);color:var(--txt)}
+  .chip input:checked+span{border-color:var(--accent);color:var(--accent);background:rgba(255,199,44,.09)}
+  .chip input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
+  .lead-hint{font-family:var(--mono);font-size:12px;color:var(--dim);margin:-8px 0 18px}
+  .jump-wrap{margin:0 0 44px}
+  .jump{display:inline-block;font-family:var(--mono);font-size:14px;text-decoration:none;color:#0a0e13;background:var(--accent);border-radius:8px;padding:11px 18px;font-weight:600}
+  .jump:hover{opacity:.9}
+  .jump-note{display:block;font-family:var(--mono);font-size:12.5px;color:var(--dim);margin-top:10px}
+  .cta-proof a{color:var(--accent);border-bottom:1px solid rgba(255,199,44,.35);text-decoration:none}
+  .lead{margin-top:8px}
+  .lead-row{display:flex;gap:12px;flex-wrap:wrap}
+  .lead-row label{flex:1 1 220px}
+  .lead label{display:block;font-family:var(--mono);font-size:12.5px;color:var(--dim);margin-bottom:12px;letter-spacing:.03em}
+  .lead input,.lead textarea{display:block;width:100%;margin-top:6px;background:var(--bg);border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:10px 12px;font:inherit;font-size:15px}
+  .lead textarea{resize:vertical;line-height:1.5}
+  .lead input:focus,.lead textarea:focus{outline:none;border-color:var(--accent)}
+  .lead-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .lead button{border:none;cursor:pointer;font-family:var(--mono)}
+  .lead button[disabled]{opacity:.6;cursor:default}
+  .lead-msg{margin:12px 0 0;font-family:var(--mono);font-size:13px;min-height:1em}
+  .lead-msg.ok{color:var(--green)} .lead-msg.err{color:var(--red)}
 </style>
 </head>
 <body>
@@ -111,6 +142,11 @@
 <span class="k">backend_paid_orders</span>    <span class="ok">76</span>   <span class="c"># the truth</span>
 <span class="c">-> your ads optimize on the wrong number. that costs money.</span></pre>
   </div>
+
+  <p class="jump-wrap">
+    <a class="jump" href="#start">Find out which number is lying</a>
+    <span class="jump-note">Takes about a minute. I read every one myself and reply with the likely cause, at no charge.</span>
+  </p>
 
   <h2>what I do</h2>
   <ul>
@@ -161,6 +197,48 @@
     <li>Attribution or reconciliation work <span>- $300-600</span></li>
     <li>Ongoing tracking ownership <span>- $500-1500/mo</span></li>
   </ul>
+  <h2 id="start">start here</h2>
+  <div class="cta">
+    <p><b>Not sure whether your numbers are lying?</b> Pick any 7 days and put your ad platform&rsquo;s conversion count next to the real orders or leads in your backend for the same days.</p>
+    <p class="ask">Send me those two numbers with your site URL, and I will tell you which of the usual causes yours is. No charge for that answer. <b>If the gap is under about 10&percnt; you probably do not need me, and I will tell you so.</b></p>
+    <form class="lead" id="leadForm" novalidate>
+      <div class="lead-row">
+        <label>Your email<input type="email" name="email" required placeholder="you@company.com" autocomplete="email"></label>
+        <label>Your site<input type="text" name="site" required placeholder="yourstore.com" autocomplete="url"></label>
+      </div>
+
+      <span class="chip-label">Where the numbers disagree</span>
+      <div class="chips">
+        <label class="chip"><input type="checkbox" name="where" value="Meta"><span>Meta ads</span></label>
+        <label class="chip"><input type="checkbox" name="where" value="Google Ads"><span>Google Ads</span></label>
+        <label class="chip"><input type="checkbox" name="where" value="GA4"><span>GA4</span></label>
+        <label class="chip"><input type="checkbox" name="where" value="TikTok"><span>TikTok</span></label>
+        <label class="chip"><input type="checkbox" name="where" value="Not sure"><span>not sure yet</span></label>
+      </div>
+
+      <span class="chip-label">Your platform</span>
+      <div class="chips">
+        <label class="chip"><input type="radio" name="platform" value="Shopify"><span>Shopify</span></label>
+        <label class="chip"><input type="radio" name="platform" value="WooCommerce"><span>WooCommerce</span></label>
+        <label class="chip"><input type="radio" name="platform" value="Custom"><span>custom build</span></label>
+        <label class="chip"><input type="radio" name="platform" value="Leads"><span>leads, not a store</span></label>
+        <label class="chip"><input type="radio" name="platform" value="Other"><span>something else</span></label>
+      </div>
+
+      <div class="lead-row">
+        <label>Platform says, last 7 days<input type="text" inputmode="numeric" name="n_platform" placeholder="e.g. 142"></label>
+        <label>Backend says, same 7 days<input type="text" inputmode="numeric" name="n_backend" placeholder="e.g. 76"></label>
+      </div>
+      <p class="lead-hint">Rough is fine. If you do not have them to hand, leave them blank and say so below.</p>
+
+      <label>Anything else worth knowing<textarea name="details" rows="3" placeholder="What counts as a conversion for you, and what changed recently"></textarea></label>
+      <div class="lead-hp"><label>Company<input type="text" name="company" tabindex="-1" autocomplete="off"></label></div>
+      <button type="submit" class="btn primary">Send it over</button>
+      <p class="lead-msg" role="status"></p>
+    </form>
+    <p class="cta-proof">or email work@rytisbalys.com &middot; every rated job 5.0 &middot; <a href="https://www.upwork.com/freelancers/rytis" rel="nofollow noopener" target="_blank">verify on Upwork</a></p>
+  </div>
+
   <h2>troubleshooting guides</h2>
   <ul>
     <li><a href="/fbq-is-not-defined-delay-javascript-fix" class="guide-link">fbq is not defined - your caching plugin is killing the Meta Pixel</a></li>
@@ -184,7 +262,48 @@
     <a class="btn" href="https://github.com/rytisdev-commits/server-side-conversion-tracking" rel="noopener">github case study</a>
   </div>
 
-  <footer>MB Euruvizija · Vilnius, Lithuania (EET) · worldwide, remote · <a href="/lt/" style="color:#4d5b6b">LT</a></footer>
+  <footer>MB Euruvizija · Vilnius, Lithuania (EET) · worldwide, remote · <a href="/lt/" style="color:#7d8a9a">LT</a></footer>
 </div>
+<script>
+(function(){
+  var f=document.getElementById('leadForm'); if(!f) return;
+  var t0=Date.now(), msg=f.querySelector('.lead-msg'), btn=f.querySelector('button');
+  function picked(name){
+    return Array.prototype.slice.call(f.querySelectorAll('input[name="'+name+'"]:checked'))
+      .map(function(i){return i.value;}).join(', ');
+  }
+  function num(v){ v=String(v||'').replace(/[^0-9.]/g,''); return v===''?null:parseFloat(v); }
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var np=num(f.n_platform.value), nb=num(f.n_backend.value), gap=null;
+    if(np!==null&&nb!==null&&np>0) gap=Math.round(Math.abs(np-nb)/np*100);
+    var d={email:f.email.value.trim(),site:f.site.value.trim(),details:f.details.value.trim(),
+           where:picked('where'),platform:picked('platform'),
+           n_platform:np,n_backend:nb,gap:gap,
+           company:f.company.value,dt:Date.now()-t0,page:location.pathname};
+    if(!d.email||!d.site){ msg.className='lead-msg err'; msg.textContent='Email and site are both needed.'; return; }
+    btn.disabled=true; msg.className='lead-msg'; msg.textContent='Sending...';
+    fetch('https://rb-form.peporalabs.workers.dev/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)})
+      .then(function(r){ return r.json().then(function(j){ return {ok:r.ok&&j.ok, j:j}; }); })
+      .then(function(res){
+        if(res.ok){
+          msg.className='lead-msg ok';
+          msg.textContent = gap===null
+            ? 'Got it. I read every one of these myself and reply, usually the same day.'
+            : (gap<10
+                ? 'Got it. That is a '+gap+'% gap, which is inside normal loss - I will tell you straight if there is nothing to fix.'
+                : 'Got it. That is a '+gap+'% gap, well past normal loss. I will come back with the likely cause, usually the same day.');
+          f.reset();
+        }
+        else { throw new Error(res.j&&res.j.error||'failed'); }
+      })
+      .catch(function(){
+        msg.className='lead-msg err';
+        msg.innerHTML='That did not go through. Email work@rytisbalys.com instead and I will pick it up.';
+        btn.disabled=false;
+      });
+  });
+})();
+</script>
 </body>
 </html>
