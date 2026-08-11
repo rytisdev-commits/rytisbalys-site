@@ -12,24 +12,24 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Your ChatGPT Traffic Is Hiding in Direct: How to Track AI Conversions in GA4</title>
-<meta name="description" content="Most ChatGPT and AI assistant traffic lands in GA4 as Direct. What you can recover server-side, what you can&#x27;t, and how to measure both honestly.">
-<link rel="canonical" href="https://rytisbalys.com/track-ai-conversions-ga4">
+<title>GEO Gets You Cited in AI Answers. Proving It Converts Is a Different Job.</title>
+<meta name="description" content="GEO tools show you get cited in AI answers. Your client&#x27;s GA4 files AI buyers under Direct. How agencies can prove GEO actually drives revenue.">
+<link rel="canonical" href="https://rytisbalys.com/prove-geo-roi">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Your ChatGPT Traffic Is Hiding in Direct: How to Track AI Conversions in GA4">
-<meta property="og:description" content="Most ChatGPT and AI assistant traffic lands in GA4 as Direct. What you can recover server-side, what you can&#x27;t, and how to measure both honestly.">
-<meta property="og:url" content="https://rytisbalys.com/track-ai-conversions-ga4">
+<meta property="og:title" content="GEO Gets You Cited in AI Answers. Proving It Converts Is a Different Job.">
+<meta property="og:description" content="GEO tools show you get cited in AI answers. Your client&#x27;s GA4 files AI buyers under Direct. How agencies can prove GEO actually drives revenue.">
+<meta property="og:url" content="https://rytisbalys.com/prove-geo-roi">
 <meta property="og:image" content="https://rytisbalys.com/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "TechArticle",
-  "headline": "Your ChatGPT Traffic Is Hiding in Direct: How to Track AI Conversions in GA4",
-  "description": "Most ChatGPT and AI assistant traffic lands in GA4 as Direct. What you can recover server-side, what you can't, and how to measure both honestly.",
-  "url": "https://rytisbalys.com/track-ai-conversions-ga4",
-  "mainEntityOfPage": "https://rytisbalys.com/track-ai-conversions-ga4",
+  "headline": "GEO Gets You Cited in AI Answers. Proving It Converts Is a Different Job.",
+  "description": "GEO tools show you get cited in AI answers. Your client's GA4 files AI buyers under Direct. How agencies can prove GEO actually drives revenue.",
+  "url": "https://rytisbalys.com/prove-geo-roi",
+  "mainEntityOfPage": "https://rytisbalys.com/prove-geo-roi",
   "inLanguage": "en",
   "datePublished": "2026-08-11",
   "dateModified": "2026-08-11",
@@ -52,34 +52,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Why does ChatGPT traffic show up as Direct in GA4?",
+      "name": "Can GEO tools like Profound, Peec or Otterly measure conversions?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "A large share of clicks from AI assistants arrive with no referrer, because the click happens in a mobile app or in-app browser, or the user copies the link into a new tab. With no referrer and no UTMs, GA4 has nothing to classify, so the session lands in Direct."
+        "text": "No. They measure whether and how a brand appears in AI answers. Connecting those answers to orders needs tracking on the client's own site and server, which is a separate build."
       }
     },
     {
       "@type": "Question",
-      "name": "Does GA4's new AI Assistant channel solve this?",
+      "name": "Can I show AI-referred revenue for months before the tracking was set up?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Only partly. It is forward-only, so it reclassifies nothing in your history, and it misses several engines including Perplexity, Claude and Meta AI. A custom channel group applies retroactively to data you have already collected and can cover the engines the native channel skips."
+        "text": "Partly. A custom GA4 channel group applies retroactively to referrer-carrying sessions the property already collected, so past AI traffic gets labeled. No-referrer clicks from before the server-side layer went in stay unrecoverable."
       }
     },
     {
       "@type": "Question",
-      "name": "Can you track people who read an AI answer but never click?",
+      "name": "Doesn't GA4's native AI Assistant channel solve this?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Not at the individual level, and nobody can. That layer is measured in aggregate: a post-purchase survey asking where the customer first heard about you, plus branded-search lift tracked against your AI visibility. The output is directional, not a per-order attribution line."
+        "text": "Only partly. It classifies traffic forward-only, skips engines like Perplexity, Claude and Meta AI, and leaves AI Overviews clicks inside Organic Search. A custom channel group applies retroactively and covers more engines."
       }
     },
     {
       "@type": "Question",
-      "name": "How much invisible AI traffic can server-side tracking recover?",
+      "name": "Can you attribute buyers who saw the brand in an AI answer but never clicked?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Roughly half of the AI clicks that are currently invisible, based on how no-referrer shares break down. The exact share depends on your traffic mix and device split, so be suspicious of anyone quoting a fixed percentage."
+        "text": "Not per person, and no vendor can. In aggregate yes, through a post-purchase survey with an AI option and branded search lift, always labeled as modeled, never mixed into the counted line."
       }
     }
   ]
@@ -164,31 +164,41 @@
 <body>
 <div class="wrap">
   <div class="crumb"><a href="/">rytisbalys.com</a> <span style="color:#7d8a9a">/ troubleshooting</span></div>
-  <h1>Your ChatGPT Traffic Is Hiding in Direct: How to Track AI Conversions in GA4</h1>
-<p>Someone asks ChatGPT for the best product in your category, gets a shortlist with your brand on it, opens your site and buys. In GA4 that sale shows up as Direct. No source, no credit. The same thing happens with Perplexity, Gemini, Copilot and Claude.</p><p>I build conversion tracking for ecommerce brands for a living, mostly GA4, Meta Pixel with CAPI, and server-side setups on sGTM. Over the last year the question I get most often has changed from "why doesn't my ROAS match" to "how much of our revenue is actually coming from AI." The honest answer is that with a stock GA4 setup you can't tell, and this page explains why, what's genuinely fixable, and what can only be measured in aggregate.</p>
-  <h2>Why AI conversions get filed under Direct</h2>
-<p>The core problem is the referrer. A big share of clicks from AI assistants arrives at your site with no referrer at all, because the click happens inside a mobile app, an in-app browser, or a context that strips the header, or because the user copies the link and pastes it into a new tab. Vendor measurements of that no-referrer share range from roughly 36% to 70% depending on the assistant and the platform. When GA4 sees a session with no referrer and no UTMs, it has nothing to classify, so the session becomes Direct.</p><p>Even the clicks that do keep a referrer haven't been safe. For most of GA4's life, traffic from chatgpt.com or perplexity.ai landed in Referral or Unassigned, where nobody thinks to look for it.</p><p>Then Safari makes it worse. ITP caps client-set cookies at seven days, so a shopper who found you through an AI answer and comes back to buy ten days later shows up as a brand new Direct visitor. The AI touchpoint existed, your analytics just couldn't hold onto it long enough.</p>
-  <h2>GA4's native AI channel doesn't close the gap</h2>
-<p>Google shipped a native AI channel in GA4 around May 2026, and it's a real improvement, but you should know its limits before assuming the problem is solved. It's forward-only, so it won't reclassify any of your history. It misses several engines outright, including Perplexity, Claude and Meta AI. And clicks from Google's own AI Overviews stay inside Organic Search, which means a fast-growing AI surface is invisible inside your biggest channel.</p><p>A custom channel group, by contrast, applies retroactively to data you've already collected. That alone is worth setting up even before touching anything server-side, because it lets you see months of AI-referred sessions you didn't know you had.</p>
-  <h2>What you can prove and what you can't</h2>
-<p>I split AI attribution into two layers, because they behave completely differently and mixing them up is how vendors end up overpromising.</p><p>Layer 1 is deterministic: the user clicked something and landed on your site. Some of those clicks carry a usable signal and some don't, but the ones that do can be captured and tied to revenue with normal tracking rigor.</p><p>Layer 2 is dark: the user saw your brand in an AI answer, never clicked anything, and bought later through search or by typing your URL. No tracking stack on earth can attribute that purchase to the AI answer at the individual level. It can only be measured in aggregate, and anyone telling you otherwise is selling you a dashboard.</p><p>Being clear about this line is the whole game. Layer 1 gets engineered. Layer 2 gets estimated honestly.</p>
-  <h2>Layer 1: catching the clicks server-side</h2>
-<p>The fix for Layer 1 lives on the server, not in the browser. At a high level: a server-side tagging container (sGTM, typically on Stape) inspects incoming traffic for the referrer hostnames and UTM patterns that identify AI assistants, writes that classification into durable first-party data, and forwards it downstream. GA4 gets a clean custom AI Assistant channel. Meta gets the same signal through the Conversions API, deduplicated against the browser pixel via event IDs, so your ads reporting sees AI-influenced purchases too.</p><p>Two caveats I'd rather you hear from me than discover later. First, cookie lifetime on Safari is not solved by moving the cookie to the server. HttpOnly doesn't bypass ITP, and CNAME-based setups get capped at about seven days. Long-lived first-party persistence needs a true same-origin path, meaning a reverse proxy or a tag gateway on your own domain. Second, if you sell in the EU, all of this runs behind Consent Mode v2. A cookie set by your server is still a cookie under ePrivacy, and consent-gating it properly is part of the build.</p><p>One more honest limitation: when an AI model cites you organically, you don't control the URL it emits, so you can't inject UTMs into it. Classification there rests on referrer plus first-party stitching, which is strong but probabilistic at the edges.</p><p>What does this recover? Roughly half of the AI clicks that were previously invisible, going by how the no-referrer shares break down. The exact share depends on your traffic mix and device split, which is why I won't quote a fixed percentage, and you should be suspicious of anyone who does.</p>
-  <h2>Layer 2: measuring the buyers who never click</h2>
-<p>For the no-click layer I use two instruments. A post-purchase survey with the question "Where did you FIRST hear about us?" including an explicit AI assistant option, placed where response rates are decent (order confirmation works well). And branded-search lift tracked against your AI visibility over time, since people who see you in an answer tend to google your name days later.</p><p>Neither gives you a per-order attribution line, and I present the output as directional. But run consistently, the survey alone usually surprises brands. The AI option gets picked far more often than their analytics would ever suggest, which is exactly the gap this whole approach exists to expose.</p>
-  <h2>Where this sits next to GEO tools</h2>
-<p>If you're working on AI visibility, you may already use Profound, Peec or Otterly. Those tools answer one question: do you appear in AI answers, and how often. Useful, and I'm not competing with them. What almost nobody does is the layer underneath, attributing actual conversions server-side. They rank you in the answer. I prove it converts. For GEO and SEO agencies that's the difference between showing a client a visibility chart and showing them revenue.</p>
+  <h1>GEO Gets You Cited in AI Answers. Proving It Converts Is a Different Job.</h1>
+<p>You did the GEO work and it shows. The client turns up in a third of relevant ChatGPT answers and the trend line in Profound points the right way. Then on the monthly call the client asks what revenue that produced, and you have nothing to point at in their GA4. The buyers are in there, they're just filed under Direct.</p>
+<p>That's the gap this article is about, and it's the difference between a GEO engagement that renews and one that gets read as a cost center.</p>
+  <h2>Visibility tools answer a different question</h2>
+<p>Profound, Peec and Otterly are good at what they do, which is presence. They tell you which prompts surface the brand, how often, in what position, next to which competitors. What none of them can tell you is whether any of those answers produced an order, because they don't sit on the client's site and they never see a transaction. So the GEO report says share of answer is up 40 percent, the client's finance person asks what that's worth in money, and from the tool side the honest answer is nobody knows.</p>
+<p>That's not a flaw in the tools, it's a boundary. Everything past the click has to live on the client's site and server, and that build is what I do.</p>
+  <h2>Why the client's GA4 makes GEO look like nothing</h2>
+<p>When someone clicks through to the site from ChatGPT, Perplexity, Gemini, Copilot or Claude, the click often arrives with no referrer. Depending on the assistant and the platform, measurements put that no-referrer share anywhere between a third and 70 percent. GA4 gets a session with no source, so it files it under Direct. The buyer your GEO work produced looks identical to someone who typed the URL from memory.</p>
+<p>GA4 did ship a <a href="/ga4-ai-assistant-channel">native AI Assistant channel</a> in May 2026, but it only classifies traffic going forward, skips engines including Perplexity, and leaves AI Overviews clicks inside Organic Search, so it can't give you a before-and-after view of the engagement.</p>
+<p>I went through the GA4 mechanics in more depth in <a href="/track-ai-conversions-ga4">Your ChatGPT Traffic Is Hiding in Direct</a> if you want to sanity-check a client's property yourself.</p>
+  <h2>The proof layer</h2>
+<p>The build has a clicked side and a no-click side, and the report has to keep them separate.</p>
+<p>The clicked side starts with a custom channel group in GA4. Unlike the native channel, a custom channel group applies retroactively to data the property has already collected, and it can cover the engines the native definition skips. For an agency that's usually the first useful artifact of the whole exercise: an honest view of AI-referred traffic across the months before and after the GEO work started, pulled from data that was sitting there all along.</p>
+<p>On top of that goes a server-side layer. I run it on server-side GTM, usually through Stape. It detects AI assistant referrers and UTMs where they survive, and persists the attribution first-party so it survives longer than a normal browser cookie would. Conversions then flow into the custom AI channel in GA4 and into Meta CAPI, deduplicated against the browser pixel so nothing counts twice. In practice this recovers roughly half of the AI clicks that are currently invisible. I don't promise a fixed percentage and I'd be careful with anyone who does. Safari's tracking prevention doesn't care that a cookie was set server-side. EU traffic runs consent-gated under Consent Mode v2, since a server-set cookie is still a cookie. And you can't force UTMs into a URL a model writes on its own, so the edges of this stay probabilistic no matter who builds it. The clicked layer is hard data with honest edges, and the report says so.</p>
+<p>The hostname lists and the sGTM configuration stay out of this article on purpose. Keeping that current as engines change is a fair part of what clients pay for.</p>
+  <h2>The layer nobody can track per person</h2>
+<p>A big share of AI influence never produces a click at all. Someone asks an assistant for the best option in the client's category, sees the brand in the answer, closes the tab, and buys a week later through branded search or by typing the URL. There is no per-person attribution for that. I can't do it and neither can any vendor, whatever their deck says.</p>
+<p>In aggregate it is measurable. A post-purchase survey asking where the buyer first heard about the brand, with an AI assistant option in the list, read alongside branded search lift over the engagement period. Those numbers go into the report labeled modeled and directional, and they hold up fine in that role because counted numbers sit right next to them.</p>
+  <h2>What the monthly client report can honestly claim</h2>
+<p>Two lines, kept apart.</p>
+<p>Counted: sessions and conversions attributed to AI engines through the custom channel group and the server-side recovery. Real orders with a mechanical reason for the attribution, which is why they survive scrutiny.</p>
+<p>Modeled: survey-attributed share of new customers plus branded search lift. Labeled modeled every time it appears and never summed into the counted line.</p>
+<p>An agency reporting this way has an answer to the revenue question that a skeptical CFO can poke at without anything falling over. The client sees the visibility graph and a revenue number in the same document with a defensible link between them, and that's the point where GEO stops being the line item someone questions every quarter.</p>
+<p>I do this under the agency's name when that's the arrangement. The client sees your report, I build what's underneath it.</p>
   <h2>Who this is for</h2>
-<p>Ecommerce brands doing meaningful volume who suspect AI is already sending them buyers, and GEO or SEO agencies that need to prove their work drives sales. If your GA4 Direct channel has been quietly growing and nobody can explain why, that's usually the tell.</p>
+<p>GEO and SEO agencies whose clients have started asking the revenue question, and in-house SEO leads who need to defend an AI visibility budget with something firmer than share of answer. If your visibility numbers are good and the client's GA4 says nothing happened, that gap is what I fix. Write me through rytisbalys.com and I'll start by looking at what the client's property already shows.</p>
   <div class="faq">
   <h2>FAQ</h2>
-    <details><summary>Why does ChatGPT traffic show up as Direct in GA4?</summary><p>A large share of clicks from AI assistants arrive with no referrer, because the click happens in a mobile app or in-app browser, or the user copies the link into a new tab. With no referrer and no UTMs, GA4 has nothing to classify, so the session lands in Direct.</p></details>
-    <details><summary>Does GA4's new AI Assistant channel solve this?</summary><p>Only partly. It is forward-only, so it reclassifies nothing in your history, and it misses several engines including Perplexity, Claude and Meta AI. A custom channel group applies retroactively to data you have already collected and can cover the engines the native channel skips.</p></details>
-    <details><summary>Can you track people who read an AI answer but never click?</summary><p>Not at the individual level, and nobody can. That layer is measured in aggregate: a post-purchase survey asking where the customer first heard about you, plus branded-search lift tracked against your AI visibility. The output is directional, not a per-order attribution line.</p></details>
-    <details><summary>How much invisible AI traffic can server-side tracking recover?</summary><p>Roughly half of the AI clicks that are currently invisible, based on how no-referrer shares break down. The exact share depends on your traffic mix and device split, so be suspicious of anyone quoting a fixed percentage.</p></details>
+    <details><summary>Can GEO tools like Profound, Peec or Otterly measure conversions?</summary><p>No. They measure whether and how a brand appears in AI answers. Connecting those answers to orders needs tracking on the client's own site and server, which is a separate build.</p></details>
+    <details><summary>Can I show AI-referred revenue for months before the tracking was set up?</summary><p>Partly. A custom GA4 channel group applies retroactively to referrer-carrying sessions the property already collected, so past AI traffic gets labeled. No-referrer clicks from before the server-side layer went in stay unrecoverable.</p></details>
+    <details><summary>Doesn't GA4's native AI Assistant channel solve this?</summary><p>Only partly. It classifies traffic forward-only, skips engines like Perplexity, Claude and Meta AI, and leaves AI Overviews clicks inside Organic Search. A custom channel group applies retroactively and covers more engines.</p></details>
+    <details><summary>Can you attribute buyers who saw the brand in an AI answer but never clicked?</summary><p>Not per person, and no vendor can. In aggregate yes, through a post-purchase survey with an AI option and branded search lift, always labeled as modeled, never mixed into the counted line.</p></details>
   </div>
   <div class="cta">
-<p>I build this layer in production, on my own store and for clients. If your Direct channel keeps growing and you suspect AI is part of it, send your numbers below and I will tell you what your GA4 is most likely hiding, no charge. <b>If your setup already separates AI traffic cleanly, I will say so.</b></p>
+<p>I build this proof layer for agencies, under your name when that is the arrangement. If a client has started asking the revenue question, send your numbers below and I will tell you what their GA4 is most likely hiding, no charge. <b>If their setup already answers it, I will say so.</b></p>
     <form class="lead" id="leadForm" novalidate>
       <fieldset class="chip-set">
         <legend class="chip-label">Which numbers disagree</legend>
@@ -226,9 +236,9 @@
     <div class="related">
     <h2>related guides</h2>
     <ul>
-      <li><a href="/server-side-gtm-what-it-fixes">Server-Side GTM: what it actually fixes (and what it doesn't)</a></li>
-      <li><a href="/ga4-purchases-attributed-stripe-paypal-direct-fix">Fix GA4 purchases showing as stripe.com, paypal.com or (direct)</a></li>
+      <li><a href="/track-ai-conversions-ga4">Your ChatGPT traffic is hiding in Direct: how to track AI conversions in GA4</a></li>
       <li><a href="/ga4-ai-assistant-channel">GA4's new AI Assistant channel: what it catches and what it misses</a></li>
+      <li><a href="/server-side-gtm-what-it-fixes">Server-Side GTM: what it actually fixes (and what it doesn't)</a></li>
     </ul>
   </div>
 

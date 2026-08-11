@@ -6,6 +6,8 @@ I find the purchases your tracking silently drops: tracking audits that reconcil
 
 ## Troubleshooting guides
 
+- [GA4's New AI Assistant Channel: What It Catches and What It Misses](https://rytisbalys.com/ga4-ai-assistant-channel): What the native GA4 AI channel catches, the engines and history it misses, and how a retroactive custom channel group plus server-side tracking closes the gaps.
+- [GEO Gets You Cited in AI Answers. Proving It Converts Is a Different Job.](https://rytisbalys.com/prove-geo-roi): Why GEO visibility never shows up as revenue in client GA4, and the server-side proof layer agencies use to report counted and modeled AI conversions honestly.
 - [Your ChatGPT Traffic Is Hiding in Direct: How to Track AI Conversions in GA4](https://rytisbalys.com/track-ai-conversions-ga4): Why AI assistant traffic lands in Direct, the server-side fix that recovers the clicks, and the honest way to measure buyers who never click.
 - [GA4 events missing? A plugin may have wrapped your gtag](https://rytisbalys.com/ga4-events-missing-plugin-wrapped-gtag): Why a wrapped gtag silently drops events, why a 204 proves nothing, and how to tell the two failure modes apart.
 - [Your cookie banner blocks nothing - the 60-second check](https://rytisbalys.com/consent-banner-not-blocking-tracking)
