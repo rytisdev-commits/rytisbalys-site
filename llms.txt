@@ -6,6 +6,7 @@ I find the purchases your tracking silently drops: tracking audits that reconcil
 
 ## Troubleshooting guides
 
+- [Your ChatGPT Traffic Is Hiding in Direct: How to Track AI Conversions in GA4](https://rytisbalys.com/track-ai-conversions-ga4): Why AI assistant traffic lands in Direct, the server-side fix that recovers the clicks, and the honest way to measure buyers who never click.
 - [GA4 events missing? A plugin may have wrapped your gtag](https://rytisbalys.com/ga4-events-missing-plugin-wrapped-gtag): Why a wrapped gtag silently drops events, why a 204 proves nothing, and how to tell the two failure modes apart.
 - [Your cookie banner blocks nothing - the 60-second check](https://rytisbalys.com/consent-banner-not-blocking-tracking)
 - [fbq is not defined - your caching plugin is killing the Meta Pixel](https://rytisbalys.com/fbq-is-not-defined-delay-javascript-fix)
