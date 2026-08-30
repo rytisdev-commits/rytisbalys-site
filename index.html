@@ -33,7 +33,7 @@
       "jobTitle": "Server-side conversion tracking engineer",
       "url": "https://rytisbalys.com/",
       "email": "work@rytisbalys.com",
-      "knowsAbout": ["Meta Conversions API", "Meta Pixel", "Google Analytics 4", "Google Tag Manager", "server-side tagging", "Consent Mode v2", "conversion tracking", "attribution", "AI traffic attribution", "LLM traffic attribution"],
+      "knowsAbout": ["Meta Conversions API", "Meta Pixel", "Google Analytics 4", "Google Tag Manager", "server-side tagging", "Consent Mode v2", "conversion tracking", "attribution"],
       "sameAs": ["https://github.com/rytisdev-commits"],
       "worksFor": {"@type": "Organization", "name": "MB Euruvizija", "address": {"@type": "PostalAddress", "addressLocality": "Vilnius", "addressCountry": "LT"}}
     },
@@ -41,7 +41,7 @@
       "@type": "ProfessionalService",
       "name": "Rytis Balys - Conversion Tracking & Attribution",
       "url": "https://rytisbalys.com/",
-      "description": "Tracking audits that reconcile ad platform numbers against real backend orders, server-side tracking builds (Meta Conversions API with event_id deduplication, GA4, server-side GTM), AI / LLM traffic attribution (ChatGPT, Perplexity, Gemini), and Shopify checkout tracking migrations.",
+      "description": "Tracking audits that reconcile ad platform numbers against real backend orders, server-side tracking builds (Meta Conversions API with event_id deduplication, GA4, server-side GTM), and Shopify checkout tracking migrations.",
       "founder": {"@id": "https://rytisbalys.com/#rytis"},
       "areaServed": "Worldwide",
       "email": "work@rytisbalys.com"
@@ -163,7 +163,6 @@
   <ul>
     <li>Tracking audits that reconcile platform numbers against real backend orders <span>- diagnosis first, with severity and effort for every finding</span></li>
     <li>Server-side tracking builds <span>- Meta Conversions API with event_id deduplication, GA4, server-side GTM (Stape), Consent Mode v2</span></li>
-    <li>AI / LLM traffic attribution <span>- ChatGPT, Perplexity and Gemini buyers usually land in GA4 as Direct; I recover them server-side into a dedicated AI Assistant channel</span></li>
     <li>Firefighting <span>- pixels not firing, double-counted purchases, conversions stuck at zero, gclid/attribution loss</span></li>
     <li>Shopify checkout migrations that keep tracking alive <span>- checkout.liquid / legacy scripts to Web Pixels, with event_id dedup and parallel-run verification</span></li>
     <li>Also: mobile page-speed audits <span>- Core Web Vitals for Shopify and WordPress stores, same verify-everything approach</span></li>
@@ -207,7 +206,6 @@
     <li>Pixel or conversion tracking fix <span>- $250-500</span></li>
     <li>Add Conversions API with deduplication <span>- $400-700</span></li>
     <li>Attribution or reconciliation work <span>- $600-1200</span></li>
-    <li>AI / LLM attribution build <span>- $600-1200</span></li>
     <li>Ongoing tracking ownership <span>- $700-1800/mo</span></li>
   </ul>
   <h2 id="start">start here</h2>
@@ -321,7 +319,7 @@
            fax_line:f.fax_line.value, dt:Date.now()-t0, page:location.pathname};
 
     btn.disabled=true; msg.className='lead-msg'; msg.textContent='Sending...';
-    fetch('https://rb-form.peporalabs.workers.dev/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)})
+    fetch('https://rb-form.formos-ops.workers.dev/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)})
       .then(function(r){ return r.json().then(function(j){ return {ok:r.ok&&j.ok, j:j}; }); })
       .then(function(res){
         if(!res.ok){ throw new Error((res.j&&res.j.error)||'failed'); }
