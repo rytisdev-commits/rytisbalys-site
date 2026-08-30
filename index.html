@@ -344,6 +344,12 @@
           : (gap<10
               ? 'Got it. A '+gap+'% gap is inside normal loss - I will tell you straight if there is nothing to fix.'
               : 'Got it. I will come back with the likely cause of that '+gap+'% gap, usually the same day.');
+        var bk=document.createElement('a');
+        bk.href='https://calendar.google.com/calendar/appointments/schedules/AcZssZ1LzwWfm37HWCuNFrwV-sWjHKMuSWugdCjbgo1P6MzEiQabGYLb9Qz5T9Vjb85kJ9Mkp0blhlG8';
+        bk.target='_blank'; bk.rel='noopener';
+        bk.textContent='Fastest path: book 20 min and show me your setup live - same free diagnosis, sooner.';
+        bk.style.cssText='display:block;margin-top:10px;font-weight:600';
+        msg.appendChild(bk);
         f.reset(); gapEl.hidden=true;
       })
       .catch(function(err){
