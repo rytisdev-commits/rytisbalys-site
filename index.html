@@ -135,6 +135,8 @@
   .lead button[disabled]{opacity:.6;cursor:default}
   .lead-msg{margin:12px 0 0;font-family:var(--mono);font-size:13px;min-height:1em}
   .lead-msg.ok{color:var(--green)} .lead-msg.err{color:var(--red)}
+  .lead-or{margin-top:12px;font-size:14px;color:#555}
+  .lead-or a{font-weight:600}
 </style>
 </head>
 <body>
@@ -255,6 +257,7 @@
       <div class="lead-hp" aria-hidden="true"><label>Leave this empty<input type="text" name="fax_line" tabindex="-1" autocomplete="off"></label></div>
       <button type="submit" class="btn primary">Get the likely cause</button>
       <p class="lead-msg" role="status"></p>
+      <p class="lead-or">Or skip the form: <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1LzwWfm37HWCuNFrwV-sWjHKMuSWugdCjbgo1P6MzEiQabGYLb9Qz5T9Vjb85kJ9Mkp0blhlG8" target="_blank" rel="noopener">book 30 min with me</a> and show me the setup live. Same free diagnosis.</p>
     </form>
     <p class="cta-proof">or email work@rytisbalys.com &middot; every rated job 5.0 &middot; <a href="https://www.upwork.com/freelancers/rytis" rel="nofollow noopener" target="_blank">verify on Upwork</a></p>
   </div>
@@ -347,7 +350,7 @@
         var bk=document.createElement('a');
         bk.href='https://calendar.google.com/calendar/appointments/schedules/AcZssZ1LzwWfm37HWCuNFrwV-sWjHKMuSWugdCjbgo1P6MzEiQabGYLb9Qz5T9Vjb85kJ9Mkp0blhlG8';
         bk.target='_blank'; bk.rel='noopener';
-        bk.textContent='Fastest path: book 20 min and show me your setup live - same free diagnosis, sooner.';
+        bk.textContent='Fastest path: book 30 min and show me your setup live - same free diagnosis, sooner.';
         bk.style.cssText='display:block;margin-top:10px;font-weight:600';
         msg.appendChild(bk);
         f.reset(); gapEl.hidden=true;
