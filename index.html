@@ -129,6 +129,7 @@
     <div class="row who"><input type="text" name="name" placeholder="Your name" autocomplete="given-name" required><input type="email" name="email" placeholder="you@company.com" autocomplete="email" required><button type="submit">Start</button></div>
     <div class="row txt" hidden><textarea name="text" rows="2" placeholder="Describe what you see, or ask about prices and timelines"></textarea><button type="submit">Send</button></div>
     <div class="row act" hidden><button type="button" class="pass">Pass it to Rytis</button><button type="button" class="more chip">I have another question</button></div>
+    <div class="row done" hidden><button type="button" class="back">Back to the page</button></div>
     <p class="hint">I read every conversation myself and reply <b>within 6 hours, usually under 1 hour</b>. Or message me directly: <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> (messages, not calls) &middot; <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a></p>
   </form>
 </div>
@@ -211,6 +212,7 @@
     <div class="row who"><input type="text" name="name" placeholder="Your name" autocomplete="given-name" required><input type="email" name="email" placeholder="you@company.com" autocomplete="email" required><button type="submit">Start</button></div>
     <div class="row txt" hidden><textarea name="text" rows="2" placeholder="Describe what you see, or ask about prices and timelines"></textarea><button type="submit">Send</button></div>
     <div class="row act" hidden><button type="button" class="pass">Pass it to Rytis</button><button type="button" class="more chip">I have another question</button></div>
+    <div class="row done" hidden><button type="button" class="back">Back to the page</button></div>
     <p class="hint">I read every conversation myself and reply <b>within 6 hours, usually under 1 hour</b>. Or message me directly: <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> (messages, not calls) &middot; <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a></p>
   </form>
 </div>
@@ -232,7 +234,7 @@
   var HANDOFF=/Anything else, or should I pass this to Rytis for you\?|Want me to pass this to Rytis/;
   function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
   function setup(root){
-    var log=root.querySelector('.log'), f=root.querySelector('form'), who=f.querySelector('.who'), txt=f.querySelector('.txt'), act=f.querySelector('.act');
+    var log=root.querySelector('.log'), f=root.querySelector('form'), who=f.querySelector('.who'), txt=f.querySelector('.txt'), act=f.querySelector('.act'), done=f.querySelector('.done');
     var st={name:'',email:'',hist:[],sent:false};
     function add(role,text){var d=document.createElement('div');d.className='m '+role;d.innerHTML=esc(text);log.appendChild(d);log.scrollTop=log.scrollHeight;return d;}
     function wait(){var w=document.createElement('div');w.className='wait';w.textContent='Thinking...';log.appendChild(w);log.scrollTop=log.scrollHeight;return w;}
@@ -244,7 +246,7 @@
       fetch(FORM,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:st.email,site:'see chat',details:transcript,where:'chat',fax_line:'',dt:9000,page:location.pathname,gclid:gclid,landing:landing,source:'home-chat'})})
         .then(function(r){return r.json();}).then(function(j){ w.remove(); if(!j.ok) throw new Error('x');
           try{ gtag('event','conversion',{'send_to':'AW-18424603738/M34RCLm1x-wcENrIxNFE','value':50,'currency':'EUR'}); gtag('event','lead_form_submit',{source:'home-chat'}); }catch(e){}
-          add('bot','Passed to Rytis. He will reach out to you at '+st.email+' within 6 hours, usually under 1 hour.');
+          add('bot','Passed to Rytis. He will reach out to you at '+st.email+' within 6 hours, usually under 1 hour. Closing the chat here, you can come back any time.'); show(done,true);
         }).catch(function(){ w.remove(); st.sent=false; add('err','That did not go through. Email work@rytisbalys.com with what you wrote above and Rytis will pick it up.'); show(txt,true); });
     }
     f.addEventListener('submit',function(e){
@@ -271,6 +273,7 @@
     var bd=null; function openBig(){ if(root.classList.contains('open')) return; bd=document.createElement('div'); bd.className='backdrop'; bd.addEventListener('click',closeBig); document.body.appendChild(bd); root.classList.add('open'); document.body.classList.add('locked'); log.scrollTop=log.scrollHeight; }
     function closeBig(){ root.classList.remove('open'); document.body.classList.remove('locked'); if(bd){bd.remove();bd=null;} }
     root.querySelector('.min').addEventListener('click',closeBig);
+    f.querySelector('.back').addEventListener('click',function(){ closeBig(); root.scrollIntoView({block:'center'}); });
     document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeBig(); });
     f.querySelector('.pass').addEventListener('click',submitToRytis);
     f.querySelector('.more').addEventListener('click',function(){ show(act,false); f.text.focus(); });
