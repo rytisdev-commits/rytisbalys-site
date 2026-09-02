@@ -98,8 +98,8 @@
   .ask button.pass{border-radius:999px}
   .card.open{position:fixed;z-index:50;top:4vh;left:50%;transform:translateX(-50%);width:min(760px,94vw);height:92vh;box-shadow:0 30px 80px rgba(15,42,32,.35)} .card.open .log{flex:1;max-height:none} .card.open .cbar{display:flex}
   .cbar{display:none;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--line);font-size:14px;font-weight:700} .cbar button{border:0;background:var(--bot);color:var(--ink);font:600 13px var(--font);padding:7px 12px;border-radius:999px;cursor:pointer}
-  .backdrop{position:fixed;inset:0;background:rgba(15,42,32,.45);z-index:49;backdrop-filter:blur(2px)} body.locked{overflow:hidden}
-  @media (max-width:900px){.card.open{top:0;height:100vh;width:100vw;border-radius:0}}
+  .backdrop{position:fixed;inset:0;background:rgba(15,42,32,.45);z-index:49;backdrop-filter:blur(2px)} body.locked{overflow:hidden;position:fixed;width:100%}
+  @media (max-width:900px){.card.open{top:0;height:100vh;height:100dvh;width:100vw;border-radius:0}}
   .hint{font-size:12.5px;color:var(--muted)} .hint b{color:var(--ink)} .hint a{text-decoration:none;font-weight:600}
   footer{font-size:12px;color:var(--muted);text-align:center;padding:48px 16px 24px} footer a{color:var(--muted)}
   .fnav{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 22px;margin-bottom:16px;font-size:14px} .fnav a{color:var(--ink);text-decoration:none;font-weight:600}
@@ -107,7 +107,7 @@
 </style>
 </head>
 <body>
-<div class="bar"><b>Free first read of your tracking numbers.</b> <span class="bx">Tell my assistant what you see, I reply within 6 hours, usually under 1 hour.</span><a href="#chat1">Get your free audit &rarr;</a></div>
+<div class="bar"><b>Free audit of your tracking numbers.</b> <span class="bx">Tell my assistant what you see, I reply within 6 hours, usually under 1 hour.</span><a href="#chat1">Get your free audit &rarr;</a></div>
 <header><div class="w">
   <img src="/rytis.jpg" alt="Rytis Balys">
   <span class="who">Rytis Balys<small>Conversion tracking engineer, replies himself</small></span>
@@ -148,7 +148,7 @@
 </div></section>
 
 <section><div class="w">
-  <div class="sh"><h2>What your reports claim vs what was actually captured</h2><p class="sub">Same store, same month, three answers. Your ads optimise on whichever one they get.</p></div>
+  <div class="sh"><h2>What your reports claim vs what was actually captured</h2><p class="sub">A typical case, same store, same month, three answers. Your ads optimise on whichever one they get.</p></div>
   <div class="grid3"><div class="tile"><div class="tl">Meta says</div><div class="tn r">142</div><div class="tt">double counting, no event_id dedup</div></div><div class="tile"><div class="tl">GA4 says</div><div class="tn o">98</div><div class="tt">consent and redirect losses on top</div></div><div class="tile"><div class="tl">Backend paid orders</div><div class="tn g">76</div><div class="tt">the truth</div></div></div>
 </div></section>
 
@@ -158,7 +158,7 @@
     <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>You own everything</h3><p>Containers, datasets and accounts stay in your name. I work inside them, never around them.</p></div>
     <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>Proved, not promised</h3><p>Every fix verified live with test orders and a before and after report you can check yourself.</p></div>
     <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>One person answers</h3><p>No handoffs, no account managers. You write to me, I write back, within 6 hours, usually under 1 hour.</p></div>
-    <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>Honest first read</h3><p>If your gap is under about 10%, I will tell you that you do not need me.</p></div>
+    <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>Honest free audit</h3><p>If your gap is under about 10%, I will tell you that you do not need me.</p></div>
   </div>
 </div></section>
 
@@ -167,20 +167,20 @@
     <div class="sh"><h2>How I work, step by step</h2><p class="sub">From the first message to the handoff. Nothing goes live without your say so.</p></div>
     <div class="steps">
       <div class="step"><div class="sn">1</div><div><h3>You describe what you see</h3><p>Through the assistant on this page, WhatsApp or email. Numbers help, but a plain sentence like &ldquo;Meta shows twice what Shopify has&rdquo; is enough to start.</p></div></div>
-      <div class="step"><div class="sn">2</div><div><h3>Free first read, within 6 hours</h3><p>I reply myself with the likely cause and what I would check first. If the gap is inside normal loss, I say so and we stop there.</p></div></div>
+      <div class="step"><div class="sn">2</div><div><h3>Free audit reply, within 6 hours</h3><p>I reply myself with the likely cause and what I would check first. If the gap is inside normal loss, I say so and we stop there.</p></div></div>
       <div class="step"><div class="sn">3</div><div><h3>Look inside, read access only</h3><p>Events Manager, GA4, GTM, Google Ads and the store, all read-only at this point. I list every finding with severity, effort and what it costs you in wasted spend.</p></div></div>
       <div class="step"><div class="sn">4</div><div><h3>One fixed price, agreed in writing</h3><p>You get one number for the whole fix before any work starts. 50% upfront, the rest when you see it working. No hourly surprises.</p></div></div>
       <div class="step"><div class="sn">5</div><div><h3>The fix, with a parallel run</h3><p>Nothing is switched off until the new setup proves itself next to the old one. Publish access only for this step, and only what the fix needs.</p></div></div>
       <div class="step"><div class="sn">6</div><div><h3>Proof you can check</h3><p>Test orders, cold-load tests, a reversal test, and confirmation on the platform side. You get a before and after report with screenshots.</p></div></div>
       <div class="step"><div class="sn">7</div><div><h3>Handoff and notes</h3><p>Written notes on what changed and why, so the next person does not break it. Access removed when you say.</p></div></div>
     </div>
-    <div class="need"><h3>What I need from you</h3><ul><li>Read access to Events Manager, GA4, Google Tag Manager and Google Ads</li><li>Store or site admin (Shopify collaborator, WordPress admin, or similar)</li><li>Any server-side tool already in place, such as Stape</li><li>Seven days of platform numbers next to real orders, if you have them handy</li></ul></div>
+    <div class="need"><h3>What I need once we agree on a fix</h3><ul><li>Read access to Events Manager, GA4, Google Tag Manager and Google Ads</li><li>Store or site admin (Shopify collaborator, WordPress admin, or similar)</li><li>Any server-side tool already in place, such as Stape</li><li>Seven days of platform numbers next to real orders, if you have them handy</li></ul></div>
   </div>
   <div id="prices">
     <div class="sh"><h2>You choose the scope</h2><p class="sub">Every job priced after I look inside, then fixed.</p></div>
     <div class="plans">
-      <div class="plan"><div class="pt">One-time fix</div><div class="pp">$250 to 700</div><p>A pixel or conversion tag repaired, or Conversions API added with deduplication. Usually 1 to 3 working days after access.</p></div>
-      <div class="plan hi"><div class="pt">Audit and fix</div><div class="pp">$600 to 1200</div><p>Platform numbers reconciled against real orders, every finding fixed in order of what it costs you. Includes the report.</p></div>
+      <div class="plan"><div class="pt">One-time fix</div><div class="pp">$250 to 700</div><p>A pixel or conversion tag repaired, or Conversions API added with deduplication. Usually 1 to 2 days after access, plus a day to verify.</p></div>
+      <div class="plan hi"><div class="pt">Deep audit and fix</div><div class="pp">$600 to 1200</div><p>Platform numbers reconciled against real orders, every finding fixed in order of what it costs you. Includes the report.</p></div>
       <div class="plan"><div class="pt">Ongoing ownership</div><div class="pp">$700 to 1800 / month</div><p>Someone watches the tracking every month and fixes it before you notice. Checkout updates, new apps, consent changes.</p></div>
     </div>
     <div class="need"><h3>Timelines, honestly</h3><ul><li>First read: within 6 hours, usually under 1 hour</li><li>Audit: 2 to 3 working days after access</li><li>Single fix: 1 to 2 days, plus a day to verify</li><li>Conversions API or server-side build: about a week with the parallel run</li></ul></div>
@@ -231,7 +231,7 @@
   var gclid='', landing='/';
   try{ var q=new URLSearchParams(location.search), gc=q.get('gclid'); if(gc){ sessionStorage.setItem('rb_gclid',gc); sessionStorage.setItem('rb_landing',location.pathname); } gclid=sessionStorage.getItem('rb_gclid')||''; landing=sessionStorage.getItem('rb_landing')||location.pathname; }catch(e){}
   var EMAIL=/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/;
-  var HANDOFF=/Anything else, or should I pass this to Rytis for you\?|Want me to pass this to Rytis/;
+  var HANDOFF=/pass this to Rytis/i; var SUBMITTED=false;
   function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
   function setup(root){
     var log=root.querySelector('.log'), f=root.querySelector('form'), who=f.querySelector('.who'), txt=f.querySelector('.txt'), act=f.querySelector('.act'), done=f.querySelector('.done');
@@ -241,24 +241,24 @@
     function show(el,on){el.hidden=!on;}
     add('bot',"Hi, I’m Rytis’s assistant. Your name and email first, so he can reply to you himself. Then tell me where your numbers disagree, or ask about prices and timelines.");
     function submitToRytis(){
-      if(st.sent) return; st.sent=true; show(act,false); show(txt,false); var w=wait();
+      if(st.sent||SUBMITTED) return; st.sent=true; SUBMITTED=true; show(act,false); show(txt,false); var w=wait();
       var transcript='Name: '+st.name+'\n\n'+st.hist.map(function(m){return (m.role==='user'?'Visitor: ':'Assistant: ')+m.text;}).join('\n\n');
       fetch(FORM,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:st.email,site:'see chat',details:transcript,where:'chat',fax_line:'',dt:9000,page:location.pathname,gclid:gclid,landing:landing,source:'home-chat'})})
         .then(function(r){return r.json();}).then(function(j){ w.remove(); if(!j.ok) throw new Error('x');
           try{ gtag('event','conversion',{'send_to':'AW-18424603738/M34RCLm1x-wcENrIxNFE','value':50,'currency':'EUR'}); gtag('event','lead_form_submit',{source:'home-chat'}); }catch(e){}
           add('bot','Passed to Rytis. He will reach out to you at '+st.email+' within 6 hours, usually under 1 hour. Closing the chat here, you can come back any time.'); show(done,true);
-        }).catch(function(){ w.remove(); st.sent=false; add('err','That did not go through. Email work@rytisbalys.com with what you wrote above and Rytis will pick it up.'); show(txt,true); });
+        }).catch(function(){ w.remove(); add('err','That did not go through. Email work@rytisbalys.com with what you wrote above and Rytis will pick it up.'); show(txt,true); show(act,true); });
     }
     f.addEventListener('submit',function(e){
       e.preventDefault();
       if(!st.name){
         var n=f.name.value.trim(), m=f.email.value.trim();
-        if(!n){ f.name.focus(); return; } if(!EMAIL.test(m)){ f.email.focus(); f.email.style.borderColor='#b91c1c'; return; }
+        if(!n){ f.name.focus(); return; } if(!EMAIL.test(m)){ f.email.focus(); f.email.style.borderColor='#b91c1c'; return; } f.email.style.borderColor='';
         st.name=n; st.email=m; add('me',n+' · '+m); show(who,false); show(txt,true); openBig();
         try{ gtag('event','intake_start',{source:'home-chat'}); }catch(x){}
         add('bot','Thanks '+n.split(' ')[0]+'. Where do your numbers disagree, Meta, Google Ads, GA4, or your backend? Tell me what you see, or ask anything about prices and timelines.'); f.text.focus(); return;
       }
-      var t=f.text.value.trim(); if(!t) return;
+      var t=f.text.value.trim(); if(!t){ f.text.focus(); return; } openBig();
       st.hist.push({role:'user',text:t}); add('me',t); f.text.value=''; show(act,false); var w=wait(); f.querySelector('.txt button').disabled=true;
       fetch(CHAT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({page:location.pathname,home:{name:st.name},messages:st.hist})})
         .then(function(r){return r.json();}).then(function(j){
@@ -270,10 +270,11 @@
         .then(function(){ f.querySelector('.txt button').disabled=false; });
     });
     f.text.addEventListener('keydown',function(e){ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); f.requestSubmit(); } });
-    var bd=null; function openBig(){ if(root.classList.contains('open')) return; bd=document.createElement('div'); bd.className='backdrop'; bd.addEventListener('click',closeBig); document.body.appendChild(bd); root.classList.add('open'); document.body.classList.add('locked'); log.scrollTop=log.scrollHeight; }
-    function closeBig(){ root.classList.remove('open'); document.body.classList.remove('locked'); if(bd){bd.remove();bd=null;} }
+    var bd=null, sy=0; function openBig(){ if(root.classList.contains('open')) return; sy=window.scrollY; bd=document.createElement('div'); bd.className='backdrop'; bd.addEventListener('click',closeBig); document.body.appendChild(bd); root.classList.add('open'); document.body.classList.add('locked'); document.body.style.top=(-sy)+'px'; log.scrollTop=log.scrollHeight; f.text.focus(); }
+    function closeBig(){ if(!root.classList.contains('open')) return; root.classList.remove('open'); document.body.classList.remove('locked'); document.body.style.top=''; window.scrollTo(0,sy); if(bd){bd.remove();bd=null;} }
+    log.addEventListener('click',function(){ if(st.name) openBig(); });
     root.querySelector('.min').addEventListener('click',closeBig);
-    f.querySelector('.back').addEventListener('click',function(){ closeBig(); root.scrollIntoView({block:'center'}); });
+    f.querySelector('.back').addEventListener('click',function(){ closeBig(); });
     document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeBig(); });
     f.querySelector('.pass').addEventListener('click',submitToRytis);
     f.querySelector('.more').addEventListener('click',function(){ show(act,false); f.text.focus(); });
