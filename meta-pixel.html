@@ -124,7 +124,7 @@
 <script>
 (function(){
   var CHAT='https://rb-chat.formos-ops.workers.dev/', FORM='https://rb-form.formos-ops.workers.dev/';
-  var TOPIC="Meta Pixel not tracking purchases", WHERE="Meta", OPENER="Hi, I\u2019m Rytis\u2019s assistant. Meta Pixel or Conversions API not counting purchases the way your store does? Leave your name and email first, so Rytis can reply to you himself.";
+  var TOPIC="Meta Pixel not tracking purchases", WHERE="Meta", OPENER="Hi, I\u2019m Rytis\u2019s assistant. Meta Pixel or Conversions API not counting purchases the way your store does? I\u2019ll guide you through three quick questions and hand everything to Rytis. Your name and email first, so he can reply to you himself.";
   var log=document.getElementById('log'), f=document.getElementById('ask'), rowWho=document.getElementById('rowWho'), rowText=document.getElementById('rowText'), chips=document.getElementById('chips'), hint=document.getElementById('hint'), direct=document.getElementById('direct');
   var st={step:'who',name:'',email:'',desc:'',platform:'',site:''};
   try{ var q=new URLSearchParams(location.search), gc=q.get('gclid'); if(gc){ sessionStorage.setItem('rb_gclid',gc); sessionStorage.setItem('rb_landing',location.pathname); } f.gclid.value=sessionStorage.getItem('rb_gclid')||''; f.landing.value=sessionStorage.getItem('rb_landing')||location.pathname; }catch(e){}
@@ -143,13 +143,13 @@
       st.name=n; st.email=m; add('me',n+' · '+m);
       try{ gtag('event','intake_start',{topic:TOPIC}); }catch(x){}
       show(rowWho,false); show(rowText,true);
-      add('bot','Hey '+n.split(' ')[0]+', describe what is happening with your tracking. What do you see, and what changed recently, if anything?');
+      add('bot','Thanks '+n.split(' ')[0]+'. Now describe what is happening with your tracking, in your own words. What do you see, and what changed recently, if anything?');
       st.step='desc'; f.text.focus(); return;
     }
     if(st.step==='desc'){
       var t=f.text.value.trim(); if(!t) return;
       st.desc=t; add('me',t); f.text.value='';
-      add('bot','Got it. Which platform is the store or site on?'); show(rowText,false); show(chips,true); st.step='platform'; return;
+      add('bot','Got it. Last two quick ones. Which platform is the store or site on?'); show(rowText,false); show(chips,true); st.step='platform'; return;
     }
     if(st.step==='site'){
       var s=f.text.value.trim(); st.site=s; if(s) add('me',s); f.text.value=''; show(rowText,false); finish(); return;
