@@ -11,15 +11,14 @@
   gtag('config', 'G-1D69SRZPPM');
   gtag('config', 'AW-18424603738');
 </script>
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rytis Balys - Conversion Tracking & Attribution</title>
-<meta name="description" content="Server-side conversion tracking engineer. Meta Pixel + CAPI with event_id dedup, GA4, GTM/sGTM. I find the purchases your tracking silently drops.">
+<meta name="description" content="Conversion tracking and server-side setup by one engineer. Meta Pixel + CAPI with event_id dedup, GA4, GTM, Google Ads and CRM conversions. Fixed price, proved before you pay.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Rytis Balys - Conversion Tracking & Attribution">
-<meta property="og:description" content="Server-side tracking engineer. Meta Pixel + CAPI with event_id dedup, GA4, GTM/sGTM. I find the purchases your tracking silently drops.">
+<meta property="og:description" content="Conversion tracking and server-side setup by one engineer. Fixed price, proved before you pay.">
 <meta property="og:url" content="https://rytisbalys.com/">
 <meta property="og:image" content="https://rytisbalys.com/og.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -50,324 +49,221 @@
   ]
 }
 </script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#0a0e13; --panel:#0f151d; --line:#1c2530;
-    --txt:#d7dee8; --dim:#8b98a8; --accent:#ffc72c; --green:#3fb950; --red:#f85149;
-    --mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace;
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{background:var(--bg);color:var(--txt);font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:720px;margin:0 auto;padding:72px 24px 96px}
-  .tag{font-family:var(--mono);font-size:13px;color:var(--accent);letter-spacing:.06em}
-  h1{font-size:34px;font-weight:700;margin:10px 0 4px;color:#fff}
-  .role{font-size:17px;color:var(--dim);margin-bottom:36px}
-  .hook{font-size:20px;color:var(--txt);font-weight:500;margin-bottom:36px;line-height:1.5}
-  .hook b{color:var(--accent);font-weight:600}
-  .term{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:44px}
-  .term-bar{display:flex;gap:6px;padding:11px 14px;border-bottom:1px solid var(--line)}
-  .term-bar span{width:11px;height:11px;border-radius:50%;background:#2a3542}
-  .term-bar span:first-child{background:#f85149}.term-bar span:nth-child(2){background:#d29922}.term-bar span:nth-child(3){background:#3fb950}
-  .term pre{padding:18px 20px;font-family:var(--mono);font-size:13.5px;line-height:1.9;color:var(--dim);overflow-x:auto}
-  .term .k{color:var(--txt)} .term .n{color:var(--red)} .term .ok{color:var(--green)} .term .c{color:#7d8a9a}
-  h2{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin:0 0 14px}
-  ul{list-style:none;margin-bottom:44px}
-  li{padding:10px 0 10px 26px;position:relative;border-bottom:1px solid var(--line);color:var(--txt);font-size:15.5px}
-  li:last-child{border-bottom:none}
-  li::before{content:'>';position:absolute;left:2px;color:var(--accent);font-family:var(--mono)}
-  li span{color:var(--dim)}
-  .links{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:56px}
-  .btn{font-family:var(--mono);font-size:14px;text-decoration:none;padding:11px 18px;border-radius:8px;border:1px solid var(--line);color:var(--txt);transition:.15s}
-  .btn:hover{border-color:var(--accent);color:var(--accent)}
-  .btn.primary{background:var(--accent);color:#0a0e13;border-color:var(--accent);font-weight:600}
-  .btn.primary:hover{opacity:.9}
-    .score{font-family:var(--mono);font-size:13.5px;color:var(--dim);border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:12px 16px;margin-bottom:18px}
-  .score b{color:var(--accent);font-weight:600}
-  .score a{color:var(--dim);text-decoration:none;border-bottom:1px solid var(--line)}
-  .score a:hover{color:var(--accent);border-color:var(--accent)}
-  .rev{border-left:2px solid var(--accent);padding:2px 0 2px 16px;margin:0 0 18px}
-  .rev p{font-size:15.5px;color:var(--txt);margin:0 0 6px}
-  .rev cite{font-family:var(--mono);font-size:12.5px;color:#7d8a9a;font-style:normal}
-  ul.proof-extra{margin-top:26px}
-  footer{font-family:var(--mono);font-size:12.5px;color:#7d8a9a;border-top:1px solid var(--line);padding-top:20px}
-  @media (max-width:520px){h1{font-size:28px}.hook{font-size:18px}.wrap{padding-top:52px}}
-
-.guide-link{color:var(--txt);text-decoration:underline;text-decoration-color:rgba(255,199,44,.5);text-underline-offset:4px;text-decoration-thickness:1px;transition:color .15s}
-.guide-link:hover{color:#FFC72C;text-decoration-color:#FFC72C}
-  .cta{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px;margin-bottom:44px}
-  .cta p{margin-bottom:14px;font-size:15.5px}
-  .cta .ask{font-size:15px;color:var(--dim)}
-  .cta .ask b{color:var(--txt);font-weight:600}
-  .cta-proof{font-family:var(--mono);font-size:13px;color:var(--dim);margin-top:12px;user-select:all}
-  .chip-label{display:block;font-family:var(--mono);font-size:12.5px;color:#b9c3cf;margin-bottom:2px;letter-spacing:.03em}
-  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0}
-  .chip-set{border:none;padding:0;margin:0 0 20px;min-width:0}
-  .other-in{display:block;width:100%;margin-top:10px;background:#0d131a;border:1px solid #2f3c4b;border-radius:8px;color:var(--txt);padding:10px 12px;font:inherit;font-size:15px}
-  .other-in:focus{outline:none;border-color:var(--accent)}
-  .other-in[hidden]{display:none}
-  .cta p.lead-gap{font-family:var(--mono);font-size:13px;margin:6px 0 0;color:var(--accent)}
-  .cta p.lead-gap.small{color:var(--green)}
-  .lead label.chip{display:inline-block;margin-bottom:0}
-  .chip input{position:absolute;opacity:0;width:0;height:0}
-  .chip span{display:inline-flex;align-items:center;min-height:40px;font-family:var(--mono);font-size:13px;padding:0 15px;border:1px solid #3a4757;border-radius:20px;color:#c9d3de;cursor:pointer;background:#18222e;transition:.15s;-webkit-tap-highlight-color:transparent}
-  .chip span:hover{border-color:var(--accent);color:#fff;background:#1e2a38}
-  .chip input:checked+span{border-color:var(--accent);color:#0a0e13;background:var(--accent);font-weight:600}
-  .chip input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
-  .lead ::placeholder{color:#7d8a9a;opacity:1}
-  .cta p.lead-hint{font-family:var(--mono);font-size:12px;line-height:1.5;color:#8b98a8;margin:6px 0 20px}
-  .jump-wrap{margin:0 0 44px}
-  .jump{display:inline-block;font-family:var(--mono);font-size:14px;text-decoration:none;color:#0a0e13;background:var(--accent);border-radius:8px;padding:11px 18px;font-weight:600}
-  .jump:hover{opacity:.9}
-  .jump-note{display:block;font-family:var(--mono);font-size:12.5px;color:var(--dim);margin-top:10px}
-  .cta-proof a{color:var(--accent);border-bottom:1px solid rgba(255,199,44,.35);text-decoration:none}
-  .lead{margin-top:8px}
-  .lead-row{display:flex;gap:12px;flex-wrap:wrap}
-  .lead-row.who{border-top:1px solid var(--line);padding-top:20px;margin-top:22px}
-  .lead-row.nums{align-items:flex-end}
-  .lead-row.nums label{flex:1 1 0;min-width:0}
-  .lead-row.nums input{font-size:16px}
-  .lead-row label{flex:1 1 220px}
-  .lead label{display:block;font-family:var(--mono);font-size:12.5px;color:#b9c3cf;margin-bottom:16px;letter-spacing:.03em}
-  .lead input,.lead textarea{display:block;width:100%;margin-top:6px;background:#0d131a;border:1px solid #2f3c4b;border-radius:8px;color:var(--txt);padding:10px 12px;font:inherit;font-size:15px}
-  .lead textarea{resize:vertical;line-height:1.5}
-  .lead input:focus,.lead textarea:focus{outline:none;border-color:var(--accent)}
-  .lead-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-  .lead button{border:none;cursor:pointer;font-family:var(--mono)}
-  .lead button[disabled]{opacity:.6;cursor:default}
-  .lead-msg{margin:12px 0 0;font-family:var(--mono);font-size:13px;min-height:1em}
-  .lead-msg.ok{color:var(--green)} .lead-msg.err{color:var(--red)}
-  .lead-or{margin-top:12px;font-size:14px;color:#555}
-  .lead-or a{font-weight:600}
+  :root{--bg:#f4f6f3;--card:#fff;--ink:#0f2a20;--muted:#4f6f62;--line:#dde5dc;--bot:#eef3ec;--g:#14532d;--font:Manrope,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif}
+  *{margin:0;padding:0;box-sizing:border-box} [hidden]{display:none!important}
+  body{background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:var(--g)}
+  .w{max-width:1200px;margin:0 auto;padding:0 40px}
+  .bar{background:var(--ink);color:#d7e4dc;font-size:13px;text-align:center;padding:8px 16px} .bar b{color:#fff} .bar a{color:#fff;font-weight:700;text-decoration:none;border-bottom:2px solid #6ee7a0;margin-left:8px;white-space:nowrap}
+  header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+  header .w{display:flex;align-items:center;gap:14px;padding-top:12px;padding-bottom:12px}
+  header img{width:44px;height:44px;border-radius:50%;object-fit:cover}
+  header .who{font-weight:700;font-size:16px} header .who small{display:block;font-weight:400;font-size:12.5px;color:var(--muted)}
+  nav{margin-left:auto;display:flex;gap:22px;align-items:center;font-size:14px}
+  nav a{color:var(--muted);text-decoration:none} nav a.cta{background:var(--g);color:#fff;border-radius:999px;padding:9px 16px;font-weight:700;white-space:nowrap}
+  section{padding:56px 0 0} section.hero{padding-top:44px}
+  .hero .w{display:grid;grid-template-columns:minmax(0,1fr) 440px;gap:48px;align-items:center}
+  .badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:13px;color:var(--muted)} .badge b{color:var(--ink)}
+  h1{font-size:48px;font-weight:800;letter-spacing:-.035em;line-height:1.05;margin:16px 0 14px}
+  .lead{font-size:18px;color:var(--muted);max-width:620px}
+  .ctas{display:flex;gap:12px;align-items:center;margin-top:20px;flex-wrap:wrap}
+  .btn{background:var(--g);color:#fff;border-radius:12px;padding:14px 22px;font-weight:700;font-size:15px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer}
+  .ctas .lnk{font-size:15px;font-weight:700;color:var(--ink);text-decoration:none} .ctas .lnk:hover{color:var(--g)}
+  .pf{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px} .pf a{display:inline-flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 12px;text-decoration:none;color:var(--ink);font-size:12.5px;line-height:1.2} .pf a b{display:block;font-size:13px} .pf a small{color:var(--muted)} .pf .pi{width:26px;height:26px;border-radius:7px;background:var(--ink);color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+  h2{font-size:32px;font-weight:800;letter-spacing:-.025em;line-height:1.15} .sub{color:var(--muted);font-size:16px;max-width:720px;margin-top:6px} .sh{margin-bottom:24px}
+  .grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px} .grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px} .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px}
+  .c{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px} .c .ic{width:34px;height:34px;border-radius:10px;background:var(--bot);display:flex;align-items:center;justify-content:center;margin-bottom:10px} .c h3{font-size:17px;font-weight:700;margin-bottom:6px} .c p{font-size:14.5px;color:var(--muted)}
+  .tile{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px} .tl{font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)} .tn{font-size:56px;font-weight:800;letter-spacing:-.03em;line-height:1.1} .tn.r{color:#b91c1c} .tn.o{color:#b45309} .tn.g{color:var(--g)} .tt{font-size:14px;color:var(--muted)}
+  .steps{display:flex;flex-direction:column;gap:22px} .step{display:flex;gap:14px;align-items:flex-start} .sn{width:34px;height:34px;border-radius:50%;background:var(--g);color:#fff;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;flex-shrink:0} .step h3{font-size:16.5px;font-weight:700} .step p{font-size:14.5px;color:var(--muted)}
+  .plans{display:flex;flex-direction:column;gap:12px} .plan{background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px} .plan.hi{background:var(--g);color:#fff;border-color:var(--g)} .pt{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.8} .pp{font-size:32px;font-weight:800;letter-spacing:-.02em;margin:4px 0 6px} .plan p{font-size:14.5px;opacity:.9}
+  .rev{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px 20px;display:flex;flex-direction:column;gap:10px} .rev .stars{display:flex;gap:2px} .rev p{font-size:14.5px;line-height:1.55} .rev .who{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;color:var(--muted)} .rev .who a{text-decoration:none;font-weight:600;white-space:nowrap}
+  .faq{border-top:1px solid var(--line);padding:16px 0} .faq h3{font-size:16px;font-weight:700;margin-bottom:6px} .faq p{font-size:14.5px;color:var(--muted)}
+  .need{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin-top:22px} .need h3{font-size:16px;font-weight:700;margin-bottom:8px} .need ul{list-style:none;display:flex;flex-direction:column;gap:6px} .need li{font-size:14.5px;color:var(--muted);padding-left:22px;position:relative} .need li::before{content:'';position:absolute;left:0;top:9px;width:10px;height:10px;border-radius:50%;background:var(--g)}
+  .guides ul{list-style:none;columns:2;column-gap:40px} .guides li{break-inside:avoid;padding:10px 0;border-bottom:1px solid var(--line)} .guide-link{color:var(--ink);text-decoration:none;font-size:15px} .guide-link:hover{color:var(--g)}
+  /* chat */
+  .card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 14px 34px rgba(20,83,45,.10);overflow:hidden}
+  .log{display:flex;flex-direction:column;gap:12px;padding:20px 20px 8px;min-height:120px}
+  .m{max-width:92%;padding:13px 16px;border-radius:18px;font-size:15px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere} .m.bot{align-self:flex-start;background:var(--bot);border-bottom-left-radius:6px} .m.me{align-self:flex-end;background:var(--g);color:#fff;border-bottom-right-radius:6px} .m.err{align-self:flex-start;background:#fff1f0;color:#a8322a}
+  .wait{align-self:flex-start;color:var(--muted);font-size:14px;padding:4px 6px}
+  .ask{padding:12px 16px 16px;display:flex;flex-direction:column;gap:10px} .row{display:flex;gap:8px;flex-wrap:wrap}
+  .ask input,.ask textarea{flex:1 1 160px;font:inherit;font-size:16px;padding:12px 14px;border:1px solid #cfe0d4;border-radius:12px;color:var(--ink);min-width:0} .ask textarea{resize:none;min-height:52px;max-height:160px;flex-basis:100%}
+  .ask input:focus,.ask textarea:focus{outline:none;border-color:var(--g);box-shadow:0 0 0 3px rgba(20,83,45,.12)}
+  .ask button{border:0;border-radius:12px;background:var(--g);color:#fff;font:600 15px var(--font);padding:0 20px;min-height:46px;cursor:pointer} .ask button[disabled]{opacity:.5}
+  .ask button.chip{background:#fff;color:var(--ink);border:1px solid #cfe0d4;border-radius:999px}
+  .ask button.pass{border-radius:999px}
+  .hint{font-size:12.5px;color:var(--muted)} .hint b{color:var(--ink)} .hint a{text-decoration:none;font-weight:600}
+  footer{font-size:12px;color:var(--muted);text-align:center;padding:48px 16px 24px} footer a{color:var(--muted)}
+  @media (max-width:900px){.w{padding:0 16px} .hero .w,.grid2{grid-template-columns:1fr;gap:28px} .grid3,.grid4{grid-template-columns:1fr} h1{font-size:32px} h2{font-size:26px} nav a:not(.cta){display:none} nav a.cta{padding:8px 13px;font-size:13px} .bar .bx{display:none} header .who small{display:none} .guides ul{columns:1} section{padding-top:40px} .tn{font-size:44px}}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="tag">// conversion tracking & attribution</div>
-  <h1>Rytis Balys</h1>
-  <p class="role">Server-side tracking engineer - Meta Pixel + CAPI, GA4, GTM / sGTM</p>
+<div class="bar"><b>Free first read of your tracking numbers.</b> <span class="bx">Tell my assistant what you see, I reply within 6 hours, usually under 1 hour.</span><a href="#chat1">Get your free audit &rarr;</a></div>
+<header><div class="w">
+  <img src="/rytis.jpg" alt="Rytis Balys">
+  <span class="who">Rytis Balys<small>Conversion tracking engineer, replies himself</small></span>
+  <nav><a href="#build">What I build</a><a href="#process">Process</a><a href="#prices">Prices</a><a href="#reviews">Reviews</a><a href="#guides">Guides</a><a class="cta" href="#chat1">Get your free audit</a></nav>
+</div></header>
 
-  <p class="hook">Your ad platforms, your analytics and your backend all report <b>different numbers</b>. I find out which one is lying - then fix the pipes.</p>
-
-  <div class="term">
-    <div class="term-bar"><span></span><span></span><span></span></div>
-    <pre><span class="c"># same store, same month, three answers</span>
-<span class="k">meta_purchases</span>        <span class="n">142</span>   <span class="c"># double-counting, no event_id dedup</span>
-<span class="k">ga4_purchases</span>          <span class="n">98</span>   <span class="c"># consent + redirect losses on top</span>
-<span class="k">backend_paid_orders</span>    <span class="ok">76</span>   <span class="c"># the truth</span>
-<span class="c">-> your ads optimize on the wrong number. that costs money.</span></pre>
+<section class="hero"><div class="w">
+  <div>
+    <span class="badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg> <b>5.0</b> every rated job on Upwork &middot; over 3 years of experience</span>
+    <h1>Conversion tracking and server-side setup. One engineer, fixed price, proved before you pay.</h1>
+    <p class="lead">Meta Pixel and Conversions API, GA4, Google Tag Manager, Google Ads and CRM conversions. I find which of your numbers is lying and fix the pipes.</p>
+    <div class="ctas"><a class="btn" href="#chat1">Get your free audit &rarr;</a><a class="lnk" href="#prices">How I charge &darr;</a></div>
+    <div class="pf"><a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener"><span class="pi">U</span><span><b>Upwork</b><small>5.0 on every rated job</small></span></a><a href="https://github.com/rytisdev-commits/server-side-conversion-tracking" target="_blank" rel="noopener"><span class="pi">G</span><span><b>GitHub</b><small>Server-side tracking case study</small></span></a></div>
   </div>
-
-  <p class="jump-wrap">
-    <a class="jump" href="#start">Find out which number is lying</a>
-    <span class="jump-note">Takes about a minute. I read every one myself and reply with the likely cause, at no charge.</span>
-  </p>
-
-  <h2>what I do</h2>
-  <ul>
-    <li>Tracking audits that reconcile platform numbers against real backend orders <span>- diagnosis first, with severity and effort for every finding</span></li>
-    <li>Server-side tracking builds <span>- Meta Conversions API with event_id deduplication, GA4, server-side GTM (Stape), Consent Mode v2</span></li>
-    <li>AI / LLM traffic attribution & GEO measurement <span>- ChatGPT, Perplexity and Gemini buyers usually land in GA4 as Direct; I recover them server-side into a dedicated AI Assistant channel. If you're investing in GEO, this is the setup that shows whether it brings visitors and inquiries</span></li>
-    <li>Firefighting <span>- pixels not firing, double-counted purchases, conversions stuck at zero, gclid/attribution loss</span></li>
-    <li>CRM &amp; funnel tracking <span>- HubSpot forms, workflows and hidden-field capture, GoHighLevel, ClickFunnels, Klaviyo - with qualified leads sent back to Google Ads and Meta as offline conversions</span></li>
-    <li>Attribution tool audits <span>- Triple Whale and similar dashboards checked against pixels and real backend orders, including the session loss between a funnel and the store that quietly eats attribution</span></li>
-    <li>App &amp; web-to-app tracking <span>- app events wired into the same source of truth as the web side</span></li>
-    <li>Shopify checkout migrations that keep tracking alive <span>- checkout.liquid / legacy scripts to Web Pixels, with event_id dedup and parallel-run verification</span></li>
-    <li>Also: mobile page-speed audits <span>- Core Web Vitals for Shopify and WordPress stores, same verify-everything approach</span></li>
-  </ul>
-
-  <h2>proof, not promises</h2>
-
-  <div class="score">
-    <b>100%</b> job success &middot; <b>every rated job 5.0</b>
-    &middot; <a href="https://www.upwork.com/freelancers/rytis" rel="nofollow noopener" target="_blank">verify on Upwork</a>
-  </div>
-
-  <blockquote class="rev">
-    <p>&ldquo;He found the exact root cause quickly, fixed it cleanly, and &mdash; this is what set him apart &mdash; didn&rsquo;t just tell me it was done. He proved it with cold-load tests and a reversal test, and confirmed it on Meta&rsquo;s side. On top of that he flagged two serious issues outside the scope of the job, including a security problem, completely honestly.&rdquo;</p>
-    <cite>Meta Pixel and conversion tracking fix, WordPress &middot; July 2026</cite>
-  </blockquote>
-
-  <blockquote class="rev">
-    <p>&ldquo;Rytis is great! Solved all of the issues we were having and gave very detailed explanations of fixes and possible future issues and their solutions. We had a major unexpected unrelated issue come up with a separate app in our shopify store that was killing sales while he was working on our original pixel issues and he immediately found the issue and sent an evidence trail detailing his findings to the app help center while actually fixing the issue that we would have never figured out on our own, then jumped right back into fixing our original issues with our pixel. He also answered all of my many questions as we worked through everything. We highly recommend working with him! We don&rsquo;t know what we would have done without his expertise!&rdquo;</p>
-    <cite>Meta pixel purchase events fix, Shopify &middot; August 2026</cite>
-  </blockquote>
-
-  <blockquote class="rev">
-    <p>&ldquo;Rytis was fantastic to work with. He quickly identified and resolved the issues with my Google Tag Manager, GA4, and Google Ads conversion tracking that had been preventing my conversions from reporting correctly. His communication was excellent throughout the project, and he took the time to explain what was causing the issue and how he was fixing it. He was knowledgeable, efficient, and made sure everything was working properly before completing the job. I highly recommend Rytis to anyone needing help with Google Tag Manager, GA4, or Google Ads tracking.&rdquo;</p>
-    <cite>GTM, GA4 and Google Ads conversion tracking fix &middot; August 2026</cite>
-  </blockquote>
-
-  <blockquote class="rev">
-    <p>&ldquo;Rytis was absolutely outstanding from start to finish. His communication was clear, concise and there thorough. He helped us find a solution to a very tricky problem in an astonishingly quick time, I couldn&rsquo;t recommend him high enough.&rdquo;</p>
-    <cite>Urgent Shopify Meta Pixel and Conversions API audit &middot; July 2026</cite>
-  </blockquote>
-
-  <blockquote class="rev">
-    <p>&ldquo;He identified and fixed all three tracking issues &mdash; the broken purchase values, the affiliate attribution dropping after the Stripe redirect, and GA4 loading twice. He also caught a fourth problem we didn&rsquo;t know about ($0 ghost conversions polluting our data) and fixed that too.&rdquo;</p>
-    <cite>GA4 and GTM attribution fix &middot; July 2026</cite>
-  </blockquote>
-
-  <blockquote class="rev">
-    <p>&ldquo;Report was actually deep &ndash; data-cross-checked GA4 / Meta Graph / Magento, not a generic checklist. He delivered the free first-read exactly as advertised, then the full audit landed same-day after access was granted.&rdquo;</p>
-    <cite>Tracking audit, phase one of a server-side GTM engagement &middot; July 2026</cite>
-  </blockquote>
-
-  <ul>
-    <li>The same stack runs in production on my own ecommerce stores <span>- every day, with my own money on it</span></li>
-    <li>Public case study of my browser + server dedup setup on GitHub</li>
-  </ul>
-
-
-  <h2>typical fixed prices</h2>
-  <ul>
-    <li>Pixel or conversion tracking fix <span>- $250-500</span></li>
-    <li>Add Conversions API with deduplication <span>- $400-700</span></li>
-    <li>Attribution or reconciliation work <span>- $600-1200</span></li>
-    <li>AI / LLM attribution build <span>- $600-1200</span></li>
-    <li>Ongoing tracking ownership <span>- $700-1800/mo</span></li>
-  </ul>
-  <h2 id="start">start here</h2>
-  <div class="cta">
-    <p><b>Not sure whether your numbers are lying?</b> Pick any 7 days, put your ad platform&rsquo;s conversion count next to the real orders or leads in your backend, and send me both. I will tell you which of the usual causes yours is, no charge. <b>If the gap is under about 10&percnt;, you probably do not need me, and I will say so.</b></p>
-    <form class="lead" id="leadForm" novalidate>
-      <fieldset class="chip-set">
-        <legend class="chip-label">Which numbers disagree</legend>
-        <div class="chips">
-          <label class="chip"><input type="checkbox" name="where" value="Meta"><span>Meta</span></label>
-          <label class="chip"><input type="checkbox" name="where" value="Google Ads"><span>Google</span></label>
-          <label class="chip"><input type="checkbox" name="where" value="GA4"><span>GA4</span></label>
-          <label class="chip"><input type="checkbox" name="where" value="TikTok"><span>TikTok</span></label>
-          <label class="chip"><input type="checkbox" name="where" value="CRM or email"><span>CRM</span></label>
-          <label class="chip"><input type="checkbox" name="where" value="Not sure"><span>not sure</span></label>
-        </div>
-      </fieldset>
-
-      <div class="lead-row nums">
-        <label>Ad platform says<input type="text" inputmode="numeric" name="n_platform" placeholder="142"></label>
-        <label>Real orders or leads<input type="text" inputmode="numeric" name="n_backend" placeholder="76"></label>
-      </div>
-      <p class="lead-gap" id="leadGap" role="status" hidden></p>
-      <p class="lead-hint">Rough is fine, and blank is fine too.</p>
-
-      <label>Anything worth knowing<textarea name="details" rows="2" placeholder="What counts as a conversion, and what changed recently"></textarea></label>
-
-      <div class="lead-row who">
-        <label>Your email<input type="email" name="email" required placeholder="you@company.com" autocomplete="email"></label>
-        <label>Your site<input type="text" name="site" required placeholder="yourstore.com" autocomplete="url" inputmode="url" autocapitalize="none" autocorrect="off" spellcheck="false"></label>
-      </div>
-      <input type="hidden" name="gclid"><input type="hidden" name="landing">
-      <div class="lead-hp" aria-hidden="true"><label>Leave this empty<input type="text" name="fax_line" tabindex="-1" autocomplete="off"></label></div>
-      <button type="submit" class="btn primary">Get the likely cause</button>
-      <p class="lead-msg" role="status"></p>
-      <p class="lead-or">Or explain it out loud instead: <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1LzwWfm37HWCuNFrwV-sWjHKMuSWugdCjbgo1P6MzEiQabGYLb9Qz5T9Vjb85kJ9Mkp0blhlG8" target="_blank" rel="noopener">book 30 min</a> and walk me through what you are seeing. I listen, ask what I need, and come back with the likely cause after.</p>
-    </form>
-    <p class="cta-proof">or email work@rytisbalys.com &middot; every rated job 5.0 &middot; <a href="https://www.upwork.com/freelancers/rytis" rel="nofollow noopener" target="_blank">verify on Upwork</a></p>
-  </div>
-
-  <h2>troubleshooting guides</h2>
-  <ul>
-    <li><a href="/fbq-is-not-defined-delay-javascript-fix" class="guide-link">fbq is not defined - your caching plugin is killing the Meta Pixel</a></li>
-    <li><a href="/meta-pixel-not-firing" class="guide-link">Meta Pixel not firing? The 7 real causes, in the order to check them</a></li>
-    <li><a href="/ga4-does-not-match-backend" class="guide-link">GA4 purchases don't match your backend orders - which number to trust</a></li>
-    <li><a href="/shopify-checkout-upgrade-tracking" class="guide-link">Shopify's checkout upgrade silently breaks tracking - what dies and how to migrate</a></li>
-    <li><a href="/offline-conversions-google-ads" class="guide-link">Google Ads only counts form fills, not real sales - how to import offline conversions</a></li>
-    <li><a href="/ga4-double-counting-purchases-duplicate-tag" class="guide-link">GA4 Counting Purchases Twice? The Duplicate Tag Fix</a></li>
-    <li><a href="/meta-events-manager-double-purchases-deduplication-fix" class="guide-link">Meta Counts Purchases Twice: Pixel + CAPI Deduplication Fix</a></li>
-    <li><a href="/google-ads-conversion-inactive-tag-fires-gtm" class="guide-link">Google Ads Conversion Inactive but Tag Fires in GTM: The Fix</a></li>
-    <li><a href="/woocommerce-stripe-redirect-purchase-event-not-firing" class="guide-link">WooCommerce Purchase Event Missing After Stripe Redirect: Fix</a></li>
-    <li><a href="/ga4-purchases-attributed-stripe-paypal-direct-fix" class="guide-link">Fix GA4 Purchases Showing as stripe.com, paypal.com or (direct)</a></li>
-    <li><a href="/consent-banner-not-blocking-tracking" class="guide-link">Your cookie banner blocks nothing - the 60-second check</a></li>
-    <li><a href="/consent-mode-v2-conversions-dropped" class="guide-link">Conversions Dropped After Consent Mode v2? How to Diagnose It</a></li>
-    <li><a href="/ga4-ai-assistant-channel" class="guide-link">GA4&#x27;s New AI Assistant Channel: What It Catches and What It Misses</a></li>
-    <li><a href="/prove-geo-roi" class="guide-link">GEO Gets You Cited in AI Answers. Proving It Converts Is a Different Job.</a></li>
-    <li><a href="/track-ai-conversions-ga4" class="guide-link">Your ChatGPT Traffic Is Hiding in Direct: How to Track AI Conversions in GA4</a></li>
-    <li><a href="/clickfunnels-upsell-tracking-fix" class="guide-link">ClickFunnels Upsell Tracking: Fix Double or Missing Purchases</a></li>
-    <li><a href="/ga4-events-missing-plugin-wrapped-gtag" class="guide-link">GA4 events missing? A plugin may have wrapped your gtag</a></li>
-    <li><a href="/server-side-gtm-what-it-fixes" class="guide-link">Server-Side GTM: What It Actually Fixes (and What It Doesn&#x27;t)</a></li>
-  </ul>
-
-  <div class="links">
-    <a class="btn primary" href="mailto:work@rytisbalys.com">work@rytisbalys.com</a>
-    <a class="btn" href="https://github.com/rytisdev-commits/server-side-conversion-tracking" rel="noopener">github case study</a>
-  </div>
-
-  <footer>MB Euruvizija · Vilnius, Lithuania (EET) · worldwide, remote · <a href="/lt/" style="color:#7d8a9a">LT</a></footer>
+  <div class="card" id="chat1">
+  <div class="log"></div>
+  <form class="ask" novalidate>
+    <div class="row who"><input type="text" name="name" placeholder="Your name" autocomplete="given-name" required><input type="email" name="email" placeholder="you@company.com" autocomplete="email" required><button type="submit">Start</button></div>
+    <div class="row txt" hidden><textarea name="text" rows="2" placeholder="Describe what you see, or ask about prices and timelines"></textarea><button type="submit">Send</button></div>
+    <div class="row act" hidden><button type="button" class="pass">Pass it to Rytis</button><button type="button" class="more chip">I have another question</button></div>
+    <p class="hint">I read every conversation myself and reply <b>within 6 hours, usually under 1 hour</b>. Or message me directly: <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> (messages, not calls) &middot; <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a></p>
+  </form>
 </div>
+</div></section>
+
+<section id="build"><div class="w">
+  <div class="sh"><h2>The tracking layer I build, end to end</h2><p class="sub">Every piece wired to one source of truth: your real orders and leads.</p></div>
+  <div class="grid3">
+    <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>GTM setup and cleanup</h3><p>One container, one data layer, no duplicate tags fighting each other.</p></div>
+    <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>Meta Pixel + Conversions API</h3><p>Browser and server events with event_id deduplication, proved in Events Manager.</p></div>
+    <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>GA4 that matches your backend</h3><p>Purchase events with the right value, consent handled, no double counting.</p></div>
+    <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>Google Ads conversions</h3><p>Tags that are active and verified, gclid kept through redirects and checkouts.</p></div>
+    <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>Offline conversions from your CRM</h3><p>HubSpot, GoHighLevel and others feeding real sales back to Google Ads and Meta.</p></div>
+    <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>Shopify and WooCommerce checkouts</h3><p>Checkout migrations, Stripe and PayPal redirects, caching plugins that break pixels.</p></div>
+  </div>
+</div></section>
+
+<section><div class="w">
+  <div class="sh"><h2>What your reports claim vs what was actually captured</h2><p class="sub">Same store, same month, three answers. Your ads optimise on whichever one they get.</p></div>
+  <div class="grid3"><div class="tile"><div class="tl">Meta says</div><div class="tn r">142</div><div class="tt">double counting, no event_id dedup</div></div><div class="tile"><div class="tl">GA4 says</div><div class="tn o">98</div><div class="tt">consent and redirect losses on top</div></div><div class="tile"><div class="tl">Backend paid orders</div><div class="tn g">76</div><div class="tt">the truth</div></div></div>
+</div></section>
+
+<section><div class="w">
+  <div class="sh"><h2>If you have been burned before, read this</h2></div>
+  <div class="grid4">
+    <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>You own everything</h3><p>Containers, datasets and accounts stay in your name. I work inside them, never around them.</p></div>
+    <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>Proved, not promised</h3><p>Every fix verified live with test orders and a before and after report you can check yourself.</p></div>
+    <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>One person answers</h3><p>No handoffs, no account managers. You write to me, I write back, within 6 hours, usually under 1 hour.</p></div>
+    <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>Honest first read</h3><p>If your gap is under about 10%, I will tell you that you do not need me.</p></div>
+  </div>
+</div></section>
+
+<section id="process"><div class="w grid2">
+  <div>
+    <div class="sh"><h2>How I work, step by step</h2><p class="sub">From the first message to the handoff. Nothing goes live without your say so.</p></div>
+    <div class="steps">
+      <div class="step"><div class="sn">1</div><div><h3>You describe what you see</h3><p>Through the assistant on this page, WhatsApp or email. Numbers help, but a plain sentence like &ldquo;Meta shows twice what Shopify has&rdquo; is enough to start.</p></div></div>
+      <div class="step"><div class="sn">2</div><div><h3>Free first read, within 6 hours</h3><p>I reply myself with the likely cause and what I would check first. If the gap is inside normal loss, I say so and we stop there.</p></div></div>
+      <div class="step"><div class="sn">3</div><div><h3>Look inside, read access only</h3><p>Events Manager, GA4, GTM, Google Ads and the store, all read-only at this point. I list every finding with severity, effort and what it costs you in wasted spend.</p></div></div>
+      <div class="step"><div class="sn">4</div><div><h3>One fixed price, agreed in writing</h3><p>You get one number for the whole fix before any work starts. 50% upfront, the rest when you see it working. No hourly surprises.</p></div></div>
+      <div class="step"><div class="sn">5</div><div><h3>The fix, with a parallel run</h3><p>Nothing is switched off until the new setup proves itself next to the old one. Publish access only for this step, and only what the fix needs.</p></div></div>
+      <div class="step"><div class="sn">6</div><div><h3>Proof you can check</h3><p>Test orders, cold-load tests, a reversal test, and confirmation on the platform side. You get a before and after report with screenshots.</p></div></div>
+      <div class="step"><div class="sn">7</div><div><h3>Handoff and notes</h3><p>Written notes on what changed and why, so the next person does not break it. Access removed when you say.</p></div></div>
+    </div>
+    <div class="need"><h3>What I need from you</h3><ul><li>Read access to Events Manager, GA4, Google Tag Manager and Google Ads</li><li>Store or site admin (Shopify collaborator, WordPress admin, or similar)</li><li>Any server-side tool already in place, such as Stape</li><li>Seven days of platform numbers next to real orders, if you have them handy</li></ul></div>
+  </div>
+  <div id="prices">
+    <div class="sh"><h2>You choose the scope</h2><p class="sub">Every job priced after I look inside, then fixed.</p></div>
+    <div class="plans">
+      <div class="plan"><div class="pt">One-time fix</div><div class="pp">$250 to 700</div><p>A pixel or conversion tag repaired, or Conversions API added with deduplication. Usually 1 to 3 working days after access.</p></div>
+      <div class="plan hi"><div class="pt">Audit and fix</div><div class="pp">$600 to 1200</div><p>Platform numbers reconciled against real orders, every finding fixed in order of what it costs you. Includes the report.</p></div>
+      <div class="plan"><div class="pt">Ongoing ownership</div><div class="pp">$700 to 1800 / month</div><p>Someone watches the tracking every month and fixes it before you notice. Checkout updates, new apps, consent changes.</p></div>
+    </div>
+    <div class="need"><h3>Timelines, honestly</h3><ul><li>First read: within 6 hours, usually under 1 hour</li><li>Audit: 2 to 3 working days after access</li><li>Single fix: 1 to 2 days, plus a day to verify</li><li>Conversions API or server-side build: about a week with the parallel run</li></ul></div>
+  </div>
+</div></section>
+
+<section id="reviews"><div class="w">
+  <div class="sh"><h2>Reviews, straight from Upwork</h2><p class="sub">Every rated job 5.0, 100% job success. Nothing here is edited.</p></div>
+  <div class="grid3"><div class="rev"><div class="stars"><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg></div><p>&ldquo;He found the exact root cause quickly, fixed it cleanly, and &mdash; this is what set him apart &mdash; didn&rsquo;t just tell me it was done. He proved it with cold-load tests and a reversal test, and confirmed it on Meta&rsquo;s side. On top of that he flagged two serious issues outside the scope of the job, including a security problem, completely honestly.&rdquo;</p><div class="who"><span>Meta Pixel and conversion tracking fix, WordPress &middot; July 2026</span><a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">view on Upwork</a></div></div><div class="rev"><div class="stars"><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg></div><p>&ldquo;Rytis is great! Solved all of the issues we were having and gave very detailed explanations of fixes and possible future issues and their solutions. We had a major unexpected unrelated issue come up with a separate app in our shopify store that was killing sales while he was working on our original pixel issues and he immediately found the issue and sent an evidence trail detailing his findings to the app help center while actually fixing the issue that we would have never figured out on our own, then jumped right back into fixing our original issues with our pixel. He also answered all of my many questions as we worked through everything. We highly recommend working with him! We don&rsquo;t know what we would have done without his expertise!&rdquo;</p><div class="who"><span>Meta pixel purchase events fix, Shopify &middot; August 2026</span><a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">view on Upwork</a></div></div><div class="rev"><div class="stars"><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg></div><p>&ldquo;Rytis was fantastic to work with. He quickly identified and resolved the issues with my Google Tag Manager, GA4, and Google Ads conversion tracking that had been preventing my conversions from reporting correctly. His communication was excellent throughout the project, and he took the time to explain what was causing the issue and how he was fixing it. He was knowledgeable, efficient, and made sure everything was working properly before completing the job. I highly recommend Rytis to anyone needing help with Google Tag Manager, GA4, or Google Ads tracking.&rdquo;</p><div class="who"><span>GTM, GA4 and Google Ads conversion tracking fix &middot; August 2026</span><a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">view on Upwork</a></div></div><div class="rev"><div class="stars"><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg></div><p>&ldquo;Rytis was absolutely outstanding from start to finish. His communication was clear, concise and there thorough. He helped us find a solution to a very tricky problem in an astonishingly quick time, I couldn&rsquo;t recommend him high enough.&rdquo;</p><div class="who"><span>Urgent Shopify Meta Pixel and Conversions API audit &middot; July 2026</span><a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">view on Upwork</a></div></div><div class="rev"><div class="stars"><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg></div><p>&ldquo;He identified and fixed all three tracking issues &mdash; the broken purchase values, the affiliate attribution dropping after the Stripe redirect, and GA4 loading twice. He also caught a fourth problem we didn&rsquo;t know about ($0 ghost conversions polluting our data) and fixed that too.&rdquo;</p><div class="who"><span>GA4 and GTM attribution fix &middot; July 2026</span><a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">view on Upwork</a></div></div><div class="rev"><div class="stars"><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg></div><p>&ldquo;Report was actually deep &ndash; data-cross-checked GA4 / Meta Graph / Magento, not a generic checklist. He delivered the free first-read exactly as advertised, then the full audit landed same-day after access was granted.&rdquo;</p><div class="who"><span>Tracking audit, phase one of a server-side GTM engagement &middot; July 2026</span><a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">view on Upwork</a></div></div></div>
+  <a class="btn" style="margin-top:18px" href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">Check them live on Upwork <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"></path><path d="M20 4L10 14"></path><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"></path></svg></a>
+</div></section>
+
+<section><div class="w grid2">
+  <div>
+    <div class="sh"><h2>Questions I hear before we start</h2></div>
+    <div class="faq"><h3>Do I need server-side tracking?</h3><p>If you pay for ads, usually yes. Browser-only tracking drops purchases to ad blockers and iOS, and the smaller the budget, the more each lost signal costs. I say first whether it fixes your gap at all.</p></div>
+    <div class="faq"><h3>What access do you need?</h3><p>Read access first: Events Manager, GA4, GTM and the store. Publish access only once the fix is agreed, and only for that step.</p></div>
+    <div class="faq"><h3>How fast?</h3><p>Most single fixes take 1 to 2 days after access, plus a day to verify. Bigger builds get a date after the look inside.</p></div>
+    <div class="faq"><h3>What if the numbers are actually fine?</h3><p>Then I tell you, and you owe nothing. A gap under about 10% is normal loss, not a tracking problem.</p></div>
+    <div class="faq"><h3>Can you work under my agency&rsquo;s name?</h3><p>Yes. The client stays yours, you invoice, I do the work under your name.</p></div>
+    <div class="faq"><h3>Do you do calls?</h3><p>Everything happens in writing: the assistant here, WhatsApp or email. You get a written record of every finding and every change, which is worth more than a call.</p></div>
+  </div>
+  <div>
+    <div class="sh"><h2>Tell my assistant what you see</h2><p class="sub">Name and email first, then the problem in your own words. I read every conversation myself.</p></div>
+    <div class="card" id="chat2">
+  <div class="log"></div>
+  <form class="ask" novalidate>
+    <div class="row who"><input type="text" name="name" placeholder="Your name" autocomplete="given-name" required><input type="email" name="email" placeholder="you@company.com" autocomplete="email" required><button type="submit">Start</button></div>
+    <div class="row txt" hidden><textarea name="text" rows="2" placeholder="Describe what you see, or ask about prices and timelines"></textarea><button type="submit">Send</button></div>
+    <div class="row act" hidden><button type="button" class="pass">Pass it to Rytis</button><button type="button" class="more chip">I have another question</button></div>
+    <p class="hint">I read every conversation myself and reply <b>within 6 hours, usually under 1 hour</b>. Or message me directly: <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> (messages, not calls) &middot; <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a></p>
+  </form>
+</div>
+  </div>
+</div></section>
+
+<section id="guides" class="guides"><div class="w">
+  <div class="sh"><h2>Troubleshooting guides</h2><p class="sub">If you would rather check it yourself first.</p></div>
+  <ul><li><a href="/fbq-is-not-defined-delay-javascript-fix" class="guide-link">fbq is not defined - your caching plugin is killing the Meta Pixel</a></li><li><a href="/meta-pixel-not-firing" class="guide-link">Meta Pixel not firing? The 7 real causes, in the order to check them</a></li><li><a href="/ga4-does-not-match-backend" class="guide-link">GA4 purchases don't match your backend orders - which number to trust</a></li><li><a href="/shopify-checkout-upgrade-tracking" class="guide-link">Shopify's checkout upgrade silently breaks tracking - what dies and how to migrate</a></li><li><a href="/offline-conversions-google-ads" class="guide-link">Google Ads only counts form fills, not real sales - how to import offline conversions</a></li><li><a href="/ga4-double-counting-purchases-duplicate-tag" class="guide-link">GA4 Counting Purchases Twice? The Duplicate Tag Fix</a></li><li><a href="/meta-events-manager-double-purchases-deduplication-fix" class="guide-link">Meta Counts Purchases Twice: Pixel + CAPI Deduplication Fix</a></li><li><a href="/google-ads-conversion-inactive-tag-fires-gtm" class="guide-link">Google Ads Conversion Inactive but Tag Fires in GTM: The Fix</a></li><li><a href="/woocommerce-stripe-redirect-purchase-event-not-firing" class="guide-link">WooCommerce Purchase Event Missing After Stripe Redirect: Fix</a></li><li><a href="/ga4-purchases-attributed-stripe-paypal-direct-fix" class="guide-link">Fix GA4 Purchases Showing as stripe.com, paypal.com or (direct)</a></li><li><a href="/consent-banner-not-blocking-tracking" class="guide-link">Your cookie banner blocks nothing - the 60-second check</a></li><li><a href="/consent-mode-v2-conversions-dropped" class="guide-link">Conversions Dropped After Consent Mode v2? How to Diagnose It</a></li><li><a href="/ga4-ai-assistant-channel" class="guide-link">GA4&#x27;s New AI Assistant Channel: What It Catches and What It Misses</a></li><li><a href="/prove-geo-roi" class="guide-link">GEO Gets You Cited in AI Answers. Proving It Converts Is a Different Job.</a></li><li><a href="/track-ai-conversions-ga4" class="guide-link">Your ChatGPT Traffic Is Hiding in Direct: How to Track AI Conversions in GA4</a></li><li><a href="/clickfunnels-upsell-tracking-fix" class="guide-link">ClickFunnels Upsell Tracking: Fix Double or Missing Purchases</a></li><li><a href="/ga4-events-missing-plugin-wrapped-gtag" class="guide-link">GA4 events missing? A plugin may have wrapped your gtag</a></li><li><a href="/server-side-gtm-what-it-fixes" class="guide-link">Server-Side GTM: What It Actually Fixes (and What It Doesn&#x27;t)</a></li></ul>
+</div></section>
+
+<footer>Rytis Balys &middot; MB Euruvizija &middot; Vilnius, Lithuania (EET) &middot; worldwide, remote &middot; assistant replies are kept 90 days so I can improve them &middot; <a href="https://github.com/rytisdev-commits/server-side-conversion-tracking" rel="noopener">github case study</a> &middot; <a href="/lt/">LT</a></footer>
 <script>
 (function(){
-  var f=document.getElementById('leadForm'); if(!f) return;
-  var t0=Date.now(), msg=f.querySelector('.lead-msg'), btn=f.querySelector('button');
-  var gapEl=document.getElementById('leadGap');
-
-  function picked(name){
-    return Array.prototype.slice.call(f.querySelectorAll('input[name="'+name+'"]:checked'))
-      .map(function(i){return i.value;}).join(', ');
-  }
-  function num(v){ v=String(v||'').replace(/[^0-9.]/g,''); return v===''?null:parseFloat(v); }
-  function gapNow(){
-    var np=num(f.n_platform.value), nb=num(f.n_backend.value);
-    if(np===null||nb===null||np<=0) return null;
-    return Math.round(Math.abs(np-nb)/np*100);
-  }
-
-  // Tarpas rodomas IS KARTO, dar nepraseant el. pasto. Zmogus pamato savo skaiciu.
-  function showGap(){
-    var g=gapNow();
-    if(g===null){ gapEl.hidden=true; return; }
-    gapEl.hidden=false;
-    if(g<10){ gapEl.className='lead-gap small'; gapEl.textContent='-> '+g+'% gap. That is inside normal loss.'; }
-    else { gapEl.className='lead-gap'; gapEl.textContent='-> '+g+'% gap, well past the ~10% you would expect.'; }
-  }
-  try{ var q=new URLSearchParams(location.search), gc=q.get('gclid'); if(gc){ sessionStorage.setItem('rb_gclid',gc); sessionStorage.setItem('rb_landing',location.pathname); } f.gclid.value=sessionStorage.getItem('rb_gclid')||''; f.landing.value=sessionStorage.getItem('rb_landing')||location.pathname; }catch(e){}
-  f.n_platform.addEventListener('input', showGap);
-  f.n_backend.addEventListener('input', showGap);
-
+  var CHAT='https://rb-chat.formos-ops.workers.dev/', FORM='https://rb-form.formos-ops.workers.dev/';
+  var gclid='', landing='/';
+  try{ var q=new URLSearchParams(location.search), gc=q.get('gclid'); if(gc){ sessionStorage.setItem('rb_gclid',gc); sessionStorage.setItem('rb_landing',location.pathname); } gclid=sessionStorage.getItem('rb_gclid')||''; landing=sessionStorage.getItem('rb_landing')||location.pathname; }catch(e){}
   var EMAIL=/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/;
-  var ERRORS={ email_invalid:'That email looks mistyped - check it and send again.',
-               site_required:'I need the site URL to look anything up.',
-               origin:'Something blocked that request. Email work@rytisbalys.com and I will pick it up.' };
-
-  f.addEventListener('submit',function(e){
-    e.preventDefault();
-    var email=f.email.value.trim(), site=f.site.value.trim();
-    if(!EMAIL.test(email)){ msg.className='lead-msg err'; msg.textContent=ERRORS.email_invalid; f.email.focus(); return; }
-    if(!site){ msg.className='lead-msg err'; msg.textContent=ERRORS.site_required; f.site.focus(); return; }
-
-    var gap=gapNow();
-    var d={email:email,site:site,details:f.details.value.trim(),
-           where:picked('where'),
-           n_platform:num(f.n_platform.value), n_backend:num(f.n_backend.value), gap:gap,
-           fax_line:f.fax_line.value, dt:Date.now()-t0, page:location.pathname,
-           gclid:f.gclid.value, landing:f.landing.value};
-
-    btn.disabled=true; msg.className='lead-msg'; msg.textContent='Sending...';
-    fetch('https://rb-form.formos-ops.workers.dev/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)})
-      .then(function(r){ return r.json().then(function(j){ return {ok:r.ok&&j.ok, j:j}; }); })
-      .then(function(res){
-        if(!res.ok){ throw new Error((res.j&&res.j.error)||'failed'); }
-        try{ gtag('event','conversion',{'send_to':'AW-18424603738/M34RCLm1x-wcENrIxNFE','value':50,'currency':'EUR'}); gtag('event','lead_form_submit',{gap:gap,where:d.where}); }catch(e){}
-        msg.className='lead-msg ok';
-        msg.textContent = gap===null
-          ? 'Got it. I read every one of these myself and reply, usually the same day.'
-          : (gap<10
-              ? 'Got it. A '+gap+'% gap is inside normal loss - I will tell you straight if there is nothing to fix.'
-              : 'Got it. I will come back with the likely cause of that '+gap+'% gap, usually the same day.');
-        var bk=document.createElement('a');
-        bk.href='https://calendar.google.com/calendar/appointments/schedules/AcZssZ1LzwWfm37HWCuNFrwV-sWjHKMuSWugdCjbgo1P6MzEiQabGYLb9Qz5T9Vjb85kJ9Mkp0blhlG8';
-        bk.target='_blank'; bk.rel='noopener';
-        bk.textContent='If it is easier to explain out loud: book 30 min and walk me through it. Same free diagnosis, I come back with the likely cause after.';
-        bk.style.cssText='display:block;margin-top:10px;font-weight:600';
-        msg.appendChild(bk);
-        f.reset(); gapEl.hidden=true;
-      })
-      .catch(function(err){
-        msg.className='lead-msg err';
-        msg.textContent = ERRORS[String(err.message)] || 'That did not go through. Email work@rytisbalys.com instead and I will pick it up.';
-        btn.disabled=false;
-      });
-  });
+  var HANDOFF=/Anything else, or should I pass this to Rytis for you\?|Want me to pass this to Rytis/;
+  function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function setup(root){
+    var log=root.querySelector('.log'), f=root.querySelector('form'), who=f.querySelector('.who'), txt=f.querySelector('.txt'), act=f.querySelector('.act');
+    var st={name:'',email:'',hist:[],sent:false};
+    function add(role,text){var d=document.createElement('div');d.className='m '+role;d.innerHTML=esc(text);log.appendChild(d);return d;}
+    function wait(){var w=document.createElement('div');w.className='wait';w.textContent='Thinking...';log.appendChild(w);return w;}
+    function show(el,on){el.hidden=!on;}
+    add('bot',"Hi, I’m Rytis’s assistant. Your name and email first, so he can reply to you himself. Then tell me where your numbers disagree, or ask about prices and timelines.");
+    function submitToRytis(){
+      if(st.sent) return; st.sent=true; show(act,false); show(txt,false); var w=wait();
+      var transcript='Name: '+st.name+'\n\n'+st.hist.map(function(m){return (m.role==='user'?'Visitor: ':'Assistant: ')+m.text;}).join('\n\n');
+      fetch(FORM,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:st.email,site:'see chat',details:transcript,where:'chat',fax_line:'',dt:9000,page:location.pathname,gclid:gclid,landing:landing,source:'home-chat'})})
+        .then(function(r){return r.json();}).then(function(j){ w.remove(); if(!j.ok) throw new Error('x');
+          try{ gtag('event','conversion',{'send_to':'AW-18424603738/M34RCLm1x-wcENrIxNFE','value':50,'currency':'EUR'}); gtag('event','lead_form_submit',{source:'home-chat'}); }catch(e){}
+          add('bot','Passed to Rytis. He will reach out to you at '+st.email+' within 6 hours, usually under 1 hour.');
+        }).catch(function(){ w.remove(); st.sent=false; add('err','That did not go through. Email work@rytisbalys.com with what you wrote above and Rytis will pick it up.'); show(txt,true); });
+    }
+    f.addEventListener('submit',function(e){
+      e.preventDefault();
+      if(!st.name){
+        var n=f.name.value.trim(), m=f.email.value.trim();
+        if(!n){ f.name.focus(); return; } if(!EMAIL.test(m)){ f.email.focus(); f.email.style.borderColor='#b91c1c'; return; }
+        st.name=n; st.email=m; add('me',n+' · '+m); show(who,false); show(txt,true);
+        try{ gtag('event','intake_start',{source:'home-chat'}); }catch(x){}
+        add('bot','Thanks '+n.split(' ')[0]+'. Where do your numbers disagree, Meta, Google Ads, GA4, or your backend? Tell me what you see, or ask anything about prices and timelines.'); f.text.focus(); return;
+      }
+      var t=f.text.value.trim(); if(!t) return;
+      st.hist.push({role:'user',text:t}); add('me',t); f.text.value=''; show(act,false); var w=wait(); f.querySelector('.txt button').disabled=true;
+      fetch(CHAT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({page:location.pathname,home:{name:st.name},messages:st.hist})})
+        .then(function(r){return r.json();}).then(function(j){
+          w.remove(); if(!j.reply) throw new Error(j.error||'no_reply');
+          st.hist.push({role:'assistant',text:j.reply}); add('bot',j.reply);
+          if(j.handoff){ submitToRytis(); return; }
+          if(HANDOFF.test(j.reply)) show(act,true);
+        }).catch(function(){ w.remove(); add('err','That did not go through. Email work@rytisbalys.com and Rytis will reply himself.'); })
+        .then(function(){ f.querySelector('.txt button').disabled=false; });
+    });
+    f.text.addEventListener('keydown',function(e){ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); f.requestSubmit(); } });
+    f.querySelector('.pass').addEventListener('click',submitToRytis);
+    f.querySelector('.more').addEventListener('click',function(){ show(act,false); f.text.focus(); });
+  }
+  setup(document.getElementById('chat1')); setup(document.getElementById('chat2'));
 })();
 </script>
-<script src="/chat.js" defer></script>
 </body>
 </html>
