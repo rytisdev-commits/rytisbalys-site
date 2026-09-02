@@ -215,6 +215,7 @@
 <footer><nav class="fnav"><a href="#build">What I build</a><a href="#process">Process</a><a href="#prices">Prices</a><a href="#reviews">Reviews</a><a href="#guides">Guides</a><a href="#chat1">Free audit</a></nav>Rytis Balys &middot; MB Euruvizija &middot; Vilnius, Lithuania (EET) &middot; worldwide, remote &middot; assistant replies are kept 90 days so I can improve them &middot; <a href="https://github.com/rytisdev-commits/server-side-conversion-tracking" rel="noopener">github case study</a> &middot; <a href="/lt/">LT</a></footer>
 <script>
 (function(){
+  var FORM='https://rb-form.formos-ops.workers.dev/';
   try{ var q=new URLSearchParams(location.search), gc=q.get('gclid'); if(gc){ sessionStorage.setItem('rb_gclid',gc); sessionStorage.setItem('rb_landing',location.pathname); } }catch(e){}
   var EMAIL=/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/;
   function setup(root){
@@ -225,7 +226,9 @@
       if(!n){ f.name.focus(); return; } if(!EMAIL.test(m)){ f.email.focus(); f.email.style.borderColor='#b91c1c'; return; } f.email.style.borderColor='';
       try{ sessionStorage.setItem('rb_name',n); sessionStorage.setItem('rb_email',m); }catch(x){}
       try{ gtag('event','intake_start',{source:'home-chat'}); }catch(x){}
-      location.href='/ai?n='+encodeURIComponent(n)+'&e='+encodeURIComponent(m);
+      var gclid='', landing='/'; try{ gclid=sessionStorage.getItem('rb_gclid')||''; landing=sessionStorage.getItem('rb_landing')||location.pathname; }catch(x){}
+      try{ fetch(FORM,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify({intake:true,name:n,email:m,fax_line:'',dt:9000,page:location.pathname,gclid:gclid,landing:landing,source:'home-start'})}); }catch(x){}
+      setTimeout(function(){ location.href='/ai?n='+encodeURIComponent(n)+'&e='+encodeURIComponent(m); },150);
     });
   }
   setup(document.getElementById('chat1')); setup(document.getElementById('chat2'));

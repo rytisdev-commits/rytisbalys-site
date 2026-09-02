@@ -84,7 +84,7 @@
   function submitToRytis(){
     if(st.sent) return; st.sent=true; show(act,false); show(txt,false); var w=wait();
     var transcript='Name: '+st.name+'\n\n'+st.hist.map(function(m){return (m.role==='user'?'Visitor: ':'Assistant: ')+m.text;}).join('\n\n');
-    fetch(FORM,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:st.email,site:'see chat',details:transcript,where:'chat',fax_line:'',dt:9000,page:location.pathname,gclid:gclid,landing:landing,source:'ai-page'})})
+    fetch(FORM,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:st.email,name:st.name,site:'see chat',details:transcript,where:'chat',fax_line:'',dt:9000,page:location.pathname,gclid:gclid,landing:landing,source:'ai-page'})})
       .then(function(r){return r.json();}).then(function(j){ w.remove(); if(!j.ok) throw new Error('x');
         try{ gtag('event','conversion',{'send_to':'AW-18424603738/M34RCLm1x-wcENrIxNFE','value':50,'currency':'EUR'}); gtag('event','lead_form_submit',{source:'ai-page'}); }catch(e){}
         add('bot','Passed to Rytis. He will reach out to you at '+st.email+' within 6 hours, usually under 1 hour. Closing the chat here, you can come back any time.'); show(done,true);
@@ -96,6 +96,7 @@
       var n=f.name.value.trim(), m=f.email.value.trim();
       if(!n){ f.name.focus(); return; } if(!EMAIL.test(m)){ f.email.focus(); f.email.style.borderColor='#b91c1c'; return; } f.email.style.borderColor='';
       try{ sessionStorage.setItem('rb_name',n); sessionStorage.setItem('rb_email',m); gtag('event','intake_start',{source:'ai-page'}); }catch(x){}
+      try{ fetch(FORM,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({intake:true,name:n,email:m,fax_line:'',dt:9000,page:location.pathname,gclid:gclid,landing:landing,source:'ai-start'})}); }catch(x){}
       begin(n,m); return;
     }
     var t=f.text.value.trim(); if(!t){ f.text.focus(); return; }
