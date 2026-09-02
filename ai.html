@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="canonical" href="https://rytisbalys.com/ai">
+<meta name="robots" content="noindex,follow">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1D69SRZPPM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1D69SRZPPM');
+  gtag('config', 'AW-18424603738');
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Talk to Rytis&rsquo;s assistant</title>
+<meta name="description" content="Describe your tracking issue, the assistant gives a first read and passes it to Rytis. He replies within 6 hours, usually under 1 hour.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#f4f6f3;--ink:#0f2a20;--muted:#4f6f62;--line:#dde5dc;--bot:#eef3ec;--g:#14532d;--font:Manrope,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif}
+  *{margin:0;padding:0;box-sizing:border-box} [hidden]{display:none!important}
+  html,body{height:100%} body{background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.55;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;height:100vh;height:100dvh}
+  header{background:#fff;border-bottom:1px solid var(--line);flex:0 0 auto}
+  header .w{max-width:820px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px}
+  header img{width:38px;height:38px;border-radius:50%;object-fit:cover}
+  header .who{font-weight:700;font-size:15px} header .who small{display:block;font-weight:400;font-size:12px;color:var(--muted)}
+  header a.home{margin-left:auto;background:var(--bot);color:var(--ink);text-decoration:none;font-weight:700;font-size:13px;padding:8px 14px;border-radius:999px;white-space:nowrap}
+  main{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;max-width:820px;width:100%;margin:0 auto}
+  .log{flex:1 1 auto;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:12px;padding:20px 16px 8px;scroll-behavior:smooth}
+  .m{max-width:88%;padding:13px 16px;border-radius:18px;font-size:15.5px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere} .m.bot{align-self:flex-start;background:#fff;border:1px solid var(--line);border-bottom-left-radius:6px} .m.me{align-self:flex-end;background:var(--g);color:#fff;border-bottom-right-radius:6px} .m.err{align-self:flex-start;background:#fff1f0;color:#a8322a}
+  .wait{align-self:flex-start;color:var(--muted);font-size:14px;padding:4px 6px}
+  .ask{flex:0 0 auto;padding:10px 16px 14px;display:flex;flex-direction:column;gap:10px;background:var(--bg)} .row{display:flex;gap:8px;flex-wrap:wrap}
+  .ask input,.ask textarea{flex:1 1 160px;font:inherit;font-size:16px;padding:12px 14px;border:1px solid #cfe0d4;border-radius:14px;color:var(--ink);min-width:0;background:#fff} .ask textarea{resize:none;min-height:52px;max-height:160px;flex-basis:100%}
+  .ask input:focus,.ask textarea:focus{outline:none;border-color:var(--g);box-shadow:0 0 0 3px rgba(20,83,45,.12)}
+  .ask button{border:0;border-radius:12px;background:var(--g);color:#fff;font:600 15px var(--font);padding:0 20px;min-height:46px;cursor:pointer} .ask button[disabled]{opacity:.5}
+  .ask button.chip{background:#fff;color:var(--ink);border:1px solid #cfe0d4;border-radius:999px} .ask button.pass{border-radius:999px}
+  .ask a.back{display:inline-flex;align-items:center;background:var(--g);color:#fff;text-decoration:none;font-weight:700;font-size:15px;padding:0 20px;min-height:46px;border-radius:999px}
+  .hint{font-size:12.5px;color:var(--muted)} .hint b{color:var(--ink)} .hint a{color:var(--g);text-decoration:none;font-weight:600}
+  @media (min-width:900px){.log{padding:28px 0 8px} .ask{padding:10px 0 20px}}
+</style>
+</head>
+<body>
+<header><div class="w">
+  <img src="/rytis.jpg" alt="Rytis Balys">
+  <span class="who">Rytis&rsquo;s assistant<small>Rytis reads every chat and replies himself</small></span>
+  <a class="home" href="/">&larr; Back to home</a>
+</div></header>
+<main>
+  <div class="log"></div>
+  <form class="ask" novalidate>
+    <div class="row who" hidden><input type="text" name="name" placeholder="Your name" autocomplete="given-name" required><input type="email" name="email" placeholder="you@company.com" autocomplete="email" required><button type="submit">Start</button></div>
+    <div class="row txt" hidden><textarea name="text" rows="2" placeholder="Describe what you see, or ask about prices and timelines"></textarea><button type="submit">Send</button></div>
+    <div class="row act" hidden><button type="button" class="pass">Pass it to Rytis</button><button type="button" class="more chip">I have another question</button></div>
+    <div class="row done" hidden><a class="back" href="/">&larr; Back to home</a></div>
+    <p class="hint">Reply <b>within 6 hours, usually under 1 hour</b>. Or directly: <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> (messages, not calls) &middot; <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a></p>
+  </form>
+</main>
+<script>
+(function(){
+  var CHAT='https://rb-chat.formos-ops.workers.dev/', FORM='https://rb-form.formos-ops.workers.dev/';
+  var gclid='', landing='/', q=new URLSearchParams(location.search);
+  try{ var gc=q.get('gclid'); if(gc){ sessionStorage.setItem('rb_gclid',gc); sessionStorage.setItem('rb_landing',location.pathname); } gclid=sessionStorage.getItem('rb_gclid')||''; landing=sessionStorage.getItem('rb_landing')||location.pathname; }catch(e){}
+  var EMAIL=/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/;
+  var HANDOFF=/pass this to Rytis/i;
+  function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  var log=document.querySelector('.log'), f=document.querySelector('form'), who=f.querySelector('.who'), txt=f.querySelector('.txt'), act=f.querySelector('.act'), done=f.querySelector('.done');
+  var st={name:'',email:'',hist:[],sent:false};
+  function add(role,text){var d=document.createElement('div');d.className='m '+role;d.innerHTML=esc(text);log.appendChild(d);log.scrollTop=log.scrollHeight;return d;}
+  function wait(){var w=document.createElement('div');w.className='wait';w.textContent='Thinking...';log.appendChild(w);log.scrollTop=log.scrollHeight;return w;}
+  function show(el,on){el.hidden=!on;}
+  function begin(n,m){
+    st.name=n; st.email=m; show(who,false); show(txt,true);
+    add('bot','Hi '+n.split(' ')[0]+', I am Rytis’s assistant. Where do your numbers disagree, Meta, Google Ads, GA4, or your backend? Tell me what you see, or ask anything about prices and timelines.'); f.text.focus();
+  }
+  var n0='', m0='';
+  try{ n0=q.get('n')||sessionStorage.getItem('rb_name')||''; m0=q.get('e')||sessionStorage.getItem('rb_email')||''; }catch(e){}
+  if(n0&&EMAIL.test(m0)){ try{ sessionStorage.setItem('rb_name',n0); sessionStorage.setItem('rb_email',m0); }catch(e){} try{ if(q.has('n')) history.replaceState(null,'','/ai'); }catch(e){} begin(n0,m0); }
+  else{ add('bot','Hi, I am Rytis’s assistant. Your name and email first, so he can reply to you himself. Then tell me where your numbers disagree, or ask about prices and timelines.'); show(who,true); }
+  function submitToRytis(){
+    if(st.sent) return; st.sent=true; show(act,false); show(txt,false); var w=wait();
+    var transcript='Name: '+st.name+'\n\n'+st.hist.map(function(m){return (m.role==='user'?'Visitor: ':'Assistant: ')+m.text;}).join('\n\n');
+    fetch(FORM,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:st.email,site:'see chat',details:transcript,where:'chat',fax_line:'',dt:9000,page:location.pathname,gclid:gclid,landing:landing,source:'ai-page'})})
+      .then(function(r){return r.json();}).then(function(j){ w.remove(); if(!j.ok) throw new Error('x');
+        try{ gtag('event','conversion',{'send_to':'AW-18424603738/M34RCLm1x-wcENrIxNFE','value':50,'currency':'EUR'}); gtag('event','lead_form_submit',{source:'ai-page'}); }catch(e){}
+        add('bot','Passed to Rytis. He will reach out to you at '+st.email+' within 6 hours, usually under 1 hour. Closing the chat here, you can come back any time.'); show(done,true);
+      }).catch(function(){ w.remove(); st.sent=false; add('err','That did not go through. Email work@rytisbalys.com with what you wrote above and Rytis will pick it up.'); show(txt,true); show(act,true); });
+  }
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!st.name){
+      var n=f.name.value.trim(), m=f.email.value.trim();
+      if(!n){ f.name.focus(); return; } if(!EMAIL.test(m)){ f.email.focus(); f.email.style.borderColor='#b91c1c'; return; } f.email.style.borderColor='';
+      try{ sessionStorage.setItem('rb_name',n); sessionStorage.setItem('rb_email',m); gtag('event','intake_start',{source:'ai-page'}); }catch(x){}
+      begin(n,m); return;
+    }
+    var t=f.text.value.trim(); if(!t){ f.text.focus(); return; }
+    st.hist.push({role:'user',text:t}); add('me',t); f.text.value=''; show(act,false); var w=wait(); f.querySelector('.txt button').disabled=true;
+    fetch(CHAT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({page:location.pathname,home:{name:st.name},messages:st.hist})})
+      .then(function(r){return r.json();}).then(function(j){
+        w.remove(); if(!j.reply) throw new Error(j.error||'no_reply');
+        st.hist.push({role:'assistant',text:j.reply}); add('bot',j.reply);
+        if(j.handoff){ submitToRytis(); return; }
+        if(HANDOFF.test(j.reply)) show(act,true);
+      }).catch(function(){ w.remove(); add('err','That did not go through. Email work@rytisbalys.com and Rytis will reply himself.'); })
+      .then(function(){ f.querySelector('.txt button').disabled=false; });
+  });
+  f.text.addEventListener('keydown',function(e){ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); f.requestSubmit(); } });
+  f.querySelector('.pass').addEventListener('click',submitToRytis);
+  f.querySelector('.more').addEventListener('click',function(){ show(act,false); f.text.focus(); });
+})();
+</script>
+</body>
+</html>

@@ -87,7 +87,7 @@
   .guides ul{list-style:none;columns:2;column-gap:40px} .guides li{break-inside:avoid;padding:10px 0;border-bottom:1px solid var(--line)} .guide-link{color:var(--ink);text-decoration:none;font-size:15px} .guide-link:hover{color:var(--g)}
   /* chat */
   .card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 14px 34px rgba(20,83,45,.10);overflow:hidden}
-  .log{display:flex;flex-direction:column;gap:12px;padding:20px 20px 8px;min-height:120px;max-height:400px;overflow-y:auto;scroll-behavior:smooth}
+  .log{display:flex;flex-direction:column;gap:12px;padding:20px 20px 8px}
   .m{max-width:92%;padding:13px 16px;border-radius:18px;font-size:15px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere} .m.bot{align-self:flex-start;background:var(--bot);border-bottom-left-radius:6px} .m.me{align-self:flex-end;background:var(--g);color:#fff;border-bottom-right-radius:6px} .m.err{align-self:flex-start;background:#fff1f0;color:#a8322a}
   .wait{align-self:flex-start;color:var(--muted);font-size:14px;padding:4px 6px}
   .ask{padding:12px 16px 16px;display:flex;flex-direction:column;gap:10px} .row{display:flex;gap:8px;flex-wrap:wrap}
@@ -96,10 +96,6 @@
   .ask button{border:0;border-radius:12px;background:var(--g);color:#fff;font:600 15px var(--font);padding:0 20px;min-height:46px;cursor:pointer} .ask button[disabled]{opacity:.5}
   .ask button.chip{background:#fff;color:var(--ink);border:1px solid #cfe0d4;border-radius:999px}
   .ask button.pass{border-radius:999px}
-  .card.open{position:fixed;z-index:50;top:4vh;left:50%;transform:translateX(-50%);width:min(760px,94vw);height:92vh;box-shadow:0 30px 80px rgba(15,42,32,.35)} .card.open .log{flex:1;max-height:none} .card.open .cbar{display:flex}
-  .cbar{display:none;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--line);font-size:14px;font-weight:700} .cbar button{border:0;background:var(--bot);color:var(--ink);font:600 13px var(--font);padding:7px 12px;border-radius:999px;cursor:pointer}
-  .backdrop{position:fixed;inset:0;background:rgba(15,42,32,.45);z-index:49;backdrop-filter:blur(2px)} body.locked{overflow:hidden;position:fixed;width:100%}
-  @media (max-width:900px){.card.open{top:0;height:100vh;height:100dvh;width:100vw;border-radius:0}}
   .hint{font-size:12.5px;color:var(--muted)} .hint b{color:var(--ink)} .hint a{text-decoration:none;font-weight:600}
   footer{font-size:12px;color:var(--muted);text-align:center;padding:48px 16px 24px} footer a{color:var(--muted)}
   .fnav{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 22px;margin-bottom:16px;font-size:14px} .fnav a{color:var(--ink);text-decoration:none;font-weight:600}
@@ -123,14 +119,10 @@
     <div class="pf"><a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener"><span class="pi">U</span><span><b>Upwork</b><small>5.0 on every rated job</small></span></a><a href="https://github.com/rytisdev-commits/server-side-conversion-tracking" target="_blank" rel="noopener"><span class="pi">G</span><span><b>GitHub</b><small>Server-side tracking case study</small></span></a></div>
   </div>
   <div class="card" id="chat1">
-  <div class="cbar"><span>Rytis&rsquo;s assistant</span><button type="button" class="min">Close</button></div>
-  <div class="log"></div>
+  <div class="log"><div class="m bot">Hi, I&rsquo;m Rytis&rsquo;s assistant. Your name and email first, so he can reply to you himself. Then tell me where your numbers disagree, or ask about prices and timelines.</div></div>
   <form class="ask" novalidate>
     <div class="row who"><input type="text" name="name" placeholder="Your name" autocomplete="given-name" required><input type="email" name="email" placeholder="you@company.com" autocomplete="email" required><button type="submit">Start</button></div>
-    <div class="row txt" hidden><textarea name="text" rows="2" placeholder="Describe what you see, or ask about prices and timelines"></textarea><button type="submit">Send</button></div>
-    <div class="row act" hidden><button type="button" class="pass">Pass it to Rytis</button><button type="button" class="more chip">I have another question</button></div>
-    <div class="row done" hidden><button type="button" class="back">Back to the page</button></div>
-    <p class="hint">I read every conversation myself and reply <b>within 6 hours, usually under 1 hour</b>. Or message me directly: <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> (messages, not calls) &middot; <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a></p>
+    <p class="hint">Opens the chat on its own page. I read every conversation myself and reply <b>within 6 hours, usually under 1 hour</b>. Or message me directly: <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> (messages, not calls) &middot; <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a></p>
   </form>
 </div>
 </div></section>
@@ -206,14 +198,10 @@
   <div>
     <div class="sh"><h2>Tell my assistant what you see</h2><p class="sub">Name and email first, then the problem in your own words. I read every conversation myself.</p></div>
     <div class="card" id="chat2">
-  <div class="cbar"><span>Rytis&rsquo;s assistant</span><button type="button" class="min">Close</button></div>
-  <div class="log"></div>
+  <div class="log"><div class="m bot">Hi, I&rsquo;m Rytis&rsquo;s assistant. Your name and email first, so he can reply to you himself. Then tell me where your numbers disagree, or ask about prices and timelines.</div></div>
   <form class="ask" novalidate>
     <div class="row who"><input type="text" name="name" placeholder="Your name" autocomplete="given-name" required><input type="email" name="email" placeholder="you@company.com" autocomplete="email" required><button type="submit">Start</button></div>
-    <div class="row txt" hidden><textarea name="text" rows="2" placeholder="Describe what you see, or ask about prices and timelines"></textarea><button type="submit">Send</button></div>
-    <div class="row act" hidden><button type="button" class="pass">Pass it to Rytis</button><button type="button" class="more chip">I have another question</button></div>
-    <div class="row done" hidden><button type="button" class="back">Back to the page</button></div>
-    <p class="hint">I read every conversation myself and reply <b>within 6 hours, usually under 1 hour</b>. Or message me directly: <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> (messages, not calls) &middot; <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a></p>
+    <p class="hint">Opens the chat on its own page. I read every conversation myself and reply <b>within 6 hours, usually under 1 hour</b>. Or message me directly: <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> (messages, not calls) &middot; <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a></p>
   </form>
 </div>
   </div>
@@ -227,57 +215,18 @@
 <footer><nav class="fnav"><a href="#build">What I build</a><a href="#process">Process</a><a href="#prices">Prices</a><a href="#reviews">Reviews</a><a href="#guides">Guides</a><a href="#chat1">Free audit</a></nav>Rytis Balys &middot; MB Euruvizija &middot; Vilnius, Lithuania (EET) &middot; worldwide, remote &middot; assistant replies are kept 90 days so I can improve them &middot; <a href="https://github.com/rytisdev-commits/server-side-conversion-tracking" rel="noopener">github case study</a> &middot; <a href="/lt/">LT</a></footer>
 <script>
 (function(){
-  var CHAT='https://rb-chat.formos-ops.workers.dev/', FORM='https://rb-form.formos-ops.workers.dev/';
-  var gclid='', landing='/';
-  try{ var q=new URLSearchParams(location.search), gc=q.get('gclid'); if(gc){ sessionStorage.setItem('rb_gclid',gc); sessionStorage.setItem('rb_landing',location.pathname); } gclid=sessionStorage.getItem('rb_gclid')||''; landing=sessionStorage.getItem('rb_landing')||location.pathname; }catch(e){}
+  try{ var q=new URLSearchParams(location.search), gc=q.get('gclid'); if(gc){ sessionStorage.setItem('rb_gclid',gc); sessionStorage.setItem('rb_landing',location.pathname); } }catch(e){}
   var EMAIL=/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/;
-  var HANDOFF=/pass this to Rytis/i; var SUBMITTED=false;
-  function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
   function setup(root){
-    var log=root.querySelector('.log'), f=root.querySelector('form'), who=f.querySelector('.who'), txt=f.querySelector('.txt'), act=f.querySelector('.act'), done=f.querySelector('.done');
-    var st={name:'',email:'',hist:[],sent:false};
-    function add(role,text){var d=document.createElement('div');d.className='m '+role;d.innerHTML=esc(text);log.appendChild(d);log.scrollTop=log.scrollHeight;return d;}
-    function wait(){var w=document.createElement('div');w.className='wait';w.textContent='Thinking...';log.appendChild(w);log.scrollTop=log.scrollHeight;return w;}
-    function show(el,on){el.hidden=!on;}
-    add('bot',"Hi, I’m Rytis’s assistant. Your name and email first, so he can reply to you himself. Then tell me where your numbers disagree, or ask about prices and timelines.");
-    function submitToRytis(){
-      if(st.sent||SUBMITTED) return; st.sent=true; SUBMITTED=true; show(act,false); show(txt,false); var w=wait();
-      var transcript='Name: '+st.name+'\n\n'+st.hist.map(function(m){return (m.role==='user'?'Visitor: ':'Assistant: ')+m.text;}).join('\n\n');
-      fetch(FORM,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:st.email,site:'see chat',details:transcript,where:'chat',fax_line:'',dt:9000,page:location.pathname,gclid:gclid,landing:landing,source:'home-chat'})})
-        .then(function(r){return r.json();}).then(function(j){ w.remove(); if(!j.ok) throw new Error('x');
-          try{ gtag('event','conversion',{'send_to':'AW-18424603738/M34RCLm1x-wcENrIxNFE','value':50,'currency':'EUR'}); gtag('event','lead_form_submit',{source:'home-chat'}); }catch(e){}
-          add('bot','Passed to Rytis. He will reach out to you at '+st.email+' within 6 hours, usually under 1 hour. Closing the chat here, you can come back any time.'); show(done,true);
-        }).catch(function(){ w.remove(); add('err','That did not go through. Email work@rytisbalys.com with what you wrote above and Rytis will pick it up.'); show(txt,true); show(act,true); });
-    }
+    var f=root.querySelector('form');
     f.addEventListener('submit',function(e){
       e.preventDefault();
-      if(!st.name){
-        var n=f.name.value.trim(), m=f.email.value.trim();
-        if(!n){ f.name.focus(); return; } if(!EMAIL.test(m)){ f.email.focus(); f.email.style.borderColor='#b91c1c'; return; } f.email.style.borderColor='';
-        st.name=n; st.email=m; add('me',n+' · '+m); show(who,false); show(txt,true); openBig();
-        try{ gtag('event','intake_start',{source:'home-chat'}); }catch(x){}
-        add('bot','Thanks '+n.split(' ')[0]+'. Where do your numbers disagree, Meta, Google Ads, GA4, or your backend? Tell me what you see, or ask anything about prices and timelines.'); f.text.focus(); return;
-      }
-      var t=f.text.value.trim(); if(!t){ f.text.focus(); return; } openBig();
-      st.hist.push({role:'user',text:t}); add('me',t); f.text.value=''; show(act,false); var w=wait(); f.querySelector('.txt button').disabled=true;
-      fetch(CHAT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({page:location.pathname,home:{name:st.name},messages:st.hist})})
-        .then(function(r){return r.json();}).then(function(j){
-          w.remove(); if(!j.reply) throw new Error(j.error||'no_reply');
-          st.hist.push({role:'assistant',text:j.reply}); add('bot',j.reply);
-          if(j.handoff){ submitToRytis(); return; }
-          if(HANDOFF.test(j.reply)) show(act,true);
-        }).catch(function(){ w.remove(); add('err','That did not go through. Email work@rytisbalys.com and Rytis will reply himself.'); })
-        .then(function(){ f.querySelector('.txt button').disabled=false; });
+      var n=f.name.value.trim(), m=f.email.value.trim();
+      if(!n){ f.name.focus(); return; } if(!EMAIL.test(m)){ f.email.focus(); f.email.style.borderColor='#b91c1c'; return; } f.email.style.borderColor='';
+      try{ sessionStorage.setItem('rb_name',n); sessionStorage.setItem('rb_email',m); }catch(x){}
+      try{ gtag('event','intake_start',{source:'home-chat'}); }catch(x){}
+      location.href='/ai?n='+encodeURIComponent(n)+'&e='+encodeURIComponent(m);
     });
-    f.text.addEventListener('keydown',function(e){ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); f.requestSubmit(); } });
-    var bd=null, sy=0; function openBig(){ if(root.classList.contains('open')) return; sy=window.scrollY; bd=document.createElement('div'); bd.className='backdrop'; bd.addEventListener('click',closeBig); document.body.appendChild(bd); root.classList.add('open'); document.body.classList.add('locked'); document.body.style.top=(-sy)+'px'; log.scrollTop=log.scrollHeight; f.text.focus(); }
-    function closeBig(){ if(!root.classList.contains('open')) return; root.classList.remove('open'); document.body.classList.remove('locked'); document.body.style.top=''; window.scrollTo(0,sy); if(bd){bd.remove();bd=null;} }
-    log.addEventListener('click',function(){ if(st.name) openBig(); });
-    root.querySelector('.min').addEventListener('click',closeBig);
-    f.querySelector('.back').addEventListener('click',function(){ closeBig(); });
-    document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeBig(); });
-    f.querySelector('.pass').addEventListener('click',submitToRytis);
-    f.querySelector('.more').addEventListener('click',function(){ show(act,false); f.text.focus(); });
   }
   setup(document.getElementById('chat1')); setup(document.getElementById('chat2'));
 })();
