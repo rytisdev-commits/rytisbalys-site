@@ -79,13 +79,6 @@
 </div></header>
 <main>
   <div class="crumb"><a href="/">rytisbalys.com</a> <span >/ troubleshooting</span></div>
-  <header><div class="w">
-  <img src="/rytis.jpg" alt="Rytis Balys">
-  <a class="who" href="/">Rytis Balys<small>Conversion tracking engineer</small></a>
-  <nav><a href="/#build">What I build</a><a href="/#process">Process</a><a href="/#prices">Prices</a><a href="/#reviews">Reviews</a><a href="/#guides">Guides</a><a class="cta" href="#chat1">Get your free audit</a></nav>
-</div></header>
-<main>
-  
   <h1>ClickFunnels Upsell Tracking: Fix Double or Missing Purchases</h1>
 <p>Ads Manager shows two purchases for one buyer. Or the opposite: Stripe says the order was $144 with the upsell, but Meta and GA4 only saw $47. Both problems have the same root. In ClickFunnels, and in any funnel with one-click upsells, the main checkout and the OTO are separate purchase events on separate pages. Most pixel setups either fire one generic Purchase on every page or tag only the first sale.</p><p>I fix this weekly. Here is the mechanism, the fix pattern, and how to prove it works before you trust the numbers.</p>
   <h2>Why one order becomes two purchase events</h2>
@@ -104,17 +97,6 @@ gtag('event', 'purchase', {transaction_id: 'CF-38291-OTO1', value: 97.00, curren
 <p>Do not assume the tags fire the way the setup screen suggests. Run the funnel and watch the events.</p><ul><li><strong>Meta Events Manager, Test Events tab.</strong> Open your pixel in Events Manager, go to Test Events, then complete a test order in the same browser (gateway test mode or a 100% discount code, refund after if needed). Take the OTO. You should see two Purchase events with different event IDs and each leg's own value, not the order total on both. If CAPI is live, send the test_event_code with the server events and confirm each browser event pairs with its server twin and shows as deduplicated.</li><li><strong>GA4 DebugView.</strong> Admin, then DebugView, with debug mode on via GTM Preview or Tag Assistant. You want two purchase events with distinct transaction_id values. If the second purchase never appears in reports despite firing in DebugView, you have the repeated transaction_id problem.</li><li><strong>Browser network tab.</strong> Filter requests to facebook.com/tr and read the query string: ev=Purchase, cd[value], cd[currency], eid. For GA4, filter for "collect" and check en=purchase and the value parameter. This is the ground truth when a tag manager UI says one thing and the wire says another.</li><li><strong>Decline path.</strong> Run a second test order and decline the OTO. The thank-you page must not fire an upsell Purchase. Most broken funnels fail this step.</li></ul>
   <h2>What clean values buy you</h2>
 <p>Once each leg reports its true value, Meta's value optimization bids toward the buyers who take upsells instead of the cheapest front-end conversions. Ads Manager ROAS starts matching Stripe, so budget decisions stop being guesses. GA4 attribution shows which campaigns produce high-AOV buyers rather than just buyers. On funnels with a strong OTO, the reported-versus-real gap is often 30-50% of revenue. That gap is what the algorithm was optimizing without.</p>
-  <div class="card" id="chat1">
-  <div class="top"><h2>Numbers still don't add up?</h2><p>Tell my assistant what you see and Rytis will reach out to you directly. Every rated job on Upwork is 5.0, <a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">check them live</a>.</p></div>
-  <div class="log"><div class="m bot">Hi, I&rsquo;m Rytis&rsquo;s assistant. Your name and email first, so Rytis can reach out to you directly. Then tell me where your numbers disagree, or ask about prices and timelines.</div></div>
-  <form class="ask" novalidate>
-    <div class="row who"><input type="text" name="name" placeholder="Your name" autocomplete="given-name" required><input type="email" name="email" placeholder="you@company.com" autocomplete="email" required><button type="submit">Start</button></div>
-    <p class="hint">I reply myself <b>within 6 hours, usually under 1 hour</b>. Prefer direct? <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> (messages, not calls) &middot; <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a></p>
-  </form>
-</div>
-  
-  
-</main>
   <div class="card" id="chat1">
   <div class="top"><h2>Numbers still don't add up?</h2><p>Tell my assistant what you see and Rytis will reach out to you directly. Every rated job on Upwork is 5.0, <a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">check them live</a>.</p></div>
   <div class="log"><div class="m bot">Hi, I&rsquo;m Rytis&rsquo;s assistant. Your name and email first, so Rytis can reach out to you directly. Then tell me where your numbers disagree, or ask about prices and timelines.</div></div>

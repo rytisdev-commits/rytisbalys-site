@@ -79,13 +79,6 @@
 </div></header>
 <main>
   <div class="crumb"><a href="/">rytisbalys.com</a> <span >/ troubleshooting</span></div>
-  <header><div class="w">
-  <img src="/rytis.jpg" alt="Rytis Balys">
-  <a class="who" href="/">Rytis Balys<small>Conversion tracking engineer</small></a>
-  <nav><a href="/#build">What I build</a><a href="/#process">Process</a><a href="/#prices">Prices</a><a href="/#reviews">Reviews</a><a href="/#guides">Guides</a><a class="cta" href="#chat1">Get your free audit</a></nav>
-</div></header>
-<main>
-  
   <h1>Meta Counts Purchases Twice: Pixel + CAPI Deduplication Fix</h1>
 <p>Your store did 100 orders yesterday. Meta Events Manager shows 195 purchases. The cause in almost every case I audit: the browser pixel and the Conversions API both send a Purchase event for the same order, and they carry no shared <strong>event_id</strong>, so Meta has no way to know it is one sale and counts it twice.</p><p>This is not a display bug. The doubled events feed campaign optimization and reported ROAS. Your ads look twice as profitable as they are, and budget decisions get made on that number. Here is how the deduplication mechanism works, how to confirm it is broken, and how to fix it.</p>
   <h2>How Meta deduplication actually works</h2>
@@ -109,17 +102,6 @@
 }</pre><p>In a server GTM setup, push the order ID into the dataLayer on the purchase page, map it into the web Meta pixel tag's event ID field, and make sure the same value rides to the server container and into the Event ID field of the Conversions API tag there. One value, one source, two destinations.</p><p>If your plugin does not let you control the event_id, replace it or disable one of its channels. Do not run two full pixel-plus-CAPI stacks side by side and hope.</p>
   <h2>Verify before you trust the numbers again</h2>
 <p>Do not declare this fixed until you have watched a real event travel both paths with the same ID. My verification pass:</p><ul><li><strong>Browser network tab.</strong> Open DevTools, Network tab, filter for <strong>facebook.com/tr</strong>, place a test order. Open the Purchase request and find the <strong>eid</strong> parameter. That is the browser-side event_id. If it is missing, the pixel side is still naked.</li><li><strong>Tag Assistant / GTM preview.</strong> In web preview, confirm the Meta pixel tag fires on the confirmation page and its event ID variable resolves to the order value, not undefined. In server container preview, confirm the incoming request carries the ID and the outgoing Meta request includes it as event_id.</li><li><strong>GA4 DebugView</strong>, if your server container is fed by the GA4 stream: confirm the purchase event arrives with the transaction or event ID parameter that your server-side Meta tag maps from. If it is empty there, it is empty everywhere downstream.</li><li><strong>Events Manager Test Events.</strong> Add your test_event_code to the server payload, place an order, and watch for the pair: browser Purchase first, server Purchase seconds later marked Deduplicated, both showing the identical ID.</li><li><strong>Next-day sanity check.</strong> Compare the Events Manager Purchase total against store orders for the day. Within a few percent is normal. Anything drifting back toward 2x means one of the sources regressed.</li></ul>
-  <div class="card" id="chat1">
-  <div class="top"><h2>Numbers still don't add up?</h2><p>Tell my assistant what you see and Rytis will reach out to you directly. Every rated job on Upwork is 5.0, <a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">check them live</a>.</p></div>
-  <div class="log"><div class="m bot">Hi, I&rsquo;m Rytis&rsquo;s assistant. Your name and email first, so Rytis can reach out to you directly. Then tell me where your numbers disagree, or ask about prices and timelines.</div></div>
-  <form class="ask" novalidate>
-    <div class="row who"><input type="text" name="name" placeholder="Your name" autocomplete="given-name" required><input type="email" name="email" placeholder="you@company.com" autocomplete="email" required><button type="submit">Start</button></div>
-    <p class="hint">I reply myself <b>within 6 hours, usually under 1 hour</b>. Prefer direct? <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> (messages, not calls) &middot; <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a></p>
-  </form>
-</div>
-  
-  
-</main>
   <div class="card" id="chat1">
   <div class="top"><h2>Numbers still don't add up?</h2><p>Tell my assistant what you see and Rytis will reach out to you directly. Every rated job on Upwork is 5.0, <a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">check them live</a>.</p></div>
   <div class="log"><div class="m bot">Hi, I&rsquo;m Rytis&rsquo;s assistant. Your name and email first, so Rytis can reach out to you directly. Then tell me where your numbers disagree, or ask about prices and timelines.</div></div>

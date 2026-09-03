@@ -79,13 +79,6 @@
 </div></header>
 <main>
   <div class="crumb"><a href="/lt/">rytisbalys.com</a> <span >/ lt</span></div>
-  <header><div class="w">
-  <img src="/rytis.jpg" alt="Rytis Balys">
-  <a class="who" href="/lt/">Rytis Balys<small>Konversijų sekimo specialistas</small></a>
-  <nav><a href="/lt/">Pagrindinis</a><a href="/">EN</a><a class="cta" href="#chat1">Nemokamas auditas</a></nav>
-</div></header>
-<main>
-  
   <h1>GA4 nerodo pardavimų: 4 priežastys ir kaip jas rasti</h1>
 <p>Stripe arba Shopify admin'as rodo 40 užsakymų per savaitę, o GA4 - 12. Arba iš viso nulį. Devyniais atvejais iš dešimties priežastis viena: purchase eventas neiššauna arba iššauna be reikiamų parametrų. Pinigai ateina, duomenys - ne, ir Google Ads kampanijos optimizuojasi aklai.</p><p>Tokias problemas taisau kiekvieną savaitę. Žemiau - keturios dažniausios priežastys ir diagnostika, kurią galite atlikti patys per 15 minučių, be programuotojo.</p>
   <h2>Purchase eventas nešaudo padėkos puslapyje</h2>
@@ -113,17 +106,6 @@ ep.transaction_id=1042
 epn.value=79.00</pre>Užklausos nėra - eventas nešaudo arba jį blokuoja consent. Yra, bet tid rodo kitą G- kodą - pardavimai eina į kitą property. Yra be cu - pajamos nesiskaičiuoja.</li></ul>
   <h2>Kada kviesti specialistą</h2>
 <p>Diagnostiką pagal šiuos žingsnius įveikia bet kuris parduotuvės savininkas. Taisymas - nebūtinai. Kvieskite žmogų iš šalies, jei:</p><ul><li>naudojate redirect mokėjimus ir dalis pirkėjų negrįžta - reikia server-side sprendimo (webhook + Measurement Protocol), naršyklės skriptais to nesutvarkysite;</li><li>Shopify parduotuvėje purchase reikia perkelti į Customer Events pixel ir suderinti su consent - ten daug tylių spąstų;</li><li>radote dvigubą įdiegimą, bet nedrįstate nieko trinti, nes neaišku, kas nuo ko priklauso;</li><li>GA4 ir mokėjimų sistema skiriasi daugiau nei 15-20 proc. ir per savaitę neradote priežasties.</li></ul><p>Sutvarkytas tracking nėra kosmetika. Google Ads Smart Bidding mokosi iš purchase eventų - jei mato pusę pardavimų, pusę biudžeto leidžia aklai.</p>
-  <div class="card" id="chat1">
-  <div class="top"><h2>Skaičiai nesueina?</h2><p>Parašykite mano asistentui, ką matote, ir Rytis susisieks su jumis tiesiogiai.</p></div>
-  <div class="log"><div class="m bot">Sveiki, aš Ryčio asistentas. Pirma vardas ir el. paštas, kad Rytis galėtų su jumis susisiekti tiesiogiai. Tada papasakokite, kur nesutampa skaičiai, arba klauskite apie kainas ir terminus.</div></div>
-  <form class="ask" novalidate>
-    <div class="row who"><input type="text" name="name" placeholder="Jūsų vardas" autocomplete="given-name" required><input type="email" name="email" placeholder="jus@imone.lt" autocomplete="email" required><button type="submit">Pradėti</button></div>
-    <p class="hint">Atsakau pats <b>per 6 valandas, dažniausiai greičiau nei per valandą</b>. Tiesiogiai: <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> (žinutės, ne skambučiai) &middot; <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a></p>
-  </form>
-</div>
-  
-  
-</main>
   <div class="card" id="chat1">
   <div class="top"><h2>Skaičiai nesueina?</h2><p>Parašykite mano asistentui, ką matote, ir Rytis susisieks su jumis tiesiogiai.</p></div>
   <div class="log"><div class="m bot">Sveiki, aš Ryčio asistentas. Pirma vardas ir el. paštas, kad Rytis galėtų su jumis susisiekti tiesiogiai. Tada papasakokite, kur nesutampa skaičiai, arba klauskite apie kainas ir terminus.</div></div>

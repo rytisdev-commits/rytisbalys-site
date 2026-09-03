@@ -79,13 +79,6 @@
 </div></header>
 <main>
   <div class="crumb"><a href="/">rytisbalys.com</a> <span >/ troubleshooting</span></div>
-  <header><div class="w">
-  <img src="/rytis.jpg" alt="Rytis Balys">
-  <a class="who" href="/">Rytis Balys<small>Conversion tracking engineer</small></a>
-  <nav><a href="/#build">What I build</a><a href="/#process">Process</a><a href="/#prices">Prices</a><a href="/#reviews">Reviews</a><a href="/#guides">Guides</a><a class="cta" href="#chat1">Get your free audit</a></nav>
-</div></header>
-<main>
-  
   <h1>Google Ads Conversion Inactive but Tag Fires in GTM: The Fix</h1>
 <p>The conversion action in Google Ads says <strong>Inactive</strong> and records nothing. GTM Preview shows the conversion tag firing green on the thank-you page. Both are true. Preview only proves the tag executed in your browser. Google Ads marks an action Inactive when it never receives hits for that conversion ID and label, or receives hits it cannot match to an ad click.</p><p>I debug this setup most weeks. The gap between "tag fired" and "conversion recorded" almost always comes down to one of five causes. Here they are, ranked by how often I find them, plus the order I check them in and how long Ads takes to update after the fix.</p>
   <h2>The five causes, ranked</h2>
@@ -96,17 +89,6 @@
 <ul><li><strong>Linker missing:</strong> add one Conversion Linker tag in GTM with the trigger Initialization - All Pages. One tag covers the whole container. Publish, then repeat the TeSter-123 cookie check.</li><li><strong>ID or label wrong:</strong> in the Ads action, open tag setup, choose the Google Tag Manager option, and copy the ID and label straight into the GTM tag fields. Do not retype them.</li><li><strong>Trigger page unreachable:</strong> the durable fix is server-side - fire the conversion from the payment webhook (for example Stripe's checkout.session.completed) through server-side GTM or the Google Ads API, so recording no longer depends on the buyer's browser coming back. The lighter fix is moving the tag to the platform's native order-received page and enabling auto-return at the payment provider.</li><li><strong>Consent blocking:</strong> implement consent mode v2 correctly through your CMP, then verify in the network tab that <code>gcs</code> flips to G111 after you accept the banner. And clear your own stored denial before testing - I have watched people debug a tag for an hour while their own browser was the one denying consent.</li><li><strong>GA4 import problems:</strong> for the primary purchase conversion I use the Ads tag, not a GA4 import. It reports faster and attributes on Google's ad click data directly. If you keep the GA4 import, fix the link and the key event flag, and remove one of the two from Primary so you do not double count.</li></ul>
   <h2>How long until the status changes</h2>
 <p>After Ads receives its first valid, attributable conversion, the count usually appears within about 3 hours. Give any fix a full 24 hours before you conclude it failed. GA4-imported conversions add another 24-48 hours because GA4 processes and attributes the event before exporting it to Ads.</p><p>Two things trip people up while waiting. First, the status column lags behind reality - the action can already be recording while the label still reads Inactive, so watch the conversion count, not the status. Second, Ads reports conversions against the date of the ad click, not the date of the purchase. If you check today's column for a conversion from a click three days ago, you will not find it there.</p><p>The definitive end-to-end test is a real ad click from a clean browser followed by a small test order. A fake gclid verifies cookie storage, but Ads discards click IDs it did not issue, so only a real click proves the full chain.</p>
-  <div class="card" id="chat1">
-  <div class="top"><h2>Numbers still don't add up?</h2><p>Tell my assistant what you see and Rytis will reach out to you directly. Every rated job on Upwork is 5.0, <a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">check them live</a>.</p></div>
-  <div class="log"><div class="m bot">Hi, I&rsquo;m Rytis&rsquo;s assistant. Your name and email first, so Rytis can reach out to you directly. Then tell me where your numbers disagree, or ask about prices and timelines.</div></div>
-  <form class="ask" novalidate>
-    <div class="row who"><input type="text" name="name" placeholder="Your name" autocomplete="given-name" required><input type="email" name="email" placeholder="you@company.com" autocomplete="email" required><button type="submit">Start</button></div>
-    <p class="hint">I reply myself <b>within 6 hours, usually under 1 hour</b>. Prefer direct? <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> (messages, not calls) &middot; <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a></p>
-  </form>
-</div>
-  
-  
-</main>
   <div class="card" id="chat1">
   <div class="top"><h2>Numbers still don't add up?</h2><p>Tell my assistant what you see and Rytis will reach out to you directly. Every rated job on Upwork is 5.0, <a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">check them live</a>.</p></div>
   <div class="log"><div class="m bot">Hi, I&rsquo;m Rytis&rsquo;s assistant. Your name and email first, so Rytis can reach out to you directly. Then tell me where your numbers disagree, or ask about prices and timelines.</div></div>
