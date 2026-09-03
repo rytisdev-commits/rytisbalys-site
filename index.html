@@ -252,8 +252,9 @@ var rbChat=(function(){
     if(!root) return;
     var log=root.querySelector('.log'), f=root.querySelector('form'), who=f.querySelector('.who'), txt=f.querySelector('.txt'), act=f.querySelector('.act'), done=f.querySelector('.done');
     var st={name:'',email:'',hist:[],sent:false,offered:false};
-    function add(role,text){var d=document.createElement('div');d.className='m '+role;d.innerHTML=esc(text);log.appendChild(d);log.scrollTop=log.scrollHeight;return d;}
-    function wait(){var w=document.createElement('div');w.className='wait';w.textContent=T?T.wait:'Thinking...';log.appendChild(w);log.scrollTop=log.scrollHeight;return w;}
+    function toEnd(){ log.scrollTop=log.scrollHeight; requestAnimationFrame(function(){ log.scrollTop=log.scrollHeight; setTimeout(function(){ log.scrollTop=log.scrollHeight; },120); }); }
+    function add(role,text){var d=document.createElement('div');d.className='m '+role;d.innerHTML=esc(text);log.appendChild(d);toEnd();return d;}
+    function wait(){var w=document.createElement('div');w.className='wait';w.textContent=T?T.wait:'Thinking...';log.appendChild(w);toEnd();return w;}
     function show(el,on){ if(el) el.hidden=!on; }
     function begin(n,m,greet){
       st.name=n; st.email=m; show(who,false); show(txt,true);
@@ -291,9 +292,10 @@ var rbChat=(function(){
       post(CHAT,{page:location.pathname,home:{name:st.name,lang:LT?'lt':'en'},messages:st.hist})
         .then(function(r){return r.json();}).then(function(j){
           w.remove(); if(!j.reply) throw new Error(j.error||'no_reply');
-          st.hist.push({role:'assistant',text:j.reply}); add('bot',j.reply);
+          st.hist.push({role:'assistant',text:j.reply});
           if(j.handoff){ submitToRytis(); return; }
-          if(HANDOFF.test(j.reply)) st.offered=true; if(st.offered) show(act,true);
+          add('bot',j.reply);
+          if(HANDOFF.test(j.reply)) st.offered=true; if(st.offered){ show(act,true); toEnd(); }
         }).catch(function(){ w.remove(); st.hist.pop(); add('err',T?T.err2:'That did not go through. Email work@rytisbalys.com and Rytis will reach out to you directly.'); })
         .then(function(){ f.querySelector('.txt button').disabled=false; });
     });
