@@ -79,6 +79,13 @@
 </div></header>
 <main>
   <div class="crumb"><a href="/">rytisbalys.com</a> <span >/ troubleshooting</span></div>
+  <header><div class="w">
+  <img src="/rytis.jpg" alt="Rytis Balys">
+  <a class="who" href="/">Rytis Balys<small>Conversion tracking engineer</small></a>
+  <nav><a href="/#build">What I build</a><a href="/#process">Process</a><a href="/#prices">Prices</a><a href="/#reviews">Reviews</a><a href="/#guides">Guides</a><a class="cta" href="#chat1">Get your free audit</a></nav>
+</div></header>
+<main>
+  
   <h1>GA4 purchases don't match your backend orders. Which number do you trust?</h1>
   <p class="sub">Short answer: your backend's PAID orders are the truth. GA4 is a browser-side observer with known blind spots. The real question is whether your gap is a normal one or a broken one - here's how to tell.</p>
 
@@ -125,6 +132,17 @@
     <p class="hint">I reply myself <b>within 6 hours, usually under 1 hour</b>. Prefer direct? <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> (messages, not calls) &middot; <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a></p>
   </form>
 </div>
+  
+  
+</main>
+  <div class="card" id="chat1">
+  <div class="top"><h2>Numbers still don't add up?</h2><p>Tell my assistant what you see and Rytis will reach out to you directly. Every rated job on Upwork is 5.0, <a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">check them live</a>.</p></div>
+  <div class="log"><div class="m bot">Hi, I&rsquo;m Rytis&rsquo;s assistant. Your name and email first, so Rytis can reach out to you directly. Then tell me where your numbers disagree, or ask about prices and timelines.</div></div>
+  <form class="ask" novalidate>
+    <div class="row who"><input type="text" name="name" placeholder="Your name" autocomplete="given-name" required><input type="email" name="email" placeholder="you@company.com" autocomplete="email" required><button type="submit">Start</button></div>
+    <p class="hint">I reply myself <b>within 6 hours, usually under 1 hour</b>. Prefer direct? <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> (messages, not calls) &middot; <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a></p>
+  </form>
+</div>
   <div class="faq">
   <h2>FAQ</h2>
     <details><summary>How big a gap between GA4 and backend orders is normal?</summary><p>A gap of roughly 5 to 15 percent is normal even in a healthy setup: ad blockers, declined consent, iOS privacy features and closed tabs all remove GA4 events that were real orders. A gap beyond that, or one that suddenly widened, has a specific cause worth finding.</p></details>
@@ -155,7 +173,7 @@
     try{ gtag('event','intake_start',{source:'guide'}); }catch(x){}
     var gclid='', landing=location.pathname; try{ gclid=sessionStorage.getItem('rb_gclid')||''; landing=sessionStorage.getItem('rb_landing')||location.pathname; }catch(x){}
     try{ fetch(FORM,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify({intake:true,name:n,email:m,fax_line:'',dt:9000,page:location.pathname,gclid:gclid,landing:landing,source:'guide'})}); }catch(x){}
-    setTimeout(function(){ location.href='/ai?n='+encodeURIComponent(n)+'&e='+encodeURIComponent(m)+''; },150);
+    setTimeout(function(){ location.href='/ai'; },150);
   });
 })();
 </script>

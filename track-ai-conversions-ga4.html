@@ -79,6 +79,13 @@
 </div></header>
 <main>
   <div class="crumb"><a href="/">rytisbalys.com</a> <span >/ troubleshooting</span></div>
+  <header><div class="w">
+  <img src="/rytis.jpg" alt="Rytis Balys">
+  <a class="who" href="/">Rytis Balys<small>Conversion tracking engineer</small></a>
+  <nav><a href="/#build">What I build</a><a href="/#process">Process</a><a href="/#prices">Prices</a><a href="/#reviews">Reviews</a><a href="/#guides">Guides</a><a class="cta" href="#chat1">Get your free audit</a></nav>
+</div></header>
+<main>
+  
   <h1>Your ChatGPT Traffic Is Hiding in Direct: How to Track AI Conversions in GA4</h1>
 <p>Someone asks ChatGPT for the best product in your category, gets a shortlist with your brand on it, opens your site and buys. In GA4 that sale shows up as Direct. No source, no credit. The same thing happens with Perplexity, Gemini, Copilot and Claude.</p><p>I build conversion tracking for ecommerce brands for a living, mostly GA4, Meta Pixel with CAPI, and server-side setups on sGTM. Over the last year the question I get most often has changed from "why doesn't my ROAS match" to "how much of our revenue is actually coming from AI." The honest answer is that with a stock GA4 setup you can't tell, and this page explains why, what's genuinely fixable, and what can only be measured in aggregate.</p>
   <h2>Why AI conversions get filed under Direct</h2>
@@ -95,6 +102,17 @@
 <p>If you're working on AI visibility, you may already use Profound, Peec or Otterly. Those tools answer one question: do you appear in AI answers, and how often. Useful, and I'm not competing with them. What almost nobody does is the layer underneath, attributing actual conversions server-side. They rank you in the answer. I prove it converts. For GEO and SEO agencies that's the difference between showing a client a visibility chart and showing them revenue.</p>
   <h2>Who this is for</h2>
 <p>Ecommerce brands doing meaningful volume who suspect AI is already sending them buyers, and GEO or SEO agencies that need to prove their work drives sales. If your GA4 Direct channel has been quietly growing and nobody can explain why, that's usually the tell.</p>
+  <div class="card" id="chat1">
+  <div class="top"><h2>Numbers still don't add up?</h2><p>Tell my assistant what you see and Rytis will reach out to you directly. Every rated job on Upwork is 5.0, <a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">check them live</a>.</p></div>
+  <div class="log"><div class="m bot">Hi, I&rsquo;m Rytis&rsquo;s assistant. Your name and email first, so Rytis can reach out to you directly. Then tell me where your numbers disagree, or ask about prices and timelines.</div></div>
+  <form class="ask" novalidate>
+    <div class="row who"><input type="text" name="name" placeholder="Your name" autocomplete="given-name" required><input type="email" name="email" placeholder="you@company.com" autocomplete="email" required><button type="submit">Start</button></div>
+    <p class="hint">I reply myself <b>within 6 hours, usually under 1 hour</b>. Prefer direct? <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> (messages, not calls) &middot; <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a></p>
+  </form>
+</div>
+  
+  
+</main>
   <div class="card" id="chat1">
   <div class="top"><h2>Numbers still don't add up?</h2><p>Tell my assistant what you see and Rytis will reach out to you directly. Every rated job on Upwork is 5.0, <a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">check them live</a>.</p></div>
   <div class="log"><div class="m bot">Hi, I&rsquo;m Rytis&rsquo;s assistant. Your name and email first, so Rytis can reach out to you directly. Then tell me where your numbers disagree, or ask about prices and timelines.</div></div>
@@ -134,7 +152,7 @@
     try{ gtag('event','intake_start',{source:'guide'}); }catch(x){}
     var gclid='', landing=location.pathname; try{ gclid=sessionStorage.getItem('rb_gclid')||''; landing=sessionStorage.getItem('rb_landing')||location.pathname; }catch(x){}
     try{ fetch(FORM,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify({intake:true,name:n,email:m,fax_line:'',dt:9000,page:location.pathname,gclid:gclid,landing:landing,source:'guide'})}); }catch(x){}
-    setTimeout(function(){ location.href='/ai?n='+encodeURIComponent(n)+'&e='+encodeURIComponent(m)+''; },150);
+    setTimeout(function(){ location.href='/ai'; },150);
   });
 })();
 </script>

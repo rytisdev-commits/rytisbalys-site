@@ -79,6 +79,13 @@
 </div></header>
 <main>
   <div class="crumb"><a href="/">rytisbalys.com</a> <span >/ troubleshooting</span></div>
+  <header><div class="w">
+  <img src="/rytis.jpg" alt="Rytis Balys">
+  <a class="who" href="/">Rytis Balys<small>Conversion tracking engineer</small></a>
+  <nav><a href="/#build">What I build</a><a href="/#process">Process</a><a href="/#prices">Prices</a><a href="/#reviews">Reviews</a><a href="/#guides">Guides</a><a class="cta" href="#chat1">Get your free audit</a></nav>
+</div></header>
+<main>
+  
   <h1>Server-Side GTM: What It Actually Fixes (and What It Doesn&#x27;t)</h1>
 <p>You moved tracking to server-side GTM, or an agency is pitching it as the fix for your missing conversions. Half of those pitches oversell it. Server-side tagging changes how data travels, not what the data says. If your purchase event fires with the wrong value in the browser, the server forwards that wrong value faster and more reliably.</p><p>I run server-side GTM on Stape in production on my own store, every day. Here is what it earns its keep on, where it does nothing, and how to check which situation you are in.</p>
   <h2>What server-side GTM actually fixes</h2>
@@ -95,6 +102,17 @@ Bad:  hits to BOTH google-analytics.com AND gtm.yourstore.com
       = you are double-sending</pre><p>If any of the four fails, stop spending time on attribution debates. The pipe is broken and everything downstream is noise.</p>
   <h2>When you need it, and what it costs</h2>
 <p>Server-side is worth it when:</p><ul><li>Paid social or Google Ads is a main channel and spend is meaningful. My rough line: above 3-5k EUR per month, the recovered signal pays for the setup.</li><li>Your audience skews iOS and Safari, or privacy-tool-heavy niches.</li><li>You want Meta CAPI or Enhanced Conversions with good match quality anyway. Doing those through one server container beats bolting on three separate integrations.</li></ul><p>A clean browser-side setup is enough when spend is small, traffic is mostly Chrome desktop, or your current tracking is broken at the logic level. Fix the logic first, browser-side, where debugging is cheaper. Migrating a broken setup gives you a broken setup with a monthly hosting bill.</p><p>Cost reality: Stape has a free tier for low traffic, and a typical small store lands around 20-50 USD per month in hosting. Self-hosting on Google Cloud usually costs more once minimum instances are counted. Setup for a standard Shopify or WooCommerce store is one to three days of competent work: custom domain with correct DNS, container config, deduplication, consent wiring, then verification. The hosting fee is the cheap part. The expensive part is a migration done without a dedup plan.</p>
+  <div class="card" id="chat1">
+  <div class="top"><h2>Numbers still don't add up?</h2><p>Tell my assistant what you see and Rytis will reach out to you directly. Every rated job on Upwork is 5.0, <a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">check them live</a>.</p></div>
+  <div class="log"><div class="m bot">Hi, I&rsquo;m Rytis&rsquo;s assistant. Your name and email first, so Rytis can reach out to you directly. Then tell me where your numbers disagree, or ask about prices and timelines.</div></div>
+  <form class="ask" novalidate>
+    <div class="row who"><input type="text" name="name" placeholder="Your name" autocomplete="given-name" required><input type="email" name="email" placeholder="you@company.com" autocomplete="email" required><button type="submit">Start</button></div>
+    <p class="hint">I reply myself <b>within 6 hours, usually under 1 hour</b>. Prefer direct? <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> (messages, not calls) &middot; <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a></p>
+  </form>
+</div>
+  
+  
+</main>
   <div class="card" id="chat1">
   <div class="top"><h2>Numbers still don't add up?</h2><p>Tell my assistant what you see and Rytis will reach out to you directly. Every rated job on Upwork is 5.0, <a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">check them live</a>.</p></div>
   <div class="log"><div class="m bot">Hi, I&rsquo;m Rytis&rsquo;s assistant. Your name and email first, so Rytis can reach out to you directly. Then tell me where your numbers disagree, or ask about prices and timelines.</div></div>
@@ -134,7 +152,7 @@ Bad:  hits to BOTH google-analytics.com AND gtm.yourstore.com
     try{ gtag('event','intake_start',{source:'guide'}); }catch(x){}
     var gclid='', landing=location.pathname; try{ gclid=sessionStorage.getItem('rb_gclid')||''; landing=sessionStorage.getItem('rb_landing')||location.pathname; }catch(x){}
     try{ fetch(FORM,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify({intake:true,name:n,email:m,fax_line:'',dt:9000,page:location.pathname,gclid:gclid,landing:landing,source:'guide'})}); }catch(x){}
-    setTimeout(function(){ location.href='/ai?n='+encodeURIComponent(n)+'&e='+encodeURIComponent(m)+''; },150);
+    setTimeout(function(){ location.href='/ai'; },150);
   });
 })();
 </script>

@@ -79,6 +79,13 @@
 </div></header>
 <main>
   <div class="crumb"><a href="/lt/">rytisbalys.com</a> <span >/ lt</span></div>
+  <header><div class="w">
+  <img src="/rytis.jpg" alt="Rytis Balys">
+  <a class="who" href="/lt/">Rytis Balys<small>Konversijų sekimo specialistas</small></a>
+  <nav><a href="/lt/">Pagrindinis</a><a href="/">EN</a><a class="cta" href="#chat1">Nemokamas auditas</a></nav>
+</div></header>
+<main>
+  
   <h1>Google Ads konversijos nesiskaičiuoja (Inactive): kaip pataisyti</h1>
 <p>Kampanijos sukasi, biudžetas dega, o Google Ads konversijos veiksmas rodo <strong>Inactive</strong> ir konversijų stulpelyje nulis. Devyniais atvejais iš dešimties kaltas ne Google, o diegimas: tag'as arba nešauna padėkos puslapyje, arba šauna, bet be gclid, todėl Google neturi prie ko pririšti pardavimo.</p><p>Tokias situacijas tvarkau kas savaitę. Žemiau surašiau penkias dažniausias priežastis ir diagnostikos eigą, kurią pereisite patys per 15 minučių, be programuotojo.</p>
   <h2>Ką iš tikrųjų reiškia Inactive statusas</h2>
@@ -89,6 +96,17 @@
 <p>Eikite iš eilės. Kiekvienas žingsnis atmeta vieną priežastį.</p><ul><li><strong>1. Patikrinkite, ar gclid išsaugomas.</strong> Atsidarykite svetainę su testiniu parametru:<pre>https://jususvetaine.lt/?gclid=TEST123</pre>Tada DevTools &gt; Application &gt; Cookies. Turi atsirasti slapukas <strong>_gcl_aw</strong> su reikšme TEST123 viduje. Jei jo nėra, kaltas Conversion Linker arba consent.</li><li><strong>2. Tag Assistant.</strong> Atsidarykite tagassistant.google.com, prijunkite savo domeną ir pereikite visą pirkimo kelią iki padėkos puslapio. Tikrinkite tris dalykus: Conversion Linker šauna pirmame puslapyje, Google Ads Conversion Tracking tag'as šauna padėkos puslapyje, consent būsena rodo granted.</li><li><strong>3. Network tab.</strong> DevTools &gt; Network, filtras <strong>googleadservices</strong> arba <strong>pagead</strong>. Padėkos puslapyje turi išeiti užklausa į /pagead/conversion/ su jūsų AW ID ir label. Užklausos parametruose pažiūrėkite <strong>gcs</strong>: G111 reiškia, kad sutikimai duoti, G100 - consent blokuoja.</li><li><strong>4. Jei importuojate iš GA4</strong> - atsidarykite GA4 Admin &gt; DebugView ir padarykite testinį pirkimą. Purchase eventas turi atvykti su value ir transaction_id. Jei GA4 jo nemato, Ads irgi niekada nepamatys.</li><li><strong>5. Testinis pirkimas per realų kliką.</strong> Paspauskite savo skelbimą, nusipirkite pigiausią prekę ir laukite. Tai vienintelis testas, kuris patikrina visą grandinę nuo kliko iki ataskaitos.</li></ul>
   <h2>Kiek laukti pirmos konversijos</h2>
 <p>Vėlavimas priklauso nuo diegimo tipo:</p><ul><li><strong>Tiesioginis website tag'as</strong> - konversijos ataskaitose dažniausiai per kelias valandas, oficialiai iki 24 valandų.</li><li><strong>GA4 importas</strong> - GA4 duomenų apdorojimas užtrunka iki paros, plius importo ciklas. Realistiškai 24-48 valandos.</li></ul><p>Dvi vietos, kur žmonės apsigauna. Pirma, konversija priskiriama <strong>kliko dienai</strong>, ne pirkimo dienai: jei klientas paspaudė skelbimą pirmadienį, o pirko trečiadienį, konversija atsiras pirmadienio eilutėje. Antra, šiandienos skaičiai visada nepilni, nes dalis paspaudusių dar tik pirks.</p><p>Riba paprasta: jei po 48 valandų su realiu srautu, patikrintu tag'u ir bent keliais realiais pardavimais Ads vis dar rodo nulį, problema tikra. Grįžkite prie diagnostikos sąrašo.</p>
+  <div class="card" id="chat1">
+  <div class="top"><h2>Skaičiai nesueina?</h2><p>Parašykite mano asistentui, ką matote, ir Rytis susisieks su jumis tiesiogiai.</p></div>
+  <div class="log"><div class="m bot">Sveiki, aš Ryčio asistentas. Pirma vardas ir el. paštas, kad Rytis galėtų su jumis susisiekti tiesiogiai. Tada papasakokite, kur nesutampa skaičiai, arba klauskite apie kainas ir terminus.</div></div>
+  <form class="ask" novalidate>
+    <div class="row who"><input type="text" name="name" placeholder="Jūsų vardas" autocomplete="given-name" required><input type="email" name="email" placeholder="jus@imone.lt" autocomplete="email" required><button type="submit">Pradėti</button></div>
+    <p class="hint">Atsakau pats <b>per 6 valandas, dažniausiai greičiau nei per valandą</b>. Tiesiogiai: <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> (žinutės, ne skambučiai) &middot; <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a></p>
+  </form>
+</div>
+  
+  
+</main>
   <div class="card" id="chat1">
   <div class="top"><h2>Skaičiai nesueina?</h2><p>Parašykite mano asistentui, ką matote, ir Rytis susisieks su jumis tiesiogiai.</p></div>
   <div class="log"><div class="m bot">Sveiki, aš Ryčio asistentas. Pirma vardas ir el. paštas, kad Rytis galėtų su jumis susisiekti tiesiogiai. Tada papasakokite, kur nesutampa skaičiai, arba klauskite apie kainas ir terminus.</div></div>
@@ -121,7 +139,7 @@
     try{ gtag('event','intake_start',{source:'guide-lt'}); }catch(x){}
     var gclid='', landing=location.pathname; try{ gclid=sessionStorage.getItem('rb_gclid')||''; landing=sessionStorage.getItem('rb_landing')||location.pathname; }catch(x){}
     try{ fetch(FORM,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify({intake:true,name:n,email:m,fax_line:'',dt:9000,page:location.pathname,gclid:gclid,landing:landing,source:'guide-lt'})}); }catch(x){}
-    setTimeout(function(){ location.href='/ai?n='+encodeURIComponent(n)+'&e='+encodeURIComponent(m)+'&l=lt'; },150);
+    setTimeout(function(){ location.href='/ai?l=lt'; },150);
   });
 })();
 </script>
