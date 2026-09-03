@@ -68,7 +68,7 @@
   .ask button{border:0;border-radius:12px;background:var(--g);color:#fff;font:600 15px var(--font);padding:0 20px;min-height:46px;cursor:pointer}
   .hint{font-size:12.5px;color:var(--muted);margin:0} .hint b{color:var(--ink)} .hint a{text-decoration:none;font-weight:600}
   footer{font-size:12px;color:var(--muted);text-align:center;padding:40px 16px 24px} footer a{color:var(--muted)}
-  .fnav{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 22px;margin-bottom:16px;font-size:14px} .fnav a{color:var(--ink);text-decoration:none;font-weight:600}
+  .fnav{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 22px;margin-bottom:16px;font-size:14px} .fnav a{color:var(--ink);text-decoration:none;font-weight:600} .fnav .cur{color:var(--muted);font-weight:600}
   @media (max-width:900px){.w{padding:0 16px} header nav a:not(.cta){display:none} header nav a.cta{padding:8px 13px;font-size:13px} header .who small{display:none} h1{font-size:30px} h2{font-size:21px} main{padding:28px 16px 48px}}
 </style>
 </head>
@@ -155,7 +155,7 @@ watch();</pre>
    ... wait 10 s. Request or nothing?
 3. same call WITHOUT send_to
    ... wait 10 s. Request or nothing?</pre>
-  <p>If step 2 produces a request and step 3 does not, the wrapper is dropping unrouted events, and every event in your site that omits <code>send_to</code> is being lost. If neither produces a request, the problem is upstream: consent, a blocked script, or a measurement ID that is not what you think it is.</p>
+  <p>If step 2 produces a request and step 3 does not, the wrapper is dropping unrouted events, and every event on your site that omits <code>send_to</code> is being lost. If neither produces a request, the problem is upstream: consent, a blocked script, or a measurement ID that is not what you think it is.</p>
 
   <h2><span class="n">6</span> The trap underneath all of this</h2>
   <p>Every symptom here shares one property: the failure is silent. No error, no warning, no red line anywhere. Silent failures are why tracking rots for months without anyone noticing, and why the platform number and the backend number drift apart until somebody finally compares them.</p>

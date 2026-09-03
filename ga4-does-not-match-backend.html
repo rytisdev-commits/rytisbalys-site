@@ -68,7 +68,7 @@
   .ask button{border:0;border-radius:12px;background:var(--g);color:#fff;font:600 15px var(--font);padding:0 20px;min-height:46px;cursor:pointer}
   .hint{font-size:12.5px;color:var(--muted);margin:0} .hint b{color:var(--ink)} .hint a{text-decoration:none;font-weight:600}
   footer{font-size:12px;color:var(--muted);text-align:center;padding:40px 16px 24px} footer a{color:var(--muted)}
-  .fnav{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 22px;margin-bottom:16px;font-size:14px} .fnav a{color:var(--ink);text-decoration:none;font-weight:600}
+  .fnav{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 22px;margin-bottom:16px;font-size:14px} .fnav a{color:var(--ink);text-decoration:none;font-weight:600} .fnav .cur{color:var(--muted);font-weight:600}
   @media (max-width:900px){.w{padding:0 16px} header nav a:not(.cta){display:none} header nav a.cta{padding:8px 13px;font-size:13px} header .who small{display:none} h1{font-size:30px} h2{font-size:21px} main{padding:28px 16px 48px}}
 </style>
 </head>
@@ -92,7 +92,7 @@
   <p class="dim">Corollary: if GA4 shows MORE than your paid backend orders, that's never normal - hunt for duplicate events or test traffic.</p>
 
   <h2><span class="n">01</span>Redirect payments never reach the thank-you page</h2>
-  <p>PayPal, financing, bank redirects: buyers pay off-site and a share never return to the page where the purchase event fires. The loss concentrates in specific payment methods, which is exactly how you catch it.</p>
+  <p>PayPal, financing, bank redirects: buyers pay off-site and a share never returns to the page where the purchase event fires. The loss concentrates in specific payment methods, which is exactly how you catch it.</p>
   <div class="verify"><b>VERIFY</b> - join GA4 transaction IDs against backend order IDs, segment the missing ones by payment method. If the missing orders cluster on redirect payments, you found the mechanism.</div>
 
   <h2><span class="n">02</span>Server-side container configured but not connected</h2>
