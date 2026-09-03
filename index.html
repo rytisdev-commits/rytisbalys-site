@@ -67,14 +67,21 @@
   header nav{margin-left:auto;display:flex;gap:22px;align-items:center;font-size:14px}
   header nav a{color:var(--muted);text-decoration:none} header nav a.cta{background:var(--g);color:#fff;border-radius:999px;padding:9px 16px;font-weight:700;white-space:nowrap}
   section{padding:80px 0} section.hero{padding:48px 0 72px} section.alt{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .hero .w{display:grid;grid-template-columns:minmax(0,1fr) 440px;gap:48px;align-items:start}
+  .hero .w{display:grid;grid-template-columns:minmax(0,1fr) 440px;gap:56px;align-items:center}
+  .vis{background:linear-gradient(135deg,#14532d 0%,#1f7a45 100%);border-radius:26px;padding:26px;color:#fff;box-shadow:0 20px 50px rgba(20,83,45,.25);position:relative}
+  .vt{display:flex;justify-content:space-between;align-items:center;font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.85;margin-bottom:14px} .vt .ok{background:rgba(255,255,255,.14);border-radius:999px;padding:4px 10px;letter-spacing:0;text-transform:none;font-size:12px}
+  .vr{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.96);color:var(--ink);border-radius:14px;padding:14px 16px;margin-bottom:8px} .vr span{flex:1;font-size:15px;font-weight:600} .vr b{font-size:26px;font-weight:800;letter-spacing:-.02em}
+  .d{width:10px;height:10px;border-radius:50%;display:inline-block} .d.r{background:#dc2626} .d.o{background:#f59e0b} .d.g{background:#16a34a}
+  .vf{font-size:14px;opacity:.92;margin-top:12px;line-height:1.5}
+  .vb{position:relative;margin:16px -14px -36px auto;width:max-content;background:var(--ink);border-radius:16px;padding:12px 16px;box-shadow:0 12px 30px rgba(15,42,32,.35)} .vb small{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.75} .vb b{font-size:22px;font-weight:800}
+  .talk .card{max-width:1100px;margin:0 auto;border-radius:26px} .talk .log{padding:30px 30px 10px} .talk .m{font-size:17px;max-width:80%} .talk .ask{padding:16px 30px 28px;gap:14px} .talk .ask input{font-size:17px;padding:16px 18px;border-radius:14px} .talk .ask button{min-height:56px;font-size:16px;padding:0 30px;border-radius:14px} .talk .hint{margin-top:4px;font-size:13.5px} .talk .sh{text-align:center;margin-bottom:32px} .talk .sub{margin-left:auto;margin-right:auto}
   .badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:13px;color:var(--muted)} .badge b{color:var(--ink)}
   h1{font-size:48px;font-weight:800;letter-spacing:-.035em;line-height:1.05;margin:16px 0 14px}
   .lead{font-size:18px;color:var(--muted);max-width:620px}
   .ctas{display:flex;gap:12px;align-items:center;margin-top:20px;flex-wrap:wrap}
   .btn{background:var(--g);color:#fff;border-radius:12px;padding:14px 22px;font-weight:700;font-size:15px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer}
   .ctas .lnk{font-size:15px;font-weight:700;color:var(--ink);text-decoration:none} .ctas .lnk:hover{color:var(--g)}
-  .pf{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px} .pf a{display:inline-flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 12px;text-decoration:none;color:var(--ink);font-size:12.5px;line-height:1.2} .pf a b{display:block;font-size:13px} .pf a small{color:var(--muted)} .pf .pi{width:26px;height:26px;border-radius:7px;background:var(--ink);color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+  .pf{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px} .pf a{flex:1 1 200px;max-width:300px;display:inline-flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 12px;text-decoration:none;color:var(--ink);font-size:12.5px;line-height:1.2} .pf a b{display:block;font-size:13px} .pf a small{color:var(--muted)} .pf .pi{width:26px;height:26px;border-radius:7px;background:var(--ink);color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
   h2{font-size:32px;font-weight:800;letter-spacing:-.025em;line-height:1.15} .sub{color:var(--muted);font-size:16px;max-width:720px;margin-top:6px} .sh{margin-bottom:36px}
   .grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px} .grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px} .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px}
   .c{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px} .c .ic{width:34px;height:34px;border-radius:10px;background:var(--bot);display:flex;align-items:center;justify-content:center;margin-bottom:10px} .c h3{font-size:17px;font-weight:700;margin-bottom:6px} .c p{font-size:14.5px;color:var(--muted)}
@@ -99,7 +106,7 @@
   .hint{font-size:12.5px;color:var(--muted)} .hint b{color:var(--ink)} .hint a{text-decoration:none;font-weight:600}
   footer{font-size:12px;color:var(--muted);text-align:center;padding:48px 16px 24px} footer a{color:var(--muted)}
   .fnav{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 22px;margin-bottom:16px;font-size:14px} .fnav a{color:var(--ink);text-decoration:none;font-weight:600}
-  @media (max-width:900px){.w{padding:0 16px} .hero .w,.grid2{grid-template-columns:1fr;gap:28px} .grid3,.grid4{grid-template-columns:1fr} h1{font-size:32px} h2{font-size:26px} header nav a:not(.cta){display:none} header nav a.cta{padding:8px 13px;font-size:13px} .bar .bx{display:none} header .who small{display:none} .guides ul{columns:1} section{padding:52px 0} section.hero{padding:28px 0 48px} .log{max-height:320px} .tn{font-size:44px}}
+  @media (max-width:900px){.w{padding:0 16px} .hero .w,.grid2{grid-template-columns:1fr;gap:28px} .grid3,.grid4{grid-template-columns:1fr} h1{font-size:32px} h2{font-size:26px} header nav a:not(.cta){display:none} header nav a.cta{padding:8px 13px;font-size:13px} .bar .bx{display:none} header .who small{display:none} .guides ul{columns:1} section{padding:52px 0} section.hero{padding:28px 0 48px} .log{max-height:320px} .tn{font-size:44px} .vb{margin:14px 0 0 auto} .vt .ok{display:none} .badge{font-size:12px} .talk .ask input{flex-basis:100%} .talk .ask .who button{width:100%} .talk .m{max-width:94%}}
 </style>
 </head>
 <body>
@@ -118,11 +125,23 @@
     <div class="ctas"><a class="btn" href="#chat1">Get your free audit &rarr;</a><a class="lnk" href="#prices">How I charge &darr;</a></div>
     <div class="pf"><a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener"><span class="pi">U</span><span><b>Upwork</b><small>5.0 on every rated job</small></span></a><a href="https://github.com/rytisdev-commits/server-side-conversion-tracking" target="_blank" rel="noopener"><span class="pi">G</span><span><b>GitHub</b><small>Server-side tracking case study</small></span></a></div>
   </div>
+  <div class="vis">
+    <div class="vt"><span>Reconciliation, one month</span><span class="ok">checked against orders</span></div>
+    <div class="vr"><i class="d r"></i><span>Meta reports</span><b>142</b></div>
+    <div class="vr"><i class="d o"></i><span>GA4 reports</span><b>98</b></div>
+    <div class="vr"><i class="d g"></i><span>Paid orders in your backend</span><b>76</b></div>
+    <div class="vf">Two of these three numbers are wrong, and your ads optimise on one of them.</div>
+    <div class="vb"><small>Typical gap I find</small><b>30 to 90%</b></div>
+  </div>
+</div></section>
+
+<section class="talk alt"><div class="w">
+  <div class="sh"><h2>Talk to my AI assistant so you save time.</h2><p class="sub">It gives you a first read on the spot and passes the conversation to me. Name and email first, so I can reply to you myself.</p></div>
   <div class="card" id="chat1">
   <div class="log"><div class="m bot">Hi, I&rsquo;m Rytis&rsquo;s assistant. Your name and email first, so he can reply to you himself. Then tell me where your numbers disagree, or ask about prices and timelines.</div></div>
   <form class="ask" novalidate>
     <div class="row who"><input type="text" name="name" placeholder="Your name" autocomplete="given-name" required><input type="email" name="email" placeholder="you@company.com" autocomplete="email" required><button type="submit">Start</button></div>
-    <p class="hint">Opens the chat on its own page. I read every conversation myself and reply <b>within 6 hours, usually under 1 hour</b>. Or message me directly: <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> (messages, not calls) &middot; <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a></p>
+    <p class="hint">Opens on its own page. I reply myself <b>within 6 hours, usually under 1 hour</b>. Prefer direct? <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> or <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a>.</p>
   </form>
 </div>
 </div></section>
@@ -137,11 +156,6 @@
     <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>Offline conversions from your CRM</h3><p>HubSpot, GoHighLevel and others feeding real sales back to Google Ads and Meta.</p></div>
     <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>Shopify and WooCommerce checkouts</h3><p>Checkout migrations, Stripe and PayPal redirects, caching plugins that break pixels.</p></div>
   </div>
-</div></section>
-
-<section><div class="w">
-  <div class="sh"><h2>What your reports claim vs what was actually captured</h2><p class="sub">A typical case, same store, same month, three answers. Your ads optimise on whichever one they get.</p></div>
-  <div class="grid3"><div class="tile"><div class="tl">Meta says</div><div class="tn r">142</div><div class="tt">double counting, no event_id dedup</div></div><div class="tile"><div class="tl">GA4 says</div><div class="tn o">98</div><div class="tt">consent and redirect losses on top</div></div><div class="tile"><div class="tl">Backend paid orders</div><div class="tn g">76</div><div class="tt">the truth</div></div></div>
 </div></section>
 
 <section class="alt"><div class="w">
@@ -201,7 +215,7 @@
   <div class="log"><div class="m bot">Hi, I&rsquo;m Rytis&rsquo;s assistant. Your name and email first, so he can reply to you himself. Then tell me where your numbers disagree, or ask about prices and timelines.</div></div>
   <form class="ask" novalidate>
     <div class="row who"><input type="text" name="name" placeholder="Your name" autocomplete="given-name" required><input type="email" name="email" placeholder="you@company.com" autocomplete="email" required><button type="submit">Start</button></div>
-    <p class="hint">Opens the chat on its own page. I read every conversation myself and reply <b>within 6 hours, usually under 1 hour</b>. Or message me directly: <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> (messages, not calls) &middot; <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a></p>
+    <p class="hint">Opens on its own page. I reply myself <b>within 6 hours, usually under 1 hour</b>. Prefer direct? <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> or <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a>.</p>
   </form>
 </div>
   </div>
