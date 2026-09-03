@@ -47,7 +47,7 @@
 <body>
 <header><div class="w">
   <img src="/rytis.jpg" alt="Rytis Balys">
-  <span class="who">Rytis&rsquo;s assistant<small>Rytis reads every chat and replies himself</small></span>
+  <span class="who">Rytis&rsquo;s assistant<small>Rytis will reach out to you directly</small></span>
   <a class="home" href="/">&larr; Back to home</a>
 </div></header>
 <main>
@@ -80,7 +80,7 @@
   var n0='', m0='';
   try{ n0=q.get('n')||sessionStorage.getItem('rb_name')||''; m0=q.get('e')||sessionStorage.getItem('rb_email')||''; }catch(e){}
   if(n0&&EMAIL.test(m0)){ try{ sessionStorage.setItem('rb_name',n0); sessionStorage.setItem('rb_email',m0); }catch(e){} try{ if(q.has('n')) history.replaceState(null,'','/ai'); }catch(e){} begin(n0,m0); }
-  else{ add('bot','Hi, I am Rytis’s assistant. Your name and email first, so he can reply to you himself. Then tell me where your numbers disagree, or ask about prices and timelines.'); show(who,true); }
+  else{ add('bot','Hi, I am Rytis’s assistant. Your name and email first, so Rytis can reach out to you directly. Then tell me where your numbers disagree, or ask about prices and timelines.'); show(who,true); }
   function submitToRytis(){
     if(st.sent) return; st.sent=true; show(act,false); show(txt,false); var w=wait();
     var transcript='Name: '+st.name+'\n\n'+st.hist.map(function(m){return (m.role==='user'?'Visitor: ':'Assistant: ')+m.text;}).join('\n\n');
@@ -107,7 +107,7 @@
         st.hist.push({role:'assistant',text:j.reply}); add('bot',j.reply);
         if(j.handoff){ submitToRytis(); return; }
         if(HANDOFF.test(j.reply)) show(act,true);
-      }).catch(function(){ w.remove(); add('err','That did not go through. Email work@rytisbalys.com and Rytis will reply himself.'); })
+      }).catch(function(){ w.remove(); add('err','That did not go through. Email work@rytisbalys.com and Rytis will reach out to you directly.'); })
       .then(function(){ f.querySelector('.txt button').disabled=false; });
   });
   f.text.addEventListener('keydown',function(e){ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); f.requestSubmit(); } });
