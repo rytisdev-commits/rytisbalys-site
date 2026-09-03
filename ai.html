@@ -61,11 +61,17 @@
   </form>
 </main>
 <script>
+(function(){ try{ var q=new URLSearchParams(location.search); var lt=q.get('l')==='lt' || (sessionStorage.getItem('rb_lang')==='lt' && !q.has('n')); if(!lt) return; document.documentElement.lang='lt'; document.title='Pokalbis su Ryčio asistentu'; var W=document.querySelector('header .who'); if(W) W.innerHTML='Ryčio asistentas<small>Rytis perskaito kiekvieną pokalbį ir susisiekia pats</small>'; var H=document.querySelector('header a.home'); if(H){ H.href='/lt/'; H.innerHTML='&larr; Į pagrindinį'; } var f=document.querySelector('form'); f.querySelector('input[name=name]').placeholder='Jūsų vardas'; f.querySelector('input[name=email]').placeholder='jus@imone.lt'; f.querySelector('.who button').textContent='Pradėti'; f.querySelector('textarea').placeholder='Aprašykite, ką matote, arba klauskite apie kainas ir terminus'; f.querySelector('.txt button').textContent='Siųsti'; f.querySelector('.pass').textContent='Perduoti Ryčiui'; f.querySelector('.more').textContent='Turiu dar klausimą'; var B=f.querySelector('.done a'); B.href='/lt/'; B.innerHTML='&larr; Į pagrindinį'; f.querySelector('.hint').innerHTML='Atsakau pats <b>per 6 valandas, dažniausiai greičiau nei per valandą</b>. Tiesiogiai: <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> (žinutės, ne skambučiai) &middot; <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a>'; }catch(e){} })();
+</script>
+<script>
 
 var rbChat=(function(){
   var CHAT='https://rb-chat.formos-ops.workers.dev/', FORM='https://rb-form.formos-ops.workers.dev/', LABEL='AW-18424603738/M34RCLm1x-wcENrIxNFE';
-  var EMAIL=/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/, HANDOFF=/pass this to Rytis/i, SUBMITTED=false;
+  var EMAIL=/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/, SUBMITTED=false;
   var q=new URLSearchParams(location.search), gclid='', landing=location.pathname;
+  var LT=(q.get('l')==='lt'); try{ if(LT) sessionStorage.setItem('rb_lang','lt'); else if(sessionStorage.getItem('rb_lang')==='lt' && /^\/ai/.test(location.pathname)) LT=true; }catch(e){}
+  var HANDOFF=LT?/perduoti tai Ry[cč]iui/i:/pass this to Rytis/i;
+  var T=LT?{hello:'Sveiki, aš Ryčio asistentas. Pirma vardas ir el. paštas, kad Rytis galėtų su jumis susisiekti tiesiogiai. Tada papasakokite, kur nesutampa skaičiai, arba klauskite apie kainas ir terminus.',full:function(n){return 'Sveiki, '+n+', aš Ryčio asistentas. Kur nesutampa skaičiai: Meta, Google Ads, GA4 ar jūsų sistema? Papasakokite, ką matote, arba klauskite apie kainas ir terminus.';},short:function(n){return 'Ačiū, '+n+'. Kur nesutampa skaičiai: Meta, Google Ads, GA4 ar jūsų sistema? Papasakokite, ką matote, arba klauskite apie kainas ir terminus.';},passed:function(m){return 'Perdaviau Ryčiui. Jis parašys jums adresu '+m+' per 6 valandas, dažniausiai greičiau nei per valandą. Pokalbį čia uždarau, galite grįžti bet kada.';},err1:'Nepavyko išsiųsti. Parašykite work@rytisbalys.com tai, ką rašėte aukščiau, ir Rytis atsakys pats.',err2:'Nepavyko išsiųsti. Parašykite work@rytisbalys.com ir Rytis susisieks tiesiogiai.',wait:'Galvoju...'}:null;
   try{ var gc=q.get('gclid'); if(gc){ sessionStorage.setItem('rb_gclid',gc); sessionStorage.setItem('rb_landing',location.pathname); } gclid=sessionStorage.getItem('rb_gclid')||''; landing=sessionStorage.getItem('rb_landing')||location.pathname; }catch(e){}
   function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
   function post(url,body,keep){ return fetch(url,{method:'POST',keepalive:!!keep,headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}); }
@@ -74,12 +80,12 @@ var rbChat=(function(){
     var log=root.querySelector('.log'), f=root.querySelector('form'), who=f.querySelector('.who'), txt=f.querySelector('.txt'), act=f.querySelector('.act'), done=f.querySelector('.done');
     var st={name:'',email:'',hist:[],sent:false,offered:false};
     function add(role,text){var d=document.createElement('div');d.className='m '+role;d.innerHTML=esc(text);log.appendChild(d);log.scrollTop=log.scrollHeight;return d;}
-    function wait(){var w=document.createElement('div');w.className='wait';w.textContent='Thinking...';log.appendChild(w);log.scrollTop=log.scrollHeight;return w;}
+    function wait(){var w=document.createElement('div');w.className='wait';w.textContent=T?T.wait:'Thinking...';log.appendChild(w);log.scrollTop=log.scrollHeight;return w;}
     function show(el,on){ if(el) el.hidden=!on; }
     function begin(n,m,greet){
       st.name=n; st.email=m; show(who,false); show(txt,true);
-      if(greet==='full') add('bot','Hi '+n.split(' ')[0]+', I am Rytis’s assistant. Where do your numbers disagree, Meta, Google Ads, GA4, or your backend? Tell me what you see, or ask anything about prices and timelines.');
-      else { add('me',n+' · '+m); add('bot','Thanks '+n.split(' ')[0]+'. Where do your numbers disagree, Meta, Google Ads, GA4, or your backend? Tell me what you see, or ask anything about prices and timelines.'); }
+      if(greet==='full') add('bot',T?T.full(n.split(' ')[0]):'Hi '+n.split(' ')[0]+', I am Rytis’s assistant. Where do your numbers disagree, Meta, Google Ads, GA4, or your backend? Tell me what you see, or ask anything about prices and timelines.');
+      else { add('me',n+' · '+m); add('bot',T?T.short(n.split(' ')[0]):'Thanks '+n.split(' ')[0]+'. Where do your numbers disagree, Meta, Google Ads, GA4, or your backend? Tell me what you see, or ask anything about prices and timelines.'); }
       f.text.focus();
     }
     function intake(n,m,src,keep){ try{ post(FORM,{intake:true,name:n,email:m,fax_line:'',dt:9000,page:location.pathname,gclid:gclid,landing:landing,source:src},keep).catch(function(){}); }catch(x){} }
@@ -89,13 +95,13 @@ var rbChat=(function(){
       post(FORM,{email:st.email,name:st.name,site:'see chat',details:transcript,where:'chat',fax_line:'',dt:9000,page:location.pathname,gclid:gclid,landing:landing,source:o.source})
         .then(function(r){return r.json();}).then(function(j){ w.remove(); if(!j.ok) throw new Error('x');
           if(!SUBMITTED){ SUBMITTED=true; try{ gtag('event','conversion',{'send_to':LABEL,'value':50,'currency':'EUR'}); gtag('event','lead_form_submit',{source:o.source}); }catch(e){} }
-          add('bot','Passed to Rytis. He will reach out to you at '+st.email+' within 6 hours, usually under 1 hour. Closing the chat here, you can come back any time.'); show(done,true);
-        }).catch(function(){ w.remove(); st.sent=false; add('err','That did not go through. Email work@rytisbalys.com with what you wrote above and Rytis will pick it up.'); show(txt,true); show(act,true); });
+          add('bot',T?T.passed(st.email):'Passed to Rytis. He will reach out to you at '+st.email+' within 6 hours, usually under 1 hour. Closing the chat here, you can come back any time.'); show(done,true);
+        }).catch(function(){ w.remove(); st.sent=false; add('err',T?T.err1:'That did not go through. Email work@rytisbalys.com with what you wrote above and Rytis will pick it up.'); show(txt,true); show(act,true); });
     }
     if(o.fromQuery){
       var n0='', m0=''; try{ n0=sessionStorage.getItem('rb_name')||''; m0=sessionStorage.getItem('rb_email')||''; }catch(e){}
       if(n0&&EMAIL.test(m0)){ begin(n0,m0,'full'); }
-      else { add('bot','Hi, I am Rytis’s assistant. Your name and email first, so Rytis can reach out to you directly. Then tell me where your numbers disagree, or ask about prices and timelines.'); show(who,true); }
+      else { add('bot',T?T.hello:'Hi, I am Rytis’s assistant. Your name and email first, so Rytis can reach out to you directly. Then tell me where your numbers disagree, or ask about prices and timelines.'); show(who,true); }
     }
     f.addEventListener('submit',function(e){
       e.preventDefault();
@@ -109,13 +115,13 @@ var rbChat=(function(){
       }
       var t=f.text.value.trim(); if(!t){ f.text.focus(); return; }
       st.hist.push({role:'user',text:t}); add('me',t); f.text.value=''; show(act,false); var w=wait(); f.querySelector('.txt button').disabled=true;
-      post(CHAT,{page:location.pathname,home:{name:st.name},messages:st.hist})
+      post(CHAT,{page:location.pathname,home:{name:st.name,lang:LT?'lt':'en'},messages:st.hist})
         .then(function(r){return r.json();}).then(function(j){
           w.remove(); if(!j.reply) throw new Error(j.error||'no_reply');
           st.hist.push({role:'assistant',text:j.reply}); add('bot',j.reply);
           if(j.handoff){ submitToRytis(); return; }
           if(HANDOFF.test(j.reply)) st.offered=true; if(st.offered) show(act,true);
-        }).catch(function(){ w.remove(); st.hist.pop(); add('err','That did not go through. Email work@rytisbalys.com and Rytis will reach out to you directly.'); })
+        }).catch(function(){ w.remove(); st.hist.pop(); add('err',T?T.err2:'That did not go through. Email work@rytisbalys.com and Rytis will reach out to you directly.'); })
         .then(function(){ f.querySelector('.txt button').disabled=false; });
     });
     f.text.addEventListener('keydown',function(e){ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); f.requestSubmit(); } });

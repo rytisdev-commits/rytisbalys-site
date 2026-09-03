@@ -8,162 +8,77 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-1D69SRZPPM');
+  gtag('config', 'AW-18424603738');
 </script>
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ClickFunnels Upsell Tracking: Fix Double or Missing Purchases</title>
 <meta name="description" content="ClickFunnels OTO funnels either double the Purchase event in Meta or drop upsell revenue in GA4. Why it happens and the fix, with verification steps.">
-<link rel="canonical" href="https://rytisbalys.com/clickfunnels-upsell-tracking-fix">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta property="og:type" content="website">
 <meta property="og:title" content="ClickFunnels Upsell Tracking: Fix Double or Missing Purchases">
 <meta property="og:description" content="ClickFunnels OTO funnels either double the Purchase event in Meta or drop upsell revenue in GA4. Why it happens and the fix, with verification steps.">
 <meta property="og:url" content="https://rytisbalys.com/clickfunnels-upsell-tracking-fix">
 <meta property="og:image" content="https://rytisbalys.com/og.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "TechArticle",
-  "headline": "ClickFunnels Upsell Tracking: Fix Double or Missing Purchases",
-  "description": "ClickFunnels OTO funnels either double the Purchase event in Meta or drop upsell revenue in GA4. Why it happens and the fix, with verification steps.",
-  "url": "https://rytisbalys.com/clickfunnels-upsell-tracking-fix",
-  "mainEntityOfPage": "https://rytisbalys.com/clickfunnels-upsell-tracking-fix",
-  "inLanguage": "en",
-  "datePublished": "2026-07-13",
-  "dateModified": "2026-07-13",
-  "author": {
-    "@type": "Person",
-    "@id": "https://rytisbalys.com/#rytis",
-    "name": "Rytis Balys",
-    "url": "https://rytisbalys.com/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "MB Euruvizija"
-  }
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Why does Meta show two purchases for one ClickFunnels order?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "A Purchase snippet placed in funnel-wide tracking code fires on both the checkout confirmation and the OTO thank-you. Since each firing gets a different event ID, Meta counts them as two separate purchases. Move to one Purchase per order leg, each with that leg's own value."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Why is my upsell revenue missing from GA4 but the tag fires?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "GA4 discards purchase events that repeat a transaction_id it has already recorded. If your OTO purchase reuses the main order's transaction_id, it fires in DebugView but never reaches reports. Give the upsell leg its own ID, for example ORDER123-OTO1."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Should the upsell Purchase event include the full order total?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. Each leg carries only its own value, because Meta and GA4 sum event values. If the OTO event repeats the base value, your reported revenue and ROAS inflate and Meta optimizes on numbers that do not exist."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do I need the Conversions API for ClickFunnels upsell tracking?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "For reliable numbers, yes. Browser-only events on post-checkout pages get lost to iOS privacy features and ad blockers, and the upsell leg is the most fragile one. Send a server event per leg with the same event_id as its browser twin so Meta deduplicates correctly."
-      }
-    }
-  ]
-}
-</script>
-<style>
-  :root{--bg:#0a0e13;--panel:#0f151d;--line:#1c2530;--txt:#d7dee8;--dim:#8b98a8;--accent:#ffc72c;--green:#3fb950;--red:#f85149;--mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace}
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{background:var(--bg);color:var(--txt);font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:720px;margin:0 auto;padding:56px 24px 96px}
-  a{color:var(--accent)}
-  .crumb{font-family:var(--mono);font-size:13px;margin-bottom:28px}
-  .crumb a{text-decoration:none;color:var(--dim)} .crumb a:hover{color:var(--accent)}
-  h1{font-size:28px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:10px}
-  .sub{color:var(--dim);margin-bottom:36px;font-size:16px}
-  h2{font-size:19px;color:#fff;margin:36px 0 10px}
-  h3{font-size:16px;color:#fff;margin:20px 0 8px}
-  p{margin-bottom:14px;font-size:15.5px}
-  p.dim{color:var(--dim)}
-  ul,ol{margin:0 0 14px 22px}
-  li{margin-bottom:8px;font-size:15.5px}
-  code{font-family:var(--mono);font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px;overflow-wrap:break-word;word-break:break-word}
-  pre{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-family:var(--mono);font-size:13px;color:var(--dim);overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin-bottom:14px}
-  pre b{color:var(--txt);font-weight:400}
-  .faq{margin-top:44px}
-  .faq h2{margin-bottom:18px}
-  .faq details{background:var(--panel);border:1px solid var(--line);border-radius:8px;margin-bottom:10px;padding:0}
-  .faq summary{cursor:pointer;padding:13px 16px;font-size:15px;font-weight:600;color:var(--txt)}
-  .faq details p{padding:0 16px 14px;color:var(--dim);font-size:14.5px;margin:0}
-  .cta{margin-top:52px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
-  .cta .ask{margin-top:12px;font-size:15px;color:var(--dim)}
-  .cta .ask b{color:var(--txt);font-weight:600}
-  .cta p{margin-bottom:14px}
-  .btn{font-family:var(--mono);font-size:14px;text-decoration:none;padding:11px 18px;border-radius:8px;background:var(--accent);color:#0a0e13;font-weight:600;display:inline-block}
-  .related{border-top:1px solid var(--line);margin-top:34px;padding-top:20px}
-  .related h2{margin-bottom:12px}
-  .related ul{list-style:none;margin:0}
-  .related li{padding:9px 0 9px 24px;position:relative;border-bottom:1px solid var(--line);font-size:15px}
-  .related li:last-child{border-bottom:none}
-  .related li::before{content:'>';position:absolute;left:2px;color:var(--accent);font-family:var(--mono)}
-  .related a{color:var(--txt);text-decoration:none}
-  .related a:hover{color:var(--accent)}
+<link rel="canonical" href="https://rytisbalys.com/clickfunnels-upsell-tracking-fix">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
-  footer{font-family:var(--mono);font-size:12.5px;color:#7d8a9a;border-top:1px solid var(--line);padding-top:20px;margin-top:56px}
-  .chip-label{display:block;font-family:var(--mono);font-size:12.5px;color:#b9c3cf;margin-bottom:2px;letter-spacing:.03em}
-  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0}
-  .chip-set{border:none;padding:0;margin:0 0 20px;min-width:0}
-  .other-in{display:block;width:100%;margin-top:10px;background:#0d131a;border:1px solid #2f3c4b;border-radius:8px;color:var(--txt);padding:10px 12px;font:inherit;font-size:15px}
-  .other-in:focus{outline:none;border-color:var(--accent)}
-  .other-in[hidden]{display:none}
-  .cta p.lead-gap{font-family:var(--mono);font-size:13px;margin:6px 0 0;color:var(--accent)}
-  .cta p.lead-gap.small{color:var(--green)}
-  .lead label.chip{display:inline-block;margin-bottom:0}
-  .chip input{position:absolute;opacity:0;width:0;height:0}
-  .chip span{display:inline-flex;align-items:center;min-height:40px;font-family:var(--mono);font-size:13px;padding:0 15px;border:1px solid #3a4757;border-radius:20px;color:#c9d3de;cursor:pointer;background:#18222e;transition:.15s;-webkit-tap-highlight-color:transparent}
-  .chip span:hover{border-color:var(--accent);color:#fff;background:#1e2a38}
-  .chip input:checked+span{border-color:var(--accent);color:#0a0e13;background:var(--accent);font-weight:600}
-  .chip input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
-  .lead ::placeholder{color:#7d8a9a;opacity:1}
-  .cta p.lead-hint{font-family:var(--mono);font-size:12px;line-height:1.5;color:#8b98a8;margin:6px 0 20px}
-  .cta-proof{font-family:var(--mono);font-size:13px;color:var(--dim);margin-top:12px;user-select:all}
-  .lead-row.nums input{font-size:16px}
-  .lead-row.nums label{flex:1 1 0;min-width:0}
-  .lead-row.nums{align-items:flex-end}
-  .lead-row.who{border-top:1px solid var(--line);padding-top:20px;margin-top:22px}
-  .cta-proof a{color:var(--accent);border-bottom:1px solid rgba(255,199,44,.35)}
-  .cta-proof a:hover{color:var(--accent)}
-  .lead{margin-top:8px}
-  .lead-row{display:flex;gap:12px;flex-wrap:wrap}
-  .lead-row label{flex:1 1 220px}
-  .lead label{display:block;font-family:var(--mono);font-size:12.5px;color:#b9c3cf;margin-bottom:16px;letter-spacing:.03em}
-  .lead input,.lead textarea{display:block;width:100%;margin-top:6px;background:#0d131a;border:1px solid #2f3c4b;border-radius:8px;color:var(--txt);padding:10px 12px;font:inherit;font-size:15px}
-  .lead textarea{resize:vertical;line-height:1.5}
-  .lead input:focus,.lead textarea:focus{outline:none;border-color:var(--accent)}
-  .lead-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-  .lead button{border:none;cursor:pointer;font-family:var(--mono)}
-  .lead button[disabled]{opacity:.6;cursor:default}
-  .lead-msg{margin:12px 0 0;font-family:var(--mono);font-size:13px;min-height:1em}
-  .lead-msg.ok{color:var(--green)} .lead-msg.err{color:var(--red)}
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#f4f6f3;--card:#fff;--ink:#0f2a20;--muted:#4f6f62;--line:#dde5dc;--bot:#eef3ec;--g:#14532d;--amber:#b45309;--font:Manrope,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;--mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
+  *{margin:0;padding:0;box-sizing:border-box} [hidden]{display:none!important} html{scroll-behavior:smooth} [id]{scroll-margin-top:92px}
+  body{background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:var(--g)}
+  .w{max-width:1200px;margin:0 auto;padding:0 40px}
+  header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+  header .w{display:flex;align-items:center;gap:14px;padding-top:12px;padding-bottom:12px}
+  header img{width:44px;height:44px;border-radius:50%;object-fit:cover}
+  header .who{font-weight:700;font-size:16px;text-decoration:none;color:var(--ink)} header .who small{display:block;font-weight:400;font-size:12.5px;color:var(--muted)}
+  header nav{margin-left:auto;display:flex;gap:22px;align-items:center;font-size:14px}
+  header nav a{color:var(--muted);text-decoration:none} header nav a.cta{background:var(--g);color:#fff;border-radius:999px;padding:9px 16px;font-weight:700;white-space:nowrap}
+  main{max-width:800px;margin:0 auto;padding:40px 24px 64px}
+  .crumb{font-size:13px;color:var(--muted);margin-bottom:22px} .crumb a{color:var(--muted);text-decoration:none} .crumb a:hover{color:var(--g)}
+  h1{font-size:38px;font-weight:800;letter-spacing:-.03em;line-height:1.12;margin-bottom:14px;text-wrap:balance}
+  .sub{font-size:18px;color:var(--muted);margin-bottom:34px;max-width:680px}
+  h2{font-size:24px;font-weight:800;letter-spacing:-.02em;line-height:1.2;margin:44px 0 12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  h2 .n{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:34px;padding:0 8px;border-radius:999px;background:var(--g);color:#fff;font-size:14px;font-weight:800;letter-spacing:0}
+  h3{font-size:18px;font-weight:700;margin:26px 0 8px}
+  p{margin-bottom:14px;font-size:16.5px} p.dim{color:var(--muted)} li{font-size:16.5px}
+  ul,ol{margin:0 0 16px 22px} li{margin-bottom:6px}
+  strong,b{font-weight:700}
+  code{font-family:var(--mono);font-size:14px;background:#fff;border:1px solid var(--line);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+  pre{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-family:var(--mono);font-size:13.5px;color:var(--ink);overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin:0 0 16px} pre code{border:0;padding:0;background:none}
+  .verify{border-left:4px solid var(--g);background:#fff;border-radius:0 12px 12px 0;padding:12px 16px;margin:0 0 12px;font-size:15.5px} .verify b{color:var(--g);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;margin-right:6px}
+  .warn{border-left:4px solid var(--amber);background:#fff;border-radius:0 12px 12px 0;padding:12px 16px;margin:0 0 12px;font-size:15.5px} .warn b{color:var(--amber)}
+  .faq{margin-top:48px;border-top:1px solid var(--line);padding-top:8px} .faq h2{margin-top:28px}
+  .faq details{border-bottom:1px solid var(--line);padding:14px 0} .faq summary{cursor:pointer;font-weight:700;font-size:16.5px;list-style:none;display:flex;justify-content:space-between;gap:12px} .faq summary::after{content:'+';color:var(--g);font-weight:800} .faq details[open] summary::after{content:'\2212'} .faq details p{margin:10px 0 0;color:var(--muted);font-size:15.5px}
+  .related{margin-top:40px;border-top:1px solid var(--line);padding-top:24px} .related h2{font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 10px} .related ul{list-style:none;margin:0} .related li{padding:10px 0;border-bottom:1px solid var(--line);margin:0} .related li:last-child{border-bottom:0} .related a{color:var(--ink);text-decoration:none;font-size:16px} .related a:hover{color:var(--g)}
+  /* asistento kortele */
+  .card{margin-top:48px;background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 14px 34px rgba(20,83,45,.10);overflow:hidden}
+  .card .top{padding:22px 22px 0} .card .top h2{margin:0 0 6px;font-size:22px} .card .top p{color:var(--muted);font-size:15.5px;margin-bottom:12px}
+  .log{display:flex;flex-direction:column;gap:12px;padding:6px 22px 8px}
+  .m{max-width:92%;padding:13px 16px;border-radius:18px;font-size:15px;line-height:1.55} .m.bot{align-self:flex-start;background:var(--bot);border-bottom-left-radius:6px}
+  .ask{padding:12px 22px 18px;display:flex;flex-direction:column;gap:10px} .row{display:flex;gap:8px;flex-wrap:wrap}
+  .ask input{flex:1 1 160px;font:inherit;font-size:16px;padding:12px 14px;border:1px solid #cfe0d4;border-radius:12px;color:var(--ink);min-width:0}
+  .ask input:focus{outline:none;border-color:var(--g);box-shadow:0 0 0 3px rgba(20,83,45,.12)}
+  .ask button{border:0;border-radius:12px;background:var(--g);color:#fff;font:600 15px var(--font);padding:0 20px;min-height:46px;cursor:pointer}
+  .hint{font-size:12.5px;color:var(--muted);margin:0} .hint b{color:var(--ink)} .hint a{text-decoration:none;font-weight:600}
+  footer{font-size:12px;color:var(--muted);text-align:center;padding:40px 16px 24px} footer a{color:var(--muted)}
+  .fnav{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 22px;margin-bottom:16px;font-size:14px} .fnav a{color:var(--ink);text-decoration:none;font-weight:600}
+  @media (max-width:900px){.w{padding:0 16px} header nav a:not(.cta){display:none} header nav a.cta{padding:8px 13px;font-size:13px} header .who small{display:none} h1{font-size:30px} h2{font-size:21px} main{padding:28px 16px 48px}}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="crumb"><a href="/">rytisbalys.com</a> <span style="color:#7d8a9a">/ troubleshooting</span></div>
+<header><div class="w">
+  <img src="/rytis.jpg" alt="Rytis Balys">
+  <a class="who" href="/">Rytis Balys<small>Conversion tracking engineer</small></a>
+  <nav><a href="/#build">What I build</a><a href="/#process">Process</a><a href="/#prices">Prices</a><a href="/#reviews">Reviews</a><a href="/#guides">Guides</a><a class="cta" href="#chat1">Get your free audit</a></nav>
+</div></header>
+<main>
+  <div class="crumb"><a href="/">rytisbalys.com</a> <span >/ troubleshooting</span></div>
   <h1>ClickFunnels Upsell Tracking: Fix Double or Missing Purchases</h1>
 <p>Ads Manager shows two purchases for one buyer. Or the opposite: Stripe says the order was $144 with the upsell, but Meta and GA4 only saw $47. Both problems have the same root. In ClickFunnels, and in any funnel with one-click upsells, the main checkout and the OTO are separate purchase events on separate pages. Most pixel setups either fire one generic Purchase on every page or tag only the first sale.</p><p>I fix this weekly. Here is the mechanism, the fix pattern, and how to prove it works before you trust the numbers.</p>
   <h2>Why one order becomes two purchase events</h2>
@@ -182,6 +97,14 @@ gtag('event', 'purchase', {transaction_id: 'CF-38291-OTO1', value: 97.00, curren
 <p>Do not assume the tags fire the way the setup screen suggests. Run the funnel and watch the events.</p><ul><li><strong>Meta Events Manager, Test Events tab.</strong> Open your pixel in Events Manager, go to Test Events, then complete a test order in the same browser (gateway test mode or a 100% discount code, refund after if needed). Take the OTO. You should see two Purchase events with different event IDs and each leg's own value, not the order total on both. If CAPI is live, send the test_event_code with the server events and confirm each browser event pairs with its server twin and shows as deduplicated.</li><li><strong>GA4 DebugView.</strong> Admin, then DebugView, with debug mode on via GTM Preview or Tag Assistant. You want two purchase events with distinct transaction_id values. If the second purchase never appears in reports despite firing in DebugView, you have the repeated transaction_id problem.</li><li><strong>Browser network tab.</strong> Filter requests to facebook.com/tr and read the query string: ev=Purchase, cd[value], cd[currency], eid. For GA4, filter for "collect" and check en=purchase and the value parameter. This is the ground truth when a tag manager UI says one thing and the wire says another.</li><li><strong>Decline path.</strong> Run a second test order and decline the OTO. The thank-you page must not fire an upsell Purchase. Most broken funnels fail this step.</li></ul>
   <h2>What clean values buy you</h2>
 <p>Once each leg reports its true value, Meta's value optimization bids toward the buyers who take upsells instead of the cheapest front-end conversions. Ads Manager ROAS starts matching Stripe, so budget decisions stop being guesses. GA4 attribution shows which campaigns produce high-AOV buyers rather than just buyers. On funnels with a strong OTO, the reported-versus-real gap is often 30-50% of revenue. That gap is what the algorithm was optimizing without.</p>
+  <div class="card" id="chat1">
+  <div class="top"><h2>Numbers still don't add up?</h2><p>Tell my assistant what you see and Rytis will reach out to you directly. Every rated job on Upwork is 5.0, <a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">check them live</a>.</p></div>
+  <div class="log"><div class="m bot">Hi, I&rsquo;m Rytis&rsquo;s assistant. Your name and email first, so Rytis can reach out to you directly. Then tell me where your numbers disagree, or ask about prices and timelines.</div></div>
+  <form class="ask" novalidate>
+    <div class="row who"><input type="text" name="name" placeholder="Your name" autocomplete="given-name" required><input type="email" name="email" placeholder="you@company.com" autocomplete="email" required><button type="submit">Start</button></div>
+    <p class="hint">I reply myself <b>within 6 hours, usually under 1 hour</b>. Prefer direct? <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> (messages, not calls) &middot; <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a></p>
+  </form>
+</div>
   <div class="faq">
   <h2>FAQ</h2>
     <details><summary>Why does Meta show two purchases for one ClickFunnels order?</summary><p>A Purchase snippet placed in funnel-wide tracking code fires on both the checkout confirmation and the OTO thank-you. Since each firing gets a different event ID, Meta counts them as two separate purchases. Move to one Purchase per order leg, each with that leg's own value.</p></details>
@@ -189,119 +112,33 @@ gtag('event', 'purchase', {transaction_id: 'CF-38291-OTO1', value: 97.00, curren
     <details><summary>Should the upsell Purchase event include the full order total?</summary><p>No. Each leg carries only its own value, because Meta and GA4 sum event values. If the OTO event repeats the base value, your reported revenue and ROAS inflate and Meta optimizes on numbers that do not exist.</p></details>
     <details><summary>Do I need the Conversions API for ClickFunnels upsell tracking?</summary><p>For reliable numbers, yes. Browser-only events on post-checkout pages get lost to iOS privacy features and ad blockers, and the upsell leg is the most fragile one. Send a server event per leg with the same event_id as its browser twin so Meta deduplicates correctly.</p></details>
   </div>
-  <div class="cta">
-<p>This is the work I do: funnel tracking rebuilt with per-leg values, CAPI dedup, and a recorded test run so you can see the numbers land correctly. Send me your two numbers below and I will tell you which of the causes above is yours, no charge. <b>If the gap is under about 10&percnt;, you probably do not need me, and I will say so.</b></p>
-    <form class="lead" id="leadForm" novalidate>
-      <fieldset class="chip-set">
-        <legend class="chip-label">Which numbers disagree</legend>
-        <div class="chips">
-          <label class="chip"><input type="checkbox" name="where" value="Meta"><span>Meta</span></label>
-          <label class="chip"><input type="checkbox" name="where" value="Google Ads"><span>Google</span></label>
-          <label class="chip"><input type="checkbox" name="where" value="GA4"><span>GA4</span></label>
-          <label class="chip"><input type="checkbox" name="where" value="TikTok"><span>TikTok</span></label>
-          <label class="chip"><input type="checkbox" name="where" value="CRM or email"><span>CRM</span></label>
-          <label class="chip"><input type="checkbox" name="where" value="Not sure"><span>not sure</span></label>
-        </div>
-      </fieldset>
-
-      <div class="lead-row nums">
-        <label>Ad platform says<input type="text" inputmode="numeric" name="n_platform" placeholder="142"></label>
-        <label>Real orders or leads<input type="text" inputmode="numeric" name="n_backend" placeholder="76"></label>
-      </div>
-      <p class="lead-gap" id="leadGap" role="status" hidden></p>
-      <p class="lead-hint">Rough is fine, and blank is fine too.</p>
-
-      <label>Anything worth knowing<textarea name="details" rows="2" placeholder="What counts as a conversion, and what changed recently"></textarea></label>
-
-      <div class="lead-row who">
-        <label>Your email<input type="email" name="email" required placeholder="you@company.com" autocomplete="email"></label>
-        <label>Your site<input type="text" name="site" required placeholder="yourstore.com" autocomplete="url" inputmode="url" autocapitalize="none" autocorrect="off" spellcheck="false"></label>
-      </div>
-      <div class="lead-hp" aria-hidden="true"><label>Leave this empty<input type="text" name="fax_line" tabindex="-1" autocomplete="off"></label></div>
-      <button type="submit" class="btn primary">Get the likely cause</button>
-      <p class="lead-msg" role="status"></p>
-    </form>
-    <p class="cta-proof">or email work@rytisbalys.com &middot; every rated job 5.0 &middot; <a href="https://www.upwork.com/freelancers/rytis" rel="nofollow noopener" target="_blank">verify on Upwork</a></p>
-  </div>
-
-
   <div class="related">
-    <h2>related guides</h2>
+    <h2>Related guides</h2>
     <ul>
       <li><a href="/meta-events-manager-double-purchases-deduplication-fix">Meta counts purchases twice: Pixel + CAPI deduplication fix</a></li>
       <li><a href="/ga4-purchases-attributed-stripe-paypal-direct-fix">Fix GA4 purchases showing as stripe.com, paypal.com or (direct)</a></li>
       <li><a href="/meta-pixel-not-firing">Meta Pixel not firing? The 7 real causes, in the order to check them</a></li>
     </ul>
   </div>
-
-  <footer>Rytis Balys · MB Euruvizija · Vilnius, Lithuania · <a href="/" style="color:#7d8a9a">rytisbalys.com</a></footer>
-</div>
+</main>
+<footer><nav class="fnav"><a href="/#build">What I build</a><a href="/#process">Process</a><a href="/#prices">Prices</a><a href="/#reviews">Reviews</a><a href="/#guides">Guides</a><a href="#chat1">Free audit</a></nav>Rytis Balys &middot; MB Euruvizija &middot; Vilnius, Lithuania (EET) &middot; worldwide, remote &middot; <a href="https://github.com/rytisdev-commits/server-side-conversion-tracking" rel="noopener">github case study</a> &middot; <a href="/lt/">LT</a></footer>
 <script>
 (function(){
-  var f=document.getElementById('leadForm'); if(!f) return;
-  var t0=Date.now(), msg=f.querySelector('.lead-msg'), btn=f.querySelector('button');
-  var gapEl=document.getElementById('leadGap');
-
-  function picked(name){
-    return Array.prototype.slice.call(f.querySelectorAll('input[name="'+name+'"]:checked'))
-      .map(function(i){return i.value;}).join(', ');
-  }
-  function num(v){ v=String(v||'').replace(/[^0-9.]/g,''); return v===''?null:parseFloat(v); }
-  function gapNow(){
-    var np=num(f.n_platform.value), nb=num(f.n_backend.value);
-    if(np===null||nb===null||np<=0) return null;
-    return Math.round(Math.abs(np-nb)/np*100);
-  }
-
-  // Tarpas rodomas IS KARTO, dar nepraseant el. pasto. Zmogus pamato savo skaiciu.
-  function showGap(){
-    var g=gapNow();
-    if(g===null){ gapEl.hidden=true; return; }
-    gapEl.hidden=false;
-    if(g<10){ gapEl.className='lead-gap small'; gapEl.textContent='-> '+g+'% gap. That is inside normal loss.'; }
-    else { gapEl.className='lead-gap'; gapEl.textContent='-> '+g+'% gap, well past the ~10% you would expect.'; }
-  }
-  f.n_platform.addEventListener('input', showGap);
-  f.n_backend.addEventListener('input', showGap);
-
+  var FORM='https://rb-form.formos-ops.workers.dev/';
+  try{ var q=new URLSearchParams(location.search), gc=q.get('gclid'); if(gc){ sessionStorage.setItem('rb_gclid',gc); sessionStorage.setItem('rb_landing',location.pathname); } }catch(e){}
   var EMAIL=/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/;
-  var ERRORS={ email_invalid:'That email looks mistyped - check it and send again.',
-               site_required:'I need the site URL to look anything up.',
-               origin:'Something blocked that request. Email work@rytisbalys.com and I will pick it up.' };
-
+  var root=document.getElementById('chat1'); if(!root) return; var f=root.querySelector('form');
   f.addEventListener('submit',function(e){
     e.preventDefault();
-    var email=f.email.value.trim(), site=f.site.value.trim();
-    if(!EMAIL.test(email)){ msg.className='lead-msg err'; msg.textContent=ERRORS.email_invalid; f.email.focus(); return; }
-    if(!site){ msg.className='lead-msg err'; msg.textContent=ERRORS.site_required; f.site.focus(); return; }
-
-    var gap=gapNow();
-    var d={email:email,site:site,details:f.details.value.trim(),
-           where:picked('where'),
-           n_platform:num(f.n_platform.value), n_backend:num(f.n_backend.value), gap:gap,
-           fax_line:f.fax_line.value, dt:Date.now()-t0, page:location.pathname};
-
-    btn.disabled=true; msg.className='lead-msg'; msg.textContent='Sending...';
-    fetch('https://rb-form.formos-ops.workers.dev/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)})
-      .then(function(r){ return r.json().then(function(j){ return {ok:r.ok&&j.ok, j:j}; }); })
-      .then(function(res){
-        if(!res.ok){ throw new Error((res.j&&res.j.error)||'failed'); }
-        msg.className='lead-msg ok';
-        msg.textContent = gap===null
-          ? 'Got it. I read every one of these myself and reply, usually the same day.'
-          : (gap<10
-              ? 'Got it. A '+gap+'% gap is inside normal loss - I will tell you straight if there is nothing to fix.'
-              : 'Got it. I will come back with the likely cause of that '+gap+'% gap, usually the same day.');
-        f.reset(); gapEl.hidden=true;
-      })
-      .catch(function(err){
-        msg.className='lead-msg err';
-        msg.textContent = ERRORS[String(err.message)] || 'That did not go through. Email work@rytisbalys.com instead and I will pick it up.';
-        btn.disabled=false;
-      });
+    var n=f.name.value.trim(), m=f.email.value.trim();
+    if(!n){ f.name.focus(); return; } if(!EMAIL.test(m)){ f.email.focus(); f.email.style.borderColor='#b91c1c'; return; } f.email.style.borderColor='';
+    try{ sessionStorage.setItem('rb_name',n); sessionStorage.setItem('rb_email',m); }catch(x){}
+    try{ gtag('event','intake_start',{source:'guide'}); }catch(x){}
+    var gclid='', landing=location.pathname; try{ gclid=sessionStorage.getItem('rb_gclid')||''; landing=sessionStorage.getItem('rb_landing')||location.pathname; }catch(x){}
+    try{ fetch(FORM,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify({intake:true,name:n,email:m,fax_line:'',dt:9000,page:location.pathname,gclid:gclid,landing:landing,source:'guide'})}); }catch(x){}
+    setTimeout(function(){ location.href='/ai?n='+encodeURIComponent(n)+'&e='+encodeURIComponent(m)+''; },150);
   });
 })();
 </script>
-<script src="/chat.js" defer></script>
 </body>
 </html>

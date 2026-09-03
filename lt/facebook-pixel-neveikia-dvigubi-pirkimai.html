@@ -8,116 +8,77 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-1D69SRZPPM');
+  gtag('config', 'AW-18424603738');
 </script>
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Facebook Pixel neveikia arba dubliuoja pirkimus: ką tikrinti</title>
 <meta name="description" content="Purchase eventas nešauna arba Events Manager rodo dvigubus pirkimus. Kaip per Test Events rasti priežastį ir kodėl netikri skaičiai brangina reklamą.">
-<link rel="canonical" href="https://rytisbalys.com/lt/facebook-pixel-neveikia-dvigubi-pirkimai">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Facebook Pixel neveikia arba dubliuoja pirkimus: ką tikrinti">
 <meta property="og:description" content="Purchase eventas nešauna arba Events Manager rodo dvigubus pirkimus. Kaip per Test Events rasti priežastį ir kodėl netikri skaičiai brangina reklamą.">
 <meta property="og:url" content="https://rytisbalys.com/lt/facebook-pixel-neveikia-dvigubi-pirkimai">
 <meta property="og:image" content="https://rytisbalys.com/og.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "TechArticle",
-  "headline": "Facebook Pixel neveikia arba dubliuoja pirkimus: ką tikrinti",
-  "description": "Purchase eventas nešauna arba Events Manager rodo dvigubus pirkimus. Kaip per Test Events rasti priežastį ir kodėl netikri skaičiai brangina reklamą.",
-  "url": "https://rytisbalys.com/lt/facebook-pixel-neveikia-dvigubi-pirkimai",
-  "mainEntityOfPage": "https://rytisbalys.com/lt/facebook-pixel-neveikia-dvigubi-pirkimai",
-  "inLanguage": "lt",
-  "datePublished": "2026-07-13",
-  "dateModified": "2026-07-13",
-  "author": {
-    "@type": "Person",
-    "@id": "https://rytisbalys.com/#rytis",
-    "name": "Rytis Balys",
-    "url": "https://rytisbalys.com/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "MB Euruvizija"
-  }
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Kaip suprasti, ar Events Manager dubliuoja mano pirkimus?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Palyginkite paskutinių 7 dienų Purchase kiekį Events Manager su realiais užsakymais parduotuvės admin'e. Jei Meta rodo maždaug dvigubai daugiau, browser pixel ir Conversions API siunčia tuos pačius pirkimus be bendro event_id. Paspaudę ant Purchase evento Events Manager viduje matysite išskaidymą pagal kanalą ir deduplikacijos statistiką."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Ar palikti browser pixelį, jei jau turiu Conversions API?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Taip, palikite abu. Naršyklės pixelis duoda Meta papildomo konteksto atitikimui (match quality), o serveris pagauna pirkimus, kuriuos blokuoja iOS ar ad blocker'iai. Svarbu viena sąlyga: abu kanalai turi siųsti tą patį event_id, kad Meta dublikatus išmestų."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Pixel Helper rodo, kad pixelis įdiegtas. Kodėl pirkimai vis tiek nesimato?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Įdiegtas bazinis kodas dar nereiškia, kad šauna Purchase eventas - bazinis kodas siunčia tik PageView. Patikrinkite būtent padėkos puslapį po testinio pirkimo. Dažniausiai eventas pamestas ten: pasikeitęs URL trigger'yje, apmokėjimas kitame domene arba consent juosta, blokuojanti skriptą."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Kiek pirkimų pameta vien naršyklės pixelis be server-side?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Priklauso nuo auditorijos, bet tipinis intervalas yra 10-30 procentų: iOS apribojimai, ad blocker'iai ir consent atmetimai. Būtent šiai spragai dengti Meta ir sukūrė Conversions API. Bet įjungus jį be deduplikacijos problema tik apsiverčia - vietoj pamestų pirkimų gaunate dvigubus."
-      }
-    }
-  ]
-}
-</script>
+<link rel="canonical" href="https://rytisbalys.com/lt/facebook-pixel-neveikia-dvigubi-pirkimai">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#0a0e13;--panel:#0f151d;--line:#1c2530;--txt:#d7dee8;--dim:#8b98a8;--accent:#ffc72c;--green:#3fb950;--red:#f85149;--mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace}
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{background:var(--bg);color:var(--txt);font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:720px;margin:0 auto;padding:56px 24px 96px}
-  a{color:var(--accent)}
-  .crumb{font-family:var(--mono);font-size:13px;margin-bottom:28px}
-  .crumb a{text-decoration:none;color:var(--dim)} .crumb a:hover{color:var(--accent)}
-  h1{font-size:28px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:10px}
-  .sub{color:var(--dim);margin-bottom:36px;font-size:16px}
-  h2{font-size:19px;color:#fff;margin:36px 0 10px}
-  h3{font-size:16px;color:#fff;margin:20px 0 8px}
-  p{margin-bottom:14px;font-size:15.5px}
-  p.dim{color:var(--dim)}
-  ul,ol{margin:0 0 14px 22px}
-  li{margin-bottom:8px;font-size:15.5px}
-  code{font-family:var(--mono);font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
-  pre{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-family:var(--mono);font-size:13px;color:var(--dim);overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin-bottom:14px}
-  pre b{color:var(--txt);font-weight:400}
-  .faq{margin-top:44px}
-  .faq h2{margin-bottom:18px}
-  .faq details{background:var(--panel);border:1px solid var(--line);border-radius:8px;margin-bottom:10px;padding:0}
-  .faq summary{cursor:pointer;padding:13px 16px;font-size:15px;font-weight:600;color:var(--txt)}
-  .faq details p{padding:0 16px 14px;color:var(--dim);font-size:14.5px;margin:0}
-  .cta{margin-top:52px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px}
-  .cta p{margin-bottom:14px}
-  .btn{font-family:var(--mono);font-size:14px;text-decoration:none;padding:11px 18px;border-radius:8px;background:var(--accent);color:#0a0e13;font-weight:600;display:inline-block}
-  footer{font-family:var(--mono);font-size:12.5px;color:#4d5b6b;border-top:1px solid var(--line);padding-top:20px;margin-top:56px}
+  :root{--bg:#f4f6f3;--card:#fff;--ink:#0f2a20;--muted:#4f6f62;--line:#dde5dc;--bot:#eef3ec;--g:#14532d;--amber:#b45309;--font:Manrope,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;--mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
+  *{margin:0;padding:0;box-sizing:border-box} [hidden]{display:none!important} html{scroll-behavior:smooth} [id]{scroll-margin-top:92px}
+  body{background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:var(--g)}
+  .w{max-width:1200px;margin:0 auto;padding:0 40px}
+  header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+  header .w{display:flex;align-items:center;gap:14px;padding-top:12px;padding-bottom:12px}
+  header img{width:44px;height:44px;border-radius:50%;object-fit:cover}
+  header .who{font-weight:700;font-size:16px;text-decoration:none;color:var(--ink)} header .who small{display:block;font-weight:400;font-size:12.5px;color:var(--muted)}
+  header nav{margin-left:auto;display:flex;gap:22px;align-items:center;font-size:14px}
+  header nav a{color:var(--muted);text-decoration:none} header nav a.cta{background:var(--g);color:#fff;border-radius:999px;padding:9px 16px;font-weight:700;white-space:nowrap}
+  main{max-width:800px;margin:0 auto;padding:40px 24px 64px}
+  .crumb{font-size:13px;color:var(--muted);margin-bottom:22px} .crumb a{color:var(--muted);text-decoration:none} .crumb a:hover{color:var(--g)}
+  h1{font-size:38px;font-weight:800;letter-spacing:-.03em;line-height:1.12;margin-bottom:14px;text-wrap:balance}
+  .sub{font-size:18px;color:var(--muted);margin-bottom:34px;max-width:680px}
+  h2{font-size:24px;font-weight:800;letter-spacing:-.02em;line-height:1.2;margin:44px 0 12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  h2 .n{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:34px;padding:0 8px;border-radius:999px;background:var(--g);color:#fff;font-size:14px;font-weight:800;letter-spacing:0}
+  h3{font-size:18px;font-weight:700;margin:26px 0 8px}
+  p{margin-bottom:14px;font-size:16.5px} p.dim{color:var(--muted)} li{font-size:16.5px}
+  ul,ol{margin:0 0 16px 22px} li{margin-bottom:6px}
+  strong,b{font-weight:700}
+  code{font-family:var(--mono);font-size:14px;background:#fff;border:1px solid var(--line);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+  pre{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-family:var(--mono);font-size:13.5px;color:var(--ink);overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin:0 0 16px} pre code{border:0;padding:0;background:none}
+  .verify{border-left:4px solid var(--g);background:#fff;border-radius:0 12px 12px 0;padding:12px 16px;margin:0 0 12px;font-size:15.5px} .verify b{color:var(--g);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;margin-right:6px}
+  .warn{border-left:4px solid var(--amber);background:#fff;border-radius:0 12px 12px 0;padding:12px 16px;margin:0 0 12px;font-size:15.5px} .warn b{color:var(--amber)}
+  .faq{margin-top:48px;border-top:1px solid var(--line);padding-top:8px} .faq h2{margin-top:28px}
+  .faq details{border-bottom:1px solid var(--line);padding:14px 0} .faq summary{cursor:pointer;font-weight:700;font-size:16.5px;list-style:none;display:flex;justify-content:space-between;gap:12px} .faq summary::after{content:'+';color:var(--g);font-weight:800} .faq details[open] summary::after{content:'\2212'} .faq details p{margin:10px 0 0;color:var(--muted);font-size:15.5px}
+  .related{margin-top:40px;border-top:1px solid var(--line);padding-top:24px} .related h2{font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 10px} .related ul{list-style:none;margin:0} .related li{padding:10px 0;border-bottom:1px solid var(--line);margin:0} .related li:last-child{border-bottom:0} .related a{color:var(--ink);text-decoration:none;font-size:16px} .related a:hover{color:var(--g)}
+  /* asistento kortele */
+  .card{margin-top:48px;background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 14px 34px rgba(20,83,45,.10);overflow:hidden}
+  .card .top{padding:22px 22px 0} .card .top h2{margin:0 0 6px;font-size:22px} .card .top p{color:var(--muted);font-size:15.5px;margin-bottom:12px}
+  .log{display:flex;flex-direction:column;gap:12px;padding:6px 22px 8px}
+  .m{max-width:92%;padding:13px 16px;border-radius:18px;font-size:15px;line-height:1.55} .m.bot{align-self:flex-start;background:var(--bot);border-bottom-left-radius:6px}
+  .ask{padding:12px 22px 18px;display:flex;flex-direction:column;gap:10px} .row{display:flex;gap:8px;flex-wrap:wrap}
+  .ask input{flex:1 1 160px;font:inherit;font-size:16px;padding:12px 14px;border:1px solid #cfe0d4;border-radius:12px;color:var(--ink);min-width:0}
+  .ask input:focus{outline:none;border-color:var(--g);box-shadow:0 0 0 3px rgba(20,83,45,.12)}
+  .ask button{border:0;border-radius:12px;background:var(--g);color:#fff;font:600 15px var(--font);padding:0 20px;min-height:46px;cursor:pointer}
+  .hint{font-size:12.5px;color:var(--muted);margin:0} .hint b{color:var(--ink)} .hint a{text-decoration:none;font-weight:600}
+  footer{font-size:12px;color:var(--muted);text-align:center;padding:40px 16px 24px} footer a{color:var(--muted)}
+  .fnav{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 22px;margin-bottom:16px;font-size:14px} .fnav a{color:var(--ink);text-decoration:none;font-weight:600}
+  @media (max-width:900px){.w{padding:0 16px} header nav a:not(.cta){display:none} header nav a.cta{padding:8px 13px;font-size:13px} header .who small{display:none} h1{font-size:30px} h2{font-size:21px} main{padding:28px 16px 48px}}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="crumb"><a href="/">rytisbalys.com</a> <span style="color:#4d5b6b">/ lt</span></div>
+<header><div class="w">
+  <img src="/rytis.jpg" alt="Rytis Balys">
+  <a class="who" href="/lt/">Rytis Balys<small>Konversijų sekimo specialistas</small></a>
+  <nav><a href="/lt/">Pagrindinis</a><a href="/">EN</a><a class="cta" href="#chat1">Nemokamas auditas</a></nav>
+</div></header>
+<main>
+  <div class="crumb"><a href="/lt/">rytisbalys.com</a> <span >/ lt</span></div>
   <h1>Facebook Pixel neveikia arba dubliuoja pirkimus: ką tikrinti</h1>
 <p>Pixelis įdiegtas, reklama sukasi, bet Events Manager arba nerodo pirkimų, arba rodo jų maždaug dvigubai daugiau nei realiai turite užsakymų. Priežastis beveik visada viena iš dviejų: Purchase eventas iš viso nešauna, arba browser pixel ir Conversions API siunčia tą patį pirkimą du kartus be bendro event_id.</p><p>Abu atvejai gadina tą patį dalyką - duomenis, pagal kuriuos Meta optimizuoja jūsų kampanijas. Žemiau parodau, kaip per 15 minučių nustatyti, kuris variantas jūsų, ir ką tvarkyti.</p>
   <h2>Pirma priežastis: Purchase eventas niekada nešauna</h2>
@@ -135,6 +96,14 @@
 <p>Nespėliokite. Padarykite testinį pirkimą ir pažiūrėkite, kas realiai atkeliauja pas Meta.</p><ul><li><strong>Events Manager > Test Events.</strong> Pasirinkite savo pixelį, skiltyje Test Events įveskite svetainės adresą ir pereikite visą pirkimo kelią iki padėkos puslapio. Naršyklės eventai rodomi realiu laiku. Jei serverio eventai nesirodo, į Conversions API užklausą laikinai įdėkite test_event_code reikšmę iš to paties lango.</li><li><strong>Ko ieškoti:</strong> ar Purchase apskritai atsiranda; ar atsiranda vieną kartą, ar du; iš kur atėjo (naršyklė ar serveris); ar prie abiejų tas pats event_id.</li><li><strong>Naršyklės Network tab.</strong> DevTools > Network, filtruokite pagal facebook.com/tr. Užsakymo patvirtinimo puslapyje turi būti užklausa su ev=Purchase. Parametras eid yra jūsų event_id - jei jo nėra, deduplikacija neveiks.</li><li><strong>Meta Pixel Helper.</strong> Chrome plėtinys, kuris padėkos puslapyje iškart parodo, kurie eventai iššovė ir su kokiais parametrais.</li><li><strong>Jei tag'ai valdomi per GTM:</strong> įjunkite Tag Assistant (Preview) režimą ir patikrinkite, ar Purchase tag'as suveikė padėkos puslapyje ir koks trigger'is jį paleido.</li><li><strong>Skaičių sutikrinimas.</strong> Palyginkite paskutinių 7 dienų Purchase kiekį Events Manager su realiais užsakymais parduotuvėje. Apie du kartus daugiau - dubliavimas. Gerokai mažiau - eventas nešauna daliai pirkėjų.</li></ul>
   <h2>Kodėl netikri skaičiai brangina kampanijas</h2>
 <p>Meta algoritmas optimizuoja pagal tuos Purchase signalus, kuriuos gauna. Ne pagal jūsų realius užsakymus.</p><p>Kai pirkimai dubliuojasi, kiekvienas ad setas atrodo dvigubai pelningesnis. Skaliuojate tai, kas realiai nuostolinga, ir pastebite tik tada, kai banko sąskaita nesutampa su Ads Manager ataskaita. Value optimizacija ir Advantage+ kampanijos gauna iškreiptas vertes, o tai reiškia, kad biudžetas keliauja ne ten.</p><p>Kai Purchase nešauna, kampanija su pirkimo optimizacija neturi iš ko mokytis. Ji stringa learning fazėje, rodymai nestabilūs, o sistema taikosi į žmones, kurie panašūs į klikintojus, ne į pirkėjus. Kaina už realų pirkimą auga, nors ataskaitose to nesimato, nes ataskaitose pirkimų tiesiog nėra.</p><p>Abiem atvejais mokate už reklamą, kuri mokosi iš klaidingų duomenų. Tai brangiausia tracking'o klaida, nes ji kaupiasi kiekvieną dieną.</p>
+  <div class="card" id="chat1">
+  <div class="top"><h2>Skaičiai nesueina?</h2><p>Parašykite mano asistentui, ką matote, ir Rytis susisieks su jumis tiesiogiai.</p></div>
+  <div class="log"><div class="m bot">Sveiki, aš Ryčio asistentas. Pirma vardas ir el. paštas, kad Rytis galėtų su jumis susisiekti tiesiogiai. Tada papasakokite, kur nesutampa skaičiai, arba klauskite apie kainas ir terminus.</div></div>
+  <form class="ask" novalidate>
+    <div class="row who"><input type="text" name="name" placeholder="Jūsų vardas" autocomplete="given-name" required><input type="email" name="email" placeholder="jus@imone.lt" autocomplete="email" required><button type="submit">Pradėti</button></div>
+    <p class="hint">Atsakau pats <b>per 6 valandas, dažniausiai greičiau nei per valandą</b>. Tiesiogiai: <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> (žinutės, ne skambučiai) &middot; <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a></p>
+  </form>
+</div>
   <div class="faq">
   <h2>D.U.K.</h2>
     <details><summary>Kaip suprasti, ar Events Manager dubliuoja mano pirkimus?</summary><p>Palyginkite paskutinių 7 dienų Purchase kiekį Events Manager su realiais užsakymais parduotuvės admin'e. Jei Meta rodo maždaug dvigubai daugiau, browser pixel ir Conversions API siunčia tuos pačius pirkimus be bendro event_id. Paspaudę ant Purchase evento Events Manager viduje matysite išskaidymą pagal kanalą ir deduplikacijos statistiką.</p></details>
@@ -142,12 +111,26 @@
     <details><summary>Pixel Helper rodo, kad pixelis įdiegtas. Kodėl pirkimai vis tiek nesimato?</summary><p>Įdiegtas bazinis kodas dar nereiškia, kad šauna Purchase eventas - bazinis kodas siunčia tik PageView. Patikrinkite būtent padėkos puslapį po testinio pirkimo. Dažniausiai eventas pamestas ten: pasikeitęs URL trigger'yje, apmokėjimas kitame domene arba consent juosta, blokuojanti skriptą.</p></details>
     <details><summary>Kiek pirkimų pameta vien naršyklės pixelis be server-side?</summary><p>Priklauso nuo auditorijos, bet tipinis intervalas yra 10-30 procentų: iOS apribojimai, ad blocker'iai ir consent atmetimai. Būtent šiai spragai dengti Meta ir sukūrė Conversions API. Bet įjungus jį be deduplikacijos problema tik apsiverčia - vietoj pamestų pirkimų gaunate dvigubus.</p></details>
   </div>
-  <div class="cta">
-<p>Tokius auditus darau kas savaitę: pereinu visą eventų grandinę nuo checkout'o iki Events Manager, sutvarkau deduplikaciją ir parodau prieš-po skaičius. Jei norite, kad kas peržiūrėtų jūsų setup'ą, parašykite work@rytisbalys.com.</p>
-    <a class="btn" href="mailto:work@rytisbalys.com">work@rytisbalys.com</a>
-  </div>
-
-  <footer>Rytis Balys · MB Euruvizija · Vilnius, Lithuania · <a href="/" style="color:#4d5b6b">rytisbalys.com</a></footer>
-</div>
+  
+</main>
+<footer><nav class="fnav"><a href="/lt/">Pagrindinis</a><a href="/lt/ga4-nerodo-pardavimu">GA4</a><a href="/lt/facebook-pixel-neveikia-dvigubi-pirkimai">Facebook Pixel</a><a href="/lt/google-ads-konversijos-nesiskaiciuoja">Google Ads</a><a href="#chat1">Nemokamas auditas</a></nav>Rytis Balys &middot; MB Euruvizija &middot; Vilnius &middot; dirbu visame pasaulyje, nuotoliniu būdu &middot; <a href="/">English</a></footer>
+<script>
+(function(){
+  var FORM='https://rb-form.formos-ops.workers.dev/';
+  try{ var q=new URLSearchParams(location.search), gc=q.get('gclid'); if(gc){ sessionStorage.setItem('rb_gclid',gc); sessionStorage.setItem('rb_landing',location.pathname); } }catch(e){}
+  var EMAIL=/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/;
+  var root=document.getElementById('chat1'); if(!root) return; var f=root.querySelector('form');
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var n=f.name.value.trim(), m=f.email.value.trim();
+    if(!n){ f.name.focus(); return; } if(!EMAIL.test(m)){ f.email.focus(); f.email.style.borderColor='#b91c1c'; return; } f.email.style.borderColor='';
+    try{ sessionStorage.setItem('rb_name',n); sessionStorage.setItem('rb_email',m); }catch(x){}
+    try{ gtag('event','intake_start',{source:'guide-lt'}); }catch(x){}
+    var gclid='', landing=location.pathname; try{ gclid=sessionStorage.getItem('rb_gclid')||''; landing=sessionStorage.getItem('rb_landing')||location.pathname; }catch(x){}
+    try{ fetch(FORM,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify({intake:true,name:n,email:m,fax_line:'',dt:9000,page:location.pathname,gclid:gclid,landing:landing,source:'guide-lt'})}); }catch(x){}
+    setTimeout(function(){ location.href='/ai?n='+encodeURIComponent(n)+'&e='+encodeURIComponent(m)+'&l=lt'; },150);
+  });
+})();
+</script>
 </body>
 </html>
