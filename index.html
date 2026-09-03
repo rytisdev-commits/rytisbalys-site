@@ -243,7 +243,7 @@ var rbChat=(function(){
   return function(root,o){
     if(!root) return;
     var log=root.querySelector('.log'), f=root.querySelector('form'), who=f.querySelector('.who'), txt=f.querySelector('.txt'), act=f.querySelector('.act'), done=f.querySelector('.done');
-    var st={name:'',email:'',hist:[],sent:false};
+    var st={name:'',email:'',hist:[],sent:false,offered:false};
     function add(role,text){var d=document.createElement('div');d.className='m '+role;d.innerHTML=esc(text);log.appendChild(d);log.scrollTop=log.scrollHeight;return d;}
     function wait(){var w=document.createElement('div');w.className='wait';w.textContent='Thinking...';log.appendChild(w);log.scrollTop=log.scrollHeight;return w;}
     function show(el,on){ if(el) el.hidden=!on; }
@@ -253,19 +253,19 @@ var rbChat=(function(){
       else { add('me',n+' · '+m); add('bot','Thanks '+n.split(' ')[0]+'. Where do your numbers disagree, Meta, Google Ads, GA4, or your backend? Tell me what you see, or ask anything about prices and timelines.'); }
       f.text.focus();
     }
-    function intake(n,m,src,keep){ try{ post(FORM,{intake:true,name:n,email:m,fax_line:'',dt:9000,page:location.pathname,gclid:gclid,landing:landing,source:src},keep); }catch(x){} }
+    function intake(n,m,src,keep){ try{ post(FORM,{intake:true,name:n,email:m,fax_line:'',dt:9000,page:location.pathname,gclid:gclid,landing:landing,source:src},keep).catch(function(){}); }catch(x){} }
     function submitToRytis(){
-      if(st.sent||SUBMITTED) return; st.sent=true; SUBMITTED=true; show(act,false); show(txt,false); var w=wait();
+      if(st.sent) return; st.sent=true; show(act,false); show(txt,false); var w=wait();
       var transcript='Name: '+st.name+'\n\n'+st.hist.map(function(m){return (m.role==='user'?'Visitor: ':'Assistant: ')+m.text;}).join('\n\n');
       post(FORM,{email:st.email,name:st.name,site:'see chat',details:transcript,where:'chat',fax_line:'',dt:9000,page:location.pathname,gclid:gclid,landing:landing,source:o.source})
         .then(function(r){return r.json();}).then(function(j){ w.remove(); if(!j.ok) throw new Error('x');
-          try{ gtag('event','conversion',{'send_to':LABEL,'value':50,'currency':'EUR'}); gtag('event','lead_form_submit',{source:o.source}); }catch(e){}
+          if(!SUBMITTED){ SUBMITTED=true; try{ gtag('event','conversion',{'send_to':LABEL,'value':50,'currency':'EUR'}); gtag('event','lead_form_submit',{source:o.source}); }catch(e){} }
           add('bot','Passed to Rytis. He will reach out to you at '+st.email+' within 6 hours, usually under 1 hour. Closing the chat here, you can come back any time.'); show(done,true);
-        }).catch(function(){ w.remove(); st.sent=false; SUBMITTED=false; add('err','That did not go through. Email work@rytisbalys.com with what you wrote above and Rytis will pick it up.'); show(txt,true); show(act,true); });
+        }).catch(function(){ w.remove(); st.sent=false; add('err','That did not go through. Email work@rytisbalys.com with what you wrote above and Rytis will pick it up.'); show(txt,true); show(act,true); });
     }
     if(o.fromQuery){
-      var n0='', m0=''; try{ n0=q.get('n')||sessionStorage.getItem('rb_name')||''; m0=q.get('e')||sessionStorage.getItem('rb_email')||''; }catch(e){}
-      if(n0&&EMAIL.test(m0)){ try{ sessionStorage.setItem('rb_name',n0); sessionStorage.setItem('rb_email',m0); if(q.has('n')) history.replaceState(null,'',location.pathname); }catch(e){} begin(n0,m0,'full'); }
+      var n0='', m0=''; try{ n0=sessionStorage.getItem('rb_name')||''; m0=sessionStorage.getItem('rb_email')||''; }catch(e){}
+      if(n0&&EMAIL.test(m0)){ begin(n0,m0,'full'); }
       else { add('bot','Hi, I am Rytis’s assistant. Your name and email first, so Rytis can reach out to you directly. Then tell me where your numbers disagree, or ask about prices and timelines.'); show(who,true); }
     }
     f.addEventListener('submit',function(e){
@@ -275,7 +275,7 @@ var rbChat=(function(){
         if(!n){ f.name.focus(); return; } if(!EMAIL.test(m)){ f.email.focus(); f.email.style.borderColor='#b91c1c'; return; } f.email.style.borderColor='';
         try{ sessionStorage.setItem('rb_name',n); sessionStorage.setItem('rb_email',m); }catch(x){}
         try{ gtag('event','intake_start',{source:o.source}); }catch(x){}
-        if(o.mobileTo && window.innerWidth<900){ intake(n,m,o.source+'-start',true); setTimeout(function(){ location.href=o.mobileTo+'?n='+encodeURIComponent(n)+'&e='+encodeURIComponent(m); },150); return; }
+        if(o.mobileTo && window.innerWidth<900){ f.querySelector('.who button').disabled=true; intake(n,m,o.source+'-start',true); setTimeout(function(){ location.href=o.mobileTo; },150); return; }
         intake(n,m,o.source+'-start',false); begin(n,m,'short'); return;
       }
       var t=f.text.value.trim(); if(!t){ f.text.focus(); return; }
@@ -285,8 +285,8 @@ var rbChat=(function(){
           w.remove(); if(!j.reply) throw new Error(j.error||'no_reply');
           st.hist.push({role:'assistant',text:j.reply}); add('bot',j.reply);
           if(j.handoff){ submitToRytis(); return; }
-          if(HANDOFF.test(j.reply)) show(act,true);
-        }).catch(function(){ w.remove(); add('err','That did not go through. Email work@rytisbalys.com and Rytis will reach out to you directly.'); })
+          if(HANDOFF.test(j.reply)) st.offered=true; if(st.offered) show(act,true);
+        }).catch(function(){ w.remove(); st.hist.pop(); add('err','That did not go through. Email work@rytisbalys.com and Rytis will reach out to you directly.'); })
         .then(function(){ f.querySelector('.txt button').disabled=false; });
     });
     f.text.addEventListener('keydown',function(e){ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); f.requestSubmit(); } });
