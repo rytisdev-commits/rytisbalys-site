@@ -28,7 +28,7 @@
   header{background:#fff;border-bottom:1px solid var(--line);flex:0 0 auto}
   header .w{max-width:820px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px}
   header img{width:38px;height:38px;border-radius:50%;object-fit:cover}
-  header .who{font-weight:700;font-size:15px} header .who small{display:block;font-weight:400;font-size:12px;color:var(--muted)}
+  header h1.who{margin:0;font-size:inherit;font-weight:inherit} .who{font-weight:700;font-size:15px} header .who small{display:block;font-weight:400;font-size:12px;color:var(--muted)}
   header a.home{margin-left:auto;background:var(--bot);color:var(--ink);text-decoration:none;font-weight:700;font-size:13px;padding:8px 14px;border-radius:999px;white-space:nowrap}
   main{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;max-width:820px;width:100%;margin:0 auto}
   .log{flex:1 1 auto;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:12px;padding:20px 16px 8px;scroll-behavior:smooth}
@@ -42,12 +42,18 @@
   .ask a.back{display:inline-flex;align-items:center;background:var(--g);color:#fff;text-decoration:none;font-weight:700;font-size:15px;padding:0 20px;min-height:46px;border-radius:999px}
   .hint{font-size:12.5px;color:var(--muted)} .hint b{color:var(--ink)} .hint a{color:var(--g);text-decoration:none;font-weight:600}
   @media (min-width:900px){.log{padding:28px 0 8px} .ask{padding:10px 0 20px}}
+.ferr{color:#b91c1c;font-size:13px;margin:6px 0 0}
 </style>
+<meta property="og:title" content="Talk to Rytis&rsquo;s assistant"><meta property="og:description" content="Tell the assistant where your tracking numbers disagree. Rytis reads every conversation and replies within 6 hours."><meta property="og:type" content="website"><meta property="og:url" content="https://rytisbalys.com/ai"><meta property="og:image" content="https://rytisbalys.com/og.png"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="en_US">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="theme-color" content="#14532d">
 </head>
 <body>
 <header><div class="w">
-  <img src="/rytis.jpg" alt="Rytis Balys">
-  <span class="who">Rytis&rsquo;s assistant<small>Rytis will reach out to you directly</small></span>
+  <img src="/rytis-88.jpg" srcset="/rytis-88.jpg 1x, /rytis-132.jpg 2x" width="44" height="44" alt="Rytis Balys">
+  <h1 class="who">Rytis&rsquo;s assistant<small>Rytis will reach out to you directly</small></h1>
   <a class="home" href="/">&larr; Back to home</a>
 </div></header>
 <main>
@@ -59,6 +65,7 @@
     <div class="row done" hidden><a class="back" href="/">&larr; Back to home</a></div>
     <p class="hint">Reply <b>within 6 hours, usually under 1 hour</b>. Or directly: <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> (messages, not calls) &middot; <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a></p>
   </form>
+<noscript><p class="hint">The assistant needs JavaScript. Write to <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a> or WhatsApp +370 603 08900 instead.</p></noscript>
 </main>
 <script>
 (function(){ try{ var q=new URLSearchParams(location.search); var lt=q.get('l')==='lt' || (sessionStorage.getItem('rb_lang')==='lt' && !q.has('n')); if(!lt) return; document.documentElement.lang='lt'; document.title='Pokalbis su Ryčio asistentu'; var W=document.querySelector('header .who'); if(W) W.innerHTML='Ryčio asistentas<small>Rytis perskaito kiekvieną pokalbį ir susisiekia pats</small>'; var H=document.querySelector('header a.home'); if(H){ H.href='/lt/'; H.innerHTML='&larr; Į pagrindinį'; } var f=document.querySelector('form'); f.querySelector('input[name=name]').placeholder='Jūsų vardas'; f.querySelector('input[name=email]').placeholder='jus@imone.lt'; f.querySelector('.who button').textContent='Pradėti'; f.querySelector('textarea').placeholder='Aprašykite, ką matote, arba klauskite apie kainas ir terminus'; f.querySelector('.txt button').textContent='Siųsti'; f.querySelector('.pass').textContent='Perduoti Ryčiui'; f.querySelector('.more').textContent='Turiu dar klausimą'; var B=f.querySelector('.done a'); B.href='/lt/'; B.innerHTML='&larr; Į pagrindinį'; f.querySelector('.hint').innerHTML='Atsakau pats <b>per 6 valandas, dažniausiai greičiau nei per valandą</b>. Tiesiogiai: <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> (žinutės, ne skambučiai) &middot; <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a>'; }catch(e){} })();
@@ -99,6 +106,7 @@ var rbChat=(function(){
           add('bot',T?T.passed(st.email):'Passed to Rytis. He will reach out to you at '+st.email+' within 6 hours, usually under 1 hour. Closing the chat here, you can come back any time.'); show(done,true);
         }).catch(function(){ w.remove(); st.sent=false; add('err',T?T.err1:'That did not go through. Email work@rytisbalys.com with what you wrote above and Rytis will pick it up.'); show(txt,true); show(act,true); });
     }
+    try{ if(!o.fromQuery){ if(!f.name.value) f.name.value=sessionStorage.getItem('rb_name')||''; if(!f.email.value) f.email.value=sessionStorage.getItem('rb_email')||''; } }catch(x){}
     if(o.fromQuery){
       var n0='', m0=''; try{ n0=sessionStorage.getItem('rb_name')||''; m0=sessionStorage.getItem('rb_email')||''; }catch(e){}
       if(n0&&EMAIL.test(m0)){ begin(n0,m0,'full'); }
@@ -108,7 +116,7 @@ var rbChat=(function(){
       e.preventDefault();
       if(!st.name){
         var n=f.name.value.trim(), m=f.email.value.trim();
-        if(!n){ f.name.focus(); return; } if(!EMAIL.test(m)){ f.email.focus(); f.email.style.borderColor='#b91c1c'; return; } f.email.style.borderColor='';
+        if(!n){ f.name.focus(); return; } var fe=f.querySelector('.ferr'); if(!EMAIL.test(m)){ f.email.focus(); f.email.style.borderColor='#b91c1c'; if(!fe){ fe=document.createElement('div'); fe.className='ferr'; who.insertAdjacentElement('afterend',fe); } fe.textContent=LT?'Įrašykite tikrą el. pašto adresą, pvz. vardas@imone.lt':'Enter a valid email address, e.g. name@company.com'; return; } f.email.style.borderColor=''; if(fe) fe.remove();
         try{ sessionStorage.setItem('rb_name',n); sessionStorage.setItem('rb_email',m); }catch(x){}
         try{ gtag('event','intake_start',{source:o.source}); }catch(x){}
         if(o.mobileTo && window.innerWidth<900){ f.querySelector('.who button').disabled=true; intake(n,m,o.source+'-start',true); setTimeout(function(){ location.href=o.mobileTo; },150); return; }

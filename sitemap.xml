@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://rytisbalys.com/</loc><lastmod>2026-08-03</lastmod></url>
-  <url><loc>https://rytisbalys.com/fbq-is-not-defined-delay-javascript-fix</loc><lastmod>2026-08-03</lastmod></url>
-  <url><loc>https://rytisbalys.com/meta-pixel-not-firing</loc><lastmod>2026-08-03</lastmod></url>
-  <url><loc>https://rytisbalys.com/ga4-does-not-match-backend</loc><lastmod>2026-08-03</lastmod></url>
-  <url><loc>https://rytisbalys.com/shopify-checkout-upgrade-tracking</loc><lastmod>2026-08-03</lastmod></url>
-  <url><loc>https://rytisbalys.com/offline-conversions-google-ads</loc><lastmod>2026-08-03</lastmod></url>
-  <url><loc>https://rytisbalys.com/ga4-double-counting-purchases-duplicate-tag</loc><lastmod>2026-08-03</lastmod></url>
-  <url><loc>https://rytisbalys.com/meta-events-manager-double-purchases-deduplication-fix</loc><lastmod>2026-08-03</lastmod></url>
-  <url><loc>https://rytisbalys.com/google-ads-conversion-inactive-tag-fires-gtm</loc><lastmod>2026-08-03</lastmod></url>
-  <url><loc>https://rytisbalys.com/woocommerce-stripe-redirect-purchase-event-not-firing</loc><lastmod>2026-08-03</lastmod></url>
-  <url><loc>https://rytisbalys.com/ga4-purchases-attributed-stripe-paypal-direct-fix</loc><lastmod>2026-08-03</lastmod></url>
-  <url><loc>https://rytisbalys.com/consent-banner-not-blocking-tracking</loc><lastmod>2026-08-03</lastmod></url>
-  <url><loc>https://rytisbalys.com/consent-mode-v2-conversions-dropped</loc><lastmod>2026-08-03</lastmod></url>
-  <url><loc>https://rytisbalys.com/clickfunnels-upsell-tracking-fix</loc><lastmod>2026-08-03</lastmod></url>
-  <url><loc>https://rytisbalys.com/server-side-gtm-what-it-fixes</loc><lastmod>2026-08-03</lastmod></url>
-  <url><loc>https://rytisbalys.com/lt/</loc><lastmod>2026-07-13</lastmod></url>
-  <url><loc>https://rytisbalys.com/lt/ga4-nerodo-pardavimu</loc><lastmod>2026-07-13</lastmod></url>
-  <url><loc>https://rytisbalys.com/lt/facebook-pixel-neveikia-dvigubi-pirkimai</loc><lastmod>2026-07-13</lastmod></url>
-  <url><loc>https://rytisbalys.com/lt/google-ads-konversijos-nesiskaiciuoja</loc><lastmod>2026-07-13</lastmod></url>
-  <url><loc>https://rytisbalys.com/ga4-events-missing-plugin-wrapped-gtag</loc><lastmod>2026-08-03</lastmod></url>
-  <url><loc>https://rytisbalys.com/track-ai-conversions-ga4</loc><lastmod>2026-08-11</lastmod></url>
-  <url><loc>https://rytisbalys.com/ga4-ai-assistant-channel</loc><lastmod>2026-08-11</lastmod></url>
-  <url><loc>https://rytisbalys.com/prove-geo-roi</loc><lastmod>2026-08-11</lastmod></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://rytisbalys.com/</loc><lastmod>2026-09-04</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://rytisbalys.com/"/><xhtml:link rel="alternate" hreflang="lt" href="https://rytisbalys.com/lt/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://rytisbalys.com/"/></url>
+  <url><loc>https://rytisbalys.com/fbq-is-not-defined-delay-javascript-fix</loc><lastmod>2026-09-04</lastmod></url>
+  <url><loc>https://rytisbalys.com/meta-pixel-not-firing</loc><lastmod>2026-09-04</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://rytisbalys.com/meta-pixel-not-firing"/><xhtml:link rel="alternate" hreflang="lt" href="https://rytisbalys.com/lt/facebook-pixel-neveikia-dvigubi-pirkimai"/><xhtml:link rel="alternate" hreflang="x-default" href="https://rytisbalys.com/meta-pixel-not-firing"/></url>
+  <url><loc>https://rytisbalys.com/ga4-does-not-match-backend</loc><lastmod>2026-09-04</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://rytisbalys.com/ga4-does-not-match-backend"/><xhtml:link rel="alternate" hreflang="lt" href="https://rytisbalys.com/lt/ga4-nerodo-pardavimu"/><xhtml:link rel="alternate" hreflang="x-default" href="https://rytisbalys.com/ga4-does-not-match-backend"/></url>
+  <url><loc>https://rytisbalys.com/shopify-checkout-upgrade-tracking</loc><lastmod>2026-09-04</lastmod></url>
+  <url><loc>https://rytisbalys.com/offline-conversions-google-ads</loc><lastmod>2026-09-04</lastmod></url>
+  <url><loc>https://rytisbalys.com/ga4-double-counting-purchases-duplicate-tag</loc><lastmod>2026-09-04</lastmod></url>
+  <url><loc>https://rytisbalys.com/meta-events-manager-double-purchases-deduplication-fix</loc><lastmod>2026-09-04</lastmod></url>
+  <url><loc>https://rytisbalys.com/google-ads-conversion-inactive-tag-fires-gtm</loc><lastmod>2026-09-04</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://rytisbalys.com/google-ads-conversion-inactive-tag-fires-gtm"/><xhtml:link rel="alternate" hreflang="lt" href="https://rytisbalys.com/lt/google-ads-konversijos-nesiskaiciuoja"/><xhtml:link rel="alternate" hreflang="x-default" href="https://rytisbalys.com/google-ads-conversion-inactive-tag-fires-gtm"/></url>
+  <url><loc>https://rytisbalys.com/woocommerce-stripe-redirect-purchase-event-not-firing</loc><lastmod>2026-09-04</lastmod></url>
+  <url><loc>https://rytisbalys.com/ga4-purchases-attributed-stripe-paypal-direct-fix</loc><lastmod>2026-09-04</lastmod></url>
+  <url><loc>https://rytisbalys.com/consent-banner-not-blocking-tracking</loc><lastmod>2026-09-04</lastmod></url>
+  <url><loc>https://rytisbalys.com/consent-mode-v2-conversions-dropped</loc><lastmod>2026-09-04</lastmod></url>
+  <url><loc>https://rytisbalys.com/clickfunnels-upsell-tracking-fix</loc><lastmod>2026-09-04</lastmod></url>
+  <url><loc>https://rytisbalys.com/server-side-gtm-what-it-fixes</loc><lastmod>2026-09-04</lastmod></url>
+  <url><loc>https://rytisbalys.com/lt/</loc><lastmod>2026-09-04</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://rytisbalys.com/"/><xhtml:link rel="alternate" hreflang="lt" href="https://rytisbalys.com/lt/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://rytisbalys.com/"/></url>
+  <url><loc>https://rytisbalys.com/lt/ga4-nerodo-pardavimu</loc><lastmod>2026-09-04</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://rytisbalys.com/ga4-does-not-match-backend"/><xhtml:link rel="alternate" hreflang="lt" href="https://rytisbalys.com/lt/ga4-nerodo-pardavimu"/><xhtml:link rel="alternate" hreflang="x-default" href="https://rytisbalys.com/ga4-does-not-match-backend"/></url>
+  <url><loc>https://rytisbalys.com/lt/facebook-pixel-neveikia-dvigubi-pirkimai</loc><lastmod>2026-09-04</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://rytisbalys.com/meta-pixel-not-firing"/><xhtml:link rel="alternate" hreflang="lt" href="https://rytisbalys.com/lt/facebook-pixel-neveikia-dvigubi-pirkimai"/><xhtml:link rel="alternate" hreflang="x-default" href="https://rytisbalys.com/meta-pixel-not-firing"/></url>
+  <url><loc>https://rytisbalys.com/lt/google-ads-konversijos-nesiskaiciuoja</loc><lastmod>2026-09-04</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://rytisbalys.com/google-ads-conversion-inactive-tag-fires-gtm"/><xhtml:link rel="alternate" hreflang="lt" href="https://rytisbalys.com/lt/google-ads-konversijos-nesiskaiciuoja"/><xhtml:link rel="alternate" hreflang="x-default" href="https://rytisbalys.com/google-ads-conversion-inactive-tag-fires-gtm"/></url>
+  <url><loc>https://rytisbalys.com/ga4-events-missing-plugin-wrapped-gtag</loc><lastmod>2026-09-04</lastmod></url>
+  <url><loc>https://rytisbalys.com/track-ai-conversions-ga4</loc><lastmod>2026-09-04</lastmod></url>
+  <url><loc>https://rytisbalys.com/ga4-ai-assistant-channel</loc><lastmod>2026-09-04</lastmod></url>
+  <url><loc>https://rytisbalys.com/prove-geo-roi</loc><lastmod>2026-09-04</lastmod></url>
 </urlset>

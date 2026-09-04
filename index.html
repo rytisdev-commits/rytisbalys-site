@@ -14,7 +14,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rytis Balys - Conversion Tracking & Attribution</title>
-<meta name="description" content="Conversion tracking and server-side setup by one engineer. Meta Pixel + CAPI with event_id dedup, GA4, GTM, Google Ads and CRM conversions. Fixed price, proved before you pay.">
+<meta name="description" content="Conversion tracking and server-side setup by one engineer: Meta Pixel + CAPI with dedup, GA4, GTM, Google Ads and CRM conversions. Fixed price, proved before you pay.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -24,33 +24,7 @@
 <meta property="og:url" content="https://rytisbalys.com/">
 <meta property="og:image" content="https://rytisbalys.com/og.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Person",
-      "@id": "https://rytisbalys.com/#rytis",
-      "name": "Rytis Balys",
-      "jobTitle": "Server-side conversion tracking engineer",
-      "url": "https://rytisbalys.com/",
-      "email": "work@rytisbalys.com",
-      "knowsAbout": ["Meta Conversions API", "Meta Pixel", "Google Analytics 4", "Google Tag Manager", "server-side tagging", "Consent Mode v2", "conversion tracking", "attribution", "AI traffic attribution", "LLM traffic attribution", "generative engine optimization measurement", "GEO tracking setup", "HubSpot", "GoHighLevel", "Triple Whale", "offline conversion tracking", "mobile app event tracking"],
-      "sameAs": ["https://github.com/rytisdev-commits"],
-      "worksFor": {"@type": "Organization", "name": "MB Euruvizija", "address": {"@type": "PostalAddress", "addressLocality": "Vilnius", "addressCountry": "LT"}}
-    },
-    {
-      "@type": "ProfessionalService",
-      "name": "Rytis Balys - Conversion Tracking & Attribution",
-      "url": "https://rytisbalys.com/",
-      "description": "Tracking audits that reconcile ad platform numbers against real backend orders, server-side tracking builds (Meta Conversions API with event_id deduplication, GA4, server-side GTM), AI / LLM traffic attribution and GEO measurement setups (ChatGPT, Perplexity, Gemini), Shopify checkout tracking migrations, and CRM offline conversion pipelines (HubSpot, GoHighLevel) back into Google Ads and Meta.",
-      "founder": {"@id": "https://rytisbalys.com/#rytis"},
-      "areaServed": "Worldwide",
-      "email": "work@rytisbalys.com"
-    }
-  ]
-}
-</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Person", "@id": "https://rytisbalys.com/#rytis", "name": "Rytis Balys", "jobTitle": "Server-side conversion tracking engineer", "url": "https://rytisbalys.com/", "email": "work@rytisbalys.com", "knowsAbout": ["Meta Conversions API", "Meta Pixel", "Google Analytics 4", "Google Tag Manager", "server-side tagging", "Consent Mode v2", "conversion tracking", "attribution", "AI traffic attribution", "LLM traffic attribution", "generative engine optimization measurement", "GEO tracking setup", "HubSpot", "GoHighLevel", "Triple Whale", "offline conversion tracking", "mobile app event tracking"], "sameAs": ["https://github.com/rytisdev-commits"], "worksFor": {"@type": "Organization", "name": "MB Euruvizija", "address": {"@type": "PostalAddress", "addressLocality": "Vilnius", "addressCountry": "LT"}}, "image": "https://rytisbalys.com/rytis.jpg", "telephone": "+37060308900"}, {"@type": "ProfessionalService", "name": "Rytis Balys - Conversion Tracking & Attribution", "url": "https://rytisbalys.com/", "description": "Tracking audits that reconcile ad platform numbers against real backend orders, server-side tracking builds (Meta Conversions API with event_id deduplication, GA4, server-side GTM), AI / LLM traffic attribution and GEO measurement setups (ChatGPT, Perplexity, Gemini), Shopify checkout tracking migrations, and CRM offline conversion pipelines (HubSpot, GoHighLevel) back into Google Ads and Meta.", "founder": {"@id": "https://rytisbalys.com/#rytis"}, "areaServed": "Worldwide", "email": "work@rytisbalys.com", "@id": "https://rytisbalys.com/#business", "image": "https://rytisbalys.com/rytis.jpg", "telephone": "+37060308900", "priceRange": "$250 - $1800", "address": {"@type": "PostalAddress", "addressLocality": "Vilnius", "addressCountry": "LT"}}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -65,7 +39,7 @@
   header img{width:44px;height:44px;border-radius:50%;object-fit:cover}
   header .who{font-weight:700;font-size:16px} header .who small{display:block;font-weight:400;font-size:12.5px;color:var(--muted)}
   header nav{margin-left:auto;display:flex;gap:22px;align-items:center;font-size:14px}
-  header nav a{color:var(--muted);text-decoration:none} header nav a.cta{background:var(--g);color:#fff;border-radius:999px;padding:9px 16px;font-weight:700;white-space:nowrap}
+  header nav a{color:var(--muted);text-decoration:none} header nav a.cta{background:var(--g);color:#fff;border-radius:999px;padding:11px 16px;min-height:40px;box-sizing:border-box;display:inline-flex;align-items:center;font-weight:700;white-space:nowrap}
   section{padding:80px 0} section.hero{padding:48px 0 72px} section.alt{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .hero .w{display:grid;grid-template-columns:minmax(0,1fr) 440px;gap:56px;align-items:center}
   .vis{background:linear-gradient(135deg,#14532d 0%,#1f7a45 100%);border-radius:26px;padding:26px;color:#fff;box-shadow:0 20px 50px rgba(20,83,45,.25);position:relative}
@@ -110,13 +84,21 @@
   .hint{font-size:12.5px;color:var(--muted)} .hint b{color:var(--ink)} .hint a{text-decoration:none;font-weight:600}
   footer{font-size:12px;color:var(--muted);text-align:center;padding:48px 16px 24px} footer a{color:var(--muted)}
   .fnav{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 22px;margin-bottom:16px;font-size:14px} .fnav a{color:var(--ink);text-decoration:none;font-weight:600}
-  @media (max-width:900px){.w{padding:0 16px} .hero .w,.grid2{grid-template-columns:1fr;gap:28px} .grid3,.grid4{grid-template-columns:1fr} h1{font-size:32px} h2{font-size:26px} header nav a:not(.cta){display:none} header nav a.cta{padding:8px 13px;font-size:13px} .bar .bx{display:none} header .who small{display:none} .guides ul{columns:1} .revs{grid-template-columns:1fr} section{padding:52px 0} section.hero{padding:28px 0 48px} .log{max-height:320px} .tn{font-size:44px} .vb{margin:14px 0 0 auto} .vt .ok{display:none} .badge{font-size:12px} .talk .ask input{flex-basis:100%} .talk .ask .who button{width:100%} .talk .m{max-width:94%}}
+  @media (max-width:900px){.w{padding:0 16px} .hero .w,.grid2{grid-template-columns:1fr;gap:28px} .grid3,.grid4{grid-template-columns:1fr} h1{font-size:32px} h2{font-size:26px} header nav a:not(.cta){display:none} header nav a.cta{padding:10px 14px;font-size:13px} .bar .bx{display:none} header .who small{display:none} .guides ul{columns:1} .revs{grid-template-columns:1fr} section{padding:52px 0} section.hero{padding:28px 0 48px} .log{max-height:320px} .tn{font-size:44px} .vb{margin:14px 0 0 auto} .vt .ok{display:none} .badge{font-size:12px} .talk .ask input{flex-basis:100%} .talk .ask .who button{width:100%} .talk .m{max-width:94%}}
+.ferr{color:#b91c1c;font-size:13px;margin:6px 0 0}
 </style>
+<link rel="alternate" hreflang="en" href="https://rytisbalys.com/">
+<link rel="alternate" hreflang="lt" href="https://rytisbalys.com/lt/">
+<link rel="alternate" hreflang="x-default" href="https://rytisbalys.com/">
+<meta property="og:locale" content="en_US"><meta property="og:locale:alternate" content="lt_LT">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="theme-color" content="#14532d">
 </head>
 <body>
 <div class="bar"><b>Free audit of your tracking numbers.</b> <span class="bx">Tell my assistant what you see, I reply within 6 hours, usually under 1 hour.</span><a href="#chat1">Get your free audit &rarr;</a></div>
 <header><div class="w">
-  <img src="/rytis.jpg" alt="Rytis Balys">
+  <img src="/rytis-88.jpg" srcset="/rytis-88.jpg 1x, /rytis-132.jpg 2x" width="44" height="44" alt="Rytis Balys">
   <span class="who">Rytis Balys<small>Conversion tracking engineer</small></span>
   <nav><a href="#build">What I build</a><a href="#process">Process</a><a href="#prices">Prices</a><a href="#reviews">Reviews</a><a href="#guides">Guides</a><a class="cta" href="#chat1">Get your free audit</a></nav>
 </div></header>
@@ -149,6 +131,7 @@
     <div class="row act" hidden><button type="button" class="pass">Pass it to Rytis</button><button type="button" class="more chip">I have another question</button></div>
     <p class="hint">I reply myself <b>within 6 hours, usually under 1 hour</b>. Prefer direct? <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> or <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a>.</p>
   </form>
+<noscript><p class="hint">The assistant needs JavaScript. Write to <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a> or WhatsApp +370 603 08900 instead.</p></noscript>
 </div>
 </div></section>
 
@@ -170,7 +153,7 @@
     <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>You own everything</h3><p>Containers, datasets and accounts stay in your name. I work inside them, never around them.</p></div>
     <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>Proved, not promised</h3><p>Every fix verified live with test orders and a before and after report you can check yourself.</p></div>
     <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>One person answers</h3><p>No handoffs, no account managers. You write to me, I write back, within 6 hours, usually under 1 hour.</p></div>
-    <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>Honest free audit</h3><p>If your gap is under about 10%, I will tell you that you do not need me.</p></div>
+    <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>Honest free audit</h3><p>If your gap is within the normal 5 to 15%, I will tell you that you do not need me.</p></div>
   </div>
 </div></section>
 
@@ -191,11 +174,11 @@
   <div id="prices">
     <div class="sh"><h2>You choose the scope</h2><p class="sub">Every job priced after I look inside, then fixed.</p></div>
     <div class="plans">
-      <div class="plan"><div class="pt">One-time fix</div><div class="pp">$250 to 700</div><p>A pixel or conversion tag repaired, or Conversions API added with deduplication. Usually 1 to 2 days after access, plus a day to verify.</p></div>
+      <div class="plan"><div class="pt">One-time fix</div><div class="pp">$250 to 700</div><p>A pixel or conversion tag repaired, or Conversions API added with deduplication. Fixed within 24 hours of access, or you don’t pay.</p></div>
       <div class="plan hi"><div class="pt">Deep audit and fix</div><div class="pp">$600 to 1200</div><p>Platform numbers reconciled against real orders, every finding fixed in order of what it costs you. Includes the report.</p></div>
       <div class="plan"><div class="pt">Ongoing ownership</div><div class="pp">$700 to 1800 / month</div><p>Someone watches the tracking every month and fixes it before you notice. Checkout updates, new apps, consent changes.</p></div>
     </div>
-    <div class="need"><h3>Timelines, honestly</h3><ul><li>First read: within 6 hours, usually under 1 hour</li><li>Audit: 2 to 3 working days after access</li><li>Single fix: 1 to 2 days, plus a day to verify</li><li>Conversions API or server-side build: about a week with the parallel run</li></ul></div>
+    <div class="need"><h3>Timelines, honestly</h3><ul><li>First read: within 6 hours, usually under 1 hour</li><li>Audit: 2 to 3 working days after access</li><li>Single fix: within 24 hours of access, or you don’t pay</li><li>Conversions API or server-side build: about a week with the parallel run</li></ul></div>
   </div>
 </div></section>
 
@@ -212,7 +195,7 @@
     <div class="faq"><h3>Do I need server-side tracking?</h3><p>If you pay for ads, usually yes. Browser-only tracking drops purchases to ad blockers and iOS, and the smaller the budget, the more each lost signal costs. I say first whether it fixes your gap at all.</p></div>
     <div class="faq"><h3>What access do you need?</h3><p>Read access first: Events Manager, GA4, GTM and the store. Publish access only once the fix is agreed, and only for that step.</p></div>
     <div class="faq"><h3>How fast?</h3><p>Most single fixes take 1 to 2 days after access, plus a day to verify. Bigger builds get a date after the look inside.</p></div>
-    <div class="faq"><h3>What if the numbers are actually fine?</h3><p>Then I tell you, and you owe nothing. A gap under about 10% is normal loss, not a tracking problem.</p></div>
+    <div class="faq"><h3>What if the numbers are actually fine?</h3><p>Then I tell you, and you owe nothing. A gap of 5 to 15% is normal loss, not a tracking problem. With a strict opt-in consent banner, add your decline rate on top.</p></div>
     <div class="faq"><h3>Can you work under my agency&rsquo;s name?</h3><p>Yes. The client stays yours, you invoice, I do the work under your name.</p></div>
     <div class="faq"><h3>Do you do calls?</h3><p>Everything happens in writing: the assistant here, WhatsApp or email. You get a written record of every finding and every change, which is worth more than a call.</p></div>
   </div>
@@ -226,6 +209,7 @@
     <div class="row act" hidden><button type="button" class="pass">Pass it to Rytis</button><button type="button" class="more chip">I have another question</button></div>
     <p class="hint">I reply myself <b>within 6 hours, usually under 1 hour</b>. Prefer direct? <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> or <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a>.</p>
   </form>
+<noscript><p class="hint">The assistant needs JavaScript. Write to <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a> or WhatsApp +370 603 08900 instead.</p></noscript>
 </div>
   </div>
 </div></section>
@@ -272,6 +256,7 @@ var rbChat=(function(){
           add('bot',T?T.passed(st.email):'Passed to Rytis. He will reach out to you at '+st.email+' within 6 hours, usually under 1 hour. Closing the chat here, you can come back any time.'); show(done,true);
         }).catch(function(){ w.remove(); st.sent=false; add('err',T?T.err1:'That did not go through. Email work@rytisbalys.com with what you wrote above and Rytis will pick it up.'); show(txt,true); show(act,true); });
     }
+    try{ if(!o.fromQuery){ if(!f.name.value) f.name.value=sessionStorage.getItem('rb_name')||''; if(!f.email.value) f.email.value=sessionStorage.getItem('rb_email')||''; } }catch(x){}
     if(o.fromQuery){
       var n0='', m0=''; try{ n0=sessionStorage.getItem('rb_name')||''; m0=sessionStorage.getItem('rb_email')||''; }catch(e){}
       if(n0&&EMAIL.test(m0)){ begin(n0,m0,'full'); }
@@ -281,7 +266,7 @@ var rbChat=(function(){
       e.preventDefault();
       if(!st.name){
         var n=f.name.value.trim(), m=f.email.value.trim();
-        if(!n){ f.name.focus(); return; } if(!EMAIL.test(m)){ f.email.focus(); f.email.style.borderColor='#b91c1c'; return; } f.email.style.borderColor='';
+        if(!n){ f.name.focus(); return; } var fe=f.querySelector('.ferr'); if(!EMAIL.test(m)){ f.email.focus(); f.email.style.borderColor='#b91c1c'; if(!fe){ fe=document.createElement('div'); fe.className='ferr'; who.insertAdjacentElement('afterend',fe); } fe.textContent=LT?'Įrašykite tikrą el. pašto adresą, pvz. vardas@imone.lt':'Enter a valid email address, e.g. name@company.com'; return; } f.email.style.borderColor=''; if(fe) fe.remove();
         try{ sessionStorage.setItem('rb_name',n); sessionStorage.setItem('rb_email',m); }catch(x){}
         try{ gtag('event','intake_start',{source:o.source}); }catch(x){}
         if(o.mobileTo && window.innerWidth<900){ f.querySelector('.who button').disabled=true; intake(n,m,o.source+'-start',true); setTimeout(function(){ location.href=o.mobileTo; },150); return; }

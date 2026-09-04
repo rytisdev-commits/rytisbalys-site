@@ -21,10 +21,15 @@
 <meta property="og:image" content="https://rytisbalys.com/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://rytisbalys.com/server-side-gtm-what-it-fixes">
+
+<meta property="og:locale" content="en_US"><meta property="og:locale:alternate" content="lt_LT">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="theme-color" content="#14532d">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Server-Side GTM: What It Actually Fixes (and What It Doesn't)", "description": "Server-side GTM fixes transport, not bad data. What Stape-style tagging really fixes, what it can't, and when browser-side is enough.", "url": "https://rytisbalys.com/server-side-gtm-what-it-fixes", "mainEntityOfPage": "https://rytisbalys.com/server-side-gtm-what-it-fixes", "inLanguage": "en", "datePublished": "2026-07-13", "dateModified": "2026-08-03", "author": {"@type": "Person", "@id": "https://rytisbalys.com/#rytis", "name": "Rytis Balys", "url": "https://rytisbalys.com/"}, "publisher": {"@type": "Organization", "name": "MB Euruvizija"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Server-Side GTM: What It Actually Fixes (and What It Doesn't)", "description": "Server-side GTM fixes transport, not bad data. What Stape-style tagging really fixes, what it can't, and when browser-side is enough.", "url": "https://rytisbalys.com/server-side-gtm-what-it-fixes", "mainEntityOfPage": "https://rytisbalys.com/server-side-gtm-what-it-fixes", "inLanguage": "en", "datePublished": "2026-07-13", "dateModified": "2026-09-04", "author": {"@type": "Person", "@id": "https://rytisbalys.com/#rytis", "name": "Rytis Balys", "url": "https://rytisbalys.com/"}, "publisher": {"@type": "Organization", "name": "MB Euruvizija", "logo": {"@type": "ImageObject", "url": "https://rytisbalys.com/icon-512.png", "width": 512, "height": 512}}, "image": ["https://rytisbalys.com/og.png"]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does server-side tracking bypass ad blockers?", "acceptedAnswer": {"@type": "Answer", "text": "Partly. Serving the container and hits from your own subdomain gets past blocklists that target google-analytics.com and connect.facebook.net, which recovers a meaningful share of blocked sessions. Blockers with behavioral heuristics still catch some traffic, so treat it as recovery, not immunity."}}, {"@type": "Question", "name": "Do I still need the browser Meta Pixel if I have the Conversions API?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Run both, deduplicated with a shared event_id. The browser pixel supplies fbp and fbc identifiers that improve match quality, and CAPI covers the sessions the pixel loses. Meta's own guidance is a redundant setup, not a replacement."}}, {"@type": "Question", "name": "How much does server-side GTM cost per month?", "acceptedAnswer": {"@type": "Answer", "text": "Hosting on Stape runs from free at low traffic to roughly 20-50 USD per month for a typical small store. Self-hosting on Google Cloud tends to cost more. The bigger cost is the one-time setup and verification, one to three days of work done properly."}}, {"@type": "Question", "name": "Will server-side tracking increase my ROAS?", "acceptedAnswer": {"@type": "Answer", "text": "It makes measured ROAS more accurate, which usually means reported numbers move closer to reality rather than up. Better match quality and more complete conversion data can improve ad delivery over the following weeks. It will not rescue an offer that does not convert."}}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -39,9 +44,9 @@
   header img{width:44px;height:44px;border-radius:50%;object-fit:cover}
   header .who{font-weight:700;font-size:16px;text-decoration:none;color:var(--ink)} header .who small{display:block;font-weight:400;font-size:12.5px;color:var(--muted)}
   header nav{margin-left:auto;display:flex;gap:22px;align-items:center;font-size:14px}
-  header nav a{color:var(--muted);text-decoration:none} header nav a.cta{background:var(--g);color:#fff;border-radius:999px;padding:9px 16px;font-weight:700;white-space:nowrap}
+  header nav a{color:var(--muted);text-decoration:none} header nav a.cta{background:var(--g);color:#fff;border-radius:999px;padding:11px 16px;min-height:40px;box-sizing:border-box;display:inline-flex;align-items:center;font-weight:700;white-space:nowrap}
   main{max-width:800px;margin:0 auto;padding:40px 24px 64px}
-  .crumb{font-size:13px;color:var(--muted);margin-bottom:22px} .crumb a{color:var(--muted);text-decoration:none} .crumb a:hover{color:var(--g)}
+  .crumb{font-size:13px;color:var(--muted);margin-bottom:22px} .date{font-size:13px;color:var(--muted);margin:-8px 0 18px} .ferr{color:#b91c1c;font-size:13px;margin:6px 0 0} .crumb a{color:var(--muted);text-decoration:none} .crumb a:hover{color:var(--g)}
   h1{font-size:38px;font-weight:800;letter-spacing:-.03em;line-height:1.12;margin-bottom:14px;text-wrap:balance}
   .sub{font-size:18px;color:var(--muted);margin-bottom:34px;max-width:680px}
   h2{font-size:24px;font-weight:800;letter-spacing:-.02em;line-height:1.2;margin:44px 0 12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
@@ -55,7 +60,7 @@
   .verify{border-left:4px solid var(--g);background:#fff;border-radius:0 12px 12px 0;padding:12px 16px;margin:0 0 12px;font-size:15.5px} .verify b{color:var(--g);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;margin-right:6px}
   .warn{border-left:4px solid var(--amber);background:#fff;border-radius:0 12px 12px 0;padding:12px 16px;margin:0 0 12px;font-size:15.5px} .warn b{color:var(--amber)}
   .faq{margin-top:48px;border-top:1px solid var(--line);padding-top:8px} .faq h2{margin-top:28px}
-  .faq details{border-bottom:1px solid var(--line);padding:14px 0} .faq summary{cursor:pointer;font-weight:700;font-size:16.5px;list-style:none;display:flex;justify-content:space-between;gap:12px} .faq summary::after{content:'+';color:var(--g);font-weight:800} .faq details[open] summary::after{content:'\2212'} .faq details p{margin:10px 0 0;color:var(--muted);font-size:15.5px}
+  .faq details{border-bottom:1px solid var(--line);padding:6px 0} .faq summary{cursor:pointer;font-weight:700;font-size:16.5px;padding:10px 0;min-height:44px;box-sizing:border-box;list-style:none;display:flex;justify-content:space-between;gap:12px} .faq summary::after{content:'+';color:var(--g);font-weight:800} .faq details[open] summary::after{content:'\2212'} .faq details p{margin:10px 0 0;color:var(--muted);font-size:15.5px}
   .related{margin-top:40px;border-top:1px solid var(--line);padding-top:24px} .related h2{font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 10px} .related ul{list-style:none;margin:0} .related li{padding:10px 0;border-bottom:1px solid var(--line);margin:0} .related li:last-child{border-bottom:0} .related a{color:var(--ink);text-decoration:none;font-size:16px} .related a:hover{color:var(--g)}
   /* asistento kortele */
   .card{margin-top:48px;background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 14px 34px rgba(20,83,45,.10);overflow:hidden}
@@ -68,19 +73,20 @@
   .ask button{border:0;border-radius:12px;background:var(--g);color:#fff;font:600 15px var(--font);padding:0 20px;min-height:46px;cursor:pointer}
   .hint{font-size:12.5px;color:var(--muted);margin:0} .hint b{color:var(--ink)} .hint a{text-decoration:none;font-weight:600}
   footer{font-size:12px;color:var(--muted);text-align:center;padding:40px 16px 24px} footer a{color:var(--muted)}
-  .fnav{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 22px;margin-bottom:16px;font-size:14px} .fnav a{color:var(--ink);text-decoration:none;font-weight:600} .fnav .cur{color:var(--muted);font-weight:600}
-  @media (max-width:900px){.w{padding:0 16px} header nav a:not(.cta){display:none} header nav a.cta{padding:8px 13px;font-size:13px} header .who small{display:none} h1{font-size:30px} h2{font-size:21px} main{padding:28px 16px 48px}}
+  .fnav{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 22px;margin-bottom:16px;font-size:14px} .fnav a{color:var(--ink);text-decoration:none;font-weight:600;display:inline-block;padding:8px 0} .fnav .cur{color:var(--muted);font-weight:600}
+  @media (max-width:900px){.w{padding:0 16px} header nav a:not(.cta){display:none} header nav a.cta{padding:10px 14px;font-size:13px} header .who small{display:none} h1{font-size:30px} h2{font-size:21px} main{padding:28px 16px 48px}}
 </style>
 </head>
 <body>
 <header><div class="w">
-  <img src="/rytis.jpg" alt="Rytis Balys">
+  <img src="/rytis-88.jpg" srcset="/rytis-88.jpg 1x, /rytis-132.jpg 2x" width="44" height="44" alt="Rytis Balys">
   <a class="who" href="/">Rytis Balys<small>Conversion tracking engineer</small></a>
   <nav><a href="/#build">What I build</a><a href="/#process">Process</a><a href="/#prices">Prices</a><a href="/#reviews">Reviews</a><a href="/#guides">Guides</a><a class="cta" href="#chat1">Get your free audit</a></nav>
 </div></header>
 <main>
   <div class="crumb"><a href="/">rytisbalys.com</a> <span >/ troubleshooting</span></div>
   <h1>Server-Side GTM: What It Actually Fixes (and What It Doesn&#x27;t)</h1>
+  <p class="date"><time datetime="2026-09-04">Updated 4 September 2026</time></p>
 <p>You moved tracking to server-side GTM, or an agency is pitching it as the fix for your missing conversions. Half of those pitches oversell it. Server-side tagging changes how data travels, not what the data says. If your purchase event fires with the wrong value in the browser, the server forwards that wrong value faster and more reliably.</p><p>I run server-side GTM on Stape in production on my own store, every day. Here is what it earns its keep on, where it does nothing, and how to check which situation you are in.</p>
   <h2>What server-side GTM actually fixes</h2>
 <p>Server-side GTM moves tag execution from the visitor's browser to a container you control - Stape hosts it, or you run it on Google Cloud. It solves four transport problems:</p><ul><li><strong>Ad blockers.</strong> Blockers kill requests to google-analytics.com and connect.facebook.net. With a custom loader on your own subdomain (gtm.yourstore.com), scripts load and hits fire from your domain. On my store this recovers a real share of Safari and Firefox sessions. Not all of them - strict blockers use heuristics and still catch some patterns.</li><li><strong>Cookie lifetime.</strong> Browsers with ITP-style rules cap JavaScript-set cookies at 7 days. Cookies set server-side via the Set-Cookie header outlive that cap in most browsers, so returning visitors keep their identity instead of counting as new users. Safari is the hard case: since 16.4 it also caps HTTP-set cookies to 7 days when the responding server's IP does not share the first half of your website server's IPv4 address, and a Stape or Cloud Run tagging server almost never does. The A record on your subdomain only avoids the CNAME-cloaking detection, not this IP check. For Safari specifically you need a mitigation like Stape's Cookie Keeper, or a tagging server on matching IP space, which is rare. Server-set cookies are still a clear win everywhere else.</li><li><strong>First-party data control.</strong> Every hit passes through your container before it reaches Google or Meta. You decide what leaves: strip parameters, hash emails, drop what you never agreed to send.</li><li><strong>One feed for CAPI and Enhanced Conversions.</strong> The same server stream feeds Meta Conversions API, GA4, and Google Ads Enhanced Conversions with hashed customer data. Match quality goes up because the server can attach order data the browser pixel never sees.</li></ul>
@@ -97,12 +103,13 @@ Bad:  hits to BOTH google-analytics.com AND gtm.yourstore.com
   <h2>When you need it, and what it costs</h2>
 <p>Server-side is worth it when:</p><ul><li>Paid social or Google Ads is a main channel and spend is meaningful. My rough line: above 3-5k EUR per month, the recovered signal pays for the setup.</li><li>Your audience skews iOS and Safari, or you sell in a privacy-tool-heavy niche.</li><li>You want Meta CAPI or Enhanced Conversions with good match quality anyway. Doing those through one server container beats bolting on three separate integrations.</li></ul><p>A clean browser-side setup is enough when spend is small, traffic is mostly Chrome desktop, or your current tracking is broken at the logic level. Fix the logic first, browser-side, where debugging is cheaper. Migrating a broken setup gives you a broken setup with a monthly hosting bill.</p><p>Cost reality: Stape has a free tier for low traffic, and a typical small store lands around 20-50 USD per month in hosting. Self-hosting on Google Cloud usually costs more once minimum instances are counted. Setup for a standard Shopify or WooCommerce store is one to three days of competent work: custom domain with correct DNS, container config, deduplication, consent wiring, then verification. The hosting fee is the cheap part. The expensive part is a migration done without a dedup plan.</p>
   <div class="card" id="chat1">
-  <div class="top"><h2>Numbers still don't add up?</h2><p>Tell my assistant what you see and Rytis will reach out to you directly. Every rated job on Upwork is 5.0, <a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">check them live</a>.</p></div>
+  <div class="top"><h2>Numbers still don't add up?</h2><p>Tell my assistant what you see and I will reach out to you directly. Every rated job on Upwork is 5.0, <a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">check them live</a>.</p></div>
   <div class="log"><div class="m bot">Hi, I&rsquo;m Rytis&rsquo;s assistant. Your name and email first, so Rytis can reach out to you directly. Then tell me where your numbers disagree, or ask about prices and timelines.</div></div>
   <form class="ask" novalidate>
     <div class="row who"><input type="text" name="name" placeholder="Your name" autocomplete="given-name" required><input type="email" name="email" placeholder="you@company.com" autocomplete="email" required><button type="submit">Start</button></div>
     <p class="hint">I reply myself <b>within 6 hours, usually under 1 hour</b>. Prefer direct? <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> (messages, not calls) &middot; <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a></p>
   </form>
+  <noscript><p class="hint">The assistant needs JavaScript. Write to <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a> or WhatsApp +370 603 08900 instead.</p></noscript>
 </div>
   <div class="faq">
   <h2>FAQ</h2>
@@ -120,17 +127,17 @@ Bad:  hits to BOTH google-analytics.com AND gtm.yourstore.com
     </ul>
   </div>
 </main>
-<footer><nav class="fnav"><a href="/#build">What I build</a><a href="/#process">Process</a><a href="/#prices">Prices</a><a href="/#reviews">Reviews</a><a href="/#guides">Guides</a><a href="#chat1">Free audit</a></nav>Rytis Balys &middot; MB Euruvizija &middot; Vilnius, Lithuania (EET) &middot; worldwide, remote &middot; <a href="https://github.com/rytisdev-commits/server-side-conversion-tracking" rel="noopener">github case study</a> &middot; <a href="/lt/">LT</a></footer>
+<footer><nav class="fnav"><a href="/#build">What I build</a><a href="/#process">Process</a><a href="/#prices">Prices</a><a href="/#reviews">Reviews</a><a href="/#guides">Guides</a><a href="#chat1">Free audit</a></nav>Rytis Balys &middot; MB Euruvizija &middot; Vilnius, Lithuania (EET) &middot; worldwide, remote &middot; assistant replies are kept 90 days so I can improve them &middot; <a href="https://github.com/rytisdev-commits/server-side-conversion-tracking" rel="noopener">github case study</a> &middot; <a href="/lt/">LT</a></footer>
 <script>
 (function(){
   var FORM='https://rb-form.formos-ops.workers.dev/';
   try{ var q=new URLSearchParams(location.search), gc=q.get('gclid'); if(gc){ sessionStorage.setItem('rb_gclid',gc); sessionStorage.setItem('rb_landing',location.pathname); } }catch(e){}
-  var EMAIL=/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/;
+  var EMAIL_MSG='Enter a valid email address, e.g. name@company.com'; var EMAIL=/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/;
   var root=document.getElementById('chat1'); if(!root) return; var f=root.querySelector('form');
   f.addEventListener('submit',function(e){
     e.preventDefault();
     var n=f.name.value.trim(), m=f.email.value.trim();
-    if(!n){ f.name.focus(); return; } if(!EMAIL.test(m)){ f.email.focus(); f.email.style.borderColor='#b91c1c'; return; } f.email.style.borderColor='';
+    if(!n){ f.name.focus(); return; } var fe=f.querySelector('.ferr'); if(!EMAIL.test(m)){ f.email.focus(); f.email.style.borderColor='#b91c1c'; if(!fe){ fe=document.createElement('div'); fe.className='ferr'; f.querySelector('.who').insertAdjacentElement('afterend',fe); } fe.textContent=EMAIL_MSG; return; } f.email.style.borderColor=''; if(fe) fe.remove();
     try{ sessionStorage.setItem('rb_name',n); sessionStorage.setItem('rb_email',m); }catch(x){}
     try{ gtag('event','intake_start',{source:'guide'}); }catch(x){}
     var gclid='', landing=location.pathname; try{ gclid=sessionStorage.getItem('rb_gclid')||''; landing=sessionStorage.getItem('rb_landing')||location.pathname; }catch(x){}

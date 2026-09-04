@@ -12,19 +12,24 @@
 </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Your ChatGPT Traffic Is Hiding in Direct: How to Track AI Conversions in GA4</title>
+<title>ChatGPT Traffic Hiding in Direct: Track AI Conversions in GA4</title>
 <meta name="description" content="Most ChatGPT and AI assistant traffic lands in GA4 as Direct. What you can recover server-side, what you can&#x27;t, and how to measure both honestly.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Your ChatGPT Traffic Is Hiding in Direct: How to Track AI Conversions in GA4">
+<meta property="og:title" content="ChatGPT Traffic Hiding in Direct: Track AI Conversions in GA4">
 <meta property="og:description" content="Most ChatGPT and AI assistant traffic lands in GA4 as Direct. What you can recover server-side, what you can&#x27;t, and how to measure both honestly.">
 <meta property="og:url" content="https://rytisbalys.com/track-ai-conversions-ga4">
 <meta property="og:image" content="https://rytisbalys.com/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://rytisbalys.com/track-ai-conversions-ga4">
+
+<meta property="og:locale" content="en_US"><meta property="og:locale:alternate" content="lt_LT">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="theme-color" content="#14532d">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Your ChatGPT Traffic Is Hiding in Direct: How to Track AI Conversions in GA4", "description": "Most ChatGPT and AI assistant traffic lands in GA4 as Direct. What you can recover server-side, what you can't, and how to measure both honestly.", "url": "https://rytisbalys.com/track-ai-conversions-ga4", "mainEntityOfPage": "https://rytisbalys.com/track-ai-conversions-ga4", "inLanguage": "en", "datePublished": "2026-08-11", "dateModified": "2026-08-11", "author": {"@type": "Person", "@id": "https://rytisbalys.com/#rytis", "name": "Rytis Balys", "url": "https://rytisbalys.com/"}, "publisher": {"@type": "Organization", "name": "MB Euruvizija"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Your ChatGPT Traffic Is Hiding in Direct: How to Track AI Conversions in GA4", "description": "Most ChatGPT and AI assistant traffic lands in GA4 as Direct. What you can recover server-side, what you can't, and how to measure both honestly.", "url": "https://rytisbalys.com/track-ai-conversions-ga4", "mainEntityOfPage": "https://rytisbalys.com/track-ai-conversions-ga4", "inLanguage": "en", "datePublished": "2026-08-11", "dateModified": "2026-09-04", "author": {"@type": "Person", "@id": "https://rytisbalys.com/#rytis", "name": "Rytis Balys", "url": "https://rytisbalys.com/"}, "publisher": {"@type": "Organization", "name": "MB Euruvizija", "logo": {"@type": "ImageObject", "url": "https://rytisbalys.com/icon-512.png", "width": 512, "height": 512}}, "image": ["https://rytisbalys.com/og.png"]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why does ChatGPT traffic show up as Direct in GA4?", "acceptedAnswer": {"@type": "Answer", "text": "A large share of clicks from AI assistants arrive with no referrer, because the click happens in a mobile app or in-app browser, or the user copies the link into a new tab. With no referrer and no UTMs, GA4 has nothing to classify, so the session lands in Direct."}}, {"@type": "Question", "name": "Does GA4's new AI Assistant channel solve this?", "acceptedAnswer": {"@type": "Answer", "text": "Only partly. It is forward-only, so it reclassifies nothing in your history, and it misses several engines including Perplexity, Claude and Meta AI. A custom channel group applies retroactively to data you have already collected and can cover the engines the native channel skips."}}, {"@type": "Question", "name": "Can you track people who read an AI answer but never click?", "acceptedAnswer": {"@type": "Answer", "text": "Not at the individual level, and nobody can. That layer is measured in aggregate: a post-purchase survey asking where the customer first heard about you, plus branded-search lift tracked against your AI visibility. The output is directional, not a per-order attribution line."}}, {"@type": "Question", "name": "How much invisible AI traffic can server-side tracking recover?", "acceptedAnswer": {"@type": "Answer", "text": "Roughly half of the AI clicks that are currently invisible, based on how no-referrer shares break down. The exact share depends on your traffic mix and device split, so be suspicious of anyone quoting a fixed percentage."}}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -39,9 +44,9 @@
   header img{width:44px;height:44px;border-radius:50%;object-fit:cover}
   header .who{font-weight:700;font-size:16px;text-decoration:none;color:var(--ink)} header .who small{display:block;font-weight:400;font-size:12.5px;color:var(--muted)}
   header nav{margin-left:auto;display:flex;gap:22px;align-items:center;font-size:14px}
-  header nav a{color:var(--muted);text-decoration:none} header nav a.cta{background:var(--g);color:#fff;border-radius:999px;padding:9px 16px;font-weight:700;white-space:nowrap}
+  header nav a{color:var(--muted);text-decoration:none} header nav a.cta{background:var(--g);color:#fff;border-radius:999px;padding:11px 16px;min-height:40px;box-sizing:border-box;display:inline-flex;align-items:center;font-weight:700;white-space:nowrap}
   main{max-width:800px;margin:0 auto;padding:40px 24px 64px}
-  .crumb{font-size:13px;color:var(--muted);margin-bottom:22px} .crumb a{color:var(--muted);text-decoration:none} .crumb a:hover{color:var(--g)}
+  .crumb{font-size:13px;color:var(--muted);margin-bottom:22px} .date{font-size:13px;color:var(--muted);margin:-8px 0 18px} .ferr{color:#b91c1c;font-size:13px;margin:6px 0 0} .crumb a{color:var(--muted);text-decoration:none} .crumb a:hover{color:var(--g)}
   h1{font-size:38px;font-weight:800;letter-spacing:-.03em;line-height:1.12;margin-bottom:14px;text-wrap:balance}
   .sub{font-size:18px;color:var(--muted);margin-bottom:34px;max-width:680px}
   h2{font-size:24px;font-weight:800;letter-spacing:-.02em;line-height:1.2;margin:44px 0 12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
@@ -55,7 +60,7 @@
   .verify{border-left:4px solid var(--g);background:#fff;border-radius:0 12px 12px 0;padding:12px 16px;margin:0 0 12px;font-size:15.5px} .verify b{color:var(--g);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;margin-right:6px}
   .warn{border-left:4px solid var(--amber);background:#fff;border-radius:0 12px 12px 0;padding:12px 16px;margin:0 0 12px;font-size:15.5px} .warn b{color:var(--amber)}
   .faq{margin-top:48px;border-top:1px solid var(--line);padding-top:8px} .faq h2{margin-top:28px}
-  .faq details{border-bottom:1px solid var(--line);padding:14px 0} .faq summary{cursor:pointer;font-weight:700;font-size:16.5px;list-style:none;display:flex;justify-content:space-between;gap:12px} .faq summary::after{content:'+';color:var(--g);font-weight:800} .faq details[open] summary::after{content:'\2212'} .faq details p{margin:10px 0 0;color:var(--muted);font-size:15.5px}
+  .faq details{border-bottom:1px solid var(--line);padding:6px 0} .faq summary{cursor:pointer;font-weight:700;font-size:16.5px;padding:10px 0;min-height:44px;box-sizing:border-box;list-style:none;display:flex;justify-content:space-between;gap:12px} .faq summary::after{content:'+';color:var(--g);font-weight:800} .faq details[open] summary::after{content:'\2212'} .faq details p{margin:10px 0 0;color:var(--muted);font-size:15.5px}
   .related{margin-top:40px;border-top:1px solid var(--line);padding-top:24px} .related h2{font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 10px} .related ul{list-style:none;margin:0} .related li{padding:10px 0;border-bottom:1px solid var(--line);margin:0} .related li:last-child{border-bottom:0} .related a{color:var(--ink);text-decoration:none;font-size:16px} .related a:hover{color:var(--g)}
   /* asistento kortele */
   .card{margin-top:48px;background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 14px 34px rgba(20,83,45,.10);overflow:hidden}
@@ -68,22 +73,23 @@
   .ask button{border:0;border-radius:12px;background:var(--g);color:#fff;font:600 15px var(--font);padding:0 20px;min-height:46px;cursor:pointer}
   .hint{font-size:12.5px;color:var(--muted);margin:0} .hint b{color:var(--ink)} .hint a{text-decoration:none;font-weight:600}
   footer{font-size:12px;color:var(--muted);text-align:center;padding:40px 16px 24px} footer a{color:var(--muted)}
-  .fnav{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 22px;margin-bottom:16px;font-size:14px} .fnav a{color:var(--ink);text-decoration:none;font-weight:600} .fnav .cur{color:var(--muted);font-weight:600}
-  @media (max-width:900px){.w{padding:0 16px} header nav a:not(.cta){display:none} header nav a.cta{padding:8px 13px;font-size:13px} header .who small{display:none} h1{font-size:30px} h2{font-size:21px} main{padding:28px 16px 48px}}
+  .fnav{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 22px;margin-bottom:16px;font-size:14px} .fnav a{color:var(--ink);text-decoration:none;font-weight:600;display:inline-block;padding:8px 0} .fnav .cur{color:var(--muted);font-weight:600}
+  @media (max-width:900px){.w{padding:0 16px} header nav a:not(.cta){display:none} header nav a.cta{padding:10px 14px;font-size:13px} header .who small{display:none} h1{font-size:30px} h2{font-size:21px} main{padding:28px 16px 48px}}
 </style>
 </head>
 <body>
 <header><div class="w">
-  <img src="/rytis.jpg" alt="Rytis Balys">
+  <img src="/rytis-88.jpg" srcset="/rytis-88.jpg 1x, /rytis-132.jpg 2x" width="44" height="44" alt="Rytis Balys">
   <a class="who" href="/">Rytis Balys<small>Conversion tracking engineer</small></a>
   <nav><a href="/#build">What I build</a><a href="/#process">Process</a><a href="/#prices">Prices</a><a href="/#reviews">Reviews</a><a href="/#guides">Guides</a><a class="cta" href="#chat1">Get your free audit</a></nav>
 </div></header>
 <main>
   <div class="crumb"><a href="/">rytisbalys.com</a> <span >/ troubleshooting</span></div>
   <h1>Your ChatGPT Traffic Is Hiding in Direct: How to Track AI Conversions in GA4</h1>
+  <p class="date"><time datetime="2026-09-04">Updated 4 September 2026</time></p>
 <p>Someone asks ChatGPT for the best product in your category, gets a shortlist with your brand on it, opens your site and buys. In GA4 that sale shows up as Direct. No source, no credit. The same thing happens with Perplexity, Gemini, Copilot and Claude.</p><p>I build conversion tracking for ecommerce brands for a living, mostly GA4, Meta Pixel with CAPI, and server-side setups on sGTM. Over the last year the question I get most often has changed from "why doesn't my ROAS match" to "how much of our revenue is actually coming from AI." The honest answer is that with a stock GA4 setup you can't tell, and this page explains why, what's genuinely fixable, and what can only be measured in aggregate.</p>
   <h2>Why AI conversions get filed under Direct</h2>
-<p>The core problem is the referrer. A big share of clicks from AI assistants arrives at your site with no referrer at all, because the click happens inside a mobile app, an in-app browser, or a context that strips the header, or because the user copies the link and pastes it into a new tab. Vendor measurements of that no-referrer share range from roughly 36% to 70% depending on the assistant and the platform. When GA4 sees a session with no referrer and no UTMs, it has nothing to classify, so the session becomes Direct.</p><p>Even the clicks that do keep a referrer haven't been safe. For most of GA4's life, traffic from chatgpt.com or perplexity.ai landed in Referral or Unassigned, where nobody thinks to look for it.</p><p>Then Safari makes it worse. ITP caps client-set cookies at seven days, so a shopper who found you through an AI answer and comes back to buy ten days later shows up as a brand new Direct visitor. The AI touchpoint existed, your analytics just couldn't hold onto it long enough.</p>
+<p>The core problem is the referrer. A big share of clicks from AI assistants arrives at your site with no referrer at all, because the click happens inside a mobile app, an in-app browser, or a context that strips the header, or because the user copies the link and pastes it into a new tab. Vendor measurements of that no-referrer share range from roughly a third to two thirds depending on the assistant and the platform. When GA4 sees a session with no referrer and no UTMs, it has nothing to classify, so the session becomes Direct.</p><p>Even the clicks that do keep a referrer haven't been safe. For most of GA4's life, traffic from chatgpt.com or perplexity.ai landed in Referral or Unassigned, where nobody thinks to look for it.</p><p>Then Safari makes it worse. ITP caps client-set cookies at seven days, so a shopper who found you through an AI answer and comes back to buy ten days later shows up as a brand new Direct visitor. The AI touchpoint existed, your analytics just couldn't hold onto it long enough.</p>
   <h2>GA4's native AI channel doesn't close the gap</h2>
 <p>Google shipped a native AI channel in GA4 around May 2026, and it's a real improvement, but you should know its limits before assuming the problem is solved. It's forward-only, so it won't reclassify any of your history. It misses several engines outright, including Perplexity, Claude and Meta AI. And clicks from Google's own AI Overviews stay inside Organic Search, which means a fast-growing AI surface is invisible inside your biggest channel.</p><p>A custom channel group, by contrast, applies retroactively to data you've already collected. That alone is worth setting up even before touching anything server-side, because it lets you see months of AI-referred sessions you didn't know you had.</p>
   <h2>What you can prove and what you can't</h2>
@@ -97,12 +103,13 @@
   <h2>Who this is for</h2>
 <p>Ecommerce brands doing meaningful volume who suspect AI is already sending them buyers, and GEO or SEO agencies that need to prove their work drives sales. If your GA4 Direct channel has been quietly growing and nobody can explain why, that's usually the tell.</p>
   <div class="card" id="chat1">
-  <div class="top"><h2>Numbers still don't add up?</h2><p>Tell my assistant what you see and Rytis will reach out to you directly. Every rated job on Upwork is 5.0, <a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">check them live</a>.</p></div>
+  <div class="top"><h2>Numbers still don't add up?</h2><p>Tell my assistant what you see and I will reach out to you directly. Every rated job on Upwork is 5.0, <a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">check them live</a>.</p></div>
   <div class="log"><div class="m bot">Hi, I&rsquo;m Rytis&rsquo;s assistant. Your name and email first, so Rytis can reach out to you directly. Then tell me where your numbers disagree, or ask about prices and timelines.</div></div>
   <form class="ask" novalidate>
     <div class="row who"><input type="text" name="name" placeholder="Your name" autocomplete="given-name" required><input type="email" name="email" placeholder="you@company.com" autocomplete="email" required><button type="submit">Start</button></div>
     <p class="hint">I reply myself <b>within 6 hours, usually under 1 hour</b>. Prefer direct? <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> (messages, not calls) &middot; <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a></p>
   </form>
+  <noscript><p class="hint">The assistant needs JavaScript. Write to <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a> or WhatsApp +370 603 08900 instead.</p></noscript>
 </div>
   <div class="faq">
   <h2>FAQ</h2>
@@ -120,17 +127,17 @@
     </ul>
   </div>
 </main>
-<footer><nav class="fnav"><a href="/#build">What I build</a><a href="/#process">Process</a><a href="/#prices">Prices</a><a href="/#reviews">Reviews</a><a href="/#guides">Guides</a><a href="#chat1">Free audit</a></nav>Rytis Balys &middot; MB Euruvizija &middot; Vilnius, Lithuania (EET) &middot; worldwide, remote &middot; <a href="https://github.com/rytisdev-commits/server-side-conversion-tracking" rel="noopener">github case study</a> &middot; <a href="/lt/">LT</a></footer>
+<footer><nav class="fnav"><a href="/#build">What I build</a><a href="/#process">Process</a><a href="/#prices">Prices</a><a href="/#reviews">Reviews</a><a href="/#guides">Guides</a><a href="#chat1">Free audit</a></nav>Rytis Balys &middot; MB Euruvizija &middot; Vilnius, Lithuania (EET) &middot; worldwide, remote &middot; assistant replies are kept 90 days so I can improve them &middot; <a href="https://github.com/rytisdev-commits/server-side-conversion-tracking" rel="noopener">github case study</a> &middot; <a href="/lt/">LT</a></footer>
 <script>
 (function(){
   var FORM='https://rb-form.formos-ops.workers.dev/';
   try{ var q=new URLSearchParams(location.search), gc=q.get('gclid'); if(gc){ sessionStorage.setItem('rb_gclid',gc); sessionStorage.setItem('rb_landing',location.pathname); } }catch(e){}
-  var EMAIL=/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/;
+  var EMAIL_MSG='Enter a valid email address, e.g. name@company.com'; var EMAIL=/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/;
   var root=document.getElementById('chat1'); if(!root) return; var f=root.querySelector('form');
   f.addEventListener('submit',function(e){
     e.preventDefault();
     var n=f.name.value.trim(), m=f.email.value.trim();
-    if(!n){ f.name.focus(); return; } if(!EMAIL.test(m)){ f.email.focus(); f.email.style.borderColor='#b91c1c'; return; } f.email.style.borderColor='';
+    if(!n){ f.name.focus(); return; } var fe=f.querySelector('.ferr'); if(!EMAIL.test(m)){ f.email.focus(); f.email.style.borderColor='#b91c1c'; if(!fe){ fe=document.createElement('div'); fe.className='ferr'; f.querySelector('.who').insertAdjacentElement('afterend',fe); } fe.textContent=EMAIL_MSG; return; } f.email.style.borderColor=''; if(fe) fe.remove();
     try{ sessionStorage.setItem('rb_name',n); sessionStorage.setItem('rb_email',m); }catch(x){}
     try{ gtag('event','intake_start',{source:'guide'}); }catch(x){}
     var gclid='', landing=location.pathname; try{ gclid=sessionStorage.getItem('rb_gclid')||''; landing=sessionStorage.getItem('rb_landing')||location.pathname; }catch(x){}
