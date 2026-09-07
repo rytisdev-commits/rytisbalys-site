@@ -39,7 +39,8 @@
   header img{width:44px;height:44px;border-radius:50%;object-fit:cover}
   header .who{font-weight:700;font-size:16px} header .who small{display:block;font-weight:400;font-size:12.5px;color:var(--muted)}
   header nav{margin-left:auto;display:flex;gap:22px;align-items:center;font-size:14px}
-  header nav a{color:var(--muted);text-decoration:none} header nav a.cta{background:var(--g);color:#fff;border-radius:999px;padding:11px 16px;min-height:40px;box-sizing:border-box;display:inline-flex;align-items:center;font-weight:700;white-space:nowrap}
+  header nav a{color:var(--muted);text-decoration:none;white-space:nowrap}
+@media (max-width:1040px) and (min-width:901px){header nav{gap:16px} header nav a[href^="https://wa.me"],header nav a[href^="mailto:"]{display:none}} header nav a.cta{background:var(--g);color:#fff;border-radius:999px;padding:11px 16px;min-height:40px;box-sizing:border-box;display:inline-flex;align-items:center;font-weight:700;white-space:nowrap}
   section{padding:80px 0} section.hero{padding:48px 0 72px} section.alt{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .hero .w{display:grid;grid-template-columns:minmax(0,1fr) 440px;gap:56px;align-items:center}
   .vis{background:linear-gradient(135deg,#14532d 0%,#1f7a45 100%);border-radius:26px;padding:26px;color:#fff;box-shadow:0 20px 50px rgba(20,83,45,.25);position:relative}
@@ -48,7 +49,10 @@
   .d{width:10px;height:10px;border-radius:50%;display:inline-block} .d.r{background:#dc2626} .d.o{background:#f59e0b} .d.g{background:#16a34a}
   .vf{font-size:14px;opacity:.92;margin-top:12px;line-height:1.5}
   .vb{position:relative;margin:16px -14px -36px auto;width:max-content;background:var(--ink);border-radius:16px;padding:12px 16px;box-shadow:0 12px 30px rgba(15,42,32,.35)} .vb small{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.75} .vb b{font-size:22px;font-weight:800}
-  .talk .card{max-width:1100px;margin:0 auto;border-radius:26px} .talk .log{padding:30px 30px 10px;min-height:200px;max-height:520px} .talk .m{font-size:17px;max-width:80%} .talk .ask{padding:16px 30px 28px;gap:14px} .talk .ask input{font-size:17px;padding:16px 18px;border-radius:14px} .talk .ask button{min-height:56px;font-size:16px;padding:0 30px;border-radius:14px} .talk .hint{margin-top:4px;font-size:13.5px} .talk .sh{text-align:center;margin-bottom:32px} .talk .sub{margin-left:auto;margin-right:auto}
+  .talk .card{max-width:1100px;margin:0 auto;border-radius:26px} .talk .log{padding:30px 30px 10px;min-height:200px;max-height:520px} .talk .m{font-size:17px;max-width:80%} .talk .ask{padding:16px 30px 28px;gap:14px} .talk .ask input{font-size:17px;padding:16px 18px;border-radius:14px} .talk .ask button{min-height:56px;font-size:16px;padding:0 30px;border-radius:14px} .talk .hint{margin-top:4px;font-size:13.5px} .talk .sh{text-align:center;margin-bottom:22px}
+.tq{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;max-width:1100px;margin:0 auto 18px;font-size:14px;line-height:1.35}
+.tq span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 14px;color:var(--ink)}
+.tq a{color:var(--g);font-weight:700;text-decoration:none;padding:8px 4px} .talk .sub{margin-left:auto;margin-right:auto}
   .badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:13px;color:var(--muted)} .badge b{color:var(--ink)}
   h1{font-size:48px;font-weight:800;letter-spacing:-.035em;line-height:1.05;margin:16px 0 14px}
   .lead{font-size:18px;color:var(--muted);max-width:620px}
@@ -96,11 +100,11 @@
 <meta name="theme-color" content="#14532d">
 </head>
 <body>
-<div class="bar"><b>Free audit of your tracking numbers.</b> <span class="bx">Tell my assistant what you see, I reply within 6 hours, usually under 1 hour.</span><a href="#chat1">Get your free audit &rarr;</a></div>
+<div class="bar"><b>Single fix within 24 hours of access, or you don&rsquo;t pay.</b> <span class="bx">Free audit first, I reply myself within 6 hours.</span><a href="#chat1">Get your free audit &rarr;</a></div>
 <header><div class="w">
   <img src="/rytis-88.jpg" srcset="/rytis-88.jpg 1x, /rytis-132.jpg 2x" width="44" height="44" alt="Rytis Balys">
   <span class="who">Rytis Balys<small>Conversion tracking engineer</small></span>
-  <nav><a href="#build">What I build</a><a href="#process">Process</a><a href="#prices">Prices</a><a href="#reviews">Reviews</a><a href="#guides">Guides</a><a class="cta" href="#chat1">Get your free audit</a></nav>
+  <nav><a href="#build">What I build</a><a href="#process">Process</a><a href="#prices">Prices</a><a href="#reviews">Reviews</a><a href="#guides">Guides</a><a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a><a href="mailto:work@rytisbalys.com">Email</a><a class="cta" href="#chat1">Get your free audit</a></nav>
 </div></header>
 
 <section class="hero"><div class="w">
@@ -109,7 +113,7 @@
     <h1>Conversion tracking and server-side setup. One engineer, fixed price, proved before you pay.</h1>
     <p class="lead">Meta Pixel and Conversions API, GA4, Google Tag Manager, Google Ads and CRM conversions. I find which of your numbers is lying and fix the pipes.</p>
     <div class="ctas"><a class="btn" href="#chat1">Get your free audit &rarr;</a><a class="lnk" href="#prices">How I charge &darr;</a></div>
-    <div class="pf"><a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener"><span class="pi">U</span><span><b>Upwork</b><small>5.0 on every rated job</small></span></a><a href="https://github.com/rytisdev-commits/server-side-conversion-tracking" target="_blank" rel="noopener"><span class="pi">G</span><span><b>GitHub</b><small>Server-side tracking case study</small></span></a></div>
+    <div class="pf"><a href="#prices"><span class="pi">24</span><span><b>Fixed within 24 hours of access</b><small>or you don&rsquo;t pay</small></span></a><a href="#process"><span class="pi">&#10003;</span><span><b>Read access first</b><small>containers and datasets stay yours</small></span></a></div>
   </div>
   <div class="vis">
     <div class="vt"><span>Reconciliation, one month</span><span class="ok">checked against orders</span></div>
@@ -122,7 +126,8 @@
 </div></section>
 
 <section class="talk alt"><div class="w">
-  <div class="sh"><h2>Talk to my AI assistant so you save time.</h2><p class="sub">It gives you a first read on the spot and passes the conversation to me. Name and email first, so I can reach out to you directly.</p></div>
+  <div class="sh"><h2>Your free audit starts here.</h2><p class="sub">Tell my assistant what you see. It asks what I would ask, and I reply myself within 6 hours. Prices and timelines it answers on the spot.</p></div>
+  <div class="tq"><span>&ldquo;He proved it with cold-load tests and a reversal test&rdquo;</span><span>&ldquo;&hellip;the full audit landed same-day after access was granted&rdquo;</span><span>&ldquo;He helped us find a solution to a very tricky problem in an astonishingly quick time&rdquo;</span><a href="#reviews">all 9 reviews, every one 5.0</a></div>
   <div class="card" id="chat1">
   <div class="log"><div class="m bot">Hi, I&rsquo;m Rytis&rsquo;s assistant. Your name and email first, so Rytis can reach out to you directly. Then tell me where your numbers disagree, or ask about prices and timelines.</div></div>
   <form class="ask" novalidate>
@@ -150,7 +155,7 @@
 <section class="alt"><div class="w">
   <div class="sh"><h2>If you have been burned before, read this</h2></div>
   <div class="grid4">
-    <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>You own everything</h3><p>Containers, datasets and accounts stay in your name. I work inside them, never around them.</p></div>
+    <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>Nothing leaves your name</h3><p>Containers, datasets and accounts stay yours. I work inside them, never around them.</p></div>
     <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>Proved, not promised</h3><p>Every fix verified live with test orders and a before and after report you can check yourself.</p></div>
     <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>One person answers</h3><p>No handoffs, no account managers. You write to me, I write back, within 6 hours, usually under 1 hour.</p></div>
     <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>Honest free audit</h3><p>If your gap is within the normal 5 to 15%, I will tell you that you do not need me.</p></div>
@@ -172,9 +177,9 @@
     <div class="need"><h3>What I need once we agree on a fix</h3><ul><li>Read access to Events Manager, GA4, Google Tag Manager and Google Ads</li><li>Store or site admin (Shopify collaborator, WordPress admin, or similar)</li><li>Any server-side tool already in place, such as Stape</li><li>Seven days of platform numbers next to real orders, if you have them handy</li></ul></div>
   </div>
   <div id="prices">
-    <div class="sh"><h2>You choose the scope</h2><p class="sub">Every job priced after I look inside, then fixed.</p></div>
+    <div class="sh"><h2>Three ways I can help</h2><p class="sub">Every job priced after I look inside, then fixed.</p></div>
     <div class="plans">
-      <div class="plan"><div class="pt">One-time fix</div><div class="pp">$250 to 700</div><p>A pixel or conversion tag repaired, or Conversions API added with deduplication. Fixed within 24 hours of access, or you don’t pay.</p></div>
+      <div class="plan"><div class="pt">One-time fix</div><div class="pp">$250 to 700</div><p>A pixel or conversion tag repaired, fixed within 24 hours of access, or you don’t pay. Conversions API with deduplication takes about a week with the parallel run.</p></div>
       <div class="plan hi"><div class="pt">Deep audit and fix</div><div class="pp">$600 to 1200</div><p>Platform numbers reconciled against real orders, every finding fixed in order of what it costs you. Includes the report.</p></div>
       <div class="plan"><div class="pt">Ongoing ownership</div><div class="pp">$700 to 1800 / month</div><p>Someone watches the tracking every month and fixes it before you notice. Checkout updates, new apps, consent changes.</p></div>
     </div>
@@ -194,7 +199,7 @@
     <div class="sh"><h2>Questions I hear before we start</h2></div>
     <div class="faq"><h3>Do I need server-side tracking?</h3><p>If you pay for ads, usually yes. Browser-only tracking drops purchases to ad blockers and iOS, and the smaller the budget, the more each lost signal costs. I say first whether it fixes your gap at all.</p></div>
     <div class="faq"><h3>What access do you need?</h3><p>Read access first: Events Manager, GA4, GTM and the store. Publish access only once the fix is agreed, and only for that step.</p></div>
-    <div class="faq"><h3>How fast?</h3><p>Most single fixes take 1 to 2 days after access, plus a day to verify. Bigger builds get a date after the look inside.</p></div>
+    <div class="faq"><h3>How fast?</h3><p>Single fixes are live within 24 hours of access, then a day to verify. Bigger builds get a date after the look inside.</p></div>
     <div class="faq"><h3>What if the numbers are actually fine?</h3><p>Then I tell you, and you owe nothing. A gap of 5 to 15% is normal loss, not a tracking problem. With a strict opt-in consent banner, add your decline rate on top.</p></div>
     <div class="faq"><h3>Can you work under my agency&rsquo;s name?</h3><p>Yes. The client stays yours, you invoice, I do the work under your name.</p></div>
     <div class="faq"><h3>Do you do calls?</h3><p>Everything happens in writing: the assistant here, WhatsApp or email. You get a written record of every finding and every change, which is worth more than a call.</p></div>
@@ -219,7 +224,7 @@
   <ul><li><a href="/fbq-is-not-defined-delay-javascript-fix" class="guide-link">fbq is not defined - your caching plugin is killing the Meta Pixel</a></li><li><a href="/meta-pixel-not-firing" class="guide-link">Meta Pixel not firing? The 7 real causes, in the order to check them</a></li><li><a href="/ga4-does-not-match-backend" class="guide-link">GA4 purchases don't match your backend orders - which number to trust</a></li><li><a href="/shopify-checkout-upgrade-tracking" class="guide-link">Shopify's checkout upgrade silently breaks tracking - what dies and how to migrate</a></li><li><a href="/offline-conversions-google-ads" class="guide-link">Google Ads only counts form fills, not real sales - how to import offline conversions</a></li><li><a href="/ga4-double-counting-purchases-duplicate-tag" class="guide-link">GA4 Counting Purchases Twice? The Duplicate Tag Fix</a></li><li><a href="/meta-events-manager-double-purchases-deduplication-fix" class="guide-link">Meta Counts Purchases Twice: Pixel + CAPI Deduplication Fix</a></li><li><a href="/google-ads-conversion-inactive-tag-fires-gtm" class="guide-link">Google Ads Conversion Inactive but Tag Fires in GTM: The Fix</a></li><li><a href="/woocommerce-stripe-redirect-purchase-event-not-firing" class="guide-link">WooCommerce Purchase Event Missing After Stripe Redirect: Fix</a></li><li><a href="/ga4-purchases-attributed-stripe-paypal-direct-fix" class="guide-link">Fix GA4 Purchases Showing as stripe.com, paypal.com or (direct)</a></li><li><a href="/consent-banner-not-blocking-tracking" class="guide-link">Your cookie banner blocks nothing - the 60-second check</a></li><li><a href="/consent-mode-v2-conversions-dropped" class="guide-link">Conversions Dropped After Consent Mode v2? How to Diagnose It</a></li><li><a href="/ga4-ai-assistant-channel" class="guide-link">GA4&#x27;s New AI Assistant Channel: What It Catches and What It Misses</a></li><li><a href="/prove-geo-roi" class="guide-link">GEO Gets You Cited in AI Answers. Proving It Converts Is a Different Job.</a></li><li><a href="/track-ai-conversions-ga4" class="guide-link">Your ChatGPT Traffic Is Hiding in Direct: How to Track AI Conversions in GA4</a></li><li><a href="/clickfunnels-upsell-tracking-fix" class="guide-link">ClickFunnels Upsell Tracking: Fix Double or Missing Purchases</a></li><li><a href="/ga4-events-missing-plugin-wrapped-gtag" class="guide-link">GA4 events missing? A plugin may have wrapped your gtag</a></li><li><a href="/server-side-gtm-what-it-fixes" class="guide-link">Server-Side GTM: What It Actually Fixes (and What It Doesn&#x27;t)</a></li></ul>
 </div></section>
 
-<footer><nav class="fnav"><a href="#build">What I build</a><a href="#process">Process</a><a href="#prices">Prices</a><a href="#reviews">Reviews</a><a href="#guides">Guides</a><a href="#chat1">Free audit</a></nav>Rytis Balys &middot; MB Euruvizija &middot; Vilnius, Lithuania (EET) &middot; worldwide, remote &middot; assistant replies are kept 90 days so I can improve them &middot; <a href="https://github.com/rytisdev-commits/server-side-conversion-tracking" rel="noopener">github case study</a> &middot; <a href="/lt/">LT</a></footer>
+<footer><nav class="fnav"><a href="#build">What I build</a><a href="#process">Process</a><a href="#prices">Prices</a><a href="#reviews">Reviews</a><a href="#guides">Guides</a><a href="#chat1">Free audit</a></nav>Rytis Balys &middot; MB Euruvizija &middot; Vilnius, Lithuania (EET) &middot; worldwide, remote &middot; <a href="https://wa.me/37060308900" rel="noopener">WhatsApp +370 603 08900</a> &middot; <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a> &middot; assistant replies are kept 90 days so I can improve them &middot; <a href="https://github.com/rytisdev-commits/server-side-conversion-tracking" rel="noopener">github case study</a> &middot; <a href="/lt/">LT</a></footer>
 <script>
 
 var rbChat=(function(){
