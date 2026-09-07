@@ -134,7 +134,7 @@
 <script>
 (function(){
   var CHAT='https://rb-chat.formos-ops.workers.dev/', FORM='https://rb-form.formos-ops.workers.dev/';
-  var TOPIC="Meta Pixel not tracking purchases", WHERE="Meta", OPENER="Hi, I\u2019m Rytis\u2019s assistant. Meta Pixel or Conversions API not counting purchases the way your store does? I\u2019ll guide you through three quick questions and hand everything to Rytis. Your name and email first, so he can reply to you himself.";
+  var TOPIC="Meta Pixel not tracking purchases", WHERE="Meta", OPENER="Hi, I\u2019m Rytis\u2019s assistant. Meta Pixel or Conversions API not counting purchases the way your store does? I\u2019ll guide you through three quick questions and hand everything to Rytis. Your name and email first, so he can reply to you himself. \ud83d\ude42";
   var log=document.getElementById('log'), f=document.getElementById('ask'), rowWho=document.getElementById('rowWho'), rowText=document.getElementById('rowText'), chips=document.getElementById('chips'), hint=document.getElementById('hint'), direct=document.getElementById('direct');
   var st={step:'who',name:'',email:'',desc:'',platform:'',site:''};
   try{ var q=new URLSearchParams(location.search), gc=q.get('gclid'); if(gc){ sessionStorage.setItem('rb_gclid',gc); sessionStorage.setItem('rb_landing',location.pathname); } f.gclid.value=sessionStorage.getItem('rb_gclid')||''; f.landing.value=sessionStorage.getItem('rb_landing')||location.pathname; }catch(e){}
