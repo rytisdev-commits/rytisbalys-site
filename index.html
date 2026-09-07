@@ -128,7 +128,7 @@
   </div>
 </div></section>
 
-<section class="talk alt"><div class="w">
+<section class="talk alt" id="chat1"><div class="w">
   <div class="sh"><h2>Your free audit starts here.</h2><p class="sub">Tell my assistant what you see. It asks what I would ask, and I reply myself within 6 hours. Prices and timelines it answers on the spot.</p></div>
   <div class="tq">
     <div class="t"><span class="st" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><p>&ldquo;He proved it with cold-load tests and a reversal test&rdquo;</p><small>Meta Pixel fix, WordPress &middot; July 2026</small></div>
@@ -136,7 +136,7 @@
     <div class="t"><span class="st" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><p>&ldquo;He helped us find a solution to a very tricky problem in an astonishingly quick time&rdquo;</p><small>Urgent Meta Pixel and CAPI audit, Shopify &middot; July 2026</small></div>
     <a class="all" href="#reviews">All 9 reviews on Upwork, every one 5.0 &rarr;</a>
   </div>
-  <div class="card" id="chat1">
+  <div class="card" id="chat1-box">
   <div class="log"><div class="m bot">Hi, I&rsquo;m Rytis&rsquo;s assistant. Your name and email first, so Rytis can reach out to you directly. Then tell me where your numbers disagree, or ask about prices and timelines.</div></div>
   <form class="ask" novalidate>
     <div class="row who"><input type="text" name="name" placeholder="Your name" autocomplete="given-name" required><input type="email" name="email" placeholder="you@company.com" autocomplete="email" required><button type="submit">Start</button></div>
@@ -304,7 +304,7 @@ var rbChat=(function(){
 })();
 
 document.querySelectorAll('.more-rev').forEach(function(b){ b.addEventListener('click',function(){ var q=b.previousElementSibling; var o=q.classList.toggle('open'); b.textContent=o?'Show less':'Read the full review'; }); });
-rbChat(document.getElementById('chat1'),{source:'home-chat',mobileTo:'/ai'}); rbChat(document.getElementById('chat2'),{source:'home-chat',mobileTo:'/ai'});
+rbChat(document.getElementById('chat1-box'),{source:'home-chat',mobileTo:'/ai'}); rbChat(document.getElementById('chat2'),{source:'home-chat',mobileTo:'/ai'});
 </script>
 </body>
 </html>
