@@ -50,9 +50,12 @@
   .vf{font-size:14px;opacity:.92;margin-top:12px;line-height:1.5}
   .vb{position:relative;margin:16px -14px -36px auto;width:max-content;background:var(--ink);border-radius:16px;padding:12px 16px;box-shadow:0 12px 30px rgba(15,42,32,.35)} .vb small{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.75} .vb b{font-size:22px;font-weight:800}
   .talk .card{max-width:1100px;margin:0 auto;border-radius:26px} .talk .log{padding:30px 30px 10px;min-height:200px;max-height:520px} .talk .m{font-size:17px;max-width:80%} .talk .ask{padding:16px 30px 28px;gap:14px} .talk .ask input{font-size:17px;padding:16px 18px;border-radius:14px} .talk .ask button{min-height:56px;font-size:16px;padding:0 30px;border-radius:14px} .talk .hint{margin-top:4px;font-size:13.5px} .talk .sh{text-align:center;margin-bottom:22px}
-.tq{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;max-width:1100px;margin:0 auto 18px;font-size:14px;line-height:1.35}
-.tq span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 14px;color:var(--ink)}
-.tq a{color:var(--g);font-weight:700;text-decoration:none;padding:8px 4px} .talk .sub{margin-left:auto;margin-right:auto}
+.tq{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:1100px;margin:0 auto 22px}
+.tq .t{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 18px 14px;display:flex;flex-direction:column;gap:8px;box-shadow:0 6px 18px rgba(20,83,45,.05)}
+.tq .st{color:#f59e0b;font-size:13px;letter-spacing:2px;line-height:1}
+.tq p{margin:0;font-size:15.5px;line-height:1.45;color:var(--ink);font-weight:600}
+.tq small{margin-top:auto;color:var(--muted);font-size:12.5px}
+.tq .all{grid-column:1/-1;text-align:center;color:var(--g);font-weight:700;text-decoration:none;font-size:14px;padding:4px} .talk .sub{margin-left:auto;margin-right:auto}
   .badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:13px;color:var(--muted)} .badge b{color:var(--ink)}
   h1{font-size:48px;font-weight:800;letter-spacing:-.035em;line-height:1.05;margin:16px 0 14px}
   .lead{font-size:18px;color:var(--muted);max-width:620px}
@@ -88,7 +91,7 @@
   .hint{font-size:12.5px;color:var(--muted)} .hint b{color:var(--ink)} .hint a{text-decoration:none;font-weight:600}
   footer{font-size:12px;color:var(--muted);text-align:center;padding:48px 16px 24px} footer a{color:var(--muted)}
   .fnav{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 22px;margin-bottom:16px;font-size:14px} .fnav a{color:var(--ink);text-decoration:none;font-weight:600}
-  @media (max-width:900px){.w{padding:0 16px} .hero .w,.grid2{grid-template-columns:1fr;gap:28px} .grid3,.grid4{grid-template-columns:1fr} h1{font-size:32px} h2{font-size:26px} header nav a:not(.cta){display:none} header nav a.cta{padding:10px 14px;font-size:13px} .bar .bx{display:none} header .who small{display:none} .guides ul{columns:1} .revs{grid-template-columns:1fr} section{padding:52px 0} section.hero{padding:28px 0 48px} .log{max-height:320px} .tn{font-size:44px} .vb{margin:14px 0 0 auto} .vt .ok{display:none} .badge{font-size:12px} .talk .ask input{flex-basis:100%} .talk .ask .who button{width:100%} .talk .m{max-width:94%}}
+  @media (max-width:900px){.w{padding:0 16px} .hero .w,.grid2{grid-template-columns:1fr;gap:28px} .grid3,.grid4{grid-template-columns:1fr} h1{font-size:32px} h2{font-size:26px} header nav a:not(.cta){display:none} header nav a.cta{padding:10px 14px;font-size:13px} .bar .bx{display:none} header .who small{display:none} .guides ul{columns:1} .revs{grid-template-columns:1fr} section{padding:52px 0} section.hero{padding:28px 0 48px} .log{max-height:320px} .tn{font-size:44px} .vb{margin:14px 0 0 auto} .vt .ok{display:none} .badge{font-size:12px} .talk .ask input{flex-basis:100%} .talk .ask .who button{width:100%} .tq{grid-template-columns:1fr;gap:10px} .talk .m{max-width:94%}}
 .ferr{color:#b91c1c;font-size:13px;margin:6px 0 0}
 </style>
 <link rel="alternate" hreflang="en" href="https://rytisbalys.com/">
@@ -127,7 +130,12 @@
 
 <section class="talk alt"><div class="w">
   <div class="sh"><h2>Your free audit starts here.</h2><p class="sub">Tell my assistant what you see. It asks what I would ask, and I reply myself within 6 hours. Prices and timelines it answers on the spot.</p></div>
-  <div class="tq"><span>&ldquo;He proved it with cold-load tests and a reversal test&rdquo;</span><span>&ldquo;&hellip;the full audit landed same-day after access was granted&rdquo;</span><span>&ldquo;He helped us find a solution to a very tricky problem in an astonishingly quick time&rdquo;</span><a href="#reviews">all 9 reviews, every one 5.0</a></div>
+  <div class="tq">
+    <div class="t"><span class="st" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><p>&ldquo;He proved it with cold-load tests and a reversal test&rdquo;</p><small>Meta Pixel fix, WordPress &middot; July 2026</small></div>
+    <div class="t"><span class="st" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><p>&ldquo;&hellip;the full audit landed same-day after access was granted&rdquo;</p><small>Tracking audit, server-side GTM &middot; July 2026</small></div>
+    <div class="t"><span class="st" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><p>&ldquo;He helped us find a solution to a very tricky problem in an astonishingly quick time&rdquo;</p><small>Urgent Meta Pixel and CAPI audit, Shopify &middot; July 2026</small></div>
+    <a class="all" href="#reviews">All 9 reviews on Upwork, every one 5.0 &rarr;</a>
+  </div>
   <div class="card" id="chat1">
   <div class="log"><div class="m bot">Hi, I&rsquo;m Rytis&rsquo;s assistant. Your name and email first, so Rytis can reach out to you directly. Then tell me where your numbers disagree, or ask about prices and timelines.</div></div>
   <form class="ask" novalidate>
