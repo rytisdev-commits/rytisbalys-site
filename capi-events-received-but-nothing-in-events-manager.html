@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1D69SRZPPM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1D69SRZPPM');
+  gtag('config', 'AW-18424603738');
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meta CAPI Says events_received: 1 but Events Manager Shows Nothing</title>
+<meta name="description" content="Your Conversions API call succeeds, the response says events_received: 1, and the event never appears. The real causes, plus two popular explanations that Meta's own docs contradict.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Meta CAPI Says events_received: 1 but Events Manager Shows Nothing">
+<meta property="og:description" content="Your Conversions API call succeeds, the response says events_received: 1, and the event never appears. The real causes, plus two popular explanations that Meta's own docs contradict.">
+<meta property="og:url" content="https://rytisbalys.com/capi-events-received-but-nothing-in-events-manager">
+<meta property="og:image" content="https://rytisbalys.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://rytisbalys.com/capi-events-received-but-nothing-in-events-manager">
+<link rel="alternate" hreflang="en" href="https://rytisbalys.com/capi-events-received-but-nothing-in-events-manager">
+
+<link rel="alternate" hreflang="x-default" href="https://rytisbalys.com/capi-events-received-but-nothing-in-events-manager">
+<meta property="og:locale" content="en_US"><meta property="og:locale:alternate" content="lt_LT">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="theme-color" content="#14532d">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Meta CAPI returns events_received: 1 and Events Manager still shows nothing", "description": "Your Conversions API call succeeds, the response says events_received: 1, and the event never appears. The real causes, plus two popular explanations that Meta's own docs contradict.", "url": "https://rytisbalys.com/capi-events-received-but-nothing-in-events-manager", "mainEntityOfPage": "https://rytisbalys.com/capi-events-received-but-nothing-in-events-manager", "inLanguage": "en", "datePublished": "2026-09-10", "dateModified": "2026-09-10", "author": {"@type": "Person", "@id": "https://rytisbalys.com/#rytis", "name": "Rytis Balys", "url": "https://rytisbalys.com/"}, "publisher": {"@type": "Organization", "name": "MB Euruvizija", "logo": {"@type": "ImageObject", "url": "https://rytisbalys.com/icon-512.png", "width": 512, "height": 512}}, "image": ["https://rytisbalys.com/og.png"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why is my Meta Pixel not firing even though it shows as installed?", "acceptedAnswer": {"@type": "Answer", "text": "\"Installed\" only means the base code is present. Firing means the browser sends requests to facebook.com/tr. Open DevTools, Network, filter by tr and act on the site. No requests means it is not firing, whatever the tag manager or Pixel Helper says."}}, {"@type": "Question", "name": "Why does my Meta Pixel work when I test it but not for real visitors?", "acceptedAnswer": {"@type": "Answer", "text": "The usual cause on WordPress is a caching plugin's delay-JavaScript option. It postpones fbq until the first interaction, while the script that calls fbq is not delayed, so the call throws ReferenceError: fbq is not defined and the PageView never fires. Testing hides it, because moving your mouse is exactly what releases the delayed scripts. Verify on a cold anonymous load with no interaction, and while logged out."}}, {"@type": "Question", "name": "My server-side events arrive but the browser pixel does not. Is that possible?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. They are two independent delivery paths. Server-side events go straight from your backend to Meta and are unaffected by delayed scripts, ad blockers or consent wiring in the browser, so one can work perfectly while the other sends nothing."}}, {"@type": "Question", "name": "Does Safari's ITP block the Meta Pixel?", "acceptedAnswer": {"@type": "Answer", "text": "No. ITP does not block the request to facebook.com/tr. It limits cookie and script-writable storage lifetime, which degrades match quality and attribution windows. Ad blockers and Firefox's strict tracking protection are what block the request itself."}}]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#f4f6f3;--card:#fff;--ink:#0f2a20;--muted:#4f6f62;--line:#dde5dc;--bot:#eef3ec;--g:#14532d;--amber:#b45309;--font:Manrope,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;--mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
+  *{margin:0;padding:0;box-sizing:border-box} [hidden]{display:none!important} html{scroll-behavior:smooth} [id]{scroll-margin-top:92px}
+  body{background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:var(--g)}
+  .w{max-width:1200px;margin:0 auto;padding:0 40px}
+  header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+  header .w{display:flex;align-items:center;gap:14px;padding-top:12px;padding-bottom:12px}
+  header img{width:44px;height:44px;border-radius:50%;object-fit:cover}
+  header .who{font-weight:700;font-size:16px;text-decoration:none;color:var(--ink)} header .who small{display:block;font-weight:400;font-size:12.5px;color:var(--muted)}
+  header nav{margin-left:auto;display:flex;gap:22px;align-items:center;font-size:14px}
+  header nav a{color:var(--muted);text-decoration:none} header nav a.cta{background:var(--g);color:#fff;border-radius:999px;padding:11px 16px;min-height:40px;box-sizing:border-box;display:inline-flex;align-items:center;font-weight:700;white-space:nowrap}
+  main{max-width:800px;margin:0 auto;padding:40px 24px 64px}
+  .crumb{font-size:13px;color:var(--muted);margin-bottom:22px} .date{font-size:13px;color:var(--muted);margin:-8px 0 18px} .ferr{color:#b91c1c;font-size:13px;margin:6px 0 0} .crumb a{color:var(--muted);text-decoration:none} .crumb a:hover{color:var(--g)}
+  h1{font-size:38px;font-weight:800;letter-spacing:-.03em;line-height:1.12;margin-bottom:14px;text-wrap:balance}
+  .sub{font-size:18px;color:var(--muted);margin-bottom:34px;max-width:680px}
+  h2{font-size:24px;font-weight:800;letter-spacing:-.02em;line-height:1.2;margin:44px 0 12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  h2 .n{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:34px;padding:0 8px;border-radius:999px;background:var(--g);color:#fff;font-size:14px;font-weight:800;letter-spacing:0}
+  h3{font-size:18px;font-weight:700;margin:26px 0 8px}
+  p{margin-bottom:14px;font-size:16.5px} p.dim{color:var(--muted)} li{font-size:16.5px}
+  ul,ol{margin:0 0 16px 22px} li{margin-bottom:6px}
+  strong,b{font-weight:700}
+  code{font-family:var(--mono);font-size:14px;background:#fff;border:1px solid var(--line);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
+  pre{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-family:var(--mono);font-size:13.5px;color:var(--ink);overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin:0 0 16px} pre code{border:0;padding:0;background:none}
+  .verify{border-left:4px solid var(--g);background:#fff;border-radius:0 12px 12px 0;padding:12px 16px;margin:0 0 12px;font-size:15.5px} .verify b{color:var(--g);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;margin-right:6px}
+  .warn{border-left:4px solid var(--amber);background:#fff;border-radius:0 12px 12px 0;padding:12px 16px;margin:0 0 12px;font-size:15.5px} .warn b{color:var(--amber)}
+  .faq{margin-top:48px;border-top:1px solid var(--line);padding-top:8px} .faq h2{margin-top:28px}
+  .faq details{border-bottom:1px solid var(--line);padding:6px 0} .faq summary{cursor:pointer;font-weight:700;font-size:16.5px;padding:10px 0;min-height:44px;box-sizing:border-box;list-style:none;display:flex;justify-content:space-between;gap:12px} .faq summary::after{content:'+';color:var(--g);font-weight:800} .faq details[open] summary::after{content:'\2212'} .faq details p{margin:10px 0 0;color:var(--muted);font-size:15.5px}
+  .lastmile{margin-top:44px;background:var(--bot);border-radius:18px;padding:24px 26px}
+.lastmile h2{font-size:19px;line-height:1.3;letter-spacing:-.01em;margin:0 0 8px;color:var(--ink);text-transform:none}
+.lastmile p{font-size:15px;line-height:1.62;color:var(--muted);margin:0 0 10px}
+.lastmile .lm-ask{color:var(--ink);font-weight:600}
+.lm-paths{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:16px}
+.lm-alt{display:flex;flex-direction:column;color:var(--g);font-weight:700;text-decoration:none;font-size:15px}
+.lm-alt span{display:block;font-weight:400;font-size:13px;color:var(--muted);margin-top:1px}
+.lm-alt:hover{text-decoration:underline}
+.related{margin-top:40px;border-top:1px solid var(--line);padding-top:24px} .related h2{font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 10px} .related ul{list-style:none;margin:0} .related li{padding:10px 0;border-bottom:1px solid var(--line);margin:0} .related li:last-child{border-bottom:0} .related a{color:var(--ink);text-decoration:none;font-size:16px} .related a:hover{color:var(--g)}
+  /* asistento kortele */
+  .card{margin-top:48px;background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 14px 34px rgba(20,83,45,.10);overflow:hidden}
+  .card .top{padding:22px 22px 0} .card .top h2{margin:0 0 6px;font-size:22px} .card .top p{color:var(--muted);font-size:15.5px;margin-bottom:12px}
+  .log{display:flex;flex-direction:column;gap:12px;padding:6px 22px 8px}
+  .m{max-width:92%;padding:13px 16px;border-radius:18px;font-size:15px;line-height:1.55} .m.bot{align-self:flex-start;background:var(--bot);border-bottom-left-radius:6px}
+  .ask{padding:12px 22px 18px;display:flex;flex-direction:column;gap:10px} .row{display:flex;gap:8px;flex-wrap:wrap}
+  .ask input{flex:1 1 160px;font:inherit;font-size:16px;padding:12px 14px;border:1px solid #cfe0d4;border-radius:12px;color:var(--ink);min-width:0}
+  .ask input:focus{outline:none;border-color:var(--g);box-shadow:0 0 0 3px rgba(20,83,45,.12)}
+  .ask button{border:0;border-radius:12px;background:var(--g);color:#fff;font:600 15px var(--font);padding:0 20px;min-height:46px;cursor:pointer}
+  .hint{font-size:12.5px;color:var(--muted);margin:0} .hint b{color:var(--ink)} .hint a{text-decoration:none;font-weight:600}
+  footer{font-size:12px;color:var(--muted);text-align:center;padding:40px 16px 24px} footer a{color:var(--muted)}
+  .fnav{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 22px;margin-bottom:16px;font-size:14px} .fnav a{color:var(--ink);text-decoration:none;font-weight:600;display:inline-block;padding:8px 0} .fnav .cur{color:var(--muted);font-weight:600}
+  @media (max-width:900px){.w{padding:0 16px} header nav a:not(.cta){display:none} header nav a.cta{padding:10px 14px;font-size:13px} header .who small{display:none} h1{font-size:30px} h2{font-size:21px} main{padding:28px 16px 48px}}
+</style>
+</head>
+<body>
+<header><div class="w">
+  <img src="/rytis-88.jpg" srcset="/rytis-88.jpg 1x, /rytis-132.jpg 2x" width="44" height="44" alt="Rytis Balys">
+  <a class="who" href="/">Rytis Balys<small>Conversion tracking engineer</small></a>
+  <nav><a href="/#build">What I build</a><a href="/#process">Process</a><a href="/#prices">Prices</a><a href="/#reviews">Reviews</a><a href="/#guides">Guides</a><a class="cta" href="#chat1">Get your free audit</a></nav>
+</div></header>
+<main>
+  <div class="crumb"><a href="/">rytisbalys.com</a> <span >/ troubleshooting</span></div>
+  <h1>Meta CAPI returns events_received: 1 and Events Manager still shows nothing</h1>
+  <p class="date"><time datetime="2026-09-10">Published 10 September 2026</time></p>
+  <p class="sub">Written from production audits. The API accepting an event and Events Manager showing
+  a new event are two different claims, and the gap between them has a small number of real causes.</p>
+
+  <p><b>The short answer:</b> <code>events_received: 1</code> means Meta accepted the payload for
+  processing. It does not mean a new event will appear. In practice it is almost always one of three
+  things: the event was deduplicated against its browser twin, it landed in a dataset you are not
+  looking at, or you are reading the wrong window in Events Manager. Two popular explanations,
+  <code>test_event_code</code> and a stale <code>event_time</code>, are contradicted by Meta&rsquo;s own
+  documentation, and we quote it below.</p>
+
+  <h2><span class="n">00</span>What the response actually promises</h2>
+  <p>A successful call returns something like <code>{"events_received": 1, "messages": [],
+  "fbtrace_id": "..."}</code>. That is an acknowledgement of receipt and schema validity. It is not a
+  statement that the event was counted, attributed, or made visible. Your own endpoint returning
+  <code>200</code> proves even less: it only says your server answered. Read the response body from
+  Meta, not the status code from your own stack.</p>
+  <div class="verify"><b>VERIFY</b> - log the full JSON body Meta returns, including
+  <code>fbtrace_id</code>. If <code>messages</code> is non-empty, your answer is already in there and
+  nothing below applies.</div>
+
+  <h2><span class="n">01</span>It was deduplicated against the browser event</h2>
+  <p>This is the most common cause and the least suspected, because nothing about it looks like a
+  failure. If the pixel already sent the same action from the browser, and your server event carries
+  the same <code>event_name</code> and <code>event_id</code>, Meta keeps one of them. From the server
+  event parameters documentation:</p>
+  <blockquote><p>&ldquo;If we find a match between events sent within 48 hours of each other, we only
+  consider the first one. If a server and browser/app event arrive at approximately the same time
+  (that is, within 5 minutes of each other), we favor the browser/app event.&rdquo;</p></blockquote>
+  <p>So a correctly deduplicated server event is received, accepted, and then deliberately not shown
+  as an additional event. The system is working. You are counting the wrong thing.</p>
+  <div class="verify"><b>VERIFY</b> - in Events Manager, open the event and look at the source
+  breakdown rather than the total. If the action shows both <code>Browser</code> and <code>Server</code>
+  with a deduplication figure, your server events are arriving and being merged on purpose.</div>
+
+  <h2><span class="n">02</span>It landed in a dataset you are not looking at</h2>
+  <p>Most businesses have more than one dataset, and the ID that ends up in server code is often not
+  the one on screen. A dataset attached to an old ad account, a second pixel created during a theme
+  migration, or a partner integration that provisioned its own. The call succeeds, because the ID is
+  valid. It is simply not the ID you have open.</p>
+  <div class="verify"><b>VERIFY</b> - take the dataset ID from the URL your server actually posts to,
+  not from a config file or a screenshot, and paste it into the Events Manager URL. If the page that
+  opens is a different dataset than the one you have been watching, you have your answer.</div>
+
+  <h2><span class="n">03</span>You are reading the wrong window</h2>
+  <p>Events Manager defaults do not match how a server sends. The overview is time-zone bound to the
+  ad account, batched server traffic can arrive in bursts, and a narrow date range with a filter left
+  on from a previous session will hide a low-volume event completely. This is the cheapest cause to
+  rule out and the one most often skipped.</p>
+  <div class="verify"><b>VERIFY</b> - widen the range to the last 7 days, clear every filter, and
+  check the event name exactly as you send it. <code>Purchase</code> and a custom
+  <code>purchase</code> are two different rows.</div>
+
+  <h2><span class="n">04</span>Two explanations you will read everywhere that are wrong</h2>
+  <p>Both circulate widely in forum threads. Meta&rsquo;s documentation contradicts both, so ruling
+  them out first saves a day.</p>
+
+  <p><b>&ldquo;Your events went to Test Events instead of production.&rdquo;</b> From the Conversions
+  API usage documentation:</p>
+  <blockquote><p>&ldquo;Events sent with test_event_code are not dropped. They flow into Events Manager
+  and are used for targeting and ads measurement purposes.&rdquo;</p></blockquote>
+  <p>Leaving <code>test_event_code</code> in production is still wrong, and Meta says to remove it.
+  But it does not hide your events.</p>
+
+  <p><b>&ldquo;Your event_time was older than 7 days, so Meta dropped it silently.&rdquo;</b> From the
+  server event parameters documentation:</p>
+  <blockquote><p>&ldquo;The event_time can be up to 7 days before you send an event to Facebook. If any
+  event_time in data is greater than 7 days in the past, we return an error for the entire request and
+  process no events.&rdquo;</p></blockquote>
+  <p>Note what that rules out. A stale timestamp does not produce a quiet partial loss. It fails the
+  <b>whole request</b> and returns an <b>error</b>, so you would not be holding an
+  <code>events_received: 1</code> at all. If you are backfilling and seeing nothing, the timestamp is
+  worth checking, but the symptom in this article is not how it presents.</p>
+  <div class="verify"><b>VERIFY</b> - if you suspect the window, send one event with a timestamp eight
+  days old on purpose. An error back confirms the rule is live on your dataset and clears the theory
+  for your real traffic.</div>
+
+  <h2><span class="n">05</span>The order to check them in</h2>
+  <p>Read the response body. Widen the window and clear filters. Confirm the dataset ID from the live
+  request rather than from config. Then look at the source breakdown for deduplication. Four steps,
+  and in production audits the answer is in the first three more often than not.</p>
+  <p>What this article cannot tell you is which one is live on your setup, because that depends on how
+  your pixel, your server and your consent layer were wired, and in what order they run. Designing a
+  deduplication key that holds across a real stack, then proving the fix did not quietly break the
+  browser path, is work rather than knowledge. That part we do with access.</p>
+
+  <div class="card" id="chat1">
+  <div class="top"><h2>Numbers still don't add up?</h2><p>Tell my assistant what you see and I will reach out to you directly. Every rated job on Upwork is 5.0, <a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">check them live</a>.</p></div>
+  <div class="log"><div class="m bot">Hi, I&rsquo;m Rytis&rsquo;s assistant. Your name and email first, so Rytis can reach out to you directly. Then tell me where your numbers disagree, or ask about prices and timelines.</div></div>
+  <form class="ask" novalidate>
+    <div class="row who"><input type="text" name="name" placeholder="Your name" autocomplete="given-name" required><input type="email" name="email" placeholder="you@company.com" autocomplete="email" required><button type="submit">Start</button></div>
+    <p class="hint">I reply myself <b>within 6 hours, usually under 1 hour</b>. Prefer direct? <a href="https://wa.me/37060308900?text=Hi%20Rytis%2C%20my%20tracking%20issue%3A%20" target="_blank" rel="noopener">WhatsApp</a> (messages, not calls) &middot; <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a></p>
+  </form>
+  <noscript><p class="hint">The assistant needs JavaScript. Write to <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a> or WhatsApp +370 603 08900 instead.</p></noscript>
+</div>
+  <div class="faq">
+    <h2>FAQ</h2>
+    <details><summary>Does events_received: 1 mean the event was counted?</summary><p>No. It means the payload was received and passed schema validation. Counting, deduplication and attribution all happen afterwards, and any of them can end with no new row in Events Manager.</p></details>
+    <details><summary>My server events are deduplicated away. Should I stop sending them?</summary><p>No. Deduplication is the point. The server event is your backup for the browser event that ad blockers, ITP or a consent decline would have lost. On the occasions the browser event never arrives, the server one is the only record you have.</p></details>
+    <details><summary>Does test_event_code stop my events reaching production?</summary><p>No. Meta documents that events sent with test_event_code are not dropped and still flow into Events Manager. Remove it from production payloads anyway, because Meta says to, but it is not the reason an event is missing.</p></details>
+    <details><summary>Can an event_time older than 7 days be dropped without telling me?</summary><p>Not according to Meta's documentation. An event_time more than 7 days in the past returns an error for the entire request and no events are processed. It is loud, not silent.</p></details>
+    <details><summary>My own endpoint returns 200. Is that enough?</summary><p>No. That is your server answering your server. The only response that matters is the one Meta returns, and it should be logged in full, fbtrace_id included, because support cannot help without it.</p></details>
+    <details><summary>How long should I wait before deciding an event is missing?</summary><p>Give it minutes rather than seconds, and check a wide date range with filters cleared before concluding anything. A low-volume event in a narrow window is invisible for reasons that have nothing to do with your integration.</p></details>
+  </div>
+
+  <div class="lastmile">
+  <h2>You have the causes. Which one is yours needs a look inside.</h2>
+  <p>The list above is what we find most often. Which one is live on your site depends on your
+  theme, your apps and your consent setup, and that part is not guessable from a guide.</p>
+  <p class="lm-ask"><b>Want it checked by professionals?</b> Seven days of platform conversions next to your real
+  orders is enough for us to name the likely cause. No charge, usually under an hour.</p>
+  <div class="lm-paths">
+    <a class="cta" href="#chat1">Start with the assistant</a>
+    <a class="lm-alt" href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">
+      Or book through Upwork <span>same price, their escrow, your money stays there until you accept the work</span>
+    </a>
+  </div>
+</div>
+<div class="related">
+    <h2>Related guides</h2>
+    <ul>
+      <li><a href="/meta-events-manager-double-purchases-deduplication-fix">Meta counts purchases twice: Pixel + CAPI deduplication fix</a></li>
+      <li><a href="/meta-pixel-not-firing">Meta Pixel not firing? The 7 real causes, in the order you should check them</a></li>
+      <li><a href="/server-side-gtm-what-it-fixes">Server-side GTM: what it actually fixes, and what it does not</a></li>
+    </ul>
+  </div>
+</main>
+<footer><nav class="fnav"><a href="/#build">What I build</a><a href="/#process">Process</a><a href="/#prices">Prices</a><a href="/#reviews">Reviews</a><a href="/#guides">Guides</a><a href="#chat1">Free audit</a></nav>Rytis Balys &middot; MB Euruvizija &middot; Vilnius, Lithuania (EET) &middot; worldwide, remote &middot; assistant replies are kept 90 days so I can improve them &middot; <a href="https://github.com/rytisdev-commits/server-side-conversion-tracking" rel="noopener">github case study</a> &middot; <a href="/lt/">LT</a></footer>
+<script>
+(function(){
+  var FORM='https://rb-form.formos-ops.workers.dev/';
+  try{ var q=new URLSearchParams(location.search), gc=q.get('gclid'); if(gc){ sessionStorage.setItem('rb_gclid',gc); sessionStorage.setItem('rb_landing',location.pathname); } }catch(e){}
+  var EMAIL_MSG='Enter a valid email address, e.g. name@company.com'; var EMAIL=/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/;
+  var root=document.getElementById('chat1'); if(!root) return; var f=root.querySelector('form');
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var n=f.name.value.trim(), m=f.email.value.trim();
+    if(!n){ f.name.focus(); return; } var fe=f.querySelector('.ferr'); if(!EMAIL.test(m)){ f.email.focus(); f.email.style.borderColor='#b91c1c'; if(!fe){ fe=document.createElement('div'); fe.className='ferr'; f.querySelector('.who').insertAdjacentElement('afterend',fe); } fe.textContent=EMAIL_MSG; return; } f.email.style.borderColor=''; if(fe) fe.remove();
+    try{ sessionStorage.setItem('rb_name',n); sessionStorage.setItem('rb_email',m); }catch(x){}
+    try{ gtag('event','intake_start',{source:'guide'}); gtag('event','conversion',{'send_to':'AW-18424603738/M34RCLm1x-wcENrIxNFE','value':50,'currency':'EUR'}); gtag('event','lead_form_submit',{source:'guide'}); }catch(x){}
+    var gclid='', landing=location.pathname; try{ gclid=sessionStorage.getItem('rb_gclid')||''; landing=sessionStorage.getItem('rb_landing')||location.pathname; }catch(x){}
+    try{ fetch(FORM,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify({intake:true,name:n,email:m,fax_line:'',dt:9000,page:location.pathname,gclid:gclid,landing:landing,source:'guide'})}); }catch(x){}
+    setTimeout(function(){ location.href='/ai'; },150);
+  });
+})();
+</script>
+<script>
+/* Contact initiated: mailto, WhatsApp, Upwork paspaudimai -> Google Ads konversija */
+(function(){
+  var L='AW-18424603738/BxxrCNvetvIcENrIxNFE', sent=false;
+  document.addEventListener('click', function(e){
+    var a = e.target && e.target.closest ? e.target.closest('a') : null;
+    if(!a) return;
+    var h = a.getAttribute('href') || '';
+    if(!/^mailto:|wa\.me|api\.whatsapp\.com|upwork\.com/i.test(h)) return;
+    if(sent) return; sent = true;
+    var kind = /^mailto:/i.test(h) ? 'email' : (/upwork\.com/i.test(h) ? 'upwork' : 'whatsapp');
+    try{
+      gtag('event','conversion',{'send_to':L,'value':50,'currency':'EUR'});
+      gtag('event','contact_initiated',{method:kind});
+    }catch(x){}
+  }, true);
+})();
+</script>
+</body>
+</html>
