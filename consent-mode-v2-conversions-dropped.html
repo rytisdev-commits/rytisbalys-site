@@ -61,7 +61,15 @@
   .warn{border-left:4px solid var(--amber);background:#fff;border-radius:0 12px 12px 0;padding:12px 16px;margin:0 0 12px;font-size:15.5px} .warn b{color:var(--amber)}
   .faq{margin-top:48px;border-top:1px solid var(--line);padding-top:8px} .faq h2{margin-top:28px}
   .faq details{border-bottom:1px solid var(--line);padding:6px 0} .faq summary{cursor:pointer;font-weight:700;font-size:16.5px;padding:10px 0;min-height:44px;box-sizing:border-box;list-style:none;display:flex;justify-content:space-between;gap:12px} .faq summary::after{content:'+';color:var(--g);font-weight:800} .faq details[open] summary::after{content:'\2212'} .faq details p{margin:10px 0 0;color:var(--muted);font-size:15.5px}
-  .related{margin-top:40px;border-top:1px solid var(--line);padding-top:24px} .related h2{font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 10px} .related ul{list-style:none;margin:0} .related li{padding:10px 0;border-bottom:1px solid var(--line);margin:0} .related li:last-child{border-bottom:0} .related a{color:var(--ink);text-decoration:none;font-size:16px} .related a:hover{color:var(--g)}
+  .lastmile{margin-top:44px;background:var(--bot);border-radius:18px;padding:24px 26px}
+.lastmile h2{font-size:19px;line-height:1.3;letter-spacing:-.01em;margin:0 0 8px;color:var(--ink);text-transform:none}
+.lastmile p{font-size:15px;line-height:1.62;color:var(--muted);margin:0 0 10px}
+.lastmile .lm-ask{color:var(--ink);font-weight:600}
+.lm-paths{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:16px}
+.lm-alt{display:flex;flex-direction:column;color:var(--g);font-weight:700;text-decoration:none;font-size:15px}
+.lm-alt span{display:block;font-weight:400;font-size:13px;color:var(--muted);margin-top:1px}
+.lm-alt:hover{text-decoration:underline}
+.related{margin-top:40px;border-top:1px solid var(--line);padding-top:24px} .related h2{font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 10px} .related ul{list-style:none;margin:0} .related li{padding:10px 0;border-bottom:1px solid var(--line);margin:0} .related li:last-child{border-bottom:0} .related a{color:var(--ink);text-decoration:none;font-size:16px} .related a:hover{color:var(--g)}
   /* asistento kortele */
   .card{margin-top:48px;background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 14px 34px rgba(20,83,45,.10);overflow:hidden}
   .card .top{padding:22px 22px 0} .card .top h2{margin:0 0 6px;font-size:22px} .card .top p{color:var(--muted);font-size:15.5px;margin-bottom:12px}
@@ -118,7 +126,20 @@
     <details><summary>Should I use basic or advanced consent mode?</summary><p>Advanced mode fires tags as cookieless pings for declined users, which enables conversion modeling in Google Ads and behavioral modeling in GA4. Basic mode blocks tags entirely until consent, so declined users produce nothing to model. Most EU stores run advanced mode; confirm the choice with whoever handles your privacy compliance, since it is a legal position as much as a technical one.</p></details>
     <details><summary>Does server-side tracking let me bypass the cookie banner?</summary><p>No. Consent applies to server-side tagging the same as browser-side, and a denied user must stay denied end to end. What server-side does is make consented traffic count fully by beating ad blockers and Safari's cookie limits, which in practice recovers more revenue than the declined minority represents.</p></details>
   </div>
-  <div class="related">
+  <div class="lastmile">
+  <h2>You have the causes. Which one is yours needs a look inside.</h2>
+  <p>The list above is what we find most often. Which one is live on your site depends on your
+  theme, your apps and your consent setup, and that part is not guessable from a guide.</p>
+  <p class="lm-ask">Send seven days of platform conversions and your real orders. We reply with the
+  likely cause, no charge, usually under an hour.</p>
+  <div class="lm-paths">
+    <a class="cta" href="#chat1">Start with the assistant</a>
+    <a class="lm-alt" href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">
+      Or book through Upwork <span>same price, their escrow, your money stays there until you accept the work</span>
+    </a>
+  </div>
+</div>
+<div class="related">
     <h2>Related guides</h2>
     <ul>
       <li><a href="/meta-pixel-not-firing">Meta Pixel not firing? The 7 real causes, in the order to check them</a></li>
