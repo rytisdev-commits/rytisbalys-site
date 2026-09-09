@@ -142,5 +142,23 @@
   });
 })();
 </script>
+<script>
+/* Contact initiated: mailto, WhatsApp, Upwork paspaudimai -> Google Ads konversija */
+(function(){
+  var L='AW-18424603738/BxxrCNvetvIcENrIxNFE', sent=false;
+  document.addEventListener('click', function(e){
+    var a = e.target && e.target.closest ? e.target.closest('a') : null;
+    if(!a) return;
+    var h = a.getAttribute('href') || '';
+    if(!/^mailto:|wa\.me|api\.whatsapp\.com|upwork\.com/i.test(h)) return;
+    if(sent) return; sent = true;
+    var kind = /^mailto:/i.test(h) ? 'email' : (/upwork\.com/i.test(h) ? 'upwork' : 'whatsapp');
+    try{
+      gtag('event','conversion',{'send_to':L,'value':50,'currency':'EUR'});
+      gtag('event','contact_initiated',{method:kind});
+    }catch(x){}
+  }, true);
+})();
+</script>
 </body>
 </html>
