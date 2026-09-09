@@ -139,7 +139,7 @@ Bad:  hits to BOTH google-analytics.com AND gtm.yourstore.com
     var n=f.name.value.trim(), m=f.email.value.trim();
     if(!n){ f.name.focus(); return; } var fe=f.querySelector('.ferr'); if(!EMAIL.test(m)){ f.email.focus(); f.email.style.borderColor='#b91c1c'; if(!fe){ fe=document.createElement('div'); fe.className='ferr'; f.querySelector('.who').insertAdjacentElement('afterend',fe); } fe.textContent=EMAIL_MSG; return; } f.email.style.borderColor=''; if(fe) fe.remove();
     try{ sessionStorage.setItem('rb_name',n); sessionStorage.setItem('rb_email',m); }catch(x){}
-    try{ gtag('event','intake_start',{source:'guide'}); }catch(x){}
+    try{ gtag('event','intake_start',{source:'guide'}); gtag('event','conversion',{'send_to':'AW-18424603738/M34RCLm1x-wcENrIxNFE','value':50,'currency':'EUR'}); gtag('event','lead_form_submit',{source:'guide'}); }catch(x){}
     var gclid='', landing=location.pathname; try{ gclid=sessionStorage.getItem('rb_gclid')||''; landing=sessionStorage.getItem('rb_landing')||location.pathname; }catch(x){}
     try{ fetch(FORM,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify({intake:true,name:n,email:m,fax_line:'',dt:9000,page:location.pathname,gclid:gclid,landing:landing,source:'guide'})}); }catch(x){}
     setTimeout(function(){ location.href='/ai'; },150);
