@@ -1,24 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
-<script>/* geo 2026-09-24: LT lankytojai i rytisbalys.lt, GB i /uk/. ?lang=en = likti. Tik rytisbalys.com. */
-(function(){try{
-var h=location.hostname;if(h!=="rytisbalys.com"&&h!=="www.rytisbalys.com")return;
-var q=location.search,x=location.hash,p=location.pathname.replace(/\.html$/,"").replace(/\/index$/,"/")||"/";
-var LT="https://rytisbalys.lt";
-if(/^\/lt(\/|$)/.test(p)){location.replace(LT+(p.slice(3)||"/")+q+x);return}
-if(/[?&]lang=en(&|$)/.test(q)){try{sessionStorage.setItem("rb_lang","en")}catch(e){}return}
-try{if(sessionStorage.getItem("rb_lang")==="en")return}catch(e){}
-if(/bot|crawl|spider|slurp|lighthouse|preview/i.test(navigator.userAgent))return;
-var LTP={"/":1,"/meta-pixel":1,"/google-ads":1,"/shopify":1,"/woocommerce":1,"/audit":1};
-if(!LTP[p])return;
-function go(c){if(c==="LT")location.replace(LT+p+q+x);else if(c==="GB"&&p==="/")location.replace("/uk/"+q+x)}
-var c=null;try{c=sessionStorage.getItem("rb_c")}catch(e){}
-if(c){go(c);return}
-fetch(LT+"/_geo").then(function(r){return r.json()}).then(function(d){try{sessionStorage.setItem("rb_c",d.c||"-")}catch(e){}go(d.c)}).catch(function(){});
-}catch(e){}})();
-</script>
-<link rel="canonical" href="https://rytisbalys.com/">
+<link rel="canonical" href="https://rytisbalys.com/uk/">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1D69SRZPPM"></script>
 <script>
@@ -38,10 +21,10 @@ fetch(LT+"/_geo").then(function(r){return r.json()}).then(function(d){try{sessio
 <meta property="og:type" content="website">
 <meta property="og:title" content="Rytis Balys - Conversion Tracking & Attribution">
 <meta property="og:description" content="Conversion tracking and server-side setup by one engineer. Fixed price, proved before you pay.">
-<meta property="og:url" content="https://rytisbalys.com/">
+<meta property="og:url" content="https://rytisbalys.com/uk/">
 <meta property="og:image" content="https://rytisbalys.com/og.png">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Person", "@id": "https://rytisbalys.com/#rytis", "name": "Rytis Balys", "jobTitle": "Server-side conversion tracking engineer", "url": "https://rytisbalys.com/", "email": "work@rytisbalys.com", "knowsAbout": ["Meta Conversions API", "Meta Pixel", "Google Analytics 4", "Google Tag Manager", "server-side tagging", "Consent Mode v2", "conversion tracking", "attribution", "AI traffic attribution", "LLM traffic attribution", "generative engine optimization measurement", "GEO tracking setup", "HubSpot", "GoHighLevel", "Triple Whale", "offline conversion tracking", "mobile app event tracking"], "sameAs": ["https://github.com/rytisdev-commits"], "worksFor": {"@type": "Organization", "name": "MB Euruvizija", "address": {"@type": "PostalAddress", "addressLocality": "Vilnius", "addressCountry": "LT"}}, "image": "https://rytisbalys.com/rytis.jpg", "telephone": "+37060308900"}, {"@type": "ProfessionalService", "name": "Rytis Balys - Conversion Tracking & Attribution", "url": "https://rytisbalys.com/", "description": "Tracking audits that reconcile ad platform numbers against real backend orders, server-side tracking builds (Meta Conversions API with event_id deduplication, GA4, server-side GTM), AI / LLM traffic attribution and GEO measurement setups (ChatGPT, Perplexity, Gemini), Shopify checkout tracking migrations, and CRM offline conversion pipelines (HubSpot, GoHighLevel) back into Google Ads and Meta.", "founder": {"@id": "https://rytisbalys.com/#rytis"}, "areaServed": "Worldwide", "email": "work@rytisbalys.com", "@id": "https://rytisbalys.com/#business", "image": "https://rytisbalys.com/rytis.jpg", "telephone": "+37060308900", "priceRange": "$150 - $1800", "address": {"@type": "PostalAddress", "addressLocality": "Vilnius", "addressCountry": "LT"}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Person", "@id": "https://rytisbalys.com/#rytis", "name": "Rytis Balys", "jobTitle": "Server-side conversion tracking engineer", "url": "https://rytisbalys.com/", "email": "work@rytisbalys.com", "knowsAbout": ["Meta Conversions API", "Meta Pixel", "Google Analytics 4", "Google Tag Manager", "server-side tagging", "Consent Mode v2", "conversion tracking", "attribution", "AI traffic attribution", "LLM traffic attribution", "generative engine optimization measurement", "GEO tracking setup", "HubSpot", "GoHighLevel", "Triple Whale", "offline conversion tracking", "mobile app event tracking"], "sameAs": ["https://github.com/rytisdev-commits"], "worksFor": {"@type": "Organization", "name": "MB Euruvizija", "address": {"@type": "PostalAddress", "addressLocality": "Vilnius", "addressCountry": "LT"}}, "image": "https://rytisbalys.com/rytis.jpg", "telephone": "+37060308900"}, {"@type": "ProfessionalService", "name": "Rytis Balys - Conversion Tracking & Attribution", "url": "https://rytisbalys.com/", "description": "Tracking audits that reconcile ad platform numbers against real backend orders, server-side tracking builds (Meta Conversions API with event_id deduplication, GA4, server-side GTM), AI / LLM traffic attribution and GEO measurement setups (ChatGPT, Perplexity, Gemini), Shopify checkout tracking migrations, and CRM offline conversion pipelines (HubSpot, GoHighLevel) back into Google Ads and Meta.", "founder": {"@id": "https://rytisbalys.com/#rytis"}, "areaServed": "Worldwide", "email": "work@rytisbalys.com", "@id": "https://rytisbalys.com/#business", "image": "https://rytisbalys.com/rytis.jpg", "telephone": "+37060308900", "priceRange": "£150 - £1800", "address": {"@type": "PostalAddress", "addressLocality": "Vilnius", "addressCountry": "LT"}}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -112,10 +95,10 @@ fetch(LT+"/_geo").then(function(r){return r.json()}).then(function(d){try{sessio
 .ferr{color:#b91c1c;font-size:13px;margin:6px 0 0}
 </style>
 <link rel="alternate" hreflang="en" href="https://rytisbalys.com/">
-<link rel="alternate" hreflang="lt" href="https://rytisbalys.lt/">
 <link rel="alternate" hreflang="en-GB" href="https://rytisbalys.com/uk/">
+<link rel="alternate" hreflang="lt" href="https://rytisbalys.lt/">
 <link rel="alternate" hreflang="x-default" href="https://rytisbalys.com/">
-<meta property="og:locale" content="en_US"><meta property="og:locale:alternate" content="lt_LT">
+<meta property="og:locale" content="en_GB"><meta property="og:locale:alternate" content="en_US">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="theme-color" content="#14532d">
@@ -205,9 +188,9 @@ fetch(LT+"/_geo").then(function(r){return r.json()}).then(function(d){try{sessio
   <div id="prices">
     <div class="sh"><h2>Three ways I can help</h2><p class="sub">Every job priced after I look inside, then fixed.</p></div>
     <div class="plans">
-      <div class="plan"><div class="pt">One-time fix</div><div class="pp">$150 to 600</div><p>A pixel or conversion tag repaired, fixed within 24 hours of access, or you don’t pay. Conversions API with deduplication takes about a week with the parallel run.</p></div>
-      <div class="plan hi"><div class="pt">Deep audit and fix</div><div class="pp">$500 to 900</div><p>Platform numbers reconciled against real orders, every finding fixed in order of what it costs you. Includes the report.</p></div>
-      <div class="plan"><div class="pt">Ongoing ownership</div><div class="pp">$700 to 1800 / month</div><p>Someone watches the tracking every month and fixes it before you notice. Checkout updates, new apps, consent changes.</p></div>
+      <div class="plan"><div class="pt">One-time fix</div><div class="pp">£150 to 600</div><p>A pixel or conversion tag repaired, fixed within 24 hours of access, or you don’t pay. Conversions API with deduplication takes about a week with the parallel run.</p></div>
+      <div class="plan hi"><div class="pt">Deep audit and fix</div><div class="pp">£500 to 900</div><p>Platform numbers reconciled against real orders, every finding fixed in order of what it costs you. Includes the report.</p></div>
+      <div class="plan"><div class="pt">Ongoing ownership</div><div class="pp">£700 to 1800 / month</div><p>Someone watches the tracking every month and fixes it before you notice. Checkout updates, new apps, consent changes.</p></div>
     </div>
     <div class="agencynote">Owning an agency? Please <a href="mailto:work@rytisbalys.com?subject=Agency%20pricing">contact directly</a> for special agency pricing.</div>
     <div class="need"><h3>Timelines, honestly</h3><ul><li>First read: within 6 hours, usually under 1 hour</li><li>Audit: 2 to 3 working days after access</li><li>Single fix: within 24 hours of access, or you don’t pay</li><li>Conversions API or server-side build: about a week with the parallel run</li></ul></div>
@@ -323,7 +306,7 @@ var rbChat=(function(){
 })();
 
 document.querySelectorAll('.more-rev').forEach(function(b){ b.addEventListener('click',function(){ var q=b.previousElementSibling; var o=q.classList.toggle('open'); b.textContent=o?'Show less':'Read the full review'; }); });
-rbChat(document.getElementById('chat1-box'),{source:'home-chat',mobileTo:'/ai'}); rbChat(document.getElementById('chat2'),{source:'home-chat',mobileTo:'/ai'});
+rbChat(document.getElementById('chat1-box'),{source:'uk-home-chat',mobileTo:'/ai'}); rbChat(document.getElementById('chat2'),{source:'uk-home-chat',mobileTo:'/ai'});
 </script>
 <script>
 /* Contact initiated: mailto, WhatsApp, Upwork paspaudimai -> Google Ads konversija */

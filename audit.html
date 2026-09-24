@@ -1,6 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>/* geo 2026-09-24: LT lankytojai i rytisbalys.lt, GB i /uk/. ?lang=en = likti. Tik rytisbalys.com. */
+(function(){try{
+var h=location.hostname;if(h!=="rytisbalys.com"&&h!=="www.rytisbalys.com")return;
+var q=location.search,x=location.hash,p=location.pathname.replace(/\.html$/,"").replace(/\/index$/,"/")||"/";
+var LT="https://rytisbalys.lt";
+if(/^\/lt(\/|$)/.test(p)){location.replace(LT+(p.slice(3)||"/")+q+x);return}
+if(/[?&]lang=en(&|$)/.test(q)){try{sessionStorage.setItem("rb_lang","en")}catch(e){}return}
+try{if(sessionStorage.getItem("rb_lang")==="en")return}catch(e){}
+if(/bot|crawl|spider|slurp|lighthouse|preview/i.test(navigator.userAgent))return;
+var LTP={"/":1,"/meta-pixel":1,"/google-ads":1,"/shopify":1,"/woocommerce":1,"/audit":1};
+if(!LTP[p])return;
+function go(c){if(c==="LT")location.replace(LT+p+q+x);else if(c==="GB"&&p==="/")location.replace("/uk/"+q+x)}
+var c=null;try{c=sessionStorage.getItem("rb_c")}catch(e){}
+if(c){go(c);return}
+fetch(LT+"/_geo").then(function(r){return r.json()}).then(function(d){try{sessionStorage.setItem("rb_c",d.c||"-")}catch(e){}go(d.c)}).catch(function(){});
+}catch(e){}})();
+</script>
 <link rel="canonical" href="https://rytisbalys.com/audit">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1D69SRZPPM"></script>

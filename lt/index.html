@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html lang="lt">
 <head>
+<script>/* geo 2026-09-24: LT lankytojai i rytisbalys.lt, GB i /uk/. ?lang=en = likti. Tik rytisbalys.com. */
+(function(){try{
+var h=location.hostname;if(h!=="rytisbalys.com"&&h!=="www.rytisbalys.com")return;
+var q=location.search,x=location.hash,p=location.pathname.replace(/\.html$/,"").replace(/\/index$/,"/")||"/";
+var LT="https://rytisbalys.lt";
+if(/^\/lt(\/|$)/.test(p)){location.replace(LT+(p.slice(3)||"/")+q+x);return}
+if(/[?&]lang=en(&|$)/.test(q)){try{sessionStorage.setItem("rb_lang","en")}catch(e){}return}
+try{if(sessionStorage.getItem("rb_lang")==="en")return}catch(e){}
+if(/bot|crawl|spider|slurp|lighthouse|preview/i.test(navigator.userAgent))return;
+var LTP={"/":1,"/meta-pixel":1,"/google-ads":1,"/shopify":1,"/woocommerce":1,"/audit":1};
+if(!LTP[p])return;
+function go(c){if(c==="LT")location.replace(LT+p+q+x);else if(c==="GB"&&p==="/")location.replace("/uk/"+q+x)}
+var c=null;try{c=sessionStorage.getItem("rb_c")}catch(e){}
+if(c){go(c);return}
+fetch(LT+"/_geo").then(function(r){return r.json()}).then(function(d){try{sessionStorage.setItem("rb_c",d.c||"-")}catch(e){}go(d.c)}).catch(function(){});
+}catch(e){}})();
+</script>
+<link rel="canonical" href="https://rytisbalys.lt/">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1D69SRZPPM"></script>
 <script>
@@ -12,127 +30,315 @@
 </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Konversijų sekimo specialistas - Meta CAPI, GA4, server-side</title>
-<meta name="description" content="Meta Ads, GA4 ir realūs užsakymai rodo skirtingus skaičius? Tracking auditas, Meta CAPI su dedup, sGTM, Consent Mode v2. Randu, kur dingsta pirkimai.">
+<title>Rytis Balys - konversijų sekimas ir atribucija</title>
+<meta name="description" content="Konversijų sekimas ir serverio pusė: Meta pikselis ir CAPI su deduplikacija, GA4, GTM, Google Ads ir CRM konversijos. Fiksuota kaina, įrodyta prieš jums mokant.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Konversijų sekimo specialistas - Meta CAPI, GA4, server-side">
-<meta property="og:description" content="Meta Ads, GA4 ir realūs užsakymai rodo skirtingus skaičius? Tracking auditas, Meta CAPI su dedup, sGTM, Consent Mode v2. Randu, kur dingsta pirkimai.">
+<meta property="og:title" content="Rytis Balys - konversijų sekimas ir atribucija">
+<meta property="og:description" content="Konversijų sekimas ir serverio pusė. Fiksuota kaina, įrodyta prieš jums mokant.">
 <meta property="og:url" content="https://rytisbalys.com/lt/">
 <meta property="og:image" content="https://rytisbalys.com/og.png">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="canonical" href="https://rytisbalys.com/lt/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Person", "@id": "https://rytisbalys.com/#rytis", "name": "Rytis Balys", "jobTitle": "Server-side conversion tracking engineer", "url": "https://rytisbalys.com/", "email": "work@rytisbalys.com", "knowsAbout": ["Meta Conversions API", "Meta Pixel", "Google Analytics 4", "Google Tag Manager", "server-side tagging", "Consent Mode v2", "conversion tracking", "attribution", "AI traffic attribution", "LLM traffic attribution", "generative engine optimization measurement", "GEO tracking setup", "HubSpot", "GoHighLevel", "Triple Whale", "offline conversion tracking", "mobile app event tracking"], "sameAs": ["https://github.com/rytisdev-commits"], "worksFor": {"@type": "Organization", "name": "MB Euruvizija", "address": {"@type": "PostalAddress", "addressLocality": "Vilnius", "addressCountry": "LT"}}, "image": "https://rytisbalys.com/rytis.jpg", "telephone": "+37060308900"}, {"@type": "ProfessionalService", "name": "Rytis Balys - Conversion Tracking & Attribution", "url": "https://rytisbalys.com/", "description": "Tracking audits that reconcile ad platform numbers against real backend orders, server-side tracking builds (Meta Conversions API with event_id deduplication, GA4, server-side GTM), AI / LLM traffic attribution and GEO measurement setups (ChatGPT, Perplexity, Gemini), Shopify checkout tracking migrations, and CRM offline conversion pipelines (HubSpot, GoHighLevel) back into Google Ads and Meta.", "founder": {"@id": "https://rytisbalys.com/#rytis"}, "areaServed": "Worldwide", "email": "work@rytisbalys.com", "@id": "https://rytisbalys.com/#business", "image": "https://rytisbalys.com/rytis.jpg", "telephone": "+37060308900", "priceRange": "$150 - $1800", "address": {"@type": "PostalAddress", "addressLocality": "Vilnius", "addressCountry": "LT"}}]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#f4f6f3;--card:#fff;--ink:#0f2a20;--muted:#4f6f62;--line:#dde5dc;--bot:#eef3ec;--g:#14532d;--font:Manrope,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif}
+  *{margin:0;padding:0;box-sizing:border-box} [hidden]{display:none!important} html{scroll-behavior:smooth} [id]{scroll-margin-top:92px}
+  body{background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:var(--g)}
+  .w{max-width:1200px;margin:0 auto;padding:0 40px}
+  .bar{background:var(--ink);color:#d7e4dc;font-size:13px;text-align:center;padding:8px 16px} .bar b{color:#fff} .bar a{color:#fff;font-weight:700;text-decoration:none;border-bottom:2px solid #6ee7a0;margin-left:8px;white-space:nowrap}
+  header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+  header .w{display:flex;align-items:center;gap:14px;padding-top:12px;padding-bottom:12px}
+  header img{width:44px;height:44px;border-radius:50%;object-fit:cover}
+  header .who{font-weight:700;font-size:16px} header .who small{display:block;font-weight:400;font-size:12.5px;color:var(--muted)}
+  header nav{margin-left:auto;display:flex;gap:22px;align-items:center;font-size:14px}
+  header nav a{color:var(--muted);text-decoration:none;white-space:nowrap}
+@media (max-width:1040px) and (min-width:901px){header nav{gap:16px} header nav a[href^="https://wa.me"],header nav a[href^="mailto:"]{display:none}} header nav a.cta{background:var(--g);color:#fff;border-radius:999px;padding:11px 16px;min-height:40px;box-sizing:border-box;display:inline-flex;align-items:center;font-weight:700;white-space:nowrap}
+  section{padding:80px 0} section.hero{padding:48px 0 72px} section.alt{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .hero .w{display:grid;grid-template-columns:minmax(0,1fr) 440px;gap:56px;align-items:center}
+  .vis{background:linear-gradient(135deg,#14532d 0%,#1f7a45 100%);border-radius:26px;padding:26px;color:#fff;box-shadow:0 20px 50px rgba(20,83,45,.25);position:relative}
+  .vt{display:flex;justify-content:space-between;align-items:center;font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.85;margin-bottom:14px} .vt .ok{background:rgba(255,255,255,.14);border-radius:999px;padding:4px 10px;letter-spacing:0;text-transform:none;font-size:12px}
+  .vr{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.96);color:var(--ink);border-radius:14px;padding:14px 16px;margin-bottom:8px} .vr span{flex:1;font-size:15px;font-weight:600} .vr b{font-size:26px;font-weight:800;letter-spacing:-.02em}
+  .d{width:10px;height:10px;border-radius:50%;display:inline-block} .d.r{background:#dc2626} .d.o{background:#f59e0b} .d.g{background:#16a34a}
+  .vf{font-size:14px;opacity:.92;margin-top:12px;line-height:1.5}
+  .vb{position:relative;margin:16px -14px -36px auto;width:max-content;background:var(--ink);border-radius:16px;padding:12px 16px;box-shadow:0 12px 30px rgba(15,42,32,.35)} .vb small{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.75} .vb b{font-size:22px;font-weight:800}
+  .talk .card{max-width:1100px;margin:0 auto;border-radius:26px} .talk .log{padding:30px 30px 10px;min-height:200px;max-height:520px} .talk .m{font-size:17px;max-width:80%} .talk .ask{padding:16px 30px 28px;gap:14px} .talk .ask input{font-size:17px;padding:16px 18px;border-radius:14px} .talk .ask button{min-height:56px;font-size:16px;padding:0 30px;border-radius:14px} .talk .hint{margin-top:4px;font-size:13.5px} .talk .sh{text-align:center;margin-bottom:22px}
+.tq{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:1100px;margin:0 auto 22px}
+.tq .t{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 18px 14px;display:flex;flex-direction:column;gap:8px;box-shadow:0 6px 18px rgba(20,83,45,.05)}
+.tq .st{color:#f59e0b;font-size:13px;letter-spacing:2px;line-height:1}
+.tq p{margin:0;font-size:15.5px;line-height:1.45;color:var(--ink);font-weight:600}
+.tq small{margin-top:auto;color:var(--muted);font-size:12.5px}
+.tq .all{grid-column:1/-1;text-align:center;color:var(--g);font-weight:700;text-decoration:none;font-size:14px;padding:4px} .talk .sub{margin-left:auto;margin-right:auto}
+  .badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:13px;color:var(--muted)} .badge b{color:var(--ink)}
+  h1{font-size:48px;font-weight:800;letter-spacing:-.035em;line-height:1.05;margin:16px 0 14px}
+  .lead{font-size:18px;color:var(--muted);max-width:620px}
+  .ctas{display:flex;gap:12px;align-items:center;margin-top:20px;flex-wrap:wrap}
+  .btn{background:var(--g);color:#fff;border-radius:12px;padding:14px 22px;font-weight:700;font-size:15px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer}
+  .ctas .lnk{font-size:15px;font-weight:700;color:var(--ink);text-decoration:none} .ctas .lnk:hover{color:var(--g)}
+  .pf{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px} .pf a{flex:1 1 200px;max-width:300px;display:inline-flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 12px;text-decoration:none;color:var(--ink);font-size:12.5px;line-height:1.2} .pf a b{display:block;font-size:13px} .pf a small{color:var(--muted)} .pf .pi{width:26px;height:26px;border-radius:7px;background:var(--ink);color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+  h2{font-size:32px;font-weight:800;letter-spacing:-.025em;line-height:1.15} .sub{color:var(--muted);font-size:16px;max-width:720px;margin-top:6px} .sh{margin-bottom:36px}
+  .grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px} .grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px} .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px}
+  .c{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px} .c .ic{width:34px;height:34px;border-radius:10px;background:var(--bot);display:flex;align-items:center;justify-content:center;margin-bottom:10px} .c h3{font-size:17px;font-weight:700;margin-bottom:6px} .c p{font-size:14.5px;color:var(--muted)}
+  .tile{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px} .tl{font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)} .tn{font-size:56px;font-weight:800;letter-spacing:-.03em;line-height:1.1} .tn.r{color:#b91c1c} .tn.o{color:#b45309} .tn.g{color:var(--g)} .tt{font-size:14px;color:var(--muted)}
+  .steps{display:flex;flex-direction:column;gap:22px} .step{display:flex;gap:14px;align-items:flex-start} .sn{width:34px;height:34px;border-radius:50%;background:var(--g);color:#fff;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;flex-shrink:0} .step h3{font-size:16.5px;font-weight:700} .step p{font-size:14.5px;color:var(--muted)}
+  .plans{display:flex;flex-direction:column;gap:12px} .plan{background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px} .plan.hi{background:var(--g);color:#fff;border-color:var(--g)} .pt{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.8} .pp{font-size:32px;font-weight:800;letter-spacing:-.02em;margin:4px 0 6px} .plan p{font-size:14.5px;opacity:.9}
+  .rev{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px 20px;display:flex;flex-direction:column;gap:10px} .rev .stars{display:flex;gap:2px} .rev p{font-size:14.5px;line-height:1.55} .rev .who{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;font-size:12.5px;color:var(--muted)} .rev .who span{min-width:0} .rev .who a{text-decoration:none;font-weight:600;white-space:nowrap;flex-shrink:0}
+  .revsum{display:flex;align-items:center;gap:8px;font-size:15px;color:var(--muted);margin:-14px 0 22px} .revsum b{color:var(--ink);font-size:18px} .revsum svg{vertical-align:-2px}
+  .revs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:stretch} .revs .rev{height:100%} .rev .who{margin-top:auto}
+  .rev .q.clamp{display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden} .rev .q.open{display:block;-webkit-line-clamp:unset}
+  .more-rev{align-self:flex-start;border:0;background:none;color:var(--g);font:700 13.5px var(--font);cursor:pointer;padding:0;text-decoration:underline;text-underline-offset:3px}
+  .faq{border-top:1px solid var(--line);padding:16px 0} .faq h3{font-size:16px;font-weight:700;margin-bottom:6px} .faq p{font-size:14.5px;color:var(--muted)}
+  .agencynote{margin-top:14px;background:var(--bot);border:1px solid var(--line);border-radius:14px;padding:14px 18px;font-size:14.5px;color:var(--muted)}.agencynote b{color:var(--ink)}.agencynote a{color:var(--g);font-weight:600}.need{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin-top:22px} .need h3{font-size:16px;font-weight:700;margin-bottom:8px} .need ul{list-style:none;display:flex;flex-direction:column;gap:6px} .need li{font-size:14.5px;color:var(--muted);padding-left:22px;position:relative} .need li::before{content:'';position:absolute;left:0;top:9px;width:10px;height:10px;border-radius:50%;background:var(--g)}
+  .guides ul{list-style:none;columns:2;column-gap:40px} .guides li{break-inside:avoid;padding:10px 0;border-bottom:1px solid var(--line)} .guide-link{color:var(--ink);text-decoration:none;font-size:15px} .guide-link:hover{color:var(--g)}
+  /* chat */
+  .card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 14px 34px rgba(20,83,45,.10);overflow:hidden}
+  .log{display:flex;flex-direction:column;gap:12px;padding:20px 20px 8px;max-height:380px;overflow-y:auto;scroll-behavior:smooth}
+  .m{max-width:92%;padding:13px 16px;border-radius:18px;font-size:15px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere} .m.bot{align-self:flex-start;background:var(--bot);border-bottom-left-radius:6px} .m.me{align-self:flex-end;background:var(--g);color:#fff;border-bottom-right-radius:6px} .m.err{align-self:flex-start;background:#fff1f0;color:#a8322a}
+  .wait{align-self:flex-start;color:var(--muted);font-size:14px;padding:4px 6px}
+  .ask{padding:12px 16px 16px;display:flex;flex-direction:column;gap:10px} .row{display:flex;gap:8px;flex-wrap:wrap}
+  .ask input,.ask textarea{flex:1 1 160px;font:inherit;font-size:16px;padding:12px 14px;border:1px solid #cfe0d4;border-radius:12px;color:var(--ink);min-width:0} .ask textarea{resize:none;min-height:52px;max-height:160px;flex-basis:100%}
+  .ask input:focus,.ask textarea:focus{outline:none;border-color:var(--g);box-shadow:0 0 0 3px rgba(20,83,45,.12)}
+  .ask button{border:0;border-radius:12px;background:var(--g);color:#fff;font:600 15px var(--font);padding:0 20px;min-height:46px;cursor:pointer} .ask button[disabled]{opacity:.5}
+  .ask button.chip{background:#fff;color:var(--ink);border:1px solid #cfe0d4;border-radius:999px}
+  .ask button.pass{border-radius:999px}
+  .hint{font-size:12.5px;color:var(--muted)} .hint b{color:var(--ink)} .hint a{text-decoration:none;font-weight:600}
+  footer{font-size:12px;color:var(--muted);text-align:center;padding:48px 16px 24px} footer a{color:var(--muted)}
+  .fnav{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 22px;margin-bottom:16px;font-size:14px} .fnav a{color:var(--ink);text-decoration:none;font-weight:600}
+  @media (max-width:900px){.w{padding:0 16px} .hero .w,.grid2{grid-template-columns:1fr;gap:28px} .grid3,.grid4{grid-template-columns:1fr} h1{font-size:32px} h2{font-size:26px} header nav a:not(.cta){display:none} header nav a.cta{padding:10px 14px;font-size:13px} .bar .bx{display:none} header .who small{display:none} .guides ul{columns:1} .revs{grid-template-columns:1fr} section{padding:52px 0} section.hero{padding:28px 0 48px} .log{max-height:320px} .tn{font-size:44px} .vb{margin:14px 0 0 auto} .vt .ok{display:none} .badge{font-size:12px} .talk .ask input{flex-basis:100%} .talk .ask .who button{width:100%} .tq{grid-template-columns:1fr;gap:10px} .talk .m{max-width:94%}}
+.ferr{color:#b91c1c;font-size:13px;margin:6px 0 0}
+</style>
 <link rel="alternate" hreflang="en" href="https://rytisbalys.com/">
-<link rel="alternate" hreflang="lt" href="https://rytisbalys.com/lt/">
+<link rel="alternate" hreflang="lt" href="https://rytisbalys.lt/">
+<link rel="alternate" hreflang="en-GB" href="https://rytisbalys.com/uk/">
 <link rel="alternate" hreflang="x-default" href="https://rytisbalys.com/">
 <meta property="og:locale" content="lt_LT"><meta property="og:locale:alternate" content="en_US">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="theme-color" content="#14532d">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ProfessionalService", "name": "Konversijų sekimo specialistas - Meta CAPI, GA4, server-side", "description": "Meta Ads, GA4 ir realūs užsakymai rodo skirtingus skaičius? Tracking auditas, Meta CAPI su dedup, sGTM, Consent Mode v2. Randu, kur dingsta pirkimai.", "url": "https://rytisbalys.com/lt/", "inLanguage": "lt", "founder": {"@type": "Person", "@id": "https://rytisbalys.com/#rytis", "name": "Rytis Balys"}, "areaServed": ["LT", "Worldwide"], "email": "work@rytisbalys.com", "address": {"@type": "PostalAddress", "addressLocality": "Vilnius", "addressCountry": "LT"}}</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Kodėl Meta Ads rodo daugiau pirkimų negu turiu užsakymų?", "acceptedAnswer": {"@type": "Answer", "text": "Dvi dažniausios priežastys: pixel ir Conversions API siunčia tą patį pirkimą be event_id deduplikacijos, arba purchase įvykis iššauna kaskart perkrovus padėkos puslapį. Pasitikrinkite Events Manager skiltyje Test Events - testinis pirkimas turi užsiskaityti vieną kartą."}}, {"@type": "Question", "name": "Ar mažai parduotuvei reikia server-side tracking?", "acceptedAnswer": {"@type": "Answer", "text": "Jei mokate už reklamą - taip. Vien naršyklinis pixel dalį įvykių praranda dėl ad blocker'ių ir iOS apribojimų, o kuo mažesnis biudžetas, tuo kiekvienas prarastas signalas algoritmui kainuoja daugiau. sGTM hostingas, pavyzdžiui Stape, kainuoja mažiau nei vienas prarastas užsakymas per mėnesį."}}, {"@type": "Question", "name": "Kas yra event_id deduplikacija?", "acceptedAnswer": {"@type": "Answer", "text": "Kai tas pats pirkimas siunčiamas ir iš naršyklės (pixel), ir iš serverio (Conversions API), abu įvykiai turi turėti tą patį pavadinimą ir tą patį event_id - tada Meta juos sujungia į vieną. Be šito Meta mato du pirkimus vietoj vieno, ir ROAS ataskaitose išpūstas dvigubai."}}, {"@type": "Question", "name": "Kiek trunka ir kaip atrodo tracking auditas?", "acceptedAnswer": {"@type": "Answer", "text": "Man reikia prieigos prie Events Manager, GA4 ir užsakymų sąrašo skaitymo teisėmis. Per kelias darbo dienas gaunate dokumentą su sutikrintais skaičiais, rastų klaidų sąrašu ir taisymo eiliškumu pagal tai, kiek kuri klaida kainuoja."}}]}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-  :root{--bg:#f4f6f3;--card:#fff;--ink:#0f2a20;--muted:#4f6f62;--line:#dde5dc;--bot:#eef3ec;--g:#14532d;--amber:#b45309;--font:Manrope,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;--mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
-  *{margin:0;padding:0;box-sizing:border-box} [hidden]{display:none!important} html{scroll-behavior:smooth} [id]{scroll-margin-top:92px}
-  body{background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.65;-webkit-font-smoothing:antialiased}
-  a{color:var(--g)}
-  .w{max-width:1200px;margin:0 auto;padding:0 40px}
-  header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
-  header .w{display:flex;align-items:center;gap:14px;padding-top:12px;padding-bottom:12px}
-  header img{width:44px;height:44px;border-radius:50%;object-fit:cover}
-  header .who{font-weight:700;font-size:16px;text-decoration:none;color:var(--ink)} header .who small{display:block;font-weight:400;font-size:12.5px;color:var(--muted)}
-  header nav{margin-left:auto;display:flex;gap:22px;align-items:center;font-size:14px}
-  header nav a{color:var(--muted);text-decoration:none} header nav a.cta{background:var(--g);color:#fff;border-radius:999px;padding:11px 16px;min-height:40px;box-sizing:border-box;display:inline-flex;align-items:center;font-weight:700;white-space:nowrap}
-  main{max-width:800px;margin:0 auto;padding:40px 24px 64px}
-  .crumb{font-size:13px;color:var(--muted);margin-bottom:22px} .date{font-size:13px;color:var(--muted);margin:-8px 0 18px} .ferr{color:#b91c1c;font-size:13px;margin:6px 0 0} .crumb a{color:var(--muted);text-decoration:none} .crumb a:hover{color:var(--g)}
-  h1{font-size:38px;font-weight:800;letter-spacing:-.03em;line-height:1.12;margin-bottom:14px;text-wrap:balance}
-  .sub{font-size:18px;color:var(--muted);margin-bottom:34px;max-width:680px}
-  h2{font-size:24px;font-weight:800;letter-spacing:-.02em;line-height:1.2;margin:44px 0 12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-  h2 .n{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:34px;padding:0 8px;border-radius:999px;background:var(--g);color:#fff;font-size:14px;font-weight:800;letter-spacing:0}
-  h3{font-size:18px;font-weight:700;margin:26px 0 8px}
-  p{margin-bottom:14px;font-size:16.5px} p.dim{color:var(--muted)} li{font-size:16.5px}
-  ul,ol{margin:0 0 16px 22px} li{margin-bottom:6px}
-  strong,b{font-weight:700}
-  code{font-family:var(--mono);font-size:14px;background:#fff;border:1px solid var(--line);border-radius:6px;padding:1px 6px;overflow-wrap:anywhere}
-  pre{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-family:var(--mono);font-size:13.5px;color:var(--ink);overflow-x:auto;white-space:pre-wrap;word-break:break-word;margin:0 0 16px} pre code{border:0;padding:0;background:none}
-  .verify{border-left:4px solid var(--g);background:#fff;border-radius:0 12px 12px 0;padding:12px 16px;margin:0 0 12px;font-size:15.5px} .verify b{color:var(--g);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;margin-right:6px}
-  .warn{border-left:4px solid var(--amber);background:#fff;border-radius:0 12px 12px 0;padding:12px 16px;margin:0 0 12px;font-size:15.5px} .warn b{color:var(--amber)}
-  .faq{margin-top:48px;border-top:1px solid var(--line);padding-top:8px} .faq h2{margin-top:28px}
-  .faq details{border-bottom:1px solid var(--line);padding:6px 0} .faq summary{cursor:pointer;font-weight:700;font-size:16.5px;padding:10px 0;min-height:44px;box-sizing:border-box;list-style:none;display:flex;justify-content:space-between;gap:12px} .faq summary::after{content:'+';color:var(--g);font-weight:800} .faq details[open] summary::after{content:'\2212'} .faq details p{margin:10px 0 0;color:var(--muted);font-size:15.5px}
-  .related{margin-top:40px;border-top:1px solid var(--line);padding-top:24px} .related h2{font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 10px} .related ul{list-style:none;margin:0} .related li{padding:10px 0;border-bottom:1px solid var(--line);margin:0} .related li:last-child{border-bottom:0} .related a{color:var(--ink);text-decoration:none;font-size:16px} .related a:hover{color:var(--g)}
-  /* asistento kortele */
-  .card{margin-top:48px;background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 14px 34px rgba(20,83,45,.10);overflow:hidden}
-  .card .top{padding:22px 22px 0} .card .top h2{margin:0 0 6px;font-size:22px} .card .top p{color:var(--muted);font-size:15.5px;margin-bottom:12px}
-  .log{display:flex;flex-direction:column;gap:12px;padding:6px 22px 8px}
-  .m{max-width:92%;padding:13px 16px;border-radius:18px;font-size:15px;line-height:1.55} .m.bot{align-self:flex-start;background:var(--bot);border-bottom-left-radius:6px}
-  .ask{padding:12px 22px 18px;display:flex;flex-direction:column;gap:10px} .row{display:flex;gap:8px;flex-wrap:wrap}
-  .ask input{flex:1 1 160px;font:inherit;font-size:16px;padding:12px 14px;border:1px solid #cfe0d4;border-radius:12px;color:var(--ink);min-width:0}
-  .ask input:focus{outline:none;border-color:var(--g);box-shadow:0 0 0 3px rgba(20,83,45,.12)}
-  .ask button{border:0;border-radius:12px;background:var(--g);color:#fff;font:600 15px var(--font);padding:0 20px;min-height:46px;cursor:pointer}
-  .hint{font-size:12.5px;color:var(--muted);margin:0} .hint b{color:var(--ink)} .hint a{text-decoration:none;font-weight:600}
-  footer{font-size:12px;color:var(--muted);text-align:center;padding:40px 16px 24px} footer a{color:var(--muted)}
-  .fnav{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 22px;margin-bottom:16px;font-size:14px} .fnav a{color:var(--ink);text-decoration:none;font-weight:600;display:inline-block;padding:8px 0} .fnav .cur{color:var(--muted);font-weight:600}
-  @media (max-width:900px){.w{padding:0 16px} header nav a:not(.cta){display:none} header nav a.cta{padding:10px 14px;font-size:13px} header .who small{display:none} h1{font-size:30px} h2{font-size:21px} main{padding:28px 16px 48px}}
-</style>
 </head>
 <body>
+<div class="bar"><b>Vienos klaidos taisymas per 24 valandas nuo prieigos, arba nemokate.</b> <span class="bx">Pirma nemokamas auditas, atsakau pats per 6 valandas.</span><a href="#chat1">Gauti nemokamą auditą &rarr;</a></div>
 <header><div class="w">
   <img src="/rytis-88.jpg" srcset="/rytis-88.jpg 1x, /rytis-132.jpg 2x" width="44" height="44" alt="Rytis Balys">
-  <a class="who" href="/lt/">Rytis Balys<small>Konversijų sekimo specialistas</small></a>
-  <nav><a href="/lt/">Pagrindinis</a><a href="/">EN</a><a class="cta" href="#chat1">Nemokamas auditas</a></nav>
+  <span class="who">Rytis Balys<small>Konversijų sekimo inžinierius</small></span>
+  <nav><a href="#build">Ką darau</a><a href="#process">Eiga</a><a href="#prices">Kainos</a><a href="#reviews">Atsiliepimai</a><a href="#guides">Gidai</a><a href="https://wa.me/37060308900?text=Sveiki%2C%20Ryti%2C%20mano%20sekimo%20problema%3A%20" target="_blank" rel="noopener">WhatsApp</a><a href="mailto:work@rytisbalys.com">El. paštas</a><a class="cta" href="#chat1">Gauti nemokamą auditą</a></nav>
 </div></header>
-<main>
-  <div class="crumb"><a href="/lt/">rytisbalys.com</a> <span >/ lt</span></div>
-  <h1>Konversijų sekimo specialistas - Meta CAPI, GA4, server-side</h1>
-<p>Meta Events Manager rodo 40 pirkimų, GA4 - 28, o užsakymų sąraše jų 33. Taip nutinka, kai konversijų duomenys reklamos platformas pasiekia tik per naršyklę: ad blocker'iai, iOS apribojimai, sutikimo baneriai ir skriptų klaidos dalį įvykių numeta, o kiti užsiskaito po du kartus.</p>
-<p>Esu Rytis Balys, server-side konversijų sekimo specialistas. Dirbu iš Vilniaus, klientai - visame pasaulyje. Žemiau - kaip per 20 minučių patiems pasitikrinti, ar jūsų tracking sveikas, ir ką darau, kai jis nesveikas.</p>
-  <h2>Kodėl sulaužytas tracking kainuoja pinigus</h2>
-<p>Meta ir Google algoritmai kampanijas optimizuoja pagal tą purchase signalą, kurį gauna. Ne pagal realius užsakymus - pagal signalą.</p><ul><li><strong>Kai įvykių trūksta</strong>, algoritmas mokosi iš mažesnės imties, kampanijos ilgiau stringa mokymosi fazėje (learning phase), CPA atrodo blogesnis nei yra, ir jūs išjungiate kampanijas, kurios iš tikrųjų uždirba.</li><li><strong>Kai įvykiai dubliuojasi</strong>, ROAS ataskaitose atrodo dvigubai geresnis nei realybėje. Keliate biudžetą kampanijai, kuri nuostolinga, ir tai pamatote tik banko išraše.</li><li><strong>Kai atribucija kreiva</strong>, GA4 nuopelnus priskiria ne tiems kanalams. Įprasta pasekmė - nurėžtas el. pašto ar prekės ženklo paieškos biudžetas, kuris iš tikrųjų ir nešė pardavimus.</li></ul><p>Kuo mažesnis biudžetas, tuo brangesnė kiekviena tokia klaida - algoritmui kiekvienas signalas sveria daugiau.</p>
-  <h2>Pasitikrinkite patys per 20 minučių</h2>
-<p>Atskaitos taškas visada tas pats - realūs užsakymai jūsų sistemoje (Shopify, WooCommerce, CRM). Ne platformų ataskaitos.</p><ul><li><strong>1. Suskaičiuokite tiesą.</strong> Backend užsakymai per paskutines 30 dienų, be atšauktų ir testinių. Šis skaičius - etalonas.</li><li><strong>2. Meta Events Manager.</strong> Atsidarykite savo pixelį ir pažiūrėkite Purchase įvykių kiekį per tą patį laikotarpį. Lyginkite įvykių kiekį, ne kampanijų konversijų stulpelį - kampanijų skaičiai priklauso nuo atribucijos lango ir su backend niekada nesutaps vienas prie vieno. Įvykių kiekis sutapti turi, plius minus keli procentai.</li><li><strong>3. Testinis pirkimas per Test Events.</strong> Events Manager skiltyje Test Events atlikite testinį užsakymą. Purchase turi atvykti vieną kartą. Jei naudojate ir pixel, ir Conversions API, matysite du įrašus - browser ir server - ir serverio įvykis turi būti pažymėtas kaip deduplikuotas pagal sutampantį event_id. Du įrašai be deduplikacijos reiškia, kad kiekvienas pirkimas skaičiuojasi dvigubai.</li><li><strong>4. GA4 DebugView.</strong> Įjunkite Tag Assistant (tagassistant.google.com) preview režimą, GA4 eikite į Admin, DebugView, ir pakartokite pirkimą. Turi atvykti purchase įvykis su transaction_id ir teisinga value.</li><li><strong>5. Naršyklės Network skirtukas.</strong> F12, Network, filtruokite pagal facebook.com/tr (pixel) ir /g/collect su en=purchase (GA4; jei jau naudojate sGTM, užklausa eis į jūsų subdomeną). Užsakymo patvirtinimo puslapyje paspauskite refresh: jei purchase iššauna dar kartą, kiekvienas to puslapio perkrovimas jums kuria fiktyvų pardavimą.</li></ul><p>Jei bent viename žingsnyje skaičiai išsiskiria daugiau nei keliais procentais, problemą turite.</p>
-  <h2>Ką darau</h2>
-<p>Keturios paslaugos, visos apie tą patį - kad platformos matytų tikrus skaičius.</p><ul><li><strong>Tracking auditas.</strong> Sutikrinu Meta, Google Ads ir GA4 duomenis su realiais backend užsakymais. Gaunate dokumentą: kur duomenys dingsta, kur dubliuojasi, kiek tai kainuoja ir ką taisyti pirmiausia.</li><li><strong>Server-side tracking.</strong> Meta Conversions API su event_id deduplikacija, GA4 per server-side GTM (sGTM ant Stape arba jūsų infrastruktūros). Įvykiai siunčiami iš serverio, todėl jų nebenumuša ad blocker'iai ir naršyklių apribojimai.</li><li><strong>Gaisrų gesinimas.</strong> Pixelis nešaudo po temos ar checkout atnaujinimo, konversijos nuliuose, dvigubi pirkimai, purchase be vertės - randu priežastį ir sutvarkau.</li><li><strong>Consent Mode v2.</strong> Sutvarkau, kad sutikimo signalai (ad_user_data, ad_personalization) Google žymes pasiektų teisingai ir ES srauto konversijos nedingtų vien dėl blogai sukonfigūruoto banerio.</li></ul>
-  <h2>Dažniausios klaidos, kurias randu audituose</h2>
-<ul><li>Pixel ir CAPI abu siunčia Purchase, bet be sutampančio event_id - kiekvienas užsakymas Meta pusėje tampa dviem.</li><li>Purchase pririštas prie padėkos puslapio URL ir iššauna kaskart jį perkrovus ar atsidarius iš išsaugotos nuorodos.</li><li>Siunčiama ne ta value: avansas vietoj pilnos užsakymo sumos, arba suma be PVM viename įrankyje ir su PVM kitame - skaičiai niekada nesutaps.</li><li>Dvi GA4 instaliacijos vienu metu, pavyzdžiui, per platformos integraciją ir per GTM - dvigubos puslapių peržiūros ir dvigubi pirkimai.</li><li>Consent baneris blokuoja žymes net ir gavus sutikimą - konversijos iš ES srauto tyliai dingsta, nors lankytojai sutiko būti skaičiuojami.</li><li>Testiniai ir atšaukti užsakymai skaičiuojami kaip tikri, todėl platformos rodo daugiau nei bankas.</li></ul>
-  <div class="card" id="chat1">
-  <div class="top"><h2>Skaičiai nesueina?</h2><p>Parašykite mano asistentui, ką matote, ir aš susisieksiu su jumis tiesiogiai.</p></div>
+
+<section class="hero"><div class="w">
+  <div>
+    <span class="badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg> <b>5.0</b> visi įvertinti darbai Upwork &middot; daugiau nei 3 metų patirtis</span>
+    <h1>Konversijų sekimas ir serverio pusė. Vienas inžinierius, fiksuota kaina, įrodyta prieš jums mokant.</h1>
+    <p class="lead">Meta pikselis ir Conversions API, GA4, Google Tag Manager, Google Ads ir CRM konversijos. Randu, kuris iš jūsų skaičių meluoja, ir sutvarkau priežastį.</p>
+    <div class="ctas"><a class="btn" href="#chat1">Gauti nemokamą auditą &rarr;</a><a class="lnk" href="#prices">Kaip skaičiuoju kainą &darr;</a></div>
+    <div class="pf"><a href="#prices"><span class="pi">24</span><span><b>Sutvarkyta per 24 val. nuo prieigos</b><small>arba nemokate</small></span></a><a href="#process"><span class="pi">&#10003;</span><span><b>Pirma tik skaitymo prieiga</b><small>konteineriai ir duomenys lieka jūsų</small></span></a></div>
+  </div>
+  <div class="vis">
+    <div class="vt"><span>Palyginimas, vienas mėnuo</span><span class="ok">sutikrinta su užsakymais</span></div>
+    <div class="vr"><i class="d r"></i><span>Meta rodo</span><b>142</b></div>
+    <div class="vr"><i class="d o"></i><span>GA4 rodo</span><b>98</b></div>
+    <div class="vr"><i class="d g"></i><span>Apmokėti užsakymai jūsų sistemoje</span><b>76</b></div>
+    <div class="vf">Du iš šių trijų skaičių klaidingi, o jūsų reklama optimizuojasi pagal vieną iš jų.</div>
+    <div class="vb"><small>Įprastas mano randamas skirtumas</small><b>30–90 %</b></div>
+  </div>
+</div></section>
+
+<section class="talk alt" id="chat1"><div class="w">
+  <div class="sh"><h2>Nemokamas auditas prasideda čia.</h2><p class="sub">Parašykite mano asistentui, kas neveikia. Jis užduos kelis svarbiausius klausimus, o toliau imuosi aš pats, per 6 valandas.</p></div>
+  <div class="tq">
+    <div class="t"><span class="st" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><p>&ldquo;He proved it with cold-load tests and a reversal test&rdquo;</p><small>Meta pikselio taisymas, WordPress &middot; 2026 m. liepa</small></div>
+    <div class="t"><span class="st" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><p>&ldquo;&hellip;the full audit landed same-day after access was granted&rdquo;</p><small>Sekimo auditas, serverio GTM &middot; 2026 m. liepa</small></div>
+    <div class="t"><span class="st" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><p>&ldquo;He helped us find a solution to a very tricky problem in an astonishingly quick time&rdquo;</p><small>Skubus Meta pikselio ir CAPI auditas, Shopify &middot; 2026 m. liepa</small></div>
+    <a class="all" href="#reviews">Visi atsiliepimai Upwork, kiekvienas 5.0 &rarr;</a>
+  </div>
+  <div class="card" id="chat1-box">
   <div class="log"><div class="m bot">Sveiki, aš Ryčio asistentas. Pirma vardas ir el. paštas, kad Rytis galėtų su jumis susisiekti tiesiogiai. Tada papasakokite, kur nesutampa skaičiai, arba klauskite apie kainas ir terminus. 🙂</div></div>
   <form class="ask" novalidate>
-    <div class="row who"><input type="text" name="name" placeholder="Jūsų vardas" autocomplete="given-name" required><input type="email" name="email" placeholder="jus@imone.lt" autocomplete="email" required><button type="submit">Pradėti</button></div>
-    <p class="hint">Atsakau pats <b>per 6 valandas, dažniausiai greičiau nei per valandą</b>. Tiesiogiai: <a href="https://wa.me/37060308900?text=Sveiki%2C%20Ryti%2C%20mano%20sekimo%20problema%3A%20" target="_blank" rel="noopener">WhatsApp</a> (žinutės, ne skambučiai) &middot; <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a></p>
+    <div class="row who"><input type="text" name="name" placeholder="Jūsų vardas" autocomplete="given-name" required><input type="email" name="email" placeholder="vardas@imone.lt" autocomplete="email" required><button type="submit">Pradėti</button></div>
+    <div class="row txt" hidden><textarea name="text" rows="2" placeholder="Aprašykite, ką matote, arba klauskite apie kainas ir terminus"></textarea><button type="submit">Klausti</button></div>
+    <div class="row act" hidden><button type="button" class="pass">Perduoti Ryčiui</button><button type="button" class="more chip">Turiu dar klausimą</button></div>
+    <p class="hint">Atsakymas <b>per 6 valandas</b>. Norite susisiekti tiesiogiai? <a href="https://wa.me/37060308900?text=Sveiki%2C%20Ryti%2C%20mano%20sekimo%20problema%3A%20" target="_blank" rel="noopener">WhatsApp</a> arba <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a>.</p>
   </form>
-  <noscript><p class="hint">Asistentui reikia JavaScript. Rašykite <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a> arba WhatsApp +370 603 08900.</p></noscript>
+<noscript><p class="hint">Asistentui reikia JavaScript. Rašykite <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a> arba WhatsApp +370 603 08900.</p></noscript>
 </div>
-  <div class="faq">
-  <h2>D.U.K.</h2>
-    <details><summary>Kodėl Meta Ads rodo daugiau pirkimų negu turiu užsakymų?</summary><p>Dvi dažniausios priežastys: pixel ir Conversions API siunčia tą patį pirkimą be event_id deduplikacijos, arba purchase įvykis iššauna kaskart perkrovus padėkos puslapį. Pasitikrinkite Events Manager skiltyje Test Events - testinis pirkimas turi užsiskaityti vieną kartą.</p></details>
-    <details><summary>Ar mažai parduotuvei reikia server-side tracking?</summary><p>Jei mokate už reklamą - taip. Vien naršyklinis pixel dalį įvykių praranda dėl ad blocker'ių ir iOS apribojimų, o kuo mažesnis biudžetas, tuo kiekvienas prarastas signalas algoritmui kainuoja daugiau. sGTM hostingas, pavyzdžiui Stape, kainuoja mažiau nei vienas prarastas užsakymas per mėnesį.</p></details>
-    <details><summary>Kas yra event_id deduplikacija?</summary><p>Kai tas pats pirkimas siunčiamas ir iš naršyklės (pixel), ir iš serverio (Conversions API), abu įvykiai turi turėti tą patį pavadinimą ir tą patį event_id - tada Meta juos sujungia į vieną. Be šito Meta mato du pirkimus vietoj vieno, ir ROAS ataskaitose išpūstas dvigubai.</p></details>
-    <details><summary>Kiek trunka ir kaip atrodo tracking auditas?</summary><p>Man reikia prieigos prie Events Manager, GA4 ir užsakymų sąrašo skaitymo teisėmis. Per kelias darbo dienas gaunate dokumentą su sutikrintais skaičiais, rastų klaidų sąrašu ir taisymo eiliškumu pagal tai, kiek kuri klaida kainuoja.</p></details>
+</div></section>
+
+<section id="build" class="alt"><div class="w">
+  <div class="sh"><h2>Sekimo sistema, kurią sukuriu nuo pradžios iki galo</h2><p class="sub">Kiekviena dalis sujungta su vienu tiesos šaltiniu: jūsų tikrais užsakymais ir užklausomis.</p></div>
+  <div class="grid3">
+    <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>GTM diegimas ir sutvarkymas</h3><p>Vienas konteineris, vienas data layer, jokių tarpusavyje konkuruojančių žymų dublikatų.</p></div>
+    <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>Meta pikselis + Conversions API</h3><p>Naršyklės ir serverio įvykiai su event_id deduplikacija, įrodyta Events Manager.</p></div>
+    <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>GA4, sutampantis su jūsų sistema</h3><p>Pirkimai su teisinga verte, sutvarkytas sutikimas, jokio dvigubo skaičiavimo.</p></div>
+    <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>Google Ads konversijos</h3><p>Aktyvios ir patikrintos žymos, gclid išlieka per nukreipimus ir apmokėjimą.</p></div>
+    <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>Offline konversijos iš jūsų CRM</h3><p>HubSpot, GoHighLevel ir kitos sistemos grąžina tikrus pardavimus į Google Ads ir Metą.</p></div>
+    <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>Shopify ir WooCommerce apmokėjimai</h3><p>Checkout migracijos, Stripe ir PayPal nukreipimai, talpyklos įskiepiai, kurie gadina pikselius.</p></div>
   </div>
-  
-</main>
-<footer><nav class="fnav"><a href="/lt/">Pagrindinis</a><a href="/lt/ga4-nerodo-pardavimu">GA4</a><a href="/lt/facebook-pixel-neveikia-dvigubi-pirkimai">Facebook Pixel</a><a href="/lt/google-ads-konversijos-nesiskaiciuoja">Google Ads</a><a href="#chat1">Nemokamas auditas</a></nav>Rytis Balys &middot; MB Euruvizija &middot; Vilnius &middot; dirbu visame pasaulyje, nuotoliniu būdu &middot; asistento atsakymai saugomi 90 dienų, kad galėčiau juos tobulinti &middot; <a href="/">English</a></footer>
+</div></section>
+
+<section class="alt"><div class="w">
+  <div class="sh"><h2>Jei su kita agentūra nepasisekė, perskaitykite</h2></div>
+  <div class="grid4">
+    <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>Viskas lieka jūsų vardu</h3><p>Konteineriai, duomenų rinkiniai ir paskyros lieka jūsų. Dirbu jų viduje, niekada ne aplinkui.</p></div>
+    <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>Įrodyta, ne pažadėta</h3><p>Kiekvienas taisymas patikrintas gyvai testiniais užsakymais, o ataskaitą „prieš ir po" galite patikrinti patys.</p></div>
+    <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>Atsako vienas žmogus</h3><p>Jokių perdavimų ir paskyrų vadybininkų. Rašote man, atsakau aš, per 6 valandas.</p></div>
+    <div class="c"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div><h3>Sąžiningas nemokamas auditas</h3><p>Jei jūsų skirtumas neviršija įprastų 5–15 %, pasakysiu, kad mano paslaugos nėra būtinos.</p></div>
+  </div>
+</div></section>
+
+<section id="process"><div class="w grid2">
+  <div>
+    <div class="sh"><h2>Darbo eiga, žingsnis po žingsnio</h2><p class="sub">Nuo pirmos žinutės iki perdavimo. Niekas neįjungiama be jūsų sutikimo.</p></div>
+    <div class="steps">
+      <div class="step"><div class="sn">1</div><div><h3>Parašote, kur, jūsų manymu, yra problema</h3><p>Galite tai padaryti per asistentą šiame puslapyje, WhatsApp ar el. paštu. Skaičiai padės, bet užtenka ir paprasto apibūdinimo, pvz., „Meta rodo dvigubai daugiau nei Shopify".</p></div></div>
+      <div class="step"><div class="sn">2</div><div><h3>Nemokamo audito atsakymą gaunate per 6 valandas</h3><p>Atrašau jūsų pasirinktu kanalu: kokia problemos priežastis ir ką tikrinčiau pirmiausia. Jei skirtumas mažas ir nuostolių nedaro, tai pasakau iš karto.</p></div></div>
+      <div class="step"><div class="sn">3</div><div><h3>Pradedu nuo peržiūros tik su „View/Read“ teisėmis</h3><p>Events Manager, GA4, GTM, Google Ads ir parduotuvė, šiame etape viskas tik skaitymui. Kiekvieną radinį surašau su svarba, darbo apimtimi ir tuo, kiek jis kainuoja iššvaistytu biudžetu.</p></div></div>
+      <div class="step"><div class="sn">4</div><div><h3>Viena fiksuota kaina, sutarta raštu</h3><p>Prieš pradedant darbą gaunate vieną sumą už visą taisymą. 50 % iš anksto, likusi dalis, kai pamatote, kad veikia. Jokių papildomų mokesčių.</p></div></div>
+      <div class="step"><div class="sn">5</div><div><h3>Įrodymai, kuriuos galite patikrinti</h3><p>Testiniai užsakymai, šaltojo užkrovimo testai, atbulinis testas ir patvirtinimas platformos pusėje. Gaunate ataskaitą „prieš ir po" su ekrano nuotraukomis.</p></div></div>
+      <div class="step"><div class="sn">6</div><div><h3>Perdavimas ir užrašai</h3><p>Raštu surašau, kas pakeista ir kodėl, kad kitas žmogus to nesugadintų. Prieigos panaikinamos, kai pasakote.</p></div></div>
+    </div>
+  </div>
+  <div id="prices">
+    <div class="sh"><h2>Trys būdai, kaip galiu padėti</h2><p class="sub">Kiekvienas darbas įkainojamas pažiūrėjus iš vidaus, tada kaina nebesikeičia.</p></div>
+    <div class="plans">
+      <div class="plan"><div class="pt">Vienkartinis taisymas</div><div class="pp">100–300 €</div><p>Sutvarkytas pikselis ar konversijos žyma, per 24 valandas nuo prieigos, arba nemokate. Conversions API su deduplikacija užtrunka 3–5 darbo dienas.</p></div>
+      <div class="plan hi"><div class="pt">Išsamus auditas ir taisymas</div><div class="pp">300–600 €</div><p>Platformų skaičiai sutikrinami su tikrais užsakymais, kiekvienas radinys taisomas pagal tai, kiek jis jums kainuoja. Ataskaita įskaičiuota.</p></div>
+      <div class="plan"><div class="pt">Nuolatinė priežiūra</div><div class="pp">300–800 € / mėn.</div><p>Kas mėnesį kažkas stebi sekimą ir sutvarko jį, dar prieš jums pastebint. Apmokėjimo atnaujinimai, naujos programėlės, sutikimo pakeitimai.</p></div>
+    </div>
+    <div class="agencynote">Turite agentūrą? <a href="mailto:work@rytisbalys.com?subject=Agent%C5%ABros%20kainos">Parašykite tiesiogiai</a>, agentūroms taikomos atskiros kainos.</div>
+    <div class="need"><h3>Terminai, sąžiningai</h3><ul><li>Pirmas atsakymas: per 6 valandas</li><li>Auditas: 1–3 darbo dienos nuo prieigos</li><li>Vienas taisymas: per 24 valandas nuo prieigos, arba nemokate</li><li>Conversions API ar serverio pusė: 3–5 darbo dienos</li></ul></div>
+  </div>
+</div></section>
+
+<section id="reviews" class="alt"><div class="w">
+  <div class="sh"><h2>Atsiliepimai tiesiai iš Upwork</h2><p class="sub">Visi įvertinti darbai 5.0, 100 % job success. Atsiliepimai originalo kalba, neredaguoti.</p></div>
+  <div class="revsum"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg></span><b>5.0</b><span>100 % job success</span></div>
+  <div class="revs"><div class="rev"><div class="stars"><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg></div><p class="q clamp">&ldquo;Rytis is great! Solved all of the issues we were having and gave very detailed explanations of fixes and possible future issues and their solutions. We had a major unexpected unrelated issue come up with a separate app in our shopify store that was killing sales while he was working on our original pixel issues and he immediately found the issue and sent an evidence trail detailing his findings to the app help center while actually fixing the issue that we would have never figured out on our own, then jumped right back into fixing our original issues with our pixel. He also answered all of my many questions as we worked through everything. We highly recommend working with him! We don&rsquo;t know what we would have done without his expertise!&rdquo;</p><button type="button" class="more-rev">Skaityti visą atsiliepimą</button><div class="who"><span>Meta pikselio pirkimų įvykių taisymas, Shopify &middot; 2026 m. rugpjūtis</span><a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">žiūrėti Upwork</a></div></div><div class="rev"><div class="stars"><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg></div><p class="q clamp">&ldquo;Rytis was fantastic to work with. He quickly identified and resolved the issues with my Google Tag Manager, GA4, and Google Ads conversion tracking that had been preventing my conversions from reporting correctly. His communication was excellent throughout the project, and he took the time to explain what was causing the issue and how he was fixing it. He was knowledgeable, efficient, and made sure everything was working properly before completing the job. I highly recommend Rytis to anyone needing help with Google Tag Manager, GA4, or Google Ads tracking.&rdquo;</p><button type="button" class="more-rev">Skaityti visą atsiliepimą</button><div class="who"><span>GTM, GA4 ir Google Ads konversijų taisymas &middot; 2026 m. rugpjūtis</span><a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">žiūrėti Upwork</a></div></div><div class="rev"><div class="stars"><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg></div><p class="q">&ldquo;He found the exact root cause quickly, fixed it cleanly, and &mdash; this is what set him apart &mdash; didn&rsquo;t just tell me it was done. He proved it with cold-load tests and a reversal test, and confirmed it on Meta&rsquo;s side. On top of that he flagged two serious issues outside the scope of the job, including a security problem, completely honestly.&rdquo;</p><div class="who"><span>Meta pikselio ir konversijų taisymas, WordPress &middot; 2026 m. liepa</span><a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">žiūrėti Upwork</a></div></div><div class="rev"><div class="stars"><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg></div><p class="q">&ldquo;He understood the brief right away, including the premium wellness direction and the references we shared, and delivered a clean, conversion-focused Shopify store ahead of the deadline. The homepage and product page came out exactly how we wanted, ready for us to start running ads.&rdquo;</p><div class="who"><span>Konversijoms pritaikytos Shopify parduotuvės kūrimas &middot; 2026 m. liepa</span><a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">žiūrėti Upwork</a></div></div><div class="rev"><div class="stars"><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg></div><p class="q">&ldquo;He identified and fixed all three tracking issues &mdash; the broken purchase values, the affiliate attribution dropping after the Stripe redirect, and GA4 loading twice. He also caught a fourth problem we didn&rsquo;t know about ($0 ghost conversions polluting our data) and fixed that too.&rdquo;</p><div class="who"><span>GA4 ir GTM atribucijos taisymas &middot; 2026 m. liepa</span><a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">žiūrėti Upwork</a></div></div><div class="rev"><div class="stars"><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg></div><p class="q">&ldquo;Rytis was absolutely outstanding from start to finish. His communication was clear, concise and there thorough. He helped us find a solution to a very tricky problem in an astonishingly quick time, I couldn&rsquo;t recommend him high enough.&rdquo;</p><div class="who"><span>Skubus Shopify Meta pikselio ir Conversions API auditas &middot; 2026 m. liepa</span><a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">žiūrėti Upwork</a></div></div><div class="rev"><div class="stars"><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg></div><p class="q">&ldquo;Report was actually deep &ndash; data-cross-checked GA4 / Meta Graph / Magento, not a generic checklist. He delivered the free first-read exactly as advertised, then the full audit landed same-day after access was granted.&rdquo;</p><div class="who"><span>Sekimo auditas, pirmas serverio GTM projekto etapas &middot; 2026 m. liepa</span><a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">žiūrėti Upwork</a></div></div><div class="rev"><div class="stars"><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg></div><p class="q">&ldquo;My GA4 wasn&rsquo;t recording anything and I had no idea if my Meta pixel even worked. Rytis got it all set up and made sure everything was actually coming through before we wrapped up, so I knew it was done properly.&rdquo;</p><div class="who"><span>GA4 ir Meta sekimas testo piltuvui &middot; 2026 m. liepa</span><a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">žiūrėti Upwork</a></div></div><div class="rev"><div class="stars"><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><path d="M12 2l3 7 7 .6-5.3 4.7 1.7 7.1L12 17.8 5.6 21.4l1.7-7.1L2 9.6 9 9z"></path></svg></div><p class="q">&ldquo;Rytis is great! Great communication. He set up the conversion API for my funnel. Everything is working fine. Will work with him again.&rdquo;</p><div class="who"><span>Meta pikselis ir Conversions API ClickFunnels piltuve &middot; 2026 m. liepa</span><a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">žiūrėti Upwork</a></div></div></div>
+  <a class="btn" style="margin-top:18px" href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">Patikrinkite juos Upwork <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"></path><path d="M20 4L10 14"></path><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"></path></svg></a>
+</div></section>
+
+<section><div class="w grid2">
+  <div>
+    <div class="sh"><h2>Klausimai, kuriuos girdžiu prieš pradedant</h2></div>
+    <div class="faq"><h3>Ar man reikia serverio pusės sekimo?</h3><p>Jei mokate už reklamą, dažniausiai taip. Sekimas naršyklėje dalį pirkimų praranda dėl reklamos blokatorių ir iOS, o kuo mažesnis biudžetas, tuo labiau skauda kiekvienas prarastas signalas. Iš anksto pasakysiu, ar tai tikrai uždarys jūsų skirtumą, o jei ne, jo nedarome.</p></div>
+    <div class="faq"><h3>Kokių prieigų reikia?</h3><p>Pradžiai tik skaitymo prieigos prie Events Manager, GA4, GTM ir parduotuvės. Publikavimo teisių prašau tik susitarus dėl taisymo ir tik tam žingsniui. Kai baigiame, jas galite iš karto atimti.</p></div>
+    <div class="faq"><h3>Kaip greitai?</h3><p>Pavieniai taisymai padaromi per 24 valandas nuo prieigos, tada dieną skiriu viskam kruopščiai patikrinti. Didesniems darbams tikslią datą pasakau pažiūrėjęs iš vidaus.</p></div>
+    <div class="faq"><h3>Ar galite dirbti mano agentūros vardu?</h3><p>Žinoma. Klientas lieka jūsų, sąskaitą jam rašote jūs, o aš darbą atlieku tyliai, jūsų vardu.</p></div>
+  </div>
+  <div>
+    <div class="sh"><h2>Papasakokite mano asistentui, ką matote</h2><p class="sub">Pirma vardas ir el. paštas, tada problema jūsų žodžiais. Kiekvieną pokalbį skaitau pats.</p></div>
+    <div class="card" id="chat2">
+  <div class="log"><div class="m bot">Sveiki, aš Ryčio asistentas. Pirma vardas ir el. paštas, kad Rytis galėtų su jumis susisiekti tiesiogiai. Tada papasakokite, kur nesutampa skaičiai, arba klauskite apie kainas ir terminus. 🙂</div></div>
+  <form class="ask" novalidate>
+    <div class="row who"><input type="text" name="name" placeholder="Jūsų vardas" autocomplete="given-name" required><input type="email" name="email" placeholder="vardas@imone.lt" autocomplete="email" required><button type="submit">Pradėti</button></div>
+    <div class="row txt" hidden><textarea name="text" rows="2" placeholder="Aprašykite, ką matote, arba klauskite apie kainas ir terminus"></textarea><button type="submit">Klausti</button></div>
+    <div class="row act" hidden><button type="button" class="pass">Perduoti Ryčiui</button><button type="button" class="more chip">Turiu dar klausimą</button></div>
+    <p class="hint">Atsakymas <b>per 6 valandas</b>. Norite susisiekti tiesiogiai? <a href="https://wa.me/37060308900?text=Sveiki%2C%20Ryti%2C%20mano%20sekimo%20problema%3A%20" target="_blank" rel="noopener">WhatsApp</a> arba <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a>.</p>
+  </form>
+<noscript><p class="hint">Asistentui reikia JavaScript. Rašykite <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a> arba WhatsApp +370 603 08900.</p></noscript>
+</div>
+  </div>
+</div></section>
+
+<section id="guides" class="guides alt"><div class="w">
+  <div class="sh"><h2>Gidai, kaip susitvarkyti patiems</h2><p class="sub">Jei pirma norite patikrinti patys.</p></div>
+  <ul><li><a href="/lt/ga4-nerodo-pardavimu" class="guide-link">GA4 nerodo pardavimų: 4 priežastys ir kaip jas rasti</a></li><li><a href="/lt/facebook-pixel-neveikia-dvigubi-pirkimai" class="guide-link">Facebook Pixel neveikia arba dubliuoja pirkimus: ką tikrinti</a></li><li><a href="/lt/google-ads-konversijos-nesiskaiciuoja" class="guide-link">Google Ads konversijos nesiskaičiuoja (Inactive): kaip pataisyti</a></li></ul>
+  <p class="sub" style="margin-top:14px">Daugiau gidų anglų kalba:</p>
+  <ul><li><a href="/fbq-is-not-defined-delay-javascript-fix" class="guide-link">fbq is not defined - your caching plugin is killing the Meta Pixel</a></li><li><a href="/meta-pixel-not-firing" class="guide-link">Meta Pixel not firing? The 7 real causes, in the order to check them</a></li><li><a href="/ga4-does-not-match-backend" class="guide-link">GA4 purchases don't match your backend orders - which number to trust</a></li><li><a href="/shopify-checkout-upgrade-tracking" class="guide-link">Shopify's checkout upgrade silently breaks tracking - what dies and how to migrate</a></li><li><a href="/offline-conversions-google-ads" class="guide-link">Google Ads only counts form fills, not real sales - how to import offline conversions</a></li><li><a href="/ga4-double-counting-purchases-duplicate-tag" class="guide-link">GA4 Counting Purchases Twice? The Duplicate Tag Fix</a></li><li><a href="/capi-events-received-but-nothing-in-events-manager" class="guide-link">Meta CAPI says events_received: 1 but Events Manager shows nothing</a><a href="/meta-events-manager-double-purchases-deduplication-fix" class="guide-link">Meta Counts Purchases Twice: Pixel + CAPI Deduplication Fix</a></li><li><a href="/google-ads-conversion-inactive-tag-fires-gtm" class="guide-link">Google Ads Conversion Inactive but Tag Fires in GTM: The Fix</a></li><li><a href="/woocommerce-stripe-redirect-purchase-event-not-firing" class="guide-link">WooCommerce Purchase Event Missing After Stripe Redirect: Fix</a></li><li><a href="/ga4-purchases-attributed-stripe-paypal-direct-fix" class="guide-link">Fix GA4 Purchases Showing as stripe.com, paypal.com or (direct)</a></li><li><a href="/consent-banner-not-blocking-tracking" class="guide-link">Your cookie banner blocks nothing - the 60-second check</a></li><li><a href="/consent-mode-v2-conversions-dropped" class="guide-link">Conversions Dropped After Consent Mode v2? How to Diagnose It</a></li><li><a href="/ga4-ai-assistant-channel" class="guide-link">GA4&#x27;s New AI Assistant Channel: What It Catches and What It Misses</a></li><li><a href="/prove-geo-roi" class="guide-link">GEO Gets You Cited in AI Answers. Proving It Converts Is a Different Job.</a></li><li><a href="/track-ai-conversions-ga4" class="guide-link">Your ChatGPT Traffic Is Hiding in Direct: How to Track AI Conversions in GA4</a></li><li><a href="/clickfunnels-upsell-tracking-fix" class="guide-link">ClickFunnels Upsell Tracking: Fix Double or Missing Purchases</a></li><li><a href="/ga4-events-missing-plugin-wrapped-gtag" class="guide-link">GA4 events missing? A plugin may have wrapped your gtag</a></li><li><a href="/server-side-gtm-what-it-fixes" class="guide-link">Server-Side GTM: What It Actually Fixes (and What It Doesn&#x27;t)</a></li></ul>
+</div></section>
+
+<footer><nav class="fnav"><a href="#build">Ką darau</a><a href="#process">Eiga</a><a href="#prices">Kainos</a><a href="#reviews">Atsiliepimai</a><a href="#guides">Gidai</a><a href="#chat1">Nemokamas auditas</a></nav>Rytis Balys &middot; MB Euruvizija &middot; Vilnius, Lietuva &middot; dirbu nuotoliu visame pasaulyje &middot; <a href="https://wa.me/37060308900" rel="noopener">WhatsApp +370 603 08900</a> &middot; <a href="mailto:work@rytisbalys.com">work@rytisbalys.com</a> &middot; asistento pokalbiai saugomi 90 dienų, kad galėčiau jį tobulinti &middot; <a href="https://github.com/rytisdev-commits/server-side-conversion-tracking" rel="noopener">atvejo aprašymas GitHub</a> &middot; <a href="/">EN</a></footer>
 <script>
+
+var rbChat=(function(){
+  var CHAT='https://rb-chat.formos-ops.workers.dev/', FORM='https://rb-form.formos-ops.workers.dev/', LABEL='AW-18424603738/M34RCLm1x-wcENrIxNFE';
+  var EMAIL=/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/, SUBMITTED=false;
+  var q=new URLSearchParams(location.search), gclid='', landing=location.pathname;
+  var LT=true; try{ if(LT) sessionStorage.setItem('rb_lang','lt'); else if(sessionStorage.getItem('rb_lang')==='lt' && /^\/ai/.test(location.pathname)) LT=true; }catch(e){}
+  var HANDOFF=LT?/perduoti tai Ry[cč]iui/i:/pass this to Rytis/i;
+  var T=LT?{hello:'Sveiki, aš Ryčio asistentas. Pirma vardas ir el. paštas, kad Rytis galėtų su jumis susisiekti tiesiogiai. Tada papasakokite, kur nesutampa skaičiai, arba klauskite apie kainas ir terminus. \ud83d\ude42',full:function(n){return 'Sveiki, '+n+', aš Ryčio asistentas. Kur nesutampa skaičiai: Meta, Google Ads, GA4 ar jūsų sistema? Papasakokite, ką matote, arba klauskite apie kainas ir terminus.';},short:function(n){return 'Ačiū, '+n+'. Kur nesutampa skaičiai: Meta, Google Ads, GA4 ar jūsų sistema? Papasakokite, ką matote, arba klauskite apie kainas ir terminus.';},passed:function(m){return 'Perdaviau Ryčiui. Jis parašys jums adresu '+m+' per 6 valandas. Pokalbį čia uždarau, galite grįžti bet kada.';},err1:'Nepavyko išsiųsti. Parašykite work@rytisbalys.com tai, ką rašėte aukščiau, ir Rytis atsakys pats.',err2:'Nepavyko išsiųsti. Parašykite work@rytisbalys.com ir Rytis susisieks tiesiogiai.',wait:'Galvoju...'}:null;
+  try{ var gc=q.get('gclid'); if(gc){ sessionStorage.setItem('rb_gclid',gc); sessionStorage.setItem('rb_landing',location.pathname); } gclid=sessionStorage.getItem('rb_gclid')||''; landing=sessionStorage.getItem('rb_landing')||location.pathname; }catch(e){}
+  function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function post(url,body,keep){ return fetch(url,{method:'POST',keepalive:!!keep,headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}); }
+  return function(root,o){
+    if(!root) return;
+    var log=root.querySelector('.log'), f=root.querySelector('form'), who=f.querySelector('.who'), txt=f.querySelector('.txt'), act=f.querySelector('.act'), done=f.querySelector('.done');
+    var st={name:'',email:'',hist:[],sent:false,offered:false};
+    function toEnd(){ log.scrollTop=log.scrollHeight; requestAnimationFrame(function(){ log.scrollTop=log.scrollHeight; setTimeout(function(){ log.scrollTop=log.scrollHeight; },120); }); }
+    function add(role,text){var d=document.createElement('div');d.className='m '+role;d.innerHTML=esc(text);log.appendChild(d);toEnd();return d;}
+    function wait(){var w=document.createElement('div');w.className='wait';w.textContent=T?T.wait:'Thinking...';log.appendChild(w);toEnd();return w;}
+    function show(el,on){ if(el) el.hidden=!on; }
+    function begin(n,m,greet){
+      st.name=n; st.email=m; show(who,false); show(txt,true);
+      if(greet==='full') add('bot',T?T.full(n.split(' ')[0]):'Hi '+n.split(' ')[0]+', I am Rytis’s assistant. Where do your numbers disagree, Meta, Google Ads, GA4, or your backend? Tell me what you see, or ask anything about prices and timelines.');
+      else { add('me',n+' · '+m); add('bot',T?T.short(n.split(' ')[0]):'Thanks '+n.split(' ')[0]+'. Where do your numbers disagree, Meta, Google Ads, GA4, or your backend? Tell me what you see, or ask anything about prices and timelines.'); }
+      f.text.focus();
+    }
+    function intake(n,m,src,keep){ try{ post(FORM,{intake:true,name:n,email:m,fax_line:'',dt:9000,page:location.pathname,gclid:gclid,landing:landing,source:src},keep).catch(function(){}); }catch(x){} }
+    function submitToRytis(){
+      if(st.sent) return; st.sent=true; show(act,false); show(txt,false); var w=wait();
+      var transcript='Name: '+st.name+'\n\n'+st.hist.map(function(m){return (m.role==='user'?'Visitor: ':'Assistant: ')+m.text;}).join('\n\n');
+      post(FORM,{email:st.email,name:st.name,site:'see chat',details:transcript,where:'chat',fax_line:'',dt:9000,page:location.pathname,gclid:gclid,landing:landing,source:o.source})
+        .then(function(r){return r.json();}).then(function(j){ w.remove(); if(!j.ok) throw new Error('x');
+          if(!SUBMITTED){ SUBMITTED=true; try{ gtag('event','conversion',{'send_to':LABEL,'value':50,'currency':'EUR'}); gtag('event','lead_form_submit',{source:o.source}); }catch(e){} }
+          add('bot',T?T.passed(st.email):'Passed to Rytis. He will reach out to you at '+st.email+' within 6 hours, usually under 1 hour. Closing the chat here, you can come back any time.'); show(done,true);
+        }).catch(function(){ w.remove(); st.sent=false; add('err',T?T.err1:'That did not go through. Email work@rytisbalys.com with what you wrote above and Rytis will pick it up.'); show(txt,true); show(act,true); });
+    }
+    try{ if(!o.fromQuery){ if(!f.name.value) f.name.value=sessionStorage.getItem('rb_name')||''; if(!f.email.value) f.email.value=sessionStorage.getItem('rb_email')||''; } }catch(x){}
+    if(o.fromQuery){
+      var n0='', m0=''; try{ n0=sessionStorage.getItem('rb_name')||''; m0=sessionStorage.getItem('rb_email')||''; }catch(e){}
+      if(n0&&EMAIL.test(m0)){ begin(n0,m0,'full'); }
+      else { add('bot',T?T.hello:'Hi, I am Rytis’s assistant. Your name and email first, so Rytis can reach out to you directly. Then tell me where your numbers disagree, or ask about prices and timelines. \ud83d\ude42'); show(who,true); }
+    }
+    f.addEventListener('submit',function(e){
+      e.preventDefault();
+      if(!st.name){
+        var n=f.name.value.trim(), m=f.email.value.trim();
+        if(!n){ f.name.focus(); return; } var fe=f.querySelector('.ferr'); if(!EMAIL.test(m)){ f.email.focus(); f.email.style.borderColor='#b91c1c'; if(!fe){ fe=document.createElement('div'); fe.className='ferr'; who.insertAdjacentElement('afterend',fe); } fe.textContent=LT?'Įrašykite tikrą el. pašto adresą, pvz. vardas@imone.lt':'Enter a valid email address, e.g. name@company.com'; return; } f.email.style.borderColor=''; if(fe) fe.remove();
+        try{ sessionStorage.setItem('rb_name',n); sessionStorage.setItem('rb_email',m); }catch(x){}
+        try{ gtag('event','intake_start',{source:o.source}); }catch(x){}
+        if(o.mobileTo && window.innerWidth<900){ f.querySelector('.who button').disabled=true; intake(n,m,o.source+'-start',true); setTimeout(function(){ location.href=o.mobileTo; },150); return; }
+        intake(n,m,o.source+'-start',false); begin(n,m,'short'); return;
+      }
+      var t=f.text.value.trim(); if(!t){ f.text.focus(); return; }
+      st.hist.push({role:'user',text:t}); add('me',t); f.text.value=''; show(act,false); var w=wait(); f.querySelector('.txt button').disabled=true;
+      post(CHAT,{page:location.pathname,home:{name:st.name,lang:LT?'lt':'en'},messages:st.hist})
+        .then(function(r){return r.json();}).then(function(j){
+          w.remove(); if(!j.reply) throw new Error(j.error||'no_reply');
+          st.hist.push({role:'assistant',text:j.reply});
+          if(j.handoff){ submitToRytis(); return; }
+          add('bot',j.reply);
+          if(HANDOFF.test(j.reply)) st.offered=true; if(st.offered){ show(act,true); toEnd(); }
+        }).catch(function(){ w.remove(); st.hist.pop(); add('err',T?T.err2:'That did not go through. Email work@rytisbalys.com and Rytis will reach out to you directly.'); })
+        .then(function(){ f.querySelector('.txt button').disabled=false; });
+    });
+    f.text.addEventListener('keydown',function(e){ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); f.requestSubmit(); } });
+    f.querySelector('.pass').addEventListener('click',submitToRytis);
+    f.querySelector('.more').addEventListener('click',function(){ show(act,false); f.text.focus(); });
+  };
+})();
+
+document.querySelectorAll('.more-rev').forEach(function(b){ b.addEventListener('click',function(){ var q=b.previousElementSibling; var o=q.classList.toggle('open'); b.textContent=o?'Rodyti mažiau':'Skaityti visą atsiliepimą'; }); });
+rbChat(document.getElementById('chat1-box'),{source:'lt-home-chat',mobileTo:'/ai?l=lt'}); rbChat(document.getElementById('chat2'),{source:'lt-home-chat',mobileTo:'/ai?l=lt'});
+</script>
+<script>
+/* Contact initiated: mailto, WhatsApp, Upwork paspaudimai -> Google Ads konversija */
 (function(){
-  var FORM='https://rb-form.formos-ops.workers.dev/';
-  try{ var q=new URLSearchParams(location.search), gc=q.get('gclid'); if(gc){ sessionStorage.setItem('rb_gclid',gc); sessionStorage.setItem('rb_landing',location.pathname); } }catch(e){}
-  var EMAIL_MSG='Įrašykite tikrą el. pašto adresą, pvz. vardas@imone.lt'; var EMAIL=/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/;
-  var root=document.getElementById('chat1'); if(!root) return; var f=root.querySelector('form');
-  f.addEventListener('submit',function(e){
-    e.preventDefault();
-    var n=f.name.value.trim(), m=f.email.value.trim();
-    if(!n){ f.name.focus(); return; } var fe=f.querySelector('.ferr'); if(!EMAIL.test(m)){ f.email.focus(); f.email.style.borderColor='#b91c1c'; if(!fe){ fe=document.createElement('div'); fe.className='ferr'; f.querySelector('.who').insertAdjacentElement('afterend',fe); } fe.textContent=EMAIL_MSG; return; } f.email.style.borderColor=''; if(fe) fe.remove();
-    try{ sessionStorage.setItem('rb_name',n); sessionStorage.setItem('rb_email',m); }catch(x){}
-    try{ gtag('event','intake_start',{source:'guide-lt'}); }catch(x){}
-    var gclid='', landing=location.pathname; try{ gclid=sessionStorage.getItem('rb_gclid')||''; landing=sessionStorage.getItem('rb_landing')||location.pathname; }catch(x){}
-    try{ fetch(FORM,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify({intake:true,name:n,email:m,fax_line:'',dt:9000,page:location.pathname,gclid:gclid,landing:landing,source:'guide-lt'})}); }catch(x){}
-    setTimeout(function(){ location.href='/ai?l=lt'; },150);
-  });
+  var L='AW-18424603738/BxxrCNvetvIcENrIxNFE', sent=false;
+  document.addEventListener('click', function(e){
+    var a = e.target && e.target.closest ? e.target.closest('a') : null;
+    if(!a) return;
+    var h = a.getAttribute('href') || '';
+    if(!/^mailto:|wa\.me|api\.whatsapp\.com|upwork\.com/i.test(h)) return;
+    if(sent) return; sent = true;
+    var kind = /^mailto:/i.test(h) ? 'email' : (/upwork\.com/i.test(h) ? 'upwork' : 'whatsapp');
+    try{
+      gtag('event','conversion',{'send_to':L,'value':50,'currency':'EUR'});
+      gtag('event','contact_initiated',{method:kind});
+    }catch(x){}
+  }, true);
 })();
 </script>
 </body>
