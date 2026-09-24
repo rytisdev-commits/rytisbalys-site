@@ -1,6 +1,23 @@
 <!DOCTYPE html>
 <html lang="lt">
 <head>
+<script>/* geo 2026-09-24: LT lankytojai i rytisbalys.lt, GB i /uk/. ?lang=en = likti. Tik rytisbalys.com. */
+(function(){try{
+var h=location.hostname;if(h!=="rytisbalys.com"&&h!=="www.rytisbalys.com")return;
+var q=location.search,x=location.hash,p=location.pathname.replace(/\.html$/,"").replace(/\/index$/,"/")||"/";
+var LT="https://rytisbalys.lt";
+if(/^\/lt(\/|$)/.test(p)){location.replace(LT+(p.slice(3)||"/")+q+x);return}
+if(/[?&]lang=en(&|$)/.test(q)){try{sessionStorage.setItem("rb_lang","en")}catch(e){}return}
+try{if(sessionStorage.getItem("rb_lang")==="en")return}catch(e){}
+if(/bot|crawl|spider|slurp|lighthouse|preview/i.test(navigator.userAgent))return;
+var LTP={"/":1,"/meta-pixel":1,"/google-ads":1,"/shopify":1,"/woocommerce":1,"/audit":1};
+if(!LTP[p])return;
+function go(c){if(c==="LT")location.replace(LT+p+q+x);else if(c==="GB"&&p==="/")location.replace("/uk/"+q+x)}
+var c=null;try{c=sessionStorage.getItem("rb_c")}catch(e){}
+if(c){go(c);return}
+fetch(LT+"/_geo").then(function(r){return r.json()}).then(function(d){try{sessionStorage.setItem("rb_c",d.c||"-")}catch(e){}go(d.c)}).catch(function(){});
+}catch(e){}})();
+</script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1D69SRZPPM"></script>
 <script>
@@ -17,12 +34,12 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="GA4 nerodo pardavimų: 4 priežastys ir kaip jas rasti">
 <meta property="og:description" content="Shopify ar Stripe rodo užsakymus, o GA4 tuščia arba rodo perpus mažiau. Dažniausios priežastys ir kaip per 15 minučių rasti, kur dingsta purchase eventas.">
-<meta property="og:url" content="https://rytisbalys.com/lt/ga4-nerodo-pardavimu">
+<meta property="og:url" content="https://rytisbalys.lt/ga4-nerodo-pardavimu">
 <meta property="og:image" content="https://rytisbalys.com/og.png">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="canonical" href="https://rytisbalys.com/lt/ga4-nerodo-pardavimu">
+<link rel="canonical" href="https://rytisbalys.lt/ga4-nerodo-pardavimu">
 <link rel="alternate" hreflang="en" href="https://rytisbalys.com/ga4-does-not-match-backend">
-<link rel="alternate" hreflang="lt" href="https://rytisbalys.com/lt/ga4-nerodo-pardavimu">
+<link rel="alternate" hreflang="lt" href="https://rytisbalys.lt/ga4-nerodo-pardavimu">
 <link rel="alternate" hreflang="x-default" href="https://rytisbalys.com/ga4-does-not-match-backend">
 <meta property="og:locale" content="lt_LT"><meta property="og:locale:alternate" content="en_US">
 <meta property="og:image:width" content="1200">
@@ -31,7 +48,7 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "GA4 nerodo pardavimų: 4 priežastys ir kaip jas rasti", "description": "Shopify ar Stripe rodo užsakymus, o GA4 tuščia arba rodo perpus mažiau. Dažniausios priežastys ir kaip per 15 minučių rasti, kur dingsta purchase eventas.", "url": "https://rytisbalys.com/lt/ga4-nerodo-pardavimu", "mainEntityOfPage": "https://rytisbalys.com/lt/ga4-nerodo-pardavimu", "inLanguage": "lt", "datePublished": "2026-07-13", "dateModified": "2026-09-04", "author": {"@type": "Person", "@id": "https://rytisbalys.com/#rytis", "name": "Rytis Balys", "url": "https://rytisbalys.com/"}, "publisher": {"@type": "Organization", "name": "MB Euruvizija", "logo": {"@type": "ImageObject", "url": "https://rytisbalys.com/icon-512.png", "width": 512, "height": 512}}, "image": ["https://rytisbalys.com/og.png"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "GA4 nerodo pardavimų: 4 priežastys ir kaip jas rasti", "description": "Shopify ar Stripe rodo užsakymus, o GA4 tuščia arba rodo perpus mažiau. Dažniausios priežastys ir kaip per 15 minučių rasti, kur dingsta purchase eventas.", "url": "https://rytisbalys.lt/ga4-nerodo-pardavimu", "mainEntityOfPage": "https://rytisbalys.lt/ga4-nerodo-pardavimu", "inLanguage": "lt", "datePublished": "2026-07-13", "dateModified": "2026-09-04", "author": {"@type": "Person", "@id": "https://rytisbalys.com/#rytis", "name": "Rytis Balys", "url": "https://rytisbalys.com/"}, "publisher": {"@type": "Organization", "name": "MB Euruvizija", "logo": {"@type": "ImageObject", "url": "https://rytisbalys.com/icon-512.png", "width": 512, "height": 512}}, "image": ["https://rytisbalys.com/og.png"]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Kodėl GA4 rodo mažiau pardavimų nei Shopify ar Stripe?", "acceptedAnswer": {"@type": "Answer", "text": "GA4 niekada nerodys 100 proc. - ad blocker'iai, atmesti cookie sutikimai, iOS apribojimai ir po apmokėjimo negrįžtantys pirkėjai nurėžia apie 5-15 proc. Jei skirtumas didesnis nei 15 proc. (su griežta sutikimo juosta: didesnis nei atmetimų dalis plius 10 proc.), beveik visada yra techninė klaida: nešaudantis purchase eventas, dvigubas įdiegimas arba consent konfigūracija."}}, {"@type": "Question", "name": "Kiek vėluoja GA4 pardavimų duomenys?", "acceptedAnswer": {"@type": "Answer", "text": "Standartinės ataskaitos atsinaujina per 24-48 valandas. Šiandienos pardavimų ieškokite Realtime ataskaitoje arba DebugView, ne standartinėse Reports. Jei pardavimo nematote ir po 48 valandų, tai jau ne vėlavimas, o gedimas."}}, {"@type": "Question", "name": "Ar cookie baneris gali visiškai užblokuoti GA4?", "acceptedAnswer": {"@type": "Answer", "text": "Taip. Jei baneris nustato analytics_storage=denied ir po sutikimo statuso neatnaujina, GA4 negauna nė vienos užklausos. Patikrinkite incognito lange: po „Sutinku“ paspaudimo network tabe turi atsirasti collect užklausos."}}, {"@type": "Question", "name": "Ar galima siųsti pardavimus į GA4 ne iš naršyklės?", "acceptedAnswer": {"@type": "Answer", "text": "Taip, per Measurement Protocol - serveris siunčia purchase eventą tiesiai į GA4 iš mokėjimo sistemos webhook'o. Tai standartinis sprendimas redirect mokėjimams ir Shopify checkout apribojimams. Svarbu perduoti tą patį client_id, kad pardavimas susisietų su sesija ir srauto kanalu."}}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -82,11 +99,11 @@
 <body>
 <header><div class="w">
   <img src="/rytis-88.jpg" srcset="/rytis-88.jpg 1x, /rytis-132.jpg 2x" width="44" height="44" alt="Rytis Balys">
-  <a class="who" href="/lt/">Rytis Balys<small>Konversijų sekimo specialistas</small></a>
-  <nav><a href="/lt/">Pagrindinis</a><a href="/">EN</a><a class="cta" href="#chat1">Nemokamas auditas</a></nav>
+  <a class="who" href="https://rytisbalys.lt/">Rytis Balys<small>Konversijų sekimo specialistas</small></a>
+  <nav><a href="https://rytisbalys.lt/">Pagrindinis</a><a href="/">EN</a><a class="cta" href="#chat1">Nemokamas auditas</a></nav>
 </div></header>
 <main>
-  <div class="crumb"><a href="/lt/">rytisbalys.com</a> <span >/ lt</span></div>
+  <div class="crumb"><a href="https://rytisbalys.lt/">rytisbalys.com</a> <span >/ lt</span></div>
   <h1>GA4 nerodo pardavimų: 4 priežastys ir kaip jas rasti</h1>
   <p class="date"><time datetime="2026-09-04">Atnaujinta 2026 m. rugsėjo 4 d.</time></p>
 <p>Stripe arba Shopify administravimo skydelis rodo 40 užsakymų per savaitę, o GA4 - 12. Arba iš viso nulį. Devyniais atvejais iš dešimties priežastis viena: purchase eventas neiššauna arba iššauna be reikiamų parametrų. Pinigai ateina, duomenys - ne, ir Google Ads kampanijos optimizuojasi aklai.</p><p>Tokias problemas taisau kiekvieną savaitę. Žemiau - keturios dažniausios priežastys ir diagnostika, kurią galite atlikti patys per 15 minučių, be programuotojo.</p>
@@ -133,7 +150,7 @@ epn.value=79.00</pre>Užklausos nėra - eventas nešaudo arba jį blokuoja conse
   </div>
   
 </main>
-<footer><nav class="fnav"><a href="/lt/">Pagrindinis</a><span class="cur">GA4</span><a href="/lt/facebook-pixel-neveikia-dvigubi-pirkimai">Facebook Pixel</a><a href="/lt/google-ads-konversijos-nesiskaiciuoja">Google Ads</a><a href="#chat1">Nemokamas auditas</a></nav>Rytis Balys &middot; MB Euruvizija &middot; Vilnius &middot; dirbu visame pasaulyje, nuotoliniu būdu &middot; asistento atsakymai saugomi 90 dienų, kad galėčiau juos tobulinti &middot; <a href="/">English</a></footer>
+<footer><nav class="fnav"><a href="https://rytisbalys.lt/">Pagrindinis</a><span class="cur">GA4</span><a href="https://rytisbalys.lt/facebook-pixel-neveikia-dvigubi-pirkimai">Facebook Pixel</a><a href="https://rytisbalys.lt/google-ads-konversijos-nesiskaiciuoja">Google Ads</a><a href="#chat1">Nemokamas auditas</a></nav>Rytis Balys &middot; MB Euruvizija &middot; Vilnius &middot; dirbu visame pasaulyje, nuotoliniu būdu &middot; asistento atsakymai saugomi 90 dienų, kad galėčiau juos tobulinti &middot; <a href="/">English</a></footer>
 <script>
 (function(){
   var FORM='https://rb-form.formos-ops.workers.dev/';

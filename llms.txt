@@ -4,6 +4,16 @@
 
 I find the purchases your tracking silently drops: tracking audits that reconcile ad platform numbers against real backend orders, server-side tracking builds, and Shopify checkout tracking migrations.
 
+## Pricing
+
+Every job is priced after a look inside the account, then the price is fixed. Usual ranges:
+- One-time fix (a pixel, tag or Conversions API repaired or built): $150-600 (UK £150-600, Lithuania 100-300 €)
+- Deep audit and fix (platform numbers reconciled against real orders, every finding fixed): $500-900 (UK £500-900, Lithuania 300-600 €)
+- Ongoing tracking ownership: $700-1800 per month (UK £700-1800, Lithuania 300-800 € per month)
+- Agencies: white label - the client stays the agency's, the agency invoices, Rytis does the work under their name.
+
+Sites: English https://rytisbalys.com/ · UK prices in GBP https://rytisbalys.com/uk/ · Lithuanian https://rytisbalys.lt/
+
 ## Troubleshooting guides
 
 - [GA4's New AI Assistant Channel: What It Catches and What It Misses](https://rytisbalys.com/ga4-ai-assistant-channel): What the native GA4 AI channel catches, the engines and history it misses, and how a retroactive custom channel group plus server-side tracking closes the gaps.
@@ -28,10 +38,10 @@ I find the purchases your tracking silently drops: tracking audits that reconcil
 
 ## Lietuviškai (Lithuanian)
 
-- [Konversijų sekimo specialistas - Meta CAPI, GA4, server-side](https://rytisbalys.com/lt/): Meta Ads, GA4 ir realūs užsakymai rodo skirtingus skaičius? Tracking auditas, Meta CAPI su dedup, sGTM, Consent Mode v2. Randu, kur dingsta pirkimai.
-- [GA4 nerodo pardavimų: 4 priežastys ir kaip jas rasti](https://rytisbalys.com/lt/ga4-nerodo-pardavimu): Shopify ar Stripe rodo užsakymus, o GA4 tuščia arba rodo perpus mažiau. Dažniausios priežastys ir kaip per 15 minučių rasti, kur dingsta purchase eventas.
-- [Facebook Pixel neveikia arba dubliuoja pirkimus: ką tikrinti](https://rytisbalys.com/lt/facebook-pixel-neveikia-dvigubi-pirkimai): Purchase eventas nešauna arba Events Manager rodo dvigubus pirkimus. Kaip per Test Events rasti priežastį ir kodėl netikri skaičiai brangina reklamą.
-- [Google Ads konversijos nesiskaičiuoja (Inactive): kaip pataisyti](https://rytisbalys.com/lt/google-ads-konversijos-nesiskaiciuoja): Google Ads rodo Inactive ir konversijos nesiskaičiuoja? Penkios realios priežastys, diagnostika per 15 minučių ir kiek laukti pirmos konversijos.
+- [Konversijų sekimo specialistas - Meta CAPI, GA4, server-side](https://rytisbalys.lt/): Meta Ads, GA4 ir realūs užsakymai rodo skirtingus skaičius? Tracking auditas, Meta CAPI su dedup, sGTM, Consent Mode v2. Randu, kur dingsta pirkimai.
+- [GA4 nerodo pardavimų: 4 priežastys ir kaip jas rasti](https://rytisbalys.lt/ga4-nerodo-pardavimu): Shopify ar Stripe rodo užsakymus, o GA4 tuščia arba rodo perpus mažiau. Dažniausios priežastys ir kaip per 15 minučių rasti, kur dingsta purchase eventas.
+- [Facebook Pixel neveikia arba dubliuoja pirkimus: ką tikrinti](https://rytisbalys.lt/facebook-pixel-neveikia-dvigubi-pirkimai): Purchase eventas nešauna arba Events Manager rodo dvigubus pirkimus. Kaip per Test Events rasti priežastį ir kodėl netikri skaičiai brangina reklamą.
+- [Google Ads konversijos nesiskaičiuoja (Inactive): kaip pataisyti](https://rytisbalys.lt/google-ads-konversijos-nesiskaiciuoja): Google Ads rodo Inactive ir konversijos nesiskaičiuoja? Penkios realios priežastys, diagnostika per 15 minučių ir kiek laukti pirmos konversijos.
 
 ## Proof
 
