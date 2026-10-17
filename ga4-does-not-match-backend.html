@@ -134,6 +134,43 @@
 <b>4.</b> segment missing by payment method + device
 <b>5.</b> the cluster tells you the mechanism; fix THAT, not "tracking" in general</pre>
   <p class="dim">The named list of missing orders is the deliverable that turns a vague "our numbers are off" into a scoped, fixable engineering task.</p>
+  <!-- tikra-cta v1 2026-10-18 -->
+<style>
+.tk{margin-top:40px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px 22px}
+.tk .tk-eye{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--g);font-weight:700;margin:0 0 6px}
+.tk h2{margin:0 0 6px;font-size:20px;line-height:1.3}
+.tk p{color:var(--muted);font-size:15.5px;margin:0 0 12px}
+.tk form{display:flex;flex-direction:column;gap:10px}
+.tk .tk-row{display:flex;gap:8px;flex-wrap:wrap}
+.tk input,.tk select{flex:1 1 170px;font:inherit;font-size:16px;padding:11px 13px;border:1px solid #cfe0d4;border-radius:12px;color:var(--ink);background:#fff;min-width:0}
+.tk input:focus,.tk select:focus{outline:none;border-color:var(--g);box-shadow:0 0 0 3px rgba(20,83,45,.12)}
+.tk button{border:0;border-radius:12px;background:var(--g);color:#fff;font:600 15px var(--font);padding:0 20px;min-height:46px;cursor:pointer}
+.tk .tk-hint{font-size:12.5px;color:var(--muted);margin:0}
+.tk .tk-hint a{font-weight:600;text-decoration:none}
+.tk .tk-ok{display:none;color:var(--ink);font-weight:600;font-size:15.5px;margin:0}
+.tk .tk-hp{position:absolute;left:-5000px}
+</style>
+<div class="tk" id="tikra">
+  <p class="tk-eye">Free diagnosis, Shopify and WooCommerce</p>
+  <h2>Not sure every order reaches Meta and GA4?</h2>
+  <p>Tikra compares your store&rsquo;s real orders with what each platform received and shows how many it missed. We are onboarding pilot stores by hand and reply within 24 hours.</p>
+  <form class="tk-form" novalidate>
+    <div class="tk-row"><input type="text" name="site" placeholder="yourstore.com" required><input type="email" name="email" placeholder="you@company.com" autocomplete="email" required></div>
+    <div class="tk-row"><select name="platform" aria-label="Store platform"><option>Shopify</option><option>WooCommerce</option><option>Other</option></select><button type="submit">Request a free diagnosis</button></div>
+    <input class="tk-hp" type="text" name="fax_line" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <p class="tk-hint">Pilot, done by hand. <a href="https://tikratracking.com/?utm_source=rytisbalys&amp;utm_medium=article&amp;utm_campaign=ga4-does-not-match-backend">What is Tikra?</a></p>
+  </form>
+  <p class="tk-ok">Thanks. We will reply within 24 hours with the next step.</p>
+</div>
+<script>
+(function(){var t0=Date.now(),b=document.getElementById('tikra');if(!b)return;var f=b.querySelector('form');
+f.addEventListener('submit',function(e){e.preventDefault();var d=new FormData(f),s=(d.get('site')||'').trim(),m=(d.get('email')||'').trim();
+if(!s||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(m)){f.querySelector(s?'[name=email]':'[name=site]').focus();return;}
+var btn=f.querySelector('button');btn.disabled=true;
+fetch('https://rb-form.formos-ops.workers.dev/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({site:s,email:m,platform:d.get('platform'),where:'Tikra pilot',source:'tikra-cta',page:location.pathname,landing:location.search.slice(0,200),details:'Tikra free diagnosis request from article ga4-does-not-match-backend',fax_line:d.get('fax_line')||'',dt:Date.now()-t0})})
+.then(function(r){return r.json()}).then(function(j){if(j&&j.ok){f.style.display='none';b.querySelector('.tk-ok').style.display='block';try{window.dataLayer=window.dataLayer||[];dataLayer.push({event:'tikra_pilot_request',page_slug:'ga4-does-not-match-backend'})}catch(_){}}else{btn.disabled=false;alert('Something went wrong. Write to work@rytisbalys.com');}})
+.catch(function(){btn.disabled=false;alert('Something went wrong. Write to work@rytisbalys.com');});});})();
+</script>
   <div class="card" id="chat1">
   <div class="top"><h2>Numbers still don't add up?</h2><p>Tell my assistant what you see and I will reach out to you directly. Every rated job on Upwork is 5.0, <a href="https://www.upwork.com/freelancers/rytis" target="_blank" rel="nofollow noopener">check them live</a>.</p></div>
   <div class="log"><div class="m bot">Hi, I&rsquo;m Rytis&rsquo;s assistant. Your name and email first, so Rytis can reach out to you directly. Then tell me where your numbers disagree, or ask about prices and timelines.</div></div>
